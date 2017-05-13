@@ -34,10 +34,10 @@
 		var module_list=function(){
 			//---------------------------------------------
 			var L=$vm.module_list,A=_app_id;
-			var S=$vm.library_path+'/vmiis/task-module-examples';
+			var M='https://vmiis.github.io/modules';
 			//---------------------------------------------
 			if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
-				S=window.location.protocol+'//'+window.location.host+"/vmiis/task-module-examples";
+				M=window.location.protocol+'//'+window.location.host+"/vmiis/task-module-examples";
 			}
 			//---------------------------------------------
 			var v={
@@ -45,8 +45,8 @@
 				document_tid:'20008360',
 				category_tid:'20008361',
 			}
-			L[A+'document']={table_id:v.document_tid,var:v,url:S+'/documents/file.html'};
-			L[A+'category']={table_id:v.category_tid,var:v,url:S+'/documents/category.html'};
+			L[A+'document']={table_id:v.document_tid,var:v,url:M+'/documents/file.html'};
+			L[A+'category']={table_id:v.category_tid,var:v,url:M+'/documents/category.html'};
 		}
 		module_list();
 		_set_li_permissions();
