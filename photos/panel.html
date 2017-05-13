@@ -36,15 +36,15 @@
         //---------------------------------------------
         _app_id='photo_';
         //---------------------------------------------
-        var _module_list=function(){
-			//---------------------------------------------
+        var module_list=function(){
+        	//---------------------------------------------
             var L=$vm.module_list,A=_app_id;
-			var M='https://vmiis.github.io/modules';
+        	var M='https://vmiis.github.io/modules';
             //---------------------------------------------
-			if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
-		        S=window.location.protocol+'//'+window.location.host+"/vmiis/task-module-examples";
-		    }
-			//---------------------------------------------
+        	if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
+                M=window.location.protocol+'//'+window.location.host+"/vmiis/task-module-examples";
+        	}
+        	//---------------------------------------------
             var v={
                 app_id:_app_id,
                 photo_tid:'20008367',
@@ -54,7 +54,7 @@
             L[A+'search_and_display'] ={table_id:v.photo_tid,     var:v,url:M+'/photos/search_and_display.html'};
             L[A+'category']           ={table_id:v.category_tid,  var:v,url:M+'/photos/category.html'};
         }
-        _module_list();
+        module_list();
 		_set_li_permissions();
         //---------------------------------------------
         $('#D__ID').on('load',function(){
