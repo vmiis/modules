@@ -31,31 +31,31 @@
     //---------------------------------------------
     function F__ID(){
         //---------------------------------------------
-        VmInclude:__BASE__/vmiis/Common-Code/navigation/navigation.js
-        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.js
+        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
         //---------------------------------------------
         _app_id='photo_';
         //---------------------------------------------
         var module_list=function(){
-        	//---------------------------------------------
-            var L=$vm.module_list,A=_app_id;
-        	var M='https://vmiis.github.io/modules';
-            //---------------------------------------------
-        	if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
-                M=window.location.protocol+'//'+window.location.host+"/vmiis/task-module-examples";
-        	}
-        	//---------------------------------------------
-            var v={
-                app_id:_app_id,
-                photo_tid:'20008367',
-                category_tid:'20008370',
-            }
-            L[A+'upload_photo']       ={table_id:v.photo_tid,     var:v,url:M+'/photos/upload_photo.html'};
-            L[A+'search_and_display'] ={table_id:v.photo_tid,     var:v,url:M+'/photos/search_and_display.html'};
-            L[A+'category']           ={table_id:v.category_tid,  var:v,url:M+'/photos/category.html'};
+	        //---------------------------------------------
+	        var L=$vm.module_list,A=_app_id;
+	        var M='https://vmiis.github.io/modules';
+	        //---------------------------------------------
+	        if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
+	                M=window.location.protocol+'//'+window.location.host+"/vmiis/task-module-examples";
+	        }
+	        //---------------------------------------------
+	        var v={
+	                app_id:_app_id,
+	                photo_tid:'20008367',
+	                category_tid:'20008370',
+	        }
+		L[A+'upload_photo']       ={table_id:v.photo_tid,     var:v,url:M+'/photos/upload_photo.html'};
+		L[A+'search_and_display'] ={table_id:v.photo_tid,     var:v,url:M+'/photos/search_and_display.html'};
+		L[A+'category']           ={table_id:v.category_tid,  var:v,url:M+'/photos/category.html'};
         }
         module_list();
-		_set_li_permissions();
+	_set_li_permissions();
         //---------------------------------------------
         $('#D__ID').on('load',function(){
             _nav_name='Photos';
@@ -65,9 +65,9 @@
     }
 </script>
 <style>
-    VmInclude:__BASE__/vmiis/Common-Code/navigation/navigation.css
+    VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.css
     #D__ID{
-        background: url("__BASE__/vmiis/common-code/image/texture.png");
+        background: url("_LIB__/vmiis/common-code/image/texture.png");
     }
     .nav__ID span{
         color:#005500;
