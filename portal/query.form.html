@@ -125,7 +125,7 @@
         }
         //----------------------------------
         var show_hide_export_all=function(sql){
-            if(sql.indexOf('ORDER BY ID OFFSET (200*(@I1-1)) ROWS FETCH NEXT 200 ROWS ONLY')==-1){
+            if(sql!=undefined && sql.indexOf('ORDER BY ID OFFSET (200*(@I1-1)) ROWS FETCH NEXT 200 ROWS ONLY')==-1){
                 $('#export_all__ID').hide();
             }
             else{
