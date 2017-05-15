@@ -1,0 +1,118 @@
+<section>
+    <div id=toolbar__ID>
+          <a id=back__ID>Back</a> <span id=ns__ID><a id=new__ID>New</a> <a id=save__ID>Save</a></span><span class=tab__ID></span><input placeholder='filter' id=keyword__ID type=text />
+          <input id=category__ID placeholder='Category' type=text ></input>
+          <input id=subcategory__ID placeholder='Subcategory' type=text ></input>
+          <a id=query__ID>Load</a>
+          <span id=multi__ID>
+              <span class=tab__ID></span>Page Size: <select id=page_size__ID><option>30</option><option>50</option><option>100</option><option>200</option></select><span class=tab__ID></span>
+              <span id=I__ID style="display:none">0</span><span id=A__ID></span>
+              <img id=p__ID src="__LIB__/vmiis/Common-Code/image/p.png" ><img id=n__ID src="__LIB__/vmiis/common-code/image/n.png" >
+          </span>
+    </div>
+    <div id=table__ID>
+        <table id=grid__ID></table>
+    </div>
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__LIB__/vmiis/Common-Code/grid/grid2.js
+        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
+        //-------------------------------------
+        var fields="Name,Category,Subcategory";
+        fields+=",_gridHidden|SQL,_gridHidden|Options,_gridHidden|input_1,_gridHidden|input_2,_gridHidden|input_3,_gridHidden|input_4,_gridHidden|input_5";
+        _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+        //-------------------------------------
+        $('#category__ID').autocomplete({
+            minLength:0,
+            source:function(request,response){
+                var sql="with tb as (select distinct name=S2 from [TABLE-"+_db_pid+"])";
+                sql+=" select top 10 name,value=name from tb where name like '%'+@S1+'%' ";
+                $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
+                    response($vm.autocomplete_list(res.table));
+                }});
+            },
+        })
+        $('#category__ID').focus(function(){$('#category__ID').autocomplete("search","");});
+        //-------------------------------------
+        $('#subcategory__ID').autocomplete({
+            minLength:0,
+            source:function(request,response){
+                var sql="with tb as (select distinct name=S3 from [TABLE-"+_db_pid+"])";
+                sql+=" select top 10 name,value=name from tb where name like '%'+@S1+'%' ";
+                $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
+                    response($vm.autocomplete_list(res.table));
+                }});
+            },
+        })
+        $('#subcategory__ID').focus(function(){$('#subcategory__ID').autocomplete("search","");});
+        //-------------------------------------
+        $('#D__ID').on('load',function(){ _set_req(); _request_data(); })
+        //-------------------------------------
+        _cell_render=function(records,I,field,td,set_value,source){
+            switch(field){
+                case 'Name':
+                    if(records[I].UID==null || records[I].UID==undefined) return;
+                    if(source=='form'){
+                        records[I].vm_readonly[field]=false;
+                        return;
+                    }
+                    records[I].vm_readonly[field]=true;
+                    td.html("<u style='cursor:pointer;'>"+records[I][field]+"</u>");
+                    td.find('u').on('click',function(){
+                        var form_module_name=_module.form_module;
+                        $vm.load_module_by_name(form_module_name,$vm.root_layout_content_slot,{
+                            sql:records[I]['SQL'],
+                            options:records[I]['Options'],
+                            name:records[I]['Name'],
+                            input_1:records[I].input_1,
+                            input_2:records[I].input_2,
+                            input_3:records[I].input_3,
+                            input_4:records[I].input_4,
+                            input_5:records[I].input_5,
+                        })
+                    })
+                    break;
+            }
+        }
+        //-------------------------------------
+        _before_submit=function(record,dbv){
+            if(record.Options!=""){
+                try{
+                    JSON.parse(record.Options);
+                }catch (e) {
+                    alert(e);
+                    return false;
+                }
+            }
+            dbv.S1=record.Name;
+            dbv.S2=record.Category;
+            dbv.S3=record.Subcategory;
+            return true;
+        };
+        //-------------------------------------
+        _set_req=function(){
+            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
+            sql+="select Information,ID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
+            var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1]";
+            _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val(),s2:$('#category__ID').val(),s3:$('#subcategory__ID').val()}
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+    VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
+    @media screen and (max-width:900px){
+        #grid__ID{
+            font-size:120%;
+        }
+        #grid__ID th:nth-child(4),#grid__ID td:nth-child(4){
+            display:none;
+        }
+        #grid__ID th:nth-child(5),#grid__ID td:nth-child(5){
+            display:none;
+        }
+    }
+</style>
