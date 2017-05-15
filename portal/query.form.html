@@ -1,0 +1,352 @@
+<section>
+    <div id=toolbar__ID>
+        <a id=back__ID>Back</a> <a id=save__ID>Save & Back</a>
+        <input id=input_1__ID data-id=input_1 type=text placeholder='input 1' />
+        <input id=input_2__ID data-id=input_2 type=text placeholder='input 2' />
+        <input id=input_3__ID data-id=input_3 type=text placeholder='input 3' />
+        <input id=input_4__ID data-id=input_4 type=text placeholder='input 4' />
+        <input id=input_5__ID data-id=input_5 type=text placeholder='input 5' />
+        <a id=run__ID>Run Query</a>
+        <a id=aexport__ID>Export Query Results</a> <a id=export_all__ID>Export All Records</a>
+
+        <span class=tab__ID></span><span class=tab__ID></span><a id=copy__ID>Copy</a> <a id=paste__ID>Paste</a>
+
+        <span id=elapsed__ID style='float:right'></span>
+    </div>
+    <form id=F__ID>
+        <div id=edit__ID>
+            <input id=Name__ID data-id=Name placeholder='Name' style='width:50%;box-sizing:border-box;'/><input id=Category__ID data-id=Category placeholder='Category' style='width:25%;box-sizing:border-box;'/><input id=Subcategory__ID data-id=Subcategory placeholder='Subcategory' style='width:25%;box-sizing:border-box;'/>
+            <br><textarea id=sql__ID data-id=SQL placeholder='SQL' style='width:100%;box-sizing:border-box;' ></textarea>
+            <br><textarea id=Options__ID data-id=Options placeholder='Options' style='width:100%;box-sizing:border-box;' ></textarea>
+        </div>
+    </form>
+    <div id=table__ID>
+        <span id=result__ID></span>
+    </div>
+</section>
+<script>
+    function F__ID(){
+        //----------------------------------
+        VmInclude:__LIB__/vmiis/Common-Code/grid/form2.js
+        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+        VmInclude:__CURRENT_PATH__/query.form.html.basic_view.js
+        VmInclude:__CURRENT_PATH__/query.form.html.chart_view.js
+        VmInclude:__CURRENT_PATH__/query.form.html.monthly_money_aggregation_view.js
+        VmInclude:__CURRENT_PATH__/query.form.html.monthly_money_aggregation_chart_view.js
+        //----------------------------------
+        $('#D__ID').on('load',function(){
+            try{
+                $('#input_1__ID').autocomplete("destroy");
+                $('#input_1__ID').removeData('autocomplete');
+            }catch(e){}
+            try{
+                $('#input_2__ID').autocomplete("destroy");
+                $('#input_2__ID').removeData('autocomplete');
+            }catch(e){}
+            var sql=$vm.vm['__ID'].op.sql;
+            var options=$vm.vm['__ID'].op.options;
+            var name=$vm.vm['__ID'].op.name;
+            if(sql==undefined){
+                $('#save__ID').show();
+                $('#edit__ID').show();
+                _init();
+                $('#input_1__ID').show();
+                $('#input_2__ID').show();
+                $('#input_3__ID').show();
+                $('#input_4__ID').show();
+                $('#input_5__ID').show();
+                $('#copy__ID').show();
+                $('#paste__ID').show();
+
+                custom_field_process();
+                $('#result__ID').html('');
+            }
+            else{
+                $('#copy__ID').hide();
+                $('#paste__ID').hide();
+                $('#save__ID').hide();
+                $('#edit__ID').hide();
+                $('#sql__ID').val(sql);
+                $('#Options__ID').val(options);
+                $('#Name__ID').val(name);
+                show_hide_export_all(sql);
+                $('#input_1__ID').off('change'); $('#input_1__ID').val($vm.vm['__ID'].op.input_1);   $('#input_1__ID').show(); if($('#input_1__ID').val()=="") $('#input_1__ID').hide();
+                $('#input_2__ID').off('change'); $('#input_2__ID').val($vm.vm['__ID'].op.input_2);   $('#input_2__ID').show(); if($('#input_2__ID').val()=="") $('#input_2__ID').hide();
+                $('#input_3__ID').off('change'); $('#input_3__ID').val($vm.vm['__ID'].op.input_3);   $('#input_3__ID').show(); if($('#input_3__ID').val()=="") $('#input_3__ID').hide();
+                $('#input_4__ID').off('change'); $('#input_4__ID').val($vm.vm['__ID'].op.input_4);   $('#input_4__ID').show(); if($('#input_4__ID').val()=="") $('#input_4__ID').hide();
+                $('#input_5__ID').off('change'); $('#input_5__ID').val($vm.vm['__ID'].op.input_5);   $('#input_5__ID').show(); if($('#input_5__ID').val()=="") $('#input_5__ID').hide();
+                $('#run__ID').triggerHandler('click');
+            }
+        })
+        //----------------------------------
+        var custom_field_process=function(){
+            $('#toolbar__ID input').each(function(){
+                var field=$(this).attr('data-id');
+                switch(field){
+                    case "input_1":
+                    case "input_2":
+                    case "input_3":
+                    case "input_4":
+                    case "input_5":
+                        $(this).val(_records[I][field]);
+                        $(this).off('change').on('change',function(){
+                            _set_value($(this).val(),_records,I,field);
+                        });
+                        break;
+                }
+            })
+            $('#F__ID input').each(function(){
+                var field=$(this).attr('data-id');
+                switch(field){
+                    case "Name":
+                    case "Category":
+                    case "Subcategory":
+                        $(this).val(_records[I][field]);
+                        $(this).off('change').on('change',function(){
+                            _set_value($(this).val(),_records,I,field);
+                        });
+                        break;
+                }
+            })
+            $('#F__ID textarea').each(function(){
+                var field=$(this).attr('data-id');
+                switch(field){
+                    case "SQL":
+                    case "Options":
+                        $(this).val(_records[I][field]);
+                        show_hide_export_all(_records[I][field]);
+                        $(this).off('change').on('change',function(){
+                            _set_value($(this).val(),_records,I,field);
+                            show_hide_export_all(_records[I][field]);
+                        });
+                        break;
+                }
+            })
+        }
+        //----------------------------------
+        var show_hide_export_all=function(sql){
+            if(sql.indexOf('ORDER BY ID OFFSET (200*(@I1-1)) ROWS FETCH NEXT 200 ROWS ONLY')==-1){
+                $('#export_all__ID').hide();
+            }
+            else{
+                $('#export_all__ID').show();
+            }
+        }
+        //----------------------------------
+        var _res_records="";
+        var _fields="";
+        $('#run__ID').on('click',function(){
+            var sql=$('#sql__ID').val();
+            var options=$('#Options__ID').val();
+            var options_json={};
+            if(options!=""){
+                try{
+                    options_json=JSON.parse(options);
+                    if(options_json.input_1!=undefined){
+                        var auto=options_json.input_1.split('|');
+                        $("#input_1__ID").autocomplete({
+                            source:auto,
+                            minLength: 0,
+                        });
+                        $("#input_1__ID").focus(function(){$("#input_1__ID").autocomplete("search","");});
+                    }
+                }catch (e) {
+                    alert(e);
+                    return;
+                }
+                if(options_json.data_format=='xml'){
+                    sql=sql.replace(/JSON_VALUE/g,'dbo.F');
+                    sql=sql.replace(/\$./g,'');
+                }
+            }
+            sql=sql.replace('where RowNum between @I1 and @I2','');
+            sql=sql.replace('and RowNum between @I1 and @I2','');
+            _res_records="";
+            _fields="";
+            var mt1=new Date().getTime();
+            $VmAPI.request({data:{cmd:'query_records',sql:sql,i1:'1',
+                s1:$('#input_1__ID').val(),
+                s2:$('#input_2__ID').val(),
+                s3:$('#input_3__ID').val(),
+                s4:$('#input_4__ID').val(),
+                s5:$('#input_5__ID').val(),
+                },callback:function(res){
+                _res_records=res.records;
+                var mt2=new Date().getTime();
+                var tt_all=mt2-mt1;
+                var tt_server=parseInt(res.elapsed);
+                if(tt_all<tt_server) tt_all=tt_server;
+                var jsonStr=JSON.stringify(res.records);
+                $("#elapsed__ID").text((jsonStr.length/1000).toFixed(1)+"k/"+tt_all.toString()+"ms/"+tt_server+'ms');
+                var all_headers=[];
+                if(res.records.length==0){
+                    $('#result__ID').html("No data");
+                    return;
+                }
+                for(var i=0;i<res.records.length;i++){
+                    var record=res.records[i];
+                    for (var key in record) {
+                        if (record.hasOwnProperty(key)) {
+                            if($.inArray(key, all_headers)==-1){
+                                all_headers.push(key);
+                                if(_fields!="") _fields+=",";
+                                _fields+=key;
+                            }
+                        }
+                    }
+                }
+                switch(options_json.template){
+                    case 'monthly_money_aggregation':       monthly_money_aggregation_view(options_json,all_headers,res.records); break;
+                    case 'monthly_money_aggregation_chart': monthly_money_aggregation_chart_view(options_json,res.records); break;
+                    case 'chart':                           chart_view(options_json,all_headers,res.records); break;
+                    default:                                basic_view(options_json,all_headers,res.records); break;
+                }
+            }})
+        })
+        //----------------------------------
+        $('#aexport__ID').on('click',function(){
+            $vm.download_csv({name:$('#Name__ID').val()+".csv",data:_res_records,fields:_fields});
+        })
+        //----------------------------------
+        $('#export_all__ID').on('click',function(){
+            var sql=$('#sql__ID').val();
+            export_data(sql);
+        })
+        //----------------------------------
+        var export_data=function(sql){
+            var g_I,gLoop,busy,results,gDialog_module_id;
+            var one_loop=function(){
+                if(busy==1) return;
+                busy=1;
+                var req={cmd:'query_records',sql:sql,i1:(g_I+1).toString()};
+                $VmAPI.request({data:req,callback:function(res){
+                    busy=0;
+                    $('#export_num'+gDialog_module_id).text("Page "+(g_I+1).toString());
+                    if(res.records.length!=0){
+                        for(var i=0;i<res.records.length;i++){
+                            results.push(res.records[i]);
+                        }
+                    }
+                    else{
+                        end_export();
+                        return;
+                    }
+                    g_I++;
+                    var num=$('#num__ID').val();
+                    if(num!=''){
+                        num=parseInt(num);
+                        if(g_I>num){
+                            end_export();
+                            return;
+                        }
+                    }
+                }})
+            }
+            //-------------------------------------
+            var start_export=function(){
+                g_I=0;busy=0;results=[];
+                gDialog_module_id=$vm.get_module_id({name:'_system_export_dialog_module'})
+                $('#export_num'+gDialog_module_id).text("Page 0");
+                $vm.open_dialog({name:'_system_export_dialog_module'});
+                gLoop=setInterval(one_loop, 500);
+            }
+            //-------------------------------------
+            var end_export=function(){
+                clearInterval(gLoop);
+                $vm.close_dialog({name:'_system_export_dialog_module'});
+
+                var fields='';
+                var all_headers=[];
+                for(var i=0;i<results.length;i++){
+                    var record=results[i];
+                    for (var key in record) {
+                        if (record.hasOwnProperty(key)) {
+                            if($.inArray(key, all_headers)==-1){
+                                all_headers.push(key);
+                                if(fields!="") fields+=",";
+                                fields+=key;
+                            }
+                        }
+                    }
+                }
+                $vm.download_csv({name:$('#Name__ID').val()+".csv",data:results,fields:fields});
+            }
+            //-------------------------------------
+            start_export();
+        }
+        var __sql="",__options="",__input_1='',__input_2='',__input_3='',__input_4='',__input_5='',__Name='',__Category='',__Subcategory='';
+        $('#copy__ID').on('click',function(){
+            __sql=$('#sql__ID').val();
+            __options=$('#Options__ID').val();
+            __input_1=$('#input_1__ID').val();
+            __input_2=$('#input_2__ID').val();
+            __input_3=$('#input_3__ID').val();
+            __input_4=$('#input_4__ID').val();
+            __input_5=$('#input_5__ID').val();
+            __Name=$('#Name__ID').val();
+            __Category=$('#Category__ID').val();
+            __Subcategory=$('#Subcategory__ID').val();
+        })
+        $('#paste__ID').on('click',function(){
+            $('#sql__ID').val(__sql);
+            $('#Options__ID').val(__options);
+            $('#input_1__ID').val(__input_1);
+            $('#input_2__ID').val(__input_2);
+            $('#input_3__ID').val(__input_3);
+            $('#input_4__ID').val(__input_4);
+            $('#input_5__ID').val(__input_5);
+            $('#Name__ID').val(__Name);
+            $('#Category__ID').val(__Category);
+            $('#Subcategory__ID').val(__Subcategory);
+            _records[I].SQL=__sql;
+            _records[I].Options=__options;
+            _records[I].Name=__Name;
+            _records[I].Category=__Category;
+            _records[I].Subcategory=__Subcategory;
+            _records[I].input_1=__input_1;
+            _records[I].input_2=__input_2;
+            _records[I].input_3=__input_3;
+            _records[I].input_4=__input_4;
+            _records[I].input_5=__input_5;
+            _records[I].vm_dirty=1;
+            $('#save__ID').css('background','#E00');
+        })
+    }
+</script>
+<style>
+    VmInclude:__LIB__/vmiis/Common-Code/style/default.css
+    VmInclude:__LIB__/vmiis/Common-Code/toolbar/toolbar.css
+    VmInclude:__LIB__/vmiis/Common-Code/grid/form.css
+    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+    #D__ID{
+        overflow: hidden;
+        background: url("__LIB__/vmiis/common-code/image/texture.png");
+    }
+    #F__ID input{
+        border: 1px solid #eee;
+    }
+    .monthly_money_aggregation__ID tr td:nth-child(3),
+    .monthly_money_aggregation__ID tr td:nth-child(4),
+    .monthly_money_aggregation__ID tr td:nth-child(5),
+    .monthly_money_aggregation__ID tr td:nth-child(5),
+    .monthly_money_aggregation__ID tr td:nth-child(6),
+    .monthly_money_aggregation__ID tr td:nth-child(7),
+    .monthly_money_aggregation__ID tr td:nth-child(8),
+    .monthly_money_aggregation__ID tr td:nth-child(9),
+    .monthly_money_aggregation__ID tr td:nth-child(10),
+    .monthly_money_aggregation__ID tr td:nth-child(11),
+    .monthly_money_aggregation__ID tr td:nth-child(12),
+    .monthly_money_aggregation__ID tr td:nth-child(13),
+    .monthly_money_aggregation__ID tr td:nth-child(14),
+    .monthly_money_aggregation__ID tr td:nth-child(15)
+    {
+        text-align: right;
+        width:70px!Important;
+    }
+    .monthly_money_aggregation__ID tr:last-child td:not(:first-child){
+        font-weight: bold!Important;
+    }
+    .monthly_money_aggregation__ID tr:nth-last-child(2) td:not(:first-child){
+        border-bottom: 2px solid black!Important;
+    }
+</style>
