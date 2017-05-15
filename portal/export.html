@@ -45,6 +45,7 @@
             _req={cmd:'query_records',sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
         }
         //-------------------------------------
+        /*
         _before_submit=function(record,dbv){
             var r=confirm("Warning!!! Data entry without validation may cause some applications not working properly! Please use a related application module to add or modify the data.This module is ideally used to search, view, delete or export data.")
             return r;
@@ -56,6 +57,7 @@
                 return false;
             }
         }
+        */
         //-------------------------------------
         _data_process=function(){
             var all_headers=[];
@@ -75,7 +77,8 @@
             fields=fields.replace('ID,','');
             fields=fields.replace(',DateTime','');
             fields=fields.replace(',Author','');
-            _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+            //_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+            _fields=fields;
         }
         //-------------------------------------
     }
