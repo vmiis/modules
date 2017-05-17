@@ -35,13 +35,18 @@ function F__ID(){
 	var module_list=function(){
 		_app_id='bookkeeping_';
 		//---------------------------------------------
-		var L=$vm.module_list,A=_app_id,M=$vm.library_path+"/transaction_bookkeeping";
-		//---------------------------------------------
+	        var L=$vm.module_list,A=_app_id;
+	        var M='https://vmiis.github.io/modules/transaction_bookkeeping';
+	        //---------------------------------------------
+	        if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
+	                M=window.location.protocol+'//'+window.location.host+"/vmiis/modules";
+	        }
+	        //---------------------------------------------
 		var v={
-		predefined_item_tid :'20005380',
-		record_tid          :'20007172',
-		bi_tid              :'20010377',
-		bi_details          :A+'income_and_expense_bi_details',
+			predefined_item_tid :'20005380',
+			record_tid          :'20007172',
+			bi_tid              :'20010377',
+			bi_details          :A+'income_and_expense_bi_details',
 		}
 		L[A+'income_and_expense_with_basic_toolbar']        ={table_id:v.record_tid,            var:v,  url:M+'/bookkeeping_with_basic_toolbar.html'};
 		L[A+'income_and_expense_with_period_toolbar']       ={table_id:v.record_tid,            var:v,  url:M+'/bookkeeping_with_period_toolbar.html'};
