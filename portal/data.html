@@ -149,6 +149,7 @@ function F__ID(){
 	}
 	//---------------------------------------------------------------
 	_data_process_after_render=function(){
+		if($vm.server=='development') return;
 		$('#grid__ID tr').each(function(index){
 			if(index!=0){
 				var $u=$(this).find('td').eq(2).find('u');
