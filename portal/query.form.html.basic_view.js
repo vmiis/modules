@@ -20,7 +20,7 @@ var basic_view=function(options_json,headers,records,class_name){
     }
     txt+="<style>";
     if(options_json.style!=undefined){
-        txt+=$('<div/>').html(options_json.style.replace('result','#result__ID')).text();
+        txt+=$('<div/>').html(options_json.style.replace(/result/g,'#result__ID')).text();
     }
     txt+="</style>"
     $('#result__ID').html(txt);
