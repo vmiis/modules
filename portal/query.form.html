@@ -15,7 +15,7 @@
     </div>
     <form id=F__ID>
         <div id=edit__ID>
-            <input id=Name__ID data-id=Name placeholder='Name' style='width:50%;box-sizing:border-box;'/><input id=Category__ID data-id=Category placeholder='Category' style='width:25%;box-sizing:border-box;'/><input id=Subcategory__ID data-id=Subcategory placeholder='Subcategory' style='width:25%;box-sizing:border-box;'/>
+            <input id=Name__ID data-id=Name placeholder='Name' style='width:50%;box-sizing:border-box;'/><input id=Category__ID data-id=Category placeholder='Category' style='width:20%;box-sizing:border-box;'/><input id=Subcategory__ID data-id=Subcategory placeholder='Subcategory' style='width:20%;box-sizing:border-box;'/><input id=Table_ID__ID data-id=Table_ID placeholder='Table_ID' style='width:10%;box-sizing:border-box;'/>
             <br><textarea id=sql__ID data-id=SQL placeholder='SQL' style='width:100%;box-sizing:border-box;' ></textarea>
             <br><textarea id=Options__ID data-id=Options placeholder='Options' style='width:100%;box-sizing:border-box;' ></textarea>
         </div>
@@ -101,6 +101,7 @@
                     case "Name":
                     case "Category":
                     case "Subcategory":
+					case "Table_ID":
                         $(this).val(_records[I][field]);
                         $(this).off('change').on('change',function(){
                             _set_value($(this).val(),_records,I,field);
@@ -274,7 +275,7 @@
             //-------------------------------------
             start_export();
         }
-        var __sql="",__options="",__input_1='',__input_2='',__input_3='',__input_4='',__input_5='',__Name='',__Category='',__Subcategory='';
+        var __sql="",__options="",__input_1='',__input_2='',__input_3='',__input_4='',__input_5='',__Name='',__Category='',__Subcategory='',__Table_ID;
         $('#copy__ID').on('click',function(){
             __sql=$('#sql__ID').val();
             __options=$('#Options__ID').val();
@@ -286,6 +287,7 @@
             __Name=$('#Name__ID').val();
             __Category=$('#Category__ID').val();
             __Subcategory=$('#Subcategory__ID').val();
+			__Table_ID=$('#Table_ID__ID').val();
         })
         $('#paste__ID').on('click',function(){
             $('#sql__ID').val(__sql);
@@ -298,11 +300,13 @@
             $('#Name__ID').val(__Name);
             $('#Category__ID').val(__Category);
             $('#Subcategory__ID').val(__Subcategory);
+			$('#Table_ID__ID').val(__Table_ID);
             _records[I].SQL=__sql;
             _records[I].Options=__options;
             _records[I].Name=__Name;
             _records[I].Category=__Category;
             _records[I].Subcategory=__Subcategory;
+			_records[I].Table_ID=__Table_ID;
             _records[I].input_1=__input_1;
             _records[I].input_2=__input_2;
             _records[I].input_3=__input_3;
