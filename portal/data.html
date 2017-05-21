@@ -49,7 +49,11 @@ function F__ID(){
 	})
 	$('#subcategory__ID').focus(function(){$('#subcategory__ID').autocomplete("search","");});
 	//-------------------------------------
-	$('#D__ID').on('load',function(){  _set_req(); _request_data(); })
+	$('#D__ID').on('load',function(){
+		if( $('#category__ID').val()=='' && $vm.category!='' ) $('#category__ID').val($vm.category);
+		if( $('#subcategory__ID').val()=='' && $vm.subcategory!='' ) $('#subcategory__ID').val($vm.subcategory);
+		_set_req(); _request_data();
+	})
 	//-------------------------------------
 	_cell_render=function(records,I,field,td,set_value,source){
 	    switch(field){
@@ -101,7 +105,7 @@ function F__ID(){
 	                            }
 	                        }
 	                    }
-						alert("The url is invalid.")
+						alert("The url ("+records[I].URL+") is not trusted.")
 					}
 	            })
 	            break;
