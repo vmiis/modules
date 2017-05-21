@@ -51,7 +51,7 @@ function F__ID(){
 	$('#D__ID').on('load',function(){
 		if( $('#category__ID').val()=='' && $vm.category!='' ) $('#category__ID').val($vm.category);
 		if( $('#subcategory__ID').val()=='' && $vm.subcategory!='' ) $('#subcategory__ID').val($vm.subcategory);
-		_set_req(); _request_data(); 
+		_set_req(); _request_data();
 	})
 	//-------------------------------------
 	_cell_render=function(records,I,field,td,set_value,source){
@@ -63,7 +63,8 @@ function F__ID(){
 	                return;
 	            }
 	            records[I].vm_readonly[field]=true;
-	            td.html("<u style='cursor:pointer;'>"+records[I][field]+"</u>");
+				var nm=$('<div/>').html(records[I][field]).text();
+	            td.html("<u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
 					if( $(this).hasClass( 'not_allowed__ID' )===true){
 			              alert("No permission!");

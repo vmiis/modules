@@ -64,7 +64,9 @@ function F__ID(){
 	                return;
 	            }
 	            records[I].vm_readonly[field]=true;
-	            td.html("<u style='cursor:pointer;'>"+records[I][field]+"</u>");
+				var nm=$('<div/>').html(records[I][field]).text();
+				if(records[I].Table_ID=='' || records[I].Table_ID==undefined) td.html("▪ <u style='cursor:pointer;'>"+nm+"</u>");
+	            else td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
 					if( $(this).hasClass( 'not_allowed__ID' )===true){
 			              alert("No permission!");
