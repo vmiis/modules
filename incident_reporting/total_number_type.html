@@ -1,0 +1,33 @@
+<section>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/query_data_basic.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/grid/grid.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        _fields="Year,Incident_only,Workers_Comp,Total";
+        //-------------------------------------
+        $('#name__ID').text('Total Number of Incident Compensation Reporting');
+        $('#D__ID').on('load',function(){  _set_req(); _request_data();  })
+        //-------------------------------------
+        _set_req=_set_req_export=function(){
+            var sql="\
+                with \
+                tb1 as (select ID,D=@T('Date_reported'),IT=@('Compensation') from [FORM-"+_db_pid+"]),  \
+                tb2 as (select ID,Y=DATEPART(year, D), IT from tb1) \
+                select [Year]=Y,Incident_only=[Incident only],Workers_Comp=[Workers Comp],Total=([Incident only]+[Workers Comp]) from tb2\
+                PIVOT(\
+                    Count(ID)\
+            	    for IT IN([Incident only],[Workers Comp])\
+            	) p\
+            "
+            _req={cmd:'query_records',sql:sql}
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid.css
+</style>
