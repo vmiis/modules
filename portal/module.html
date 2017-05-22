@@ -97,6 +97,11 @@ function F__ID(){
 	                                    v=JSON.parse(records[I].Input);
 	                                }catch (e) {}
 	    							var module="M"+records[I].UID;
+									if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
+										url=url.replace('https://vmiis.github.io',window.location.protocol+'//'+window.location.host+'/vmiis');
+										url=url.replace('https://rt.woolcock.org.au/github/woolcock-imr',window.location.protocol+'//'+window.location.host+'/woolcock-imr');
+										url=url.replace('https://cbs.wappsystem.com/dev/github',window.location.protocol+'//'+window.location.host);
+									}
 	                                $vm.module_list[module]={
 	                                    table_id:records[I].Table_ID,
 	                                    url:url,
