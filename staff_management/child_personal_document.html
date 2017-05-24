@@ -1,0 +1,49 @@
+<section>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid_without_export.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/grid/grid.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        var fields="_Hidden|Staff,Document,Last Modified|lastModified,Size,Description";
+        _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete,_Hidden|Staff";
+        //-------------------------------------
+        $('#D__ID').on('load',function(){  _set_req(); _request_data();   })
+        //-------------------------------------
+        _cell_render=function(records,I,field,td,set_value,source){
+            switch(field){
+                case 'Document':
+                    VmInclude:__BASE__/vmiis/Common-Code/grid/field_file_with_size.js
+                break;
+                case 'Size':
+                    records[I].vm_custom[field]=true;
+                break;
+                case 'lastModified':
+                    records[I].vm_custom[field]=true;
+                break;
+            }
+        }
+        //-------------------------------------
+        _before_submit=function(record,dbv){
+            record.Staff=$vm.vm['__ID'].op.staff_name
+            dbv.PPID=$vm.vm['__ID'].op.staff_pid;
+            dbv.PUID=$vm.vm['__ID'].op.staff_uid;
+            dbv.S2=$vm.vm['__ID'].op.staff_login_name;
+            return true;
+        };
+        //-------------------------------------
+        _set_req=function(){
+            var where="S2='"+$vm.vm['__ID'].op.staff_login_name+"'";
+            var sql="with tb as (select Information,ID,UID,S2,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where "+where+")";
+            sql+="select Information,ID,UID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
+            var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1] where "+where;
+            _req={cmd:'query_records',sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+       }
+       //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid.css
+</style>

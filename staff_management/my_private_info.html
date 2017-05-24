@@ -1,0 +1,73 @@
+<section>
+      VmInclude:__BASE__/vmiis/Common-Code/grid/grid.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/grid/grid.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        _record_type='s2';
+        _fields="_Form,_Hidden|Staff,Address,Suburb,Postcode,State,Mobile_Phone";
+        _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
+        //-------------------------------------
+        _cell_render=function(records,I,field,td,set_value,source){
+            switch(field){
+                case 'Suburb':
+                    VmInclude:__BASE__/vmiis/Common-Code/grid/field_suburb.js
+                break;
+                case 'Postcode':
+                    VmInclude:__BASE__/vmiis/Common-Code/grid/field_postcode.js
+                break;
+            }
+        }
+        //-------------------------------------
+        $('#new__ID').hide();
+        //-------------------------------------
+        $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
+        //-------------------------------------
+        var person_name,person_login_name,person_pid=_module.var.staff_tid,person_uid;
+        var get_info=function(){
+            jQuery.ajaxSetup({async:false});
+            var req={cmd:'query_records_s2',db_pid:person_pid,fields:'ID,UID,Information'}
+            $VmAPI.request({data:req,callback:function(res){
+                if(res.records.length>0){
+                    person_name=res.records[0].First_Name+' '+res.records[0].Last_Name;
+                    person_login_name=res.records[0].Login_Name;
+                    person_uid=res.records[0].UID;
+                }
+            }});
+            jQuery.ajaxSetup({async:true});
+        }
+        //-------------------------------------
+        _before_submit=function(record,dbv){
+            get_info();
+            record.Staff=person_name;
+            dbv.PPID=person_pid;
+            dbv.PUID=person_uid;
+            return true;
+        };
+        //-------------------------------------
+        _set_req=function(){
+            _req={cmd:'query_records_s2',db_pid:_db_pid,fields:'ID,Information'}
+        }
+        //-------------------------------------
+        _data_process_after_render=function(){
+            if(_records.length==0){
+                $('#new__ID').triggerHandler('click');
+            }
+            if(_records.length==1){
+                var form=$('#grid__ID tr:nth-child(2)').find('u:first');
+                form.triggerHandler('click');
+            }
+            else{
+                alert("More than one records were found! Please report the administrator.");
+                return;
+            }
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid.css
+</style>
