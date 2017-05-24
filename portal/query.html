@@ -1,6 +1,6 @@
 <section>
     <div id=toolbar__ID>
-          <a id=back__ID>Back</a> <span id=ns__ID><a id=new__ID>New</a> <a id=save__ID>Save</a></span><span class=tab__ID></span><input placeholder='filter' id=keyword__ID type=text />
+          <a id=back__ID>Back</a> <span id=ns__ID><a id=new__ID>New</a> <a id=save__ID>Save</a></span><span class=tab__ID></span><input placeholder='Name' id=keyword__ID type=text />
           <input id=category__ID placeholder='Category' type=text ></input>
           <input id=subcategory__ID placeholder='Subcategory' type=text ></input>
           <a id=query__ID>Load</a>
@@ -24,6 +24,7 @@ function F__ID(){
 	fields+=",_gridHidden|Table_ID,_gridHidden|SQL,_gridHidden|Options,_gridHidden|input_1,_gridHidden|input_2,_gridHidden|input_3,_gridHidden|input_4,_gridHidden|input_5";
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
+	/*
 	$('#category__ID').autocomplete({
 	    minLength:0,
 	    source:function(request,response){
@@ -47,6 +48,7 @@ function F__ID(){
 	    },
 	})
 	$('#subcategory__ID').focus(function(){$('#subcategory__ID').autocomplete("search","");});
+	*/
 	//-------------------------------------
 	$('#D__ID').on('load',function(){
 		if( $('#category__ID').val()=='' && $vm.category!='' ) $('#category__ID').val($vm.category);
@@ -102,10 +104,10 @@ function F__ID(){
 	};
 	//-------------------------------------
 	_set_req=function(){
-	    var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
+		var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"] where S1 like '%'+@S1+'%' and S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
 	    sql+="select Information,ID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
-	    var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1]";
-	    _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val(),s2:$('#category__ID').val(),s3:$('#subcategory__ID').val()}
+	    var sql_n="select count(ID) from [TABLE-"+_db_pid+"] where S1 like '%'+@S1+'%' and S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%'";
+	    _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:$('#keyword__ID').val(),I:$('#I__ID').text(),page_size:$('#page_size__ID').val(),s2:$('#category__ID').val(),s3:$('#subcategory__ID').val()}
 	}
 	//-------------------------------------
 	var tr_permission={};
@@ -127,6 +129,14 @@ function F__ID(){
 	}
 	//---------------------------------------------------------------
 	_data_process_after_render=function(){
+		if(_res.pms=='1000'){
+			$('#grid__ID th:nth-child(2)').hide()
+			$('#grid__ID td:nth-child(2)').hide()
+			$('#grid__ID th:nth-child(6)').hide()
+			$('#grid__ID td:nth-child(6)').hide()
+			$('#grid__ID th:nth-child(7)').hide()
+			$('#grid__ID td:nth-child(7)').hide()
+	    }
 		if($vm.server=='development') return;
 		$('#grid__ID tr').each(function(index){
 			if(index!=0){
