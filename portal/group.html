@@ -1,6 +1,6 @@
 <section>
     <div id=toolbar__ID>
-          <a id=back__ID>Back</a> <span id=ns__ID><a id=new__ID>New</a> <a id=save__ID>Save</a></span><span class=tab__ID></span><input placeholder='Name' id=keyword__ID type=text />
+          <a id=back__ID>Back</a> <span class=tab__ID></span>
           <input id=category__ID placeholder='Category' type=text ></input>
           <input id=subcategory__ID placeholder='Subcategory' type=text ></input>
           <a id=query__ID>Load</a>
@@ -23,7 +23,7 @@ function F__ID(){
 	//-------------------------------------
 	var _module=$vm.module_list[$vm.vm['__ID'].name];
 	_app_id=_module.var.app_id;
-	_fields="Category,Subcategory";
+	_fields="Category / Subcategory|Name";
 	//-------------------------------------
 	$('#D__ID').on('load',function(){
 		if( $('#category__ID').val()=='' && $vm.category!='' ) $('#category__ID').val($vm.category);
@@ -33,12 +33,13 @@ function F__ID(){
 	//-------------------------------------
 	_cell_render=function(records,I,field,td,set_value,source){
 	    switch(field){
-			case 'Category':
+			case 'Name':
 	            records[I].vm_readonly[field]=true;
-				var nm=$('<div/>').html(records[I][field]).text();
+				var nm=$('<div/>').html(records[I].Category+' / '+records[I].Subcategory).text();
+				if(records[I].Subcategory=='') nm=$('<div/>').html(records[I].Category).text();
 				td.html("▪ <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
-					$vm.load_module_by_name(_app_id+'group_panel',$vm.root_layout_content_slot,{category:nm,subcategory:records[I].Subcategory})
+					$vm.load_module_by_name(_app_id+'group_panel',$vm.root_layout_content_slot,{category:records[I].Category,subcategory:records[I].Subcategory})
 	            })
 	            break;
 	    }

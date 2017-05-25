@@ -3,12 +3,12 @@
 		<a id=back__ID>Back</a><span class=tab__ID></span><span id=nav_link__ID></span>
 	</div>
 	<div id=panel__ID style='clear:left;'>
-		<div class='nav__ID'>
+		<div class='nav__ID' id=div_modules__ID>
 		    <span>Modules</span>
 			<div id=modules__ID>
 			</div>
 		</div>
-		<div class='nav__ID'>
+		<div class='nav__ID' id=div_queries__ID>
 		    <span>Queries</span>
 			<div id=queries__ID>
 			</div>
@@ -75,6 +75,8 @@ function F__ID(){
 			}
 			txt+='</ul>'
 			$('#modules__ID').html(txt);
+			if(res.records.length==0) $('#div_modules__ID').hide();
+			else $('#div_modules__ID').show();
 			//---------------------------------------------
 			$('#modules__ID li').on('click',function(){
 				var i=$(this).attr('data-i');
@@ -97,6 +99,8 @@ function F__ID(){
 			}
 			txt+='</ul>'
 			$('#queries__ID').html(txt);
+			if(res.records.length==0) $('#div_queries__ID').hide();
+			else $('#div_queries__ID').show();
 			//---------------------------------------------
 			$('#queries__ID li').on('click',function(){
 				var i=$(this).attr('data-i');
@@ -163,8 +167,8 @@ function F__ID(){
         color:#005500;
     }
     .nav__ID li{
-        padding-top:3px;
-        padding-bottom:3px;
+        padding-top:1px;
+        padding-bottom:1px;
     }
     .nh__ID{
         color:#999!Important;
@@ -176,5 +180,9 @@ function F__ID(){
         #D__ID{
             font-size:16pt;
         }
+		.nav__ID li{
+	        padding-top:3px;
+	        padding-bottom:3px;
+	    }
     }
 </style>
