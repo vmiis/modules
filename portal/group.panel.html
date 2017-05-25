@@ -31,9 +31,40 @@ function F__ID(){
 		request_data(c,s);
 	});
 	//---------------------------------------------
+	var li_permission={};
+	var set_li_permission=function($li,records){
+		var i=$li.attr('data-i');
+		var tid=records[i].Table_ID;
+		var per=li_permission['P'+tid]
+		if(tid==undefined || tid=='') per=1;
+		if(per==undefined){
+			//set_li_permission($(this),tid)
+			$VmAPI.request({data:{cmd:'query_permission',db_pid:tid},callback:function(res){
+				if(res.pms!=undefined){
+					var p=parseInt(res.pms) & parseInt("1111",2); //read,write,delete,full
+					if(p==0){
+						li_permission['P'+tid]=0;
+						$li.addClass('not_allowed__ID')
+					}
+					else{
+						li_permission['P'+tid]=1;
+						$li.removeClass('not_allowed__ID');
+					}
+				}
+			}})
+		}
+		else if(per==1){
+			$li.removeClass('not_allowed__ID');
+		}
+		else if(per==0){
+			$li.addClass('not_allowed__ID')
+		}
+	}
+	//---------------------------------------------------------------
 	var module_records;
 	var query_records;
 	var request_data=function(category,subcategory){
+		//---------------------------------------------
 		var sql="select UID,Information from [TABLE-"+_module.var.module_tid+"] where S2=@S2 and S3=@S3 order by S1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:'',s2:category,s3:subcategory},callback:function(res){
 			module_records=res.records;
@@ -44,11 +75,18 @@ function F__ID(){
 			}
 			txt+='</ul>'
 			$('#modules__ID').html(txt);
+			//---------------------------------------------
 			$('#modules__ID li').on('click',function(){
 				var i=$(this).attr('data-i');
 				load_module(i)
 			});
+			//---------------------------------------------
+			$('#modules__ID li').each(function(){
+				set_li_permission($(this),module_records)
+			})
+			//---------------------------------------------
 		}})
+		//---------------------------------------------
 		var sql="select UID,Information from [TABLE-"+_module.var.query_tid+"] where S2=@S2 and S3=@S3 order by S1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:'',s2:category,s3:subcategory},callback:function(res){
 			query_records=res.records;
@@ -59,11 +97,18 @@ function F__ID(){
 			}
 			txt+='</ul>'
 			$('#queries__ID').html(txt);
+			//---------------------------------------------
 			$('#queries__ID li').on('click',function(){
 				var i=$(this).attr('data-i');
 				load_query(i)
 			});
+			//---------------------------------------------
+			$('#queries__ID li').each(function(){
+				set_li_permission($(this),query_records)
+			})
+			//---------------------------------------------
 		}})
+		//---------------------------------------------
 	}
 	//---------------------------------------------
 	var load_module=function(I){
