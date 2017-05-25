@@ -1,0 +1,76 @@
+<section>
+    <div id=toolbar__ID>
+          <a id=back__ID>Back</a> <span id=ns__ID><a id=new__ID>New</a> <a id=save__ID>Save</a></span><span class=tab__ID></span><input placeholder='Name' id=keyword__ID type=text />
+          <input id=category__ID placeholder='Category' type=text ></input>
+          <input id=subcategory__ID placeholder='Subcategory' type=text ></input>
+          <a id=query__ID>Load</a>
+          <span id=multi__ID>
+              <span class=tab__ID></span>Page Size: <select id=page_size__ID><option>30</option><option>50</option><option>100</option><option>200</option></select><span class=tab__ID></span>
+              <span id=I__ID style="display:none">0</span><span id=A__ID></span>
+              <img id=p__ID src="__LIB__/vmiis/Common-Code/image/p.png" ><img id=n__ID src="__LIB__/vmiis/common-code/image/n.png" >
+          </span>
+          <span id=elapsed__ID style='float:right'></span>
+    </div>
+    <div id=table__ID>
+        <table id=grid__ID></table>
+    </div>
+</section>
+<script>
+function F__ID(){
+	//-------------------------------------
+	VmInclude:__LIB__/vmiis/Common-Code/grid/grid2.js
+	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
+	//-------------------------------------
+	var _module=$vm.module_list[$vm.vm['__ID'].name];
+	_app_id=_module.var.app_id;
+	_fields="Category,Subcategory";
+	//-------------------------------------
+	$('#D__ID').on('load',function(){
+		if( $('#category__ID').val()=='' && $vm.category!='' ) $('#category__ID').val($vm.category);
+		if( $('#subcategory__ID').val()=='' && $vm.subcategory!='' ) $('#subcategory__ID').val($vm.subcategory);
+		_set_req(); _request_data();
+	})
+	//-------------------------------------
+	_cell_render=function(records,I,field,td,set_value,source){
+	    switch(field){
+			case 'Category':
+	            records[I].vm_readonly[field]=true;
+				var nm=$('<div/>').html(records[I][field]).text();
+				td.html("▪ <u style='cursor:pointer;'>"+nm+"</u>");
+	            td.find('u').on('click',function(){
+					$vm.load_module_by_name(_app_id+'group_panel',$vm.root_layout_content_slot,{category:nm,subcategory:records[I].Subcategory})
+	            })
+	            break;
+	    }
+	}
+	//-------------------------------------
+	_set_req=function(){
+		var tb="with tbM as (select S2,S3, ID=MAX(ID) OVER (PARTITION BY S2) from [TABLE-"+_module.var.module_tid+"] where S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
+		tb+=",       tbQ as (select S2,S3, ID=MAX(ID) OVER (PARTITION BY S2) from [TABLE-"+_module.var.query_tid+"] where S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
+		tb+=", tb0 as (select ID,S2,S3 from tbM union select ID,S2,S3 from tbQ )";
+		tb+=", tb as (select distinct ID=MAX(ID) OVER (PARTITION BY S2),S2,S3 from tb0 )";
+
+		var sql=tb+",tb1 as (select Category=S2,Subcategory=S3, RowNum=row_number() over (order by ID desc) from tb)";
+	    sql+=" select Category,Subcategory from tb1 where RowNum between @I6 and @I7";
+
+	    var sql_n=tb+" select count(ID) from tb";
+
+		_req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,I:$('#I__ID').text(),page_size:$('#page_size__ID').val(),s2:$('#category__ID').val(),s3:$('#subcategory__ID').val()}
+	}
+	//-------------------------------------
+}
+</script>
+<style>
+    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+    VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.css
+	.not_allowed__ID{
+	    color:#888!Important;
+	    cursor:not-allowed!Important;
+		text-decoration: none;
+	}
+    @media screen and (max-width:900px){
+        #grid__ID{
+            font-size:120%;
+        }
+    }
+</style>
