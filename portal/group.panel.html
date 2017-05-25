@@ -71,6 +71,10 @@ function F__ID(){
 			var txt='<ul>'
 			for(var i=0;i<res.records.length;i++){
 				var nm=$('<div/>').html(res.records[i].Name).text();
+				var digit=nm.split(' ')[0];
+				if(isNaN(digit)==false){
+					nm=nm.replace(digit,'').trim();
+				}
 				txt+='<li data-i='+i+'>'+nm+'</li>';
 			}
 			txt+='</ul>'

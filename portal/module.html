@@ -67,6 +67,12 @@ function F__ID(){
 	            }
 	            records[I].vm_readonly[field]=true;
 				var nm=$('<div/>').html(records[I][field]).text();
+				if(_res.pms=='1000'){
+					var digit=nm.split(' ')[0];
+					if(isNaN(digit)==false){
+						nm=nm.replace(digit,'').trim();
+					}
+				}
 				if(records[I].Table_ID=='' || records[I].Table_ID==undefined) td.html("▪ <u style='cursor:pointer;'>"+nm+"</u>");
 	            else td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
@@ -125,7 +131,7 @@ function F__ID(){
 	_before_submit=function(record,dbv){
 	    if(record.Input!=""){
 	        try{
-	            JSON.parse(record.Options);
+	            JSON.parse(record.Input);
 	        }catch (e) {
 	            alert(e);
 	            return false;
