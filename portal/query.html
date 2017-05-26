@@ -66,6 +66,19 @@ function F__ID(){
 	            }
 	            records[I].vm_readonly[field]=true;
 				var nm=$('<div/>').html(records[I][field]).text();
+				if(_res.pms=='1000'){
+					var digit=nm.split(' ')[0];
+					if(isNaN(digit)==false){
+						nm=nm.replace(digit,'').trim();
+					}
+				}
+				else{
+					var digit=nm.split(' ')[0];
+					if(isNaN(digit)==false){
+						nm=nm.replace(digit,'').trim();
+						nm="<span style='color:#aaa'>"+digit+"</span> "+nm;
+					}
+				}
 	            td.html("<u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
 					if( $(this).hasClass( 'not_allowed__ID' )===true){

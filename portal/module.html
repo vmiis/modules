@@ -73,6 +73,13 @@ function F__ID(){
 						nm=nm.replace(digit,'').trim();
 					}
 				}
+				else{
+					var digit=nm.split(' ')[0];
+					if(isNaN(digit)==false){
+						nm=nm.replace(digit,'').trim();
+						nm="<span style='color:#aaa'>"+digit+"</span> "+nm;
+					}
+				}
 				if(records[I].Table_ID=='' || records[I].Table_ID==undefined) td.html("▪ <u style='cursor:pointer;'>"+nm+"</u>");
 	            else td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
@@ -85,7 +92,9 @@ function F__ID(){
 						url="__LIB__"+url;
 	                    var v={}
 	                    try{
-	                        v=JSON.parse(records[I].Input);
+							var obj=records[I].Input;
+							if(obj[0]!='{') obj='{'+obj+'}';
+							v=JSON.parse(obj);
 							v.UID=records[I].UID;
 	                    }catch (e) {}
 						var module="M"+records[I].UID;
@@ -103,7 +112,9 @@ function F__ID(){
 	                            if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
 	                                var v={}
 	                                try{
-	                                    v=JSON.parse(records[I].Input);
+										var obj=records[I].Input;
+										if(obj[0]!='{') obj='{'+obj+'}';
+	                                    v=JSON.parse(obj);
 										v.UID=records[I].UID;
 	                                }catch (e) {}
 	    							var module="M"+records[I].UID;
@@ -133,7 +144,9 @@ function F__ID(){
 	_before_submit=function(record,dbv){
 	    if(record.Input!=""){
 	        try{
-	            JSON.parse(record.Input);
+				var obj=record.Input;
+				if(obj[0]!='{') obj='{'+obj+'}';
+	            JSON.parse(obj);
 	        }catch (e) {
 	            alert(e);
 	            return false;
