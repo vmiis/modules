@@ -126,7 +126,9 @@ function F__ID(){
 			if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
 				var v={}
 				try{
-					v=JSON.parse(module_records[I].Input);
+					var obj=module_records[I].Input;
+					if(obj[0]!='{') obj='{'+obj+'}';
+					v=JSON.parse(obj);
 				}catch (e) {}
 				var module="M"+module_records[I].UID;
 				if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
