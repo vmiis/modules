@@ -118,9 +118,12 @@ function F__ID(){
 	//--------------------------------------------------------
 	$('#D__ID').on('refresh_back',_request_and_render);
 	//--------------------------------------------------------
-	if(_module.var.booking_record==undefined){
-		_module.var.booking_record="M"+_module.var.UID+"_record_module";
-		$vm.module_list[_module.var.booking_record]=_module.var.booking_record_module;
+	if(typeof _module.var.booking_record!=='string'){
+		var obj=_module.var.booking_record;
+		obj.var=_module.var;
+		var module_name="M"+_module.var.UID+"_record_module";
+		$vm.module_list[module_name]=obj;
+		_module.var.booking_record=module_name;
 	}
 	//--------------------------------------------------------
 }
