@@ -27,7 +27,9 @@ function F__ID(){
 		var s=$vm.vm['__ID'].op.subcategory;
 		var n=c; if(s!='') n=c+' / '+s;
 	    _nav_name=n;
-	    _set_nav_link();
+	    //_set_nav_link();
+		$('#modules__ID').html('');
+		$('#queries__ID').html('');
 		request_data(c,s);
 	});
 	//---------------------------------------------
