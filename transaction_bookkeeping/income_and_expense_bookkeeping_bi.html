@@ -89,7 +89,11 @@ function F__ID(){
                     tr.find('td').eq(2).find('u').data('rid',res.records[i].ID);
                     tr.find('td').eq(2).find('u').on('click',function(){
                         var rid=$(this).data('rid');
-                        $vm.load_module_by_name(_module.var.bi_details,$vm.root_layout_content_slot,{rid:rid});
+						if(_module.var.bi_details==undefined){
+							_module.var.bi_details="M"+_module.var.UID+"_income_and_expense_bi_details";
+							$vm.module_list[_module.var.bi_details]=_module.var.bi_details_module;
+						}
+                    	$vm.load_module_by_name(_module.var.bi_details,$vm.root_layout_content_slot,{rid:rid});
                     })
                 }
                 else tr.find('td').eq(2).text(Num)
