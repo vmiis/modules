@@ -3,62 +3,66 @@
       VmInclude:__BASE__/vmiis/common-code/calendar/week.html
 </section>
 <script>
-    /*
-    Booking record must have fields:
-        Time,Booked_by,Color
-    input:
-        var.daily_calendar_module
-        var.record_tid
-        var.record_module
-    */
-    function F__ID(){
-        //--------------------------------------------------------
-        VmInclude:__BASE__/vmiis/Common-Code/toolbar/week_v2.js
-        VmInclude:__BASE__/vmiis/Common-Code/calendar/week_v2.js
-        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
-        //--------------------------------------------------------
-        var _module=$vm.module_list[$vm.vm['__ID'].name];
-        //--------------------------------------------------------
-        _on_day_click_fun=function(date){
-            $vm.load_module_by_name(_module.var.daily_calendar_module,$vm.root_layout_content_slot,{day:date});
-        }
-        //--------------------------------------------------------
-        _request_and_render=function(){
-            var sql="select ID,Author,Information from [TABLE-"+_module.var.record_tid+"] where @T1<=DT1 and DT1<=@T2 order by S1";
-            var req_data={cmd:'query_records',sql:sql,t1:_first_day,t2:_last_day};
-            $VmAPI.request({data:req_data,callback:function(res){
-                _calendar_render("<ul></ul>");
-        		for(var i=0;i<res.records.length;i++){
-    				var id=res.records[i].ID;
-    				var d=res.records[i].Date;
-                    cell_render(res.records[i]);
-    			}
-                var top1=$('#calendar__ID').offset().top;
-                $('#calendar__ID').css("height",$(window).height()-top1-$('#'+$vm.root_layout_footer).outerHeight());
-            }});
-        }
-        //--------------------------------------------------------
-        var cell_render=function(record){
-            var id=record.ID;
-    		var time=record.Time;
-            var name=record.Booked_by;
-    		var color=record.Color;
-    		var author=record.Author;
-            var d=record.Date;
-            var $div=_get_cell_div(d);
-            var $ul=$($div.find('ul')[0]);
-            var LI="<li><u id=event"+id+" style=cursor:pointer;color:"+color+">"+time+" - "+name+"</u></li>";
-    		$ul.append(LI);
-    		$ul.find('u').data("author",author);
-        	$('#event'+id).on('click',function(){
-                $vm.load_module_by_name(_module.var.record_module,undefined,{edit:1,sql_where:' id='+id});
-        	});
-        }
-        //--------------------------------------------------------
-        $('#D__ID').on('load',_request_and_render);
-        $('#D__ID').on('refresh_back',_request_and_render);
-        //--------------------------------------------------------
+function F__ID(){
+    //--------------------------------------------------------
+    VmInclude:__BASE__/vmiis/Common-Code/toolbar/week_v2.js
+    VmInclude:__BASE__/vmiis/Common-Code/calendar/week_v2.js
+    VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+    //--------------------------------------------------------
+    var _module=$vm.module_list[$vm.vm['__ID'].name];
+    //--------------------------------------------------------
+    _on_day_click_fun=function(date){
+        $vm.load_module_by_name(_module.var.daily_calendar_module,$vm.root_layout_content_slot,{day:date});
     }
+    //--------------------------------------------------------
+    _request_and_render=function(){
+        var sql="select ID,Author,Information from [TABLE-"+_module.var.record_tid+"] where @T1<=DT1 and DT1<=@T2 order by S1";
+        var req_data={cmd:'query_records',sql:sql,t1:_first_day,t2:_last_day};
+        $VmAPI.request({data:req_data,callback:function(res){
+            _calendar_render("<ul></ul>");
+    		for(var i=0;i<res.records.length;i++){
+				var id=res.records[i].ID;
+				var d=res.records[i].Date;
+                cell_render(res.records[i]);
+			}
+            var top1=$('#calendar__ID').offset().top;
+            $('#calendar__ID').css("height",$(window).height()-top1-$('#'+$vm.root_layout_footer).outerHeight());
+        }});
+    }
+    //--------------------------------------------------------
+    var cell_render=function(record){
+        var id=record.ID;
+		var time=record.Time;
+        var name=record.Booked_by;
+		var color=record.Color;
+		var author=record.Author;
+        var d=record.Date;
+        var $div=_get_cell_div(d);
+        var $ul=$($div.find('ul')[0]);
+        var LI="<li><u id=event"+id+" style=cursor:pointer;color:"+color+">"+time+" - "+name+"</u></li>";
+		$ul.append(LI);
+		$ul.find('u').data("author",author);
+    	$('#event'+id).on('click',function(){
+            $vm.load_module_by_name(_module.var.record_module,undefined,{edit:1,sql_where:' id='+id});
+    	});
+    }
+    //--------------------------------------------------------
+    $('#D__ID').on('load',_request_and_render);
+    $('#D__ID').on('refresh_back',_request_and_render);
+    //--------------------------------------------------------
+	if(typeof _module.var.record_module!=='string'){
+		var module_name="M"+_module.var.UID+"_record_module";
+		$vm.module_list[module_name]=_module.var.record_module;
+		_module.var.record_module=module_name;
+	}
+	//--------------------------------------------------------
+	if(typeof _module.var.daily_calendar_module!=='string'){
+		var module_name="M"+_module.var.UID+"_daily_calendar";
+		$vm.module_list[module_name]=_module.var.daily_calendar_module;
+		_module.var.daily_calendar_module=module_name;
+	}
+	//--------------------------------------------------------
+}
 </script>
 <style>
     #D__ID{
