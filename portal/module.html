@@ -25,7 +25,6 @@ function F__ID(){
 	fields+=",_gridHidden|Table_ID,_gridHidden|URL,_gridHidden|Input";
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
-	/*
 	$('#category__ID').autocomplete({
 	    minLength:0,
 	    source:function(request,response){
@@ -49,7 +48,6 @@ function F__ID(){
 	    },
 	})
 	$('#subcategory__ID').focus(function(){$('#subcategory__ID').autocomplete("search","");});
-	*/
 	//-------------------------------------
 	$('#D__ID').on('load',function(){
 		if( $('#category__ID').val()=='' && $vm.category!='' ) $('#category__ID').val($vm.category);
@@ -118,17 +116,13 @@ function F__ID(){
 										v.UID=records[I].UID;
 	                                }catch (e) {}
 	    							var module="M"+records[I].UID;
-									if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
-										url=url.replace('https://vmiis.github.io',window.location.protocol+'//'+window.location.host+'/vmiis');
-										url=url.replace('https://rt.woolcock.org.au/github/woolcock-imr',window.location.protocol+'//'+window.location.host+'/woolcock-imr');
-										url=url.replace('https://cbs.wappsystem.com/dev/github',window.location.protocol+'//'+window.location.host);
-										url=url.replace('https://woolcock-imr.github.io',window.location.protocol+'//'+window.location.host+'/woolcock-imr');
+									if($vm.module_list[module]==undefined){
+		                                $vm.module_list[module]={
+		                                    table_id:records[I].Table_ID,
+		                                    url:url,
+		                                    var:v,
+		                                }
 									}
-	                                $vm.module_list[module]={
-	                                    table_id:records[I].Table_ID,
-	                                    url:url,
-	                                    var:v,
-	                                }
 	                                $vm.load_module_by_name(module,$vm.root_layout_content_slot,{})
 	                                return;
 	                            }
