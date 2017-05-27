@@ -119,8 +119,10 @@ function F__ID(){
 	$('#D__ID').on('refresh_back',_request_and_render);
 	//--------------------------------------------------------
 	if(typeof _module.var.record_module!=='string'){
+		var obj=_module.var.record_module;
+		obj.var=_module.var;
 		var module_name="M"+_module.var.UID+"_record_module";
-		$vm.module_list[module_name]=_module.var.record_module;
+		$vm.module_list[module_name]=obj;
 		_module.var.record_module=module_name;
 	}
 	//--------------------------------------------------------

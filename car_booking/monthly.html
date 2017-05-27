@@ -39,10 +39,10 @@ function F__ID(){
         var d=record.Date;
         var $div=_get_cell_div(d);
         var $ul=$($div.find('ul')[0]);
-        var LI="<li><u id=event"+id+" style=cursor:pointer;color:"+color+">"+time+" - "+name+"</u></li>";
+        var LI="<li><u id=event__ID"+id+" style=cursor:pointer;color:"+color+">"+time+" - "+name+"</u></li>";
 		$ul.append(LI);
 		$ul.find('u').data("author",author);
-    	$('#event'+id).on('click',function(){
+    	$('#event__ID'+id).on('click',function(){
             $vm.load_module_by_name(_module.var.record_module,undefined,{edit:1,sql_where:' id='+id});
     	});
     }
@@ -51,14 +51,18 @@ function F__ID(){
     $('#D__ID').on('refresh_back',_request_and_render);
     //--------------------------------------------------------
 	if(typeof _module.var.record_module!=='string'){
+		var obj=_module.var.record_module;
+		obj.var=_module.var;
 		var module_name="M"+_module.var.UID+"_record_module";
-		$vm.module_list[module_name]=_module.var.record_module;
+		$vm.module_list[module_name]=obj;
 		_module.var.record_module=module_name;
 	}
 	//--------------------------------------------------------
 	if(typeof _module.var.daily_calendar_module!=='string'){
+		var obj=_module.var.daily_calendar_module;
+		obj.var=_module.var;
 		var module_name="M"+_module.var.UID+"_daily_calendar";
-		$vm.module_list[module_name]=_module.var.daily_calendar_module;
+		$vm.module_list[module_name]=obj;
 		_module.var.daily_calendar_module=module_name;
 	}
 	//--------------------------------------------------------
