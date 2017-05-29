@@ -27,42 +27,7 @@ function F__ID(){
 	_cell_render=function(records,I,field,td,set_value,source){
 	    switch(field){
 	        case 'File_Name':
-	            records[I].vm_custom[field]=true;
-	            td.data('filename_field',field);
-	            td.css('position','relative');
-	            td.css('padding-right','15px');
-	            var html="<u style='cursor:pointer'>"+records[I][field]+"</u>";
-	            html+="<form><input type=file style='display:none'></input></form><a class=file_button><a>";
-	            td.html(html);
-	            td.find('u').on('click',function(){
-	                var f_name=$(this).html();
-	                var rid=records[I].ID;
-	                if(rid!==undefined){
-	                    $vm.open_link({rid:rid,filename:f_name});
-	                }
-	                else alert("No file was found on server.")
-	            });
-	            td.find('a').on('click',function(){
-	                td.find('form')[0].reset();
-	                td.find('input[type=file]').trigger('click');
-	            })
-	            td.find('input[type=file]').on('change',function(evt){
-	                var file = this.files[0];
-	                var date=$vm.date_to_string_dmy(new Date(file.lastModified));
-	                set_value(file.name,records,I,'File_Name');
-	                set_value(file.size,records,I,'Size');
-	                set_value(date,records,I,'Last_Modified');
-	                if(source=='grid'){
-	                    td.parent().find("td[data-id='File_Name']").find('u').html(file.name);
-	                    td.parent().find("td[data-id='Size']").html(file.size);
-	                    td.parent().find("td[data-id='Last_Modified']").html(date);
-	                }
-	                else{
-	                    td.parent().parent().find("td[data-id='File_Name']").find('u').html(file.name);
-	                    td.parent().parent().find("td[data-id='Size']").html(file.size);
-	                    td.parent().parent().find("td[data-id='Last_Modified']").html(date);
-	                }
-	            })
+				VmInclude:__BASE__/vmiis/Common-Code/grid/field_file.js
 	            break;
 	        case 'Department':
 	            td_set_department(records,I,field,td,source);
@@ -79,13 +44,13 @@ function F__ID(){
 	    }
 	}
 	//-------------------------------------
-	var pid=$vm.module_list['kangdinglu_category'][0];
+	var pid=_module.var.kangdinglu_category_tid;
 	//-------------------------------------
 	var td_set_department=function(records,I,field,td,source){
 	    td.autocomplete({
 	        minLength:0,
 	        source:function(request,response){
-	            var sql="with tb as (select distinct name=S1 from [FORM-"+pid+"])";
+	            var sql="with tb as (select distinct name=S1 from [TABLE-"+pid+"])";
 	            sql+=" select top 10 name,value=name from tb where name like '%'+@S1+'%' ";
 	            $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
 	                response($vm.autocomplete_list(res.table));
@@ -105,7 +70,7 @@ function F__ID(){
 	    td.autocomplete({
 	        minLength:0,
 	        source:function(request,response){
-	            var sql="with tb as (select distinct name=S2,S1 from [FORM-"+pid+"])";
+	            var sql="with tb as (select distinct name=S2,S1 from [TABLE-"+pid+"])";
 	            sql+=" select top 10 name,value=name from tb where  S1='"+s1+"' and name like '%'+@S1+'%' ";
 	            $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
 	                response($vm.autocomplete_list(res.table));
@@ -125,7 +90,7 @@ function F__ID(){
 	    td.autocomplete({
 	        minLength:0,
 	        source:function(request,response){
-	            var sql="with tb as (select distinct name=S3,S2,S1 from [FORM-"+pid+"])";
+	            var sql="with tb as (select distinct name=S3,S2,S1 from [TABLE-"+pid+"])";
 	            sql+=" select top 10 name from tb where S1='"+s1+"' and S2='"+s2+"' and name like '%'+@S1+'%' ";
 	            $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
 	                response($vm.autocomplete_list(res.table));
@@ -142,7 +107,7 @@ function F__ID(){
 	    $('#department__ID').autocomplete({
 	        minLength:0,
 	        source:function(request,response){
-	            var sql="with tb as (select distinct name=S1 from [FORM-"+pid+"])";
+	            var sql="with tb as (select distinct name=S1 from [TABLE-"+pid+"])";
 	            sql+=" select top 10 name from tb where Name like '%'+@S1+'%' ";
 	            $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
 	                response($vm.autocomplete_list(res.table));
@@ -159,7 +124,7 @@ function F__ID(){
 	    $('#category__ID').autocomplete({
 	        minLength:0,
 	        source:function(request,response){
-	            var sql="with tb as (select distinct name=S2,S1 from [FORM-"+pid+"])";
+	            var sql="with tb as (select distinct name=S2,S1 from [TABLE-"+pid+"])";
 	            sql+=" select top 10 name from tb where  S1='"+$('#department__ID').val()+"' and name like '%'+@S1+'%' ";
 	            $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
 	                response($vm.autocomplete_list(res.table));
@@ -176,7 +141,7 @@ function F__ID(){
 	    $('#sub_category__ID').autocomplete({
 	        minLength:0,
 	        source:function(request,response){
-	            var sql="with tb as (select distinct name=S3,S2,S1 from [FORM-"+pid+"])";
+	            var sql="with tb as (select distinct name=S3,S2,S1 from [TABLE-"+pid+"])";
 	            sql+=" select top 10 name from tb where S1='"+$('#department__ID').val()+"' and S2='"+$('#category__ID').val()+"' and name like '%'+@S1+'%' ";
 	            $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
 	                response($vm.autocomplete_list(res.table));
