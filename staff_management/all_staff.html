@@ -45,7 +45,7 @@
                     if(records[I].UID==null || records[I].UID==undefined) return;
                     td.html("<u style='cursor:pointer;'>More...</u>");
                     td.find('u').on('click',function(){
-                        $vm.load_module_by_name(_module.panel,$vm.root_layout_content_slot,{
+                        $vm.load_module_by_name(_module.var.panel,$vm.root_layout_content_slot,{
                             staff_name:records[I].First_Name+' '+records[I].Last_Name,
                             staff_login_name:records[I].Login_Name,
                             staff_rid:records[I].ID,
@@ -78,14 +78,22 @@
             _records[0].Department=$('#department__ID').val();
         };
         //-------------------------------------
-        _set_req=function(){
-            var where=" S1 like '%'+@S2+'%' "
-            var sql="with tb as (select S1,S2,Information,PID,ID,UID,PUID,DateTime,Author,Modified,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where "+where+")";
-            sql+="select S1,S2,Information,PID,ID,UID,PUID,DateTime,Author,Modified,RowNum from tb where RowNum between @I6 and @I7";
-            var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1] where "+where;
-            _req={cmd:'query_records',sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',s2:$('#department__ID').val(),I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
-       }
-       //-------------------------------------
+		_set_req=function(){
+			var where=" S1 like '%'+@S2+'%' "
+			var sql="with tb as (select S1,S2,Information,PID,ID,UID,PUID,DateTime,Author,Modified,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where "+where+")";
+			sql+="select S1,S2,Information,PID,ID,UID,PUID,DateTime,Author,Modified,RowNum from tb where RowNum between @I6 and @I7";
+			var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1] where "+where;
+			_req={cmd:'query_records',sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',s2:$('#department__ID').val(),I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+		}
+		//-------------------------------------
+		if(_module.var.panel!=undefined && typeof _module.var.panel!=='string'){
+			var obj=_module.var.panel;
+			obj.var=_module.var;
+			var module_name="M"+_module.var.UID+"_staff_child_record_panel";
+			$vm.module_list[module_name]=obj;
+			_module.var.panel=module_name;
+		}
+		//--------------------------------------------------------
     }
 </script>
 <style>
