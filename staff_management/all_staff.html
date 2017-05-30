@@ -45,12 +45,26 @@
                     if(records[I].UID==null || records[I].UID==undefined) return;
                     td.html("<u style='cursor:pointer;'>More...</u>");
                     td.find('u').on('click',function(){
-                        $vm.load_module_by_name(_module.var.panel,$vm.root_layout_content_slot,{
+						/*
+						$vm.load_module_by_name(_module.var.panel,$vm.root_layout_content_slot,{
                             staff_name:records[I].First_Name+' '+records[I].Last_Name,
                             staff_login_name:records[I].Login_Name,
                             staff_rid:records[I].ID,
                             staff_pid:_db_pid,
                             staff_uid:records[I].UID,
+                        })
+						*/
+						$vm.load_module_by_name(_module.var.child_module,$vm.root_layout_content_slot,{
+							parent_name:records[I].First_Name+' '+records[I].Last_Name,
+							//parent_pid:_db_pid,
+							//parent_uid:records[I].UID,
+							parent_info:{
+	                            staff_name:records[I].First_Name+' '+records[I].Last_Name,
+	                            staff_login_name:records[I].Login_Name,
+	                            staff_rid:records[I].ID,
+	                            staff_pid:_db_pid,
+	                            staff_uid:records[I].UID,
+							}
                         })
                     })
                     break;
@@ -86,12 +100,22 @@
 			_req={cmd:'query_records',sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',s2:$('#department__ID').val(),I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
 		}
 		//-------------------------------------
+		/*
 		if(_module.var.panel!=undefined && typeof _module.var.panel!=='string'){
 			var obj=_module.var.panel;
 			obj.var=_module.var;
 			var module_name="M"+_module.var.UID+"_staff_child_record_panel";
 			$vm.module_list[module_name]=obj;
 			_module.var.panel=module_name;
+		}
+		*/
+		//--------------------------------------------------------
+		if(_module.var.child_module!=undefined && typeof _module.var.child_module!=='string'){
+			var obj=_module.var.child_module;
+			obj.var=_module.var;
+			var module_name="M"+_module.var.UID+"_staff_child_module";
+			$vm.module_list[module_name]=obj;
+			_module.var.child_module=module_name;
 		}
 		//--------------------------------------------------------
     }
