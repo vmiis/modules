@@ -29,7 +29,7 @@ function F__ID(){
 		$('#btn_modules__ID').show();
 		var dp=','+_module.var.child_panel.child_developer+',';
 		var us=','+$vm.user+',';
-		if(dp.substring(us)==-1) $('#btn_modules__ID').hide();
+		if(dp.indexOf(us)==-1) $('#btn_modules__ID').hide();
 		$('#modules__ID').html('');
 		$('#queries__ID').html('');
 		request_data();
