@@ -38,6 +38,13 @@
         //-------------------------------------
         $('#D__ID').on('load',function(){  _set_req(); _request_data();  })
         //-------------------------------------
+		_set_req=function(){
+		    var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by DT1 DESC) from [TABLE-"+_db_pid+"-@S1] )";
+		    sql+="select Information,ID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
+		    var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1]";
+		    _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+		}
+		//-------------------------------------
         $('#import__ID').on('click',function(){
             $('#fileform__ID')[0].reset();
             $('#import_file__ID').trigger('click');
