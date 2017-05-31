@@ -30,13 +30,14 @@ function F__ID(){
 		if(_records[I].ID==undefined) $('#delete__ID').hide();
 	});
 	//---------------------------------------------
-	var __name="",__category="",__subcategory='',__table_id='',__url='',__input='';
+	var __name="",__category="",__subcategory='',__table_id='',__url='',__input='',__single_child='';;
 	$('#copy__ID').on('click',function(){
 		__name=$('#tb__ID tbody td[data-id=Name]').text();
 		__category=$('#tb__ID tbody td[data-id=Category]').text();
 		__subcategory=$('#tb__ID tbody td[data-id=Subcategory]').text();
 		__table_id=$('#tb__ID tbody td[data-id=Table_ID]').text();
 		__url=$('#tb__ID tbody td[data-id=URL]').text();
+		__single_child='0'; if( $('#tb__ID tbody td[data-id=Single_Child]').find('input').prop("checked") == true ) __single_child='1';
 		__input=$('#tb__ID tbody td[data-id=Input]').html();
 		__input=__input.replace(/<br>/g,'\n');
 	})
@@ -48,12 +49,15 @@ function F__ID(){
 		$('#tb__ID tbody td[data-id=Table_ID]').text(__table_id);
 		$('#tb__ID tbody td[data-id=URL]').text(__url);
 		$('#tb__ID tbody td[data-id=Input]').text(__input);
+		$('#tb__ID tbody td[data-id=Single_Child]').find('input').prop('checked', false);
+		if(__single_child=="1") $('#tb__ID tbody td[data-id=Single_Child]').find('input').prop('checked', true);
 		_records[I].Name=__name;
 		_records[I].Category=__category;
 		_records[I].Subcategory=__subcategory;
 		_records[I].Table_ID=__table_id;
 		_records[I].URL=__url;
 		_records[I].Input=__input;
+		_records[I].Single_Child=__single_child;
 		_records[I].vm_dirty=1;
 		$('#save__ID').css('background','#E00');
 	})

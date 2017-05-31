@@ -22,7 +22,7 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
 	var fields="Name,Category,Subcategory";
-	fields+=",_gridHidden|Table_ID,_gridHidden|URL,_gridHidden|Input";
+	fields+=",_gridHidden|Table_ID,_gridHidden|URL,_gridHidden|Input,_gridHidden|Single_Child";
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -57,6 +57,10 @@ function F__ID(){
 	//-------------------------------------
 	_cell_render=function(records,I,field,td,set_value,source){
 	    switch(field){
+			case 'Single_Child':
+				td.html('<input type=checkbox />');
+				VmInclude:__BASE__/vmiis/Common-Code/grid/field_checkbox.js
+				break;
 			case 'Name':
 	            if(records[I].UID==null || records[I].UID==undefined) return;
 	            if(source=='form'){

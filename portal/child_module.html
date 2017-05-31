@@ -130,13 +130,14 @@ function F__ID(){
 	        }
 	    }
 	    dbv.S1=record.Name;
+		dbv.PUID=_module.var.UID;
 	    return true;
 	};
 	//-------------------------------------
 	_set_req=function(){
-	    var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by S1) from [TABLE-"+_db_pid+"] where S1 like '%'+@S1+'%')";
+	    var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by S1) from [TABLE-"+_db_pid+"] where PUID="+_module.var.UID+" and S1 like '%'+@S1+'%')";
 	    sql+="select Information,ID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
-	    var sql_n="select count(ID) from [TABLE-"+_db_pid+"] where S1 like '%'+@S1+'%'";
+	    var sql_n="select count(ID) from [TABLE-"+_db_pid+"] where PUID="+_module.var.UID+" and S1 like '%'+@S1+'%'";
 	    _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:$('#keyword__ID').val(),I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
 	}
 	//-------------------------------------
@@ -166,6 +167,8 @@ function F__ID(){
 			$('#grid__ID td:nth-child(4)').hide()
 			$('#grid__ID th:nth-child(5)').hide()
 			$('#grid__ID td:nth-child(5)').hide()
+			$('#grid__ID th:nth-child(6)').hide()
+			$('#grid__ID td:nth-child(6)').hide()
 	    }
 		if($vm.server=='development') return;
 		$('#grid__ID tr').each(function(index){

@@ -1,6 +1,8 @@
 <div>
 	<div id=toolbar__ID>
-		<a id=back__ID>Back</a><span class=tab__ID></span><span id=nav_link__ID></span>
+		<a id=back__ID>Back</a>
+		<span class=tab__ID></span><span id=parent_name__ID></span>
+		<span class=tab__ID></span><a id=btn_modules__ID>Modules</a>
 	</div>
 	<div id=panel__ID style='clear:left;'>
 		<div class='nav__ID' id=div_modules__ID>
@@ -23,15 +25,19 @@ function F__ID(){
 	VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
-		var c=$vm.vm['__ID'].op.category;
-		var s=$vm.vm['__ID'].op.subcategory;
-		var n=c; if(s!='') n=c+' / '+s;
-	    _nav_name=n;
-	    //_set_nav_link();
+		$('#parent_name__ID').text($vm.vm['__ID'].op.parent_name);
+		$('#btn_modules__ID').show();
+		var dp=','+_module.var.child_panel.child_developer+',';
+		var us=','+$vm.user+',';
+		if(dp.substring(us)==-1) $('#btn_modules__ID').hide();
 		$('#modules__ID').html('');
 		$('#queries__ID').html('');
-		request_data(c,s);
+		request_data();
 	});
+	//---------------------------------------------
+	$('#btn_modules__ID').on('click',function(){
+		$vm.load_module_by_name(child_module,$vm.root_layout_content_slot,$vm.vm['__ID'].op)
+	})
 	//---------------------------------------------
 	var li_permission={};
 	var set_li_permission=function($li,records){
@@ -65,10 +71,10 @@ function F__ID(){
 	//---------------------------------------------------------------
 	var module_records;
 	var query_records;
-	var request_data=function(category,subcategory){
+	var request_data=function(){
 		//---------------------------------------------
-		var sql="select UID,Information from [TABLE-"+_module.var.module_tid+"] where S2=@S2 and S3=@S3 order by S1";
-		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:'',s2:category,s3:subcategory},callback:function(res){
+		var sql="select UID,Information from [TABLE-"+_module.var.child_module.table_id+"] where PUID="+_module.var.UID+" order by S1";
+		$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
 			module_records=res.records;
 			var txt='<ul>'
 			for(var i=0;i<res.records.length;i++){
@@ -95,6 +101,7 @@ function F__ID(){
 			//---------------------------------------------
 		}})
 		//---------------------------------------------
+		/*
 		var sql="select UID,Information from [TABLE-"+_module.var.query_tid+"] where S2=@S2 and S3=@S3 order by S1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:'',s2:category,s3:subcategory},callback:function(res){
 			query_records=res.records;
@@ -123,6 +130,8 @@ function F__ID(){
 			//---------------------------------------------
 		}})
 		//---------------------------------------------
+		*/
+		$('#div_queries__ID').hide();
 	}
 	//---------------------------------------------
 	var load_module=function(I){
@@ -135,7 +144,6 @@ function F__ID(){
 					var obj=module_records[I].Input;
 					if(obj[0]!='{') obj='{'+obj+'}';
 					v=JSON.parse(obj);
-					v.UID=module_records[I].UID;
 				}catch (e) {}
 				var module="M"+module_records[I].UID;
 				$vm.module_list[module]={
@@ -143,7 +151,9 @@ function F__ID(){
 					url:url,
 					var:v,
 				}
-				$vm.load_module_by_name(module,$vm.root_layout_content_slot,{})
+				var slot=$vm.root_layout_content_slot;
+				if(module_records[I].Single_Child=='1') slot=undefined;
+				$vm.load_module_by_name(module,slot,$vm.vm['__ID'].op.parent_info)
 				return;
 			}
 		}
@@ -163,6 +173,12 @@ function F__ID(){
 		})
 	}
 	//---------------------------------------------
+	var child_module="M"+_module.var.UID+"_child_module";
+	if($vm.module_list[child_module]==undefined){
+		$vm.module_list[child_module]=_module.var.child_module;
+		$vm.module_list[child_module].var=_module.var;
+	}
+	//--------------------------------------------------------
 }
 </script>
 <style>
@@ -184,6 +200,13 @@ function F__ID(){
         margin:0!Important;
     }
     @media screen and (max-width:900px){
+		#elapsed__ID{
+	        display:none;
+	    }
+	    #toolbar__ID{
+	        overflow-x:auto;
+	        white-space: nowrap;
+	    }
         #D__ID{
             font-size:16pt;
         }
