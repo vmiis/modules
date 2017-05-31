@@ -10,8 +10,8 @@
         _fields="_Form,Name,File|I2_Document,Version|I2_Version,All Files|all_files,Comments|NT";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete,_Hidden|fileID,_Hidden|I3_Color";
         //-------------------------------------
-        var file_pid=_module.var.file_tid;
-        var discussion_pid=_module.var.discussion_tid;
+        var file_pid=_module.var.file.table_id;
+        var discussion_pid=_module.var.discussion.table_id;
         //-------------------------------------
         _cell_render=function(records,I,field,td,set_value,source){
             var uid=records[I].UID;
@@ -26,14 +26,14 @@
                     records[I].vm_readonly[field]=true;
                     td.html("<u style='cursor:pointer'>Files</u>");
                     td.find('u').on('click',function(){
-                        $vm.load_module_by_name(_module.var.file,$vm.root_layout_content_slot,{sql_where:'puid='+uid,uid,puid:uid,topic:records[I].Name});
+                        $vm.load_module_by_name(file_module,$vm.root_layout_content_slot,{sql_where:'puid='+uid,uid,puid:uid,topic:records[I].Name});
                     });
                     break;
                 case 'NT':
                     records[I].vm_readonly[field]=true;
                     td.html("<u style='cursor:pointer;color:"+records[I].I3_Color+"'>"+records[I][field]+"</u>");
                     td.find('u').on('click',function(){
-                        $vm.load_module_by_name(_module.var.discussion,$vm.root_layout_content_slot,{sql_where:'puid='+uid,puid:uid,topic:records[I].Name,version:records[I].I2_Version});
+                        $vm.load_module_by_name(discussion_module,$vm.root_layout_content_slot,{sql_where:'puid='+uid,puid:uid,topic:records[I].Name,version:records[I].I2_Version});
                     });
                     break;
             }
@@ -70,6 +70,18 @@
             _req={cmd:'query_records',sql:sql,i6:_from,i7:_to}
         }
         //-------------------------------------
+		var file_module="M"+_module.var.UID+"_file_module";
+		if($vm.module_list[file_module]==undefined){
+			$vm.module_list[file_module]=_module.var.file;
+			$vm.module_list[file_module].var=_module.var;
+		}
+		//--------------------------------------------------------
+		var discussion_module="M"+_module.var.UID+"_discussion_module";
+		if($vm.module_list[discussion_module]==undefined){
+			$vm.module_list[discussion_module]=_module.var.discussion;
+			$vm.module_list[discussion_module].var=_module.var;
+		}
+		//--------------------------------------------------------
     }
 </script>
 <style>
