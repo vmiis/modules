@@ -26,6 +26,10 @@
         }
         //-------------------------------------
         $('#D__ID').on('load',function(){
+			if($vm.vm['__ID'].op.staff_login_name==undefined){
+				alert('The module can not be load without parent infomation. It should be called from a staff module.');
+				return;
+			}
             _set_req(); _request_data();
             $('#save__ID').show();
             if($vm.vm['__ID'].op.readonly!=undefined){ //from search staff
