@@ -138,10 +138,12 @@ function F__ID(){
 					v.UID=module_records[I].UID;
 				}catch (e) {}
 				var module="M"+module_records[I].UID;
-				$vm.module_list[module]={
-					table_id:module_records[I].Table_ID,
-					url:url,
-					var:v,
+				if($vm.module_list[module]==undefined){
+					$vm.module_list[module]={
+						table_id:module_records[I].Table_ID,
+						url:url,
+						var:v,
+					}
 				}
 				$vm.load_module_by_name(module,$vm.root_layout_content_slot,{})
 				return;
