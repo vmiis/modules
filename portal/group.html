@@ -46,7 +46,7 @@ function F__ID(){
 	}
 	//-------------------------------------
 	_set_req=function(){
-		var tb="with tbM as (select S2,S3, ID=MAX(ID) OVER (PARTITION BY S2) from [TABLE-"+_module.var.module_tid+"] where V2=0 and S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
+		var tb="with tbM as (select S2,S3, ID=MAX(ID) OVER (PARTITION BY S2) from [TABLE-"+_module.var.module_tid+"] where V1=0 and S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
 		tb+=",       tbQ as (select S2,S3, ID=MAX(ID) OVER (PARTITION BY S2) from [TABLE-"+_module.var.query_tid+"] where S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
 		tb+=", tb0 as (select ID,S2,S3 from tbM union select ID,S2,S3 from tbQ )";
 		tb+=", tb as (select distinct ID=MAX(ID) OVER (PARTITION BY S2),S2,S3 from tb0 )";
