@@ -25,10 +25,6 @@ function F__ID(){
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
 		$('#parent_name__ID').text($vm.vm['__ID'].op.parent_name);
-		$('#btn_modules__ID').show();
-		var dp=','+_module.var.child_panel.child_developer+',';
-		var us=','+$vm.user+',';
-		if(dp.indexOf(us)==-1) $('#btn_modules__ID').hide();
 		$('#modules__ID').html('');
 		$('#queries__ID').html('');
 		request_data();
@@ -68,8 +64,8 @@ function F__ID(){
 	var query_records;
 	var request_data=function(){
 		//---------------------------------------------
-		var sql="select UID,Information from [TABLE-"+_module.var.child_panel.table_id+"] where V1=1 order by S1";
-		$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+		var sql="select UID,Information from [TABLE-"+_module.var.child_panel.table_id+"] where V1=1 and S2=@s1 and S3=@S2 order by S1";
+		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:_module.var.child_panel.category,s2:_module.var.child_panel.subcategory},callback:function(res){
 			module_records=res.records;
 			var txt='<ul>'
 			for(var i=0;i<res.records.length;i++){
@@ -198,12 +194,6 @@ function F__ID(){
 		})
 	}
 	//---------------------------------------------
-	var child_module="M"+_module.var.UID+"_child_module";
-	if($vm.module_list[child_module]==undefined){
-		$vm.module_list[child_module]=_module.var.child_module;
-		$vm.module_list[child_module].var=_module.var;
-	}
-	//--------------------------------------------------------
 }
 </script>
 <style>
