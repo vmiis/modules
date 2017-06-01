@@ -2,7 +2,6 @@
 	<div id=toolbar__ID>
 		<a id=back__ID>Back</a>
 		<span class=tab__ID></span><span id=parent_name__ID></span>
-		<span class=tab__ID></span><a id=btn_modules__ID>Modules</a>
 	</div>
 	<div id=panel__ID style='clear:left;'>
 		<div class='nav__ID' id=div_modules__ID>
@@ -34,10 +33,6 @@ function F__ID(){
 		$('#queries__ID').html('');
 		request_data();
 	});
-	//---------------------------------------------
-	$('#btn_modules__ID').on('click',function(){
-		$vm.load_module_by_name(child_module,$vm.root_layout_content_slot,$vm.vm['__ID'].op)
-	})
 	//---------------------------------------------
 	var li_permission={};
 	var set_li_permission=function($li,records){
@@ -73,6 +68,35 @@ function F__ID(){
 	var query_records;
 	var request_data=function(){
 		//---------------------------------------------
+		var sql="select UID,Information from [TABLE-"+_module.var.child_panel.table_id+"] where V1=1 order by S1";
+		$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+			module_records=res.records;
+			var txt='<ul>'
+			for(var i=0;i<res.records.length;i++){
+				var nm=$('<div/>').html(res.records[i].Name).text();
+				var digit=nm.split(' ')[0];
+				if(isNaN(digit)==false){
+					nm=nm.replace(digit,'').trim();
+				}
+				txt+='<li data-i='+i+'>'+nm+'</li>';
+			}
+			txt+='</ul>'
+			$('#modules__ID').html(txt);
+			if(res.records.length==0) $('#div_modules__ID').hide();
+			else $('#div_modules__ID').show();
+			//---------------------------------------------
+			$('#modules__ID li').on('click',function(){
+				var i=$(this).attr('data-i');
+				load_module(i)
+			});
+			//---------------------------------------------
+			$('#modules__ID li').each(function(){
+				set_li_permission($(this),module_records)
+			})
+			//---------------------------------------------
+		}})
+		//---------------------------------------------
+		/*
 		var sql="select UID,Information from [TABLE-"+_module.var.child_module.table_id+"] where PUID="+_module.var.UID+" order by S1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
 			module_records=res.records;
@@ -101,6 +125,7 @@ function F__ID(){
 			//---------------------------------------------
 		}})
 		//---------------------------------------------
+		*/
 		/*
 		var sql="select UID,Information from [TABLE-"+_module.var.query_tid+"] where S2=@S2 and S3=@S3 order by S1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:'',s2:category,s3:subcategory},callback:function(res){
@@ -152,7 +177,7 @@ function F__ID(){
 					var:v,
 				}
 				var slot=$vm.root_layout_content_slot;
-				if(module_records[I].Single_Child=='1') slot=undefined;
+				if(module_records[I].Single_Record=='1') slot=undefined;
 				$vm.load_module_by_name(module,slot,$vm.vm['__ID'].op.parent_info)
 				return;
 			}

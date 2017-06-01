@@ -22,7 +22,7 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
 	var fields="Name,Category,Subcategory";
-	fields+=",_gridHidden|Table_ID,_gridHidden|URL,_gridHidden|Input,_gridHidden|Single_Child";
+	fields+=",_gridHidden|Table_ID,_gridHidden|URL,_gridHidden|Input,_gridHidden|Single_Record,_gridHidden|Child_Record";
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -57,7 +57,8 @@ function F__ID(){
 	//-------------------------------------
 	_cell_render=function(records,I,field,td,set_value,source){
 	    switch(field){
-			case 'Single_Child':
+			case 'Single_Record':
+			case 'Child_Record':
 				td.html('<input type=checkbox />');
 				VmInclude:__BASE__/vmiis/Common-Code/grid/field_checkbox.js
 				break;
@@ -127,7 +128,9 @@ function F__ID(){
 		                                    var:v,
 		                                }
 									}
-	                                $vm.load_module_by_name(module,$vm.root_layout_content_slot,{})
+									var slot=$vm.root_layout_content_slot;
+									if(records[I].Single_Record=='1') slot=undefined;
+	                                $vm.load_module_by_name(module,slot,{})
 	                                return;
 	                            }
 	                        }
@@ -153,6 +156,7 @@ function F__ID(){
 	    dbv.S1=record.Name;
 	    dbv.S2=record.Category;
 	    dbv.S3=record.Subcategory;
+		dbv.V1='0'; if(record.Child_Record=='1') dbv.V1='1';
 	    return true;
 	};
 	//-------------------------------------
