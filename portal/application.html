@@ -21,8 +21,9 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/grid/grid2.js
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
-	var fields="Name,Category,Subcategory,Notes";
-	fields+=",_gridHidden|Table_ID,_gridHidden|URL,_gridHidden|Input,_gridHidden|Single_Record,_gridHidden|Child_Record";
+	var fields="Name,Category,Subcategory";
+	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
+	fields+=",_gridHidden|Panel_URL,_gridHidden|Input";
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -57,11 +58,6 @@ function F__ID(){
 	//-------------------------------------
 	_cell_render=function(records,I,field,td,set_value,source){
 	    switch(field){
-			case 'Single_Record':
-			case 'Child_Record':
-				td.html('<input type=checkbox />');
-				VmInclude:__BASE__/vmiis/Common-Code/grid/field_checkbox.js
-				break;
 			case 'Name':
 	            if(records[I].UID==null || records[I].UID==undefined) return;
 	            if(source=='form'){
@@ -70,72 +66,39 @@ function F__ID(){
 	            }
 	            records[I].vm_readonly[field]=true;
 				var nm=$('<div/>').html(records[I][field]).text();
-				if(_res.pms=='1000'){
-					var digit=nm.split(' ')[0];
-					if(isNaN(digit)==false){
-						nm=nm.replace(digit,'').trim();
-					}
-				}
-				else{
-					var digit=nm.split(' ')[0];
-					if(isNaN(digit)==false){
-						nm=nm.replace(digit,'').trim();
-						nm="<span style='color:#aaa'>"+digit+"</span> "+nm;
-					}
-				}
-				if(records[I].Table_ID=='' || records[I].Table_ID==undefined) td.html("▪ <u style='cursor:pointer;'>"+nm+"</u>");
-	            else td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
+	            td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
-					if( $(this).hasClass( 'not_allowed__ID' )===true){
-			              alert("No permission!");
-			              return;
-			        }
-	                var url=records[I].URL;
-	                if(url.length>0 && url[0]=='/'){
-						url="__LIB__"+url;
-	                    var v={}
-	                    try{
-							var obj=records[I].Input;
-							if(obj[0]!='{') obj='{'+obj+'}';
-							v=JSON.parse(obj);
-							v.UID=records[I].UID;
-	                    }catch (e) {}
-						var module="M"+records[I].UID;
-	                    $vm.module_list[module]={
-	                        table_id:records[I].Table_ID,
-	                        url:url,
-	                        var:v,
-	                    }
-	                    $vm.load_module_by_name(module,$vm.root_layout_content_slot,{})
-	                }
-					else{
-	                    if($vm.trust_path!==undefined){
-	                        for(var i=0;i<$vm.trust_path.length;i++){
-	                            var len=$vm.trust_path[i].length;
-	                            if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
-	                                var v={}
-	                                try{
-										var obj=records[I].Input;
-										if(obj[0]!='{') obj='{'+obj+'}';
-	                                    v=JSON.parse(obj);
-										v.UID=records[I].UID;
-	                                }catch (e) {}
-	    							var module="M"+records[I].UID;
-									if($vm.module_list[module]==undefined){
-		                                $vm.module_list[module]={
-		                                    table_id:records[I].Table_ID,
-		                                    url:url,
-		                                    var:v,
-		                                }
-									}
-									var slot=$vm.root_layout_content_slot;
-									if(records[I].Single_Record=='1') slot=undefined;
-	                                $vm.load_module_by_name(module,slot,{})
-	                                return;
-	                            }
-	                        }
-	                    }
-						alert("The url ("+records[I].URL+") is not trusted.")
+	                var url=records[I].Panel_URL;
+                    if($vm.trust_path!==undefined){
+                        for(var i=0;i<$vm.trust_path.length;i++){
+                            var len=$vm.trust_path[i].length;
+                            if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
+                                var v={}
+                                try{
+									var obj=records[I].Input;
+									if(obj[0]!='{') obj='{'+obj+'}';
+                                    v=JSON.parse(obj);
+									v.UID=records[I].UID;
+									v.module_tid=_module.var.module_tid;
+									v.query_tid=_module.var.query_tid;
+                                }catch (e) {}
+    							var module="P"+records[I].UID;
+								if($vm.module_list[module]==undefined){
+	                                $vm.module_list[module]={
+	                                    url:url,
+	                                    var:v,
+	                                }
+								}
+								var slot=$vm.root_layout_content_slot;
+                                $vm.load_module_by_name(module,slot,{
+									name:records[I].Name,
+									mq_category:records[I].MQ_category,
+									mq_subcategory:records[I].MQ_subcategory,
+								})
+                                return;
+                            }
+                        }
+						alert("The url ("+records[I].panel_url+") is not trusted.")
 					}
 	            })
 	            break;
@@ -187,34 +150,20 @@ function F__ID(){
 	}
 	//---------------------------------------------------------------
 	_data_process_after_render=function(){
-		if(_res.pms=='1000'){
-			$('#grid__ID th:nth-child(2)').hide()
-			$('#grid__ID td:nth-child(2)').hide()
+		if(_res.pms=='1000' || $vm.user=='guest'){
+//			$('#grid__ID th:nth-child(2)').hide()
+//			$('#grid__ID td:nth-child(2)').hide()
+			$('#grid__ID th:nth-child(4)').hide()
+			$('#grid__ID td:nth-child(4)').hide()
+			$('#grid__ID th:nth-child(5)').hide()
+			$('#grid__ID td:nth-child(5)').hide()
+			$('#grid__ID th:nth-child(6)').hide()
+			$('#grid__ID td:nth-child(6)').hide()
 			$('#grid__ID th:nth-child(7)').hide()
 			$('#grid__ID td:nth-child(7)').hide()
 			$('#grid__ID th:nth-child(8)').hide()
 			$('#grid__ID td:nth-child(8)').hide()
-			$('#grid__ID th:nth-child(9)').hide()
-			$('#grid__ID td:nth-child(9)').hide()
 	    }
-		if($vm.server=='development') return;
-		$('#grid__ID tr').each(function(index){
-			if(index!=0){
-				var $u=$(this).find('td').eq(2).find('u');
-				var tid=_records[index-1].Table_ID;
-				var per=tr_permission['P'+tid]
-				if(tid==undefined || tid=='') per=1;
-				if(per==undefined){
-					set_u_permission($u,tid)
-				}
-				else if(per==1){
-					$u.removeClass('not_allowed__ID');
-				}
-				else if(per==0){
-					$u.addClass('not_allowed__ID')
-				}
-			}
-		})
 	}
 	//-------------------------------------
 }
