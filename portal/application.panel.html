@@ -3,16 +3,6 @@
 		<a id=back__ID>Back</a><span class=tab__ID></span><span id=nav_link__ID></span>
 	</div>
 	<div id=panel__ID style='clear:left;'>
-		<!--
-		<div class='nav__ID'>
-			<div id=modules__ID>
-			</div>
-		</div>
-		<div class='nav__ID' id=div_queries__ID>
-			<div id=queries__ID>
-			</div>
-		</div>
-	-->
 	</div>
 </div>
 <script>
@@ -93,12 +83,12 @@ function F__ID(){
 			txt+='</ul></div>'
 			$('#panel__ID').html(txt);
 			//---------------------------------------------
-			$('#modules__ID li').on('click',function(){
+			$('#panel__ID li').on('click',function(){
 				var i=$(this).attr('data-i');
 				load_module(i)
 			});
 			//---------------------------------------------
-			$('#modules__ID li').each(function(){
+			$('#panel__ID li').each(function(){
 				set_li_permission($(this),module_records)
 			})
 			//---------------------------------------------
