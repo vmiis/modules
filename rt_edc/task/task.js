@@ -1,10 +1,11 @@
 //*************************************
 //hard-code
+//the following information are needed in each task
 var app_name="rt_edc_";
 var participant_pid='20009726';
 var notes_pid='20009727';
-var notes_url='https://vmiis.github.io/modules/rt_edc/task_notes.html'
 var site_filter_pid='';
+var notes_url='https://vmiis.github.io/modules/clinical_trials/task_notes.html'
 var sql_participant="@('Study_ID')";
 $vm.module_list[app_name+'clinical_trials_notes']={table_id:notes_pid, var:{},  url:notes_url};
 //*************************************
