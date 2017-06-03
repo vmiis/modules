@@ -13,14 +13,15 @@ function F__ID(){
 	VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
-		var n=$vm.vm['__ID'].op.name;
-		var c=$vm.vm['__ID'].op.mq_category;
-		var s=$vm.vm['__ID'].op.mq_subcategory;
-	    _nav_name=n;
+		//var op=$vm.vm['__ID'].op;
+		var record=_mobj().op.record;
+		_nav_name=record.First_Name+' '+record.Last_Name;
 		_set_nav_link();
-		$('#modules__ID').html('');
-		$('#queries__ID').html('');
-		request_data(c,s);
+		var name=_mobj().op.mobj.name;
+		var m_tid=$vm.module_list[name].var.child_panel.module_tid;
+		var c	 =$vm.module_list[name].var.child_panel.category;
+		var s	 =$vm.module_list[name].var.child_panel.subcategory;
+		request_data(m_tid,c,s);
 	});
 	//---------------------------------------------
 	var li_permission={};
@@ -55,10 +56,10 @@ function F__ID(){
 	//---------------------------------------------------------------
 	var module_records;
 	var query_records;
-	var request_data=function(category,subcategory){
+	var request_data=function(module_tid,category,subcategory){
 		//---------------------------------------------
-		var sql="select UID,Information from [TABLE-"+_module.var.module_tid+"] where S2=@S2 and S3=@S3 order by S1";
-		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:'',s2:category,s3:subcategory},callback:function(res){
+		var sql="select UID,Information from [TABLE-"+module_tid+"] where V1=1 and S2=@S2 and S3=@S3 order by S1";
+		$VmAPI.request({data:{cmd:'query_records',sql:sql,s2:category,s3:subcategory},callback:function(res){
 			module_records=res.records;
 			var txt='';
 			for(var i=0;i<res.records.length;i++){
@@ -94,6 +95,7 @@ function F__ID(){
 			//---------------------------------------------
 		}})
 		//---------------------------------------------
+		/*
 		var sql="select UID,Information from [TABLE-"+_module.var.query_tid+"] where S2=@S2 and S3=@S3 order by S1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql,s1:'',s2:category,s3:subcategory},callback:function(res){
 			query_records=res.records;
@@ -121,6 +123,7 @@ function F__ID(){
 			})
 			//---------------------------------------------
 		}})
+		*/
 		//---------------------------------------------
 	}
 	//---------------------------------------------
@@ -144,11 +147,19 @@ function F__ID(){
 						var:v,
 					}
 				}
+				/*
 				var op={
-					mobj:$vm.vm['__ID'],
-					record:module_records[I],
+					parent_op:$vm.vm['__ID'].op,
+					parent_module_name:$vm.vm['__ID'].name,
+					parent_name:$vm.vm['__ID'].op.parent_name,
+					parent_record:module_records[I],
+					is_child_panel:"1",
 				}
-				$vm.load_module_by_name(module,$vm.root_layout_content_slot,op)
+				*/
+				var op={mobj:$vm.vm['__ID'],record:module_records[I],is_child_panel:"1"}
+				var slot=$vm.root_layout_content_slot;
+				if(module_records[I].Single_Record=='1') slot=undefined;
+				$vm.load_module_by_name(module,slot,op);
 				return;
 			}
 		}

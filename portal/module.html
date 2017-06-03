@@ -91,52 +91,37 @@ function F__ID(){
 			              return;
 			        }
 	                var url=records[I].URL;
-	                if(url.length>0 && url[0]=='/'){
-						url="__LIB__"+url;
-	                    var v={}
-	                    try{
-							var obj=records[I].Input;
-							if(obj[0]!='{') obj='{'+obj+'}';
-							v=JSON.parse(obj);
-							v.UID=records[I].UID;
-	                    }catch (e) {}
-						var module="M"+records[I].UID;
-	                    $vm.module_list[module]={
-	                        table_id:records[I].Table_ID,
-	                        url:url,
-	                        var:v,
-	                    }
-	                    $vm.load_module_by_name(module,$vm.root_layout_content_slot,{})
-	                }
-					else{
-	                    if($vm.trust_path!==undefined){
-	                        for(var i=0;i<$vm.trust_path.length;i++){
-	                            var len=$vm.trust_path[i].length;
-	                            if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
-	                                var v={}
-	                                try{
-										var obj=records[I].Input;
-										if(obj[0]!='{') obj='{'+obj+'}';
-	                                    v=JSON.parse(obj);
-										v.UID=records[I].UID;
-	                                }catch (e) {}
-	    							var module="M"+records[I].UID;
-									if($vm.module_list[module]==undefined){
-		                                $vm.module_list[module]={
-		                                    table_id:records[I].Table_ID,
-		                                    url:url,
-		                                    var:v,
-		                                }
-									}
-									var slot=$vm.root_layout_content_slot;
-									if(records[I].Single_Record=='1') slot=undefined;
-	                                $vm.load_module_by_name(module,slot,{})
-	                                return;
-	                            }
-	                        }
-	                    }
-						alert("The url ("+records[I].URL+") is not trusted.")
-					}
+                    if($vm.trust_path!==undefined){
+                        for(var i=0;i<$vm.trust_path.length;i++){
+                            var len=$vm.trust_path[i].length;
+                            if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
+                                var v={}
+                                try{
+									var obj=records[I].Input;
+									if(obj[0]!='{') obj='{'+obj+'}';
+                                    v=JSON.parse(obj);
+									//v.UID=records[I].UID;
+                                }catch (e) {}
+    							var module="M"+records[I].UID;
+								if($vm.module_list[module]==undefined){
+	                                $vm.module_list[module]={
+	                                    table_id:records[I].Table_ID,
+	                                    url:url,
+	                                    var:v,
+	                                }
+								}
+								var op={
+									mobj:$vm.vm['__ID'],
+									record:records[I],
+								}
+								var slot=$vm.root_layout_content_slot;
+								if(records[I].Single_Record=='1') slot=undefined;
+                                $vm.load_module_by_name(module,slot,op)
+                                return;
+                            }
+                        }
+                    }
+					alert("The url ("+records[I].URL+") is not trusted.")
 	            })
 	            break;
 	    }
@@ -156,7 +141,8 @@ function F__ID(){
 	    dbv.S1=record.Name;
 	    dbv.S2=record.Category;
 	    dbv.S3=record.Subcategory;
-		dbv.V1='0'; if(record.Child_Record=='1') dbv.V1='1';
+		dbv.V1='0'; if(record.Child_Record=='1')  dbv.V1='1';
+		dbv.V2='0'; if(record.Single_Record=='1') dbv.V2='1';
 	    return true;
 	};
 	//-------------------------------------
