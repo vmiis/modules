@@ -46,7 +46,8 @@
                     if(records[I].UID==null || records[I].UID==undefined) return;
                     td.html("<u style='cursor:pointer;'>More...</u>");
                     td.find('u').on('click',function(){
-						var op={mobj:$vm.vm['__ID'],record:records[I]}
+						var panel_name=records[I].First_Name+' '+records[I].Last_Name;
+						var op={mobj:$vm.vm['__ID'],record:records[I],panel_name:panel_name}
 						$vm.load_module_by_name(child_panel,$vm.root_layout_content_slot,op)
                     })
                     break;
