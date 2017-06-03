@@ -9,7 +9,7 @@ var _default_cell_render=function(records,I,field,td,set_value,source){
 					records[I].Login_Name=ui.item.S2;
 					records[I].Staff_uid=ui.item.value2;
 				}
-				VmInclude:__BASE__/vmiis/Common-Code/grid/field_auto_with_callback.js
+				VmInclude:__LIB__/vmiis/Common-Code/grid/field_auto_with_callback.js
 			}
 			else{
 				records[I].vm_readonly[field]=true;
@@ -60,8 +60,6 @@ _new_pre_data_process=function(){
 		var record=_mobj().op.mobj.op.record;
 		var staff=record.First_Name+' '+record.Last_Name
 		_records[0].Staff=staff;
-		//_records[0].Login_Name=record.Login_Name;
-		//_records[0].Staff_uid=record.Staff_uid;
 	}
 }
 //-------------------------------------
@@ -82,6 +80,6 @@ _before_submit=function(record,dbv){
 	dbv.PUID=record.Staff_uid;
 	dbv.S2=record.Login_Name;
 
-	return false;
+	return true;
 };
 //-------------------------------------
