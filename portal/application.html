@@ -94,6 +94,9 @@ function F__ID(){
 									name:records[I].Name,
 									mq_category:records[I].MQ_category,
 									mq_subcategory:records[I].MQ_subcategory,
+									mobj:$vm.vm['__ID'],
+									record:records[I],
+									json:records[I].Input,
 								})
                                 return;
                             }
@@ -125,8 +128,8 @@ function F__ID(){
 	//-------------------------------------
 	_set_req=function(){
 		var order_field="ID DESC";	if($('#category__ID').val()) order_field="S1";
-	    var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by "+order_field+") from [TABLE-"+_db_pid+"] where S1 like '%'+@S1+'%' and S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
-	    sql+="select Information,ID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
+	    var sql="with tb as (select Information,ID,PID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by "+order_field+") from [TABLE-"+_db_pid+"] where S1 like '%'+@S1+'%' and S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%')";
+	    sql+="select Information,ID,PID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
 	    var sql_n="select count(ID) from [TABLE-"+_db_pid+"] where S1 like '%'+@S1+'%' and S2 like '%'+@S2+'%' and S3 like '%'+@S3+'%'";
 	    _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:$('#keyword__ID').val(),I:$('#I__ID').text(),page_size:$('#page_size__ID').val(),s2:$('#category__ID').val(),s3:$('#subcategory__ID').val()}
 	}
