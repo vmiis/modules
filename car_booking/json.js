@@ -1,0 +1,11 @@
+var _mobj=function(){ return $vm.vm['__ID']; }
+var ID=_mobj().op.record.ID;
+var json=JSON.parse(_mobj().op.json);
+var daily_calendar_module='M'+ID+'_car_daily_calendar_module';
+var booking_record_module='M'+ID+'_car_booking_record_module';
+var car_module='M'+ID+'_car_module';
+$vm.module_list[daily_calendar_module]=$vm.find_object(json,'module_id','daily_calendar_module');
+$vm.module_list[booking_record_module]=$vm.find_object(json,'module_id','booking_record_module');
+$vm.module_list[car_module]=$vm.find_object(json,'module_id','car_module');
+var booking_record_tid=$vm.module_list[booking_record_module].table_id;
+var car_tid=$vm.module_list[car_module].table_id;

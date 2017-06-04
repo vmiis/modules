@@ -1,12 +1,13 @@
 <section>
-      VmInclude:__BASE__/vmiis/Common-Code/toolbar/day.html
-      VmInclude:__BASE__/vmiis/Common-Code/calendar/day.html
+      VmInclude:__LIB__/vmiis/Common-Code/toolbar/day.html
+      VmInclude:__LIB__/vmiis/Common-Code/calendar/day.html
 </section>
 <script>
 function F__ID(){
 	//--------------------------------------------------------
-	VmInclude:__BASE__/vmiis/Common-Code/toolbar/day_v2.js
-	VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+	VmInclude:__LIB__/vmiis/Common-Code/toolbar/day_v2.js
+	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+	VmInclude:__CURRENT_PATH__/json.js
 	//--------------------------------------------------------
 	var _module=$vm.module_list[$vm.vm['__ID'].name];
 	//--------------------------------------------------------
@@ -15,7 +16,7 @@ function F__ID(){
 	}
 	//--------------------------------------------------------
 	var layout_render=function(){
-		var sql="select ID,UID,Information from [TABLE-"+_module.var.car_tid+"] order by S1";
+		var sql="select ID,UID,Information from [TABLE-"+car_tid+"] order by S1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
 			var txt="<tr><th style='width:200px;text-align:left'>Car</th>";
 			for(var j=0;j<12;j++){
@@ -59,7 +60,13 @@ function F__ID(){
 				    var j=$(this).data('j');
 				    var date=$('#date__ID').val();
 				    var time=$vm.pad((8+Math.floor(j/2)),2)+":"+$vm.pad(30*(j%2),2);
-				    $vm.load_module_by_name(_module.var.record_module,undefined,{new:1,date:date,time:time,car_uid:uid,car_number:car_number,car_name:car_name,sql_where:'id=-1'});
+					var op={ //transfer parent module and record, because this is a panel module
+						mobj:_mobj().op.mobj,
+						record:_mobj().op.record,
+						json:_mobj().op.json,
+						new:1,date:date,time:time,car_uid:uid,car_number:car_number,car_name:car_name,sql_where:'id=-1',
+					}
+				    $vm.load_module_by_name(booking_record_module,undefined,op);
 				})
 				$cell.css('cursor','pointer');
 			}
@@ -67,7 +74,7 @@ function F__ID(){
 	};
 	//-----------------------------------
 	var put_on_bookings=function(){
-		var sql="select ID,PUID,Author,Information from [TABLE-"+_module.var.record_tid+"] where Convert(date,dt1)=@T1";
+		var sql="select ID,PUID,Author,Information from [TABLE-"+booking_record_tid+"] where Convert(date,dt1)=@T1";
 		$VmAPI.request({data:{cmd:'query_records',sql:sql,t1:$('#date__ID').val()},callback:function(res){
 			for(var i=0;i<res.records.length;i++){
 				var rid			=res.records[i].ID;
@@ -106,7 +113,13 @@ function F__ID(){
 	//-----------------------------------
 	var on_click_edit_fun=function(){
 	    var rid=$(this).data('rid');
-	    $vm.load_module_by_name(_module.var.record_module,undefined,{edit:1, sql_where:" ID="+rid});
+		var op={ //transfer parent module and record, because this is a panel module
+			mobj:_mobj().op.mobj,
+			record:_mobj().op.record,
+			json:_mobj().op.json,
+			edit:1, sql_where:" ID="+rid,
+		}
+	    $vm.load_module_by_name(booking_record_module,undefined,op);
 	};
 	//--------------------------------------------------------
 	$('#D__ID').on('load',function(){
@@ -117,14 +130,6 @@ function F__ID(){
 	});
 	//--------------------------------------------------------
 	$('#D__ID').on('refresh_back',_request_and_render);
-	//--------------------------------------------------------
-	if(typeof _module.var.record_module!=='string'){
-		var obj=_module.var.record_module;
-		obj.var=_module.var;
-		var module_name="M"+_module.var.UID+"_record_module";
-		$vm.module_list[module_name]=obj;
-		_module.var.record_module=module_name;
-	}
 	//--------------------------------------------------------
 }
 </script>
