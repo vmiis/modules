@@ -22,8 +22,8 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
 	var fields="Name,Category,Subcategory";
-	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
-	fields+=",_gridHidden|Panel_URL,_gridHidden|Input";
+//	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
+	fields+=",_gridHidden|Setup|Input"; ///*_gridHidden|Panel_URL,*/
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -68,7 +68,18 @@ function F__ID(){
 				var nm=$('<div/>').html(records[I][field]).text();
 	            td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
-	                var url=records[I].Panel_URL;
+					var url=records[I].Panel_URL;
+					var panel_name='';
+					//---------------------------
+					var obj=records[I].Input;
+					if(obj[0]!='{') obj='{'+obj+'}';
+					var json=JSON.parse(obj);
+					if(json.panel!=undefined){
+						var uurl=json.panel.url;
+						if(uurl!=undefined) url=uurl;
+						panel_name=json.panel.name;
+					}
+					//---------------------------
                     if($vm.trust_path!==undefined){
                         for(var i=0;i<$vm.trust_path.length;i++){
                             var len=$vm.trust_path[i].length;
@@ -97,11 +108,13 @@ function F__ID(){
 									mobj:$vm.vm['__ID'],
 									record:records[I],
 									json:records[I].Input,
+									panel:'panel',
+									panel_name:panel_name,
 								})
                                 return;
                             }
                         }
-						alert("The url ("+records[I].panel_url+") is not trusted.")
+						alert("The url ("+url+") is not trusted.")
 					}
 	            })
 	            break;
