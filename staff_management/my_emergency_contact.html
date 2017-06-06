@@ -20,7 +20,7 @@
         //-------------------------------------
         $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
         //-------------------------------------
-        var person_name,person_login_name,person_pid=_module.var.staff_tid,person_uid;
+        var person_name,person_login_name,person_pid=staff_tid,person_uid;
         var get_info=function(){
             jQuery.ajaxSetup({async:false});
             var req={cmd:'query_records_s2',db_pid:person_pid,fields:'ID,UID,Information'}

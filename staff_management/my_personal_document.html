@@ -11,7 +11,7 @@
         _fields="_Form,_Hidden|Staff,Document,Last Modified|lastModified,Size,Description";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
-        var person_name,person_login_name,person_pid=_module.var.staff_tid,person_uid;
+        var person_name,person_login_name,person_pid=staff_tid,person_uid;
         var get_info=function(){
             jQuery.ajaxSetup({async:false});
             var req={cmd:'query_records_s2',db_pid:person_pid,fields:'ID,UID,Information'}

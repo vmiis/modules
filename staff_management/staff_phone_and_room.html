@@ -19,15 +19,19 @@
         //-------------------------------------
         VmInclude:__BASE__/vmiis/Common-Code/frame/records_with_paging.js
         VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
-        var _op,_module=$vm.module_list[$vm.vm['__ID'].name],_app_id=_module.var.app_id;
+        var _op,_module=$vm.module_list[$vm.vm['__ID'].name];
         //-------------------------------------
         _fields="First_Name,Last_Name,Department,Position,Location,Email,Phone";
         _fields+=",Submit Date|DateTime,Submitted by|Author,Hidden|File,Hidden|Size,Hidden|lastModified";
         //-------------------------------------
+		//var ids=$vm.AJSON['A'+_mobj().op.sys.UID].module_ids;
+		var ids=_mobj().op.sys.config.module_ids;
+		var department_tid=$vm.module_list[ids.department].table_id;
+		//-------------------------------------
         $('#department__ID').autocomplete({
             minLength:0,
             source:function(request,response){
-                var sql="with tb as (select name=S1 from [TABLE-"+_module.var.department_tid+"])";
+                var sql="with tb as (select name=S1 from [TABLE-"+department_tid+"])";
                 sql+=" select top 10 name,value=name from tb where name like '%'+@S1+'%' ";
                 $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
                     response($vm.autocomplete_list(res.table));
@@ -122,38 +126,20 @@
 
                 set_image_url($(this),rid,filename,modified);
                 $(this).parent().on('click',function(){
-					/*
-                    $vm.load_module_by_name(_module.var.child_staff,undefined,{
-                        staff_name:records[i].First_Name+' '+records[i].Last_Name,
-                        staff_login_name:records[i].Login_Name,
-                        staff_pid:_db_pid,
-                        staff_uid:records[i].UID,
-                        readonly:1,
-                    });
-					*/
-					var op={mobj:$vm.vm['__ID'],record:records[i],is_phone_and_room:'1'}
-					$vm.load_module_by_name(child_staff,undefined,op);
+					var this_mobj  =_mobj();
+					var this_record=records[i];
+					var op={
+						sys:_mobj().op.sys,
+						mobj:this_mobj,
+						record:this_record,
+						child:'1',
+						readonly:'1'
+					}
+					$vm.load_module_by_name(ids.staff,undefined,op);
                 })
             });
        }
        //-------------------------------------
-	   /*
-	   if(_module.var.child_staff!=undefined && typeof _module.var.child_staff!=='string'){
-		   var obj=_module.var.child_staff;
-		   obj.var=_module.var;
-		   var module_name="M"+_module.var.UID+"_staff_child";
-		   $vm.module_list[module_name]=obj;
-		   _module.var.child_staff=module_name;
-	   }
-	   */
-	   //--------------------------------------------------------
-	   var child_staff="M"+_mobj().op.record.UID+"_staff_info";
-	   if($vm.module_list[child_staff]==undefined){
-		   $vm.module_list[child_staff]=_module.var.child_staff;
-		   var v={}; v.department_tid=_module.var.department_tid;
-		   $vm.module_list[child_staff].var=v;
-	   }
-	   //--------------------------------------------------------
     }
 </script>
 <style>
