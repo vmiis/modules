@@ -22,8 +22,8 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
 	var fields="Name,Category,Subcategory";
-//	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
-	fields+=",_gridHidden|Setup|Input"; ///*_gridHidden|Panel_URL,*/
+ //	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
+	fields+=",_gridHidden|Config|Input"; ///*_gridHidden|Panel_URL,*/
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -74,10 +74,10 @@ function F__ID(){
 					var obj=records[I].Input;
 					if(obj[0]!='{') obj='{'+obj+'}';
 					var json=JSON.parse(obj);
-					if(json.panel!=undefined){
-						var uurl=json.panel.url;
+					if(json.panels.main_panel!=undefined){
+						var uurl=json.panels.main_panel.url;
 						if(uurl!=undefined) url=uurl;
-						panel_name=json.panel.name;
+						panel_name=json.panels.main_panel.name;
 					}
 					//---------------------------
                     if($vm.trust_path!==undefined){
@@ -107,8 +107,8 @@ function F__ID(){
 									mq_subcategory:records[I].MQ_subcategory,
 									mobj:$vm.vm['__ID'],
 									record:records[I],
-									json:records[I].Input,
-									panel:'panel',
+									config:records[I].Input,
+									panel:'main_panel',
 									panel_name:panel_name,
 								})
                                 return;
