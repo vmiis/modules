@@ -1,0 +1,561 @@
+{
+	"parameters" :
+	{
+		"sql_participant" : "@('Study_ID')",
+		"participant":"participant"
+	},
+	"panels" :
+	{
+		"main_panel" :
+		{
+			"url" : "https://vmiis.github.io/modules/panels/main.html",
+			"name" : "RT-EDC Clinical Trials",
+			"columns" :
+			[
+				{
+					"sections" :
+					[
+						{
+							"name" : "Participants",
+							"tasks" :
+							[
+								{
+								   "module_id" : "participant",
+								   "name" : "Participants",
+								   "table_id" : "20009726",
+								   "url" : "https://vmiis.github.io/modules/rt_edc/participant.html"
+								}
+							]
+						},
+						{
+							"name" : "Notes",
+							"tasks" :
+							[
+								{
+									"module_id" : "task_notes",
+									"name" : "All Task Notes",
+									"table_id" : "20009727",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task_notes.html"
+								}
+							]
+						}
+					]
+				},
+				{
+					"sections" :
+					[
+						{
+							"name" : "General",
+							"tasks" :
+							[
+								{
+									"module_id" : "File_Notes",
+									"name" : "File Notes",
+									"table_id" : "20009733",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/file_notes.html",
+									"visit_task" : "General - File Notes"
+								}
+							]
+						},
+						{
+							"name" : "Adverse Event & Concom",
+							"tasks" :
+							[
+								{
+									"module_id" : "Adverse_Event",
+									"name" : "Adverse Event",
+									"table_id" : "20009731",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Adverse Event & Concom - Adverse Event"
+								},
+								{
+									"module_id" : "Concomitant_Medication",
+									"name" : "Concomitant Medication",
+									"table_id" : "20009732",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Adverse Event & Concom - Concomitant Medication"
+								}
+							]
+						}
+				   ]
+				},
+				{
+					"sections" :
+					[
+						{
+							"name" : "Screening",
+							"tasks" :
+							[
+								{
+									"module_id" : "Screening_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009734",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Screening - Visit Date"
+								},
+								{
+									"module_id" : "Screening_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009735",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "Screening - Anthropometry"
+								},
+								{
+									"module_id" : "Screening_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009736",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Screening - Anthropometry",
+									"form_module":"Screening_ESS_form"
+								},
+								{
+									"module_id" : "Screening_ESS_form",
+									"table_id" : "20009736",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								}
+						 ]
+					  }
+				   ]
+				},
+				{
+					"sections" :
+					[
+						{
+							"name" : "Baseline",
+							"tasks" :
+							[
+								{
+									"module_id" : "Baseline_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009737",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Baseline - Visit Date"
+								},
+								{
+									"module_id" : "Baseline_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009738",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "Baseline - Anthropometry"
+								},
+								{
+									"module_id" : "Baseline_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009739",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Baseline - ESS",
+									"form_module":"Baseline_ESS_form"
+								},
+								{
+									"module_id" : "Baseline_ESS_form",
+									"table_id" : "20009739",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								},
+								{
+									"module_id" : "Baseline_KSS",
+									"name" : "Karolinska Sleepiness Scale (KSS)",
+									"table_id" : "20009740",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Baseline - KSS"
+								},
+								{
+									"module_id" : "Baseline_ISI",
+									"name" : "Insomnia Severity Index (ISI)",
+									"table_id" : "20009741",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Baseline - ISI"
+								},
+								{
+									"module_id" : "Baseline_Scoring",
+									"name" : "Scoring File upload",
+									"table_id" : "20009742",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Baseline - Scoring File upload"
+								}
+							]
+						},
+						{
+							"name" : "Visit 1",
+							"tasks" :
+							[
+								{
+									"module_id" : "Visit_1_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009743",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Visit 1 - Visit Date"
+								},
+								{
+									"module_id" : "Visit_1_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009744",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "Visit 1- Anthropometry"
+								},
+								{
+									"module_id" : "Visit_1_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009745",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Visit 1- ESS",
+									"form_module":"Visit_1_ESS_form"
+								},
+								{
+									"module_id" : "Visit_1_ESS_form",
+									"table_id" : "20009745",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								},
+								{
+									"module_id" : "Visit_1_KSS",
+									"name" : "Karolinska Sleepiness Scale (KSS)",
+									"table_id" : "20009746",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 1 - KSS"
+								},
+								{
+									"module_id" : "Visit_1_ISI",
+									"name" : "Insomnia Severity Index (ISI)",
+									"table_id" : "20009747",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 1 - ISI"
+								},
+								{
+									"module_id" : "Visit_1_Scoring",
+									"name" : "Scoring File upload",
+									"table_id" : "20009748",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 1 - Scoring File upload"
+								}
+							]
+						},
+						{
+							"name" : "Visit 2",
+							"tasks" :
+							[
+								{
+									"module_id" : "Visit_2_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009749",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Visit 2 - Visit Date"
+								},
+								{
+									"module_id" : "Visit_2_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009750",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "Visit 2- Anthropometry"
+								},
+								{
+									"module_id" : "Visit_2_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009751",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Visit 2- ESS",
+									"form_module":"Visit_2_ESS_form"
+								},
+								{
+									"module_id" : "Visit_2_ESS_form",
+									"table_id" : "20009751",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								},
+								{
+									"module_id" : "Visit_2_KSS",
+									"name" : "Karolinska Sleepiness Scale (KSS)",
+									"table_id" : "20009752",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 2 - KSS"
+								},
+								{
+									"module_id" : "Visit_2_ISI",
+									"name" : "Insomnia Severity Index (ISI)",
+									"table_id" : "20009753",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 2 - ISI"
+								},
+								{
+									"module_id" : "Visit_2_Scoring",
+									"name" : "Scoring File upload",
+									"table_id" : "20009754",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 2 - Scoring File upload"
+								}
+							]
+						}
+
+					]
+				}
+			]
+		},
+		"child_panel" :
+		{
+			"url" : "https://vmiis.github.io/modules/panels/child.html",
+			"name" : "RT-EDC Clinical Trials",
+			"columns" :
+			[
+				{
+					"sections" :
+					[
+						{
+							"name" : "General",
+							"tasks" :
+							[
+								{
+									"module_id" : "child_File_Notes",
+									"name" : "File Notes",
+									"table_id" : "20009733",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/file_notes.html",
+									"visit_task" : "General - File Notes"
+								}
+							]
+						},
+						{
+							"name" : "Adverse Event & Concom",
+							"tasks" :
+							[
+								{
+									"module_id" : "child_Adverse_Event",
+									"name" : "Adverse Event",
+									"table_id" : "20009731",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Adverse Event & Concom - Adverse Event"
+								},
+								{
+									"module_id" : "child_Concomitant_Medication",
+									"name" : "Concomitant Medication",
+									"table_id" : "20009732",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Adverse Event & Concom - Concomitant Medication"
+								}
+							]
+						}
+				   ]
+				},
+				{
+					"sections" :
+					[
+						{
+							"name" : "Screening",
+							"tasks" :
+							[
+								{
+									"module_id" : "child_Screening_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009734",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Screening - Visit Date",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Screening_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009735",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "Screening - Anthropometry",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Screening_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009736",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Screening - Anthropometry",
+									"form_module":"child_Screening_ESS_form",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Screening_ESS_form",
+									"table_id" : "20009736",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								}
+						 ]
+					  }
+				   ]
+				},
+				{
+					"sections" :
+					[
+						{
+							"name" : "Baseline",
+							"tasks" :
+							[
+								{
+									"module_id" : "child_Baseline_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009737",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Baseline - Visit Date",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Baseline_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009738",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "Baseline - Anthropometry",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Baseline_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009739",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Baseline - ESS",
+									"form_module":"child_Baseline_ESS_form",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Baseline_ESS_form",
+									"table_id" : "20009739",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								},
+								{
+									"module_id" : "child_Baseline_KSS",
+									"name" : "Karolinska Sleepiness Scale (KSS)",
+									"table_id" : "20009740",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Baseline - KSS",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Baseline_ISI",
+									"name" : "Insomnia Severity Index (ISI)",
+									"table_id" : "20009741",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Baseline - ISI",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Baseline_Scoring",
+									"name" : "Scoring File upload",
+									"table_id" : "20009742",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Baseline - Scoring File upload"
+								}
+							]
+						},
+						{
+							"name" : "Visit 1",
+							"tasks" :
+							[
+								{
+									"module_id" : "child_Visit_1_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009743",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Visit 1 - Visit Date",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_1_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009744",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "Visit 1- Anthropometry",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_1_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009745",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Visit 1- ESS",
+									"form_module":"child_Visit_1_ESS_form",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_1_ESS_form",
+									"table_id" : "20009745",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								},
+								{
+									"module_id" : "child_Visit_1_KSS",
+									"name" : "Karolinska Sleepiness Scale (KSS)",
+									"table_id" : "20009746",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 1 - KSS",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_1_ISI",
+									"name" : "Insomnia Severity Index (ISI)",
+									"table_id" : "20009747",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 1 - ISI",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_1_Scoring",
+									"name" : "Scoring File upload",
+									"table_id" : "20009748",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 1 - Scoring File upload"
+								}
+							]
+						},
+						{
+							"name" : "Visit 2",
+							"tasks" :
+							[
+								{
+									"module_id" : "child_Visit_2_Visit_Data",
+									"name" : "Visit Date",
+									"table_id" : "20009749",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/visit_date.html",
+									"visit_task" : "Visit 2 - Visit Date",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_2_Anthropometry",
+									"name" : "Anthropometry",
+									"table_id" : "20009750",
+									"url" : "https://vmiis.github.io/modules/rt_edc/task/anthro.html",
+									"visit_task" : "child_Visit 2- Anthropometry",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_2_ESS",
+									"name" : "Epworth Sleepiness Scale (ESS)",
+									"table_id" : "20009751",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.html",
+									"visit_task" : "Visit 2- ESS",
+									"form_module":"child_Visit_2_ESS_form",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_2_ESS_form",
+									"table_id" : "20009751",
+									"url" : "https://vmiis.github.io/modules/clinical_trials_questionnaire/epworth_sleepiness_scale.form.html"
+								},
+								{
+									"module_id" : "child_Visit_2_KSS",
+									"name" : "Karolinska Sleepiness Scale (KSS)",
+									"table_id" : "20009752",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 2 - KSS",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_2_ISI",
+									"name" : "Insomnia Severity Index (ISI)",
+									"table_id" : "20009753",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 2 - ISI",
+									"single_record":"1"
+								},
+								{
+									"module_id" : "child_Visit_2_Scoring",
+									"name" : "Scoring File upload",
+									"table_id" : "20009754",
+									"url" : "https://vmiis.github.io/modules/template/under_construction.html",
+									"visit_task" : "Visit 2 - Scoring File upload"
+								}
+							]
+						}
+
+					]
+				}
+			]
+		}
+	}
+}
