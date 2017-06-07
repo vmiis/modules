@@ -1,12 +1,12 @@
 //-------------------------------------
-//var ids=$vm.AJSON['A'+_mobj().op.sys.UID].module_ids;
-var ids=_mobj().op.sys.config.module_ids;
+//var ids=$vm.AJSON['A'+_mobj.op.sys.UID].module_ids;
+var ids=_mobj.op.sys.config.module_ids;
 var staff_tid=$vm.module_list[ids.staff].table_id;
 //-------------------------------------
 var _default_cell_render=function(records,I,field,td,set_value,source){
     switch(field){
         case 'Staff':
-			if(_mobj().op.child=='1'){
+			if(_mobj.op.child=='1'){
 				records[I].vm_readonly[field]=true;
 				td.text(records[I].Staff);
 			}
@@ -24,8 +24,8 @@ var _default_cell_render=function(records,I,field,td,set_value,source){
 }
 //-------------------------------------
 _set_req=function(){
-	if(_mobj().op.child=='1'){
-		var staff_record=_mobj().op.record;
+	if(_mobj.op.child=='1'){
+		var staff_record=_mobj.op.record;
 		var where="S2='"+staff_record.Login_Name+"'";
 		var sql="select ID,Information,DateTime,Author from [TABLE-"+_db_pid+"] where "+where;
 		_req={cmd:'query_records',sql:sql}
@@ -39,7 +39,7 @@ _set_req=function(){
 }
 //-------------------------------------
 _data_process_after_render=function(){
-	if(_mobj().op.child='1' && _mobj().op.single_record=='1'){
+	if(_mobj.op.child='1' && _mobj.op.single_record=='1'){
 		if(_records.length==0){
 			$('#new__ID').triggerHandler('click');
 		}
@@ -55,16 +55,16 @@ _data_process_after_render=function(){
 }
 //-------------------------------------
 _new_pre_data_process=function(){
-	if(_mobj().op.child=='1'){
-		var record=_mobj().op.record;
+	if(_mobj.op.child=='1'){
+		var record=_mobj.op.record;
 		var staff=record.First_Name+' '+record.Last_Name
 		_records[0].Staff=staff;
 	}
 }
 //-------------------------------------
 _before_submit=function(record,dbv){
-	if(_mobj().op.child=='1'){
-		var p_record=_mobj().op.record;
+	if(_mobj.op.child=='1'){
+		var p_record=_mobj.op.record;
 		var staff=p_record.First_Name+' '+p_record.Last_Name
 		record.Staff=staff;
 		record.Login_Name=p_record.Login_Name;
