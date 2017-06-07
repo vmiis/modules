@@ -1,0 +1,72 @@
+{
+	"parameters" :
+	{
+		"daily":"daily",
+		"equipment":"equipment",
+		"booking_record":"booking_record"
+	},
+	"panels" :
+	{
+		"main_panel" :
+		{
+			"url":"https://vmiis.github.io/modules/panels/main.html",
+			"name":"Equipment Booking",
+			"columns":
+			[
+				{
+					"sections":
+					[
+						{
+							"name":"Calendar",
+							"tasks":
+							[
+								{
+									"module_id":"monthly",
+									"name":"Equipment booking monthly calendar",
+									"table_id":"20002163",
+									"url":"https://vmiis.github.io/modules/equipment_booking/monthly.html"
+								},
+								{
+									"module_id":"weekly",
+									"name":"Equipment booking weekly calendar",
+									"table_id":"20002163",
+									"url":"https://vmiis.github.io/modules/equipment_booking/weekly.html"
+								},
+								{
+									"module_id":"daily",
+									"name":"Equipment booking daily calendar",
+									"table_id":"20002163",
+									"url":"https://vmiis.github.io/modules/equipment_booking/daily.html"
+								}
+							]
+						},
+						{
+							"name":"Booking records",
+							"tasks":
+							[
+								{
+									"module_id":"booking_record",
+									"name":"Equipment booking records",
+									"table_id":"20002163",
+									"url":"https://vmiis.github.io/modules/equipment_booking/booking_record.html"
+								}
+							]
+						},
+						{
+							"name":"Setup",
+							"tasks":
+							[
+								{
+									"module_id":"equipment",
+									"name":"Add/Remove cars",
+									"table_id":"20002162",
+									"url":"https://vmiis.github.io/modules/equipment_booking/equipment.html"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	}
+}
