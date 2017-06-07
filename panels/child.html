@@ -12,23 +12,24 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.js
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
 	//---------------------------------------------
-	//var config=$vm.AJSON['A'+_mobj().op.sys.UID];
-	var config=_mobj().op.sys.config;
-	var panel=_mobj().op.panel;
+	var config=_sys.config;
+	var panel_id=_mobj.op.panel_id;
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
-		_nav_name=_mobj().op.panel.name;
+		_nav_name=_mobj.op.panel_name;
 		_set_nav_link();
 		var txt="";
-		for(i=0;i<config.panels[panel].columns.length;i++){
+		for(i=0;i<config.panels[panel_id].columns.length;i++){
 			txt+="<div class=nav__ID>";
-			for(j=0;j<config.panels[panel].columns[i].sections.length;j++){
-				var header=config.panels[panel].columns[i].sections[j].name;
+			for(j=0;j<config.panels[panel_id].columns[i].sections.length;j++){
+				var header=config.panels[panel_id].columns[i].sections[j].name;
 				txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
-				for(k=0;k<config.panels[panel].columns[i].sections[j].tasks.length;k++){
-					var task=config.panels[panel].columns[i].sections[j].tasks[k].name;
-					var m_id=config.panels[panel].columns[i].sections[j].tasks[k].module_id;
-					txt+="<li data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
+				for(k=0;k<config.panels[panel_id].columns[i].sections[j].tasks.length;k++){
+					if(config.panels[panel_id].columns[i].sections[j].tasks[k].name!=undefined){
+						var task=config.panels[panel_id].columns[i].sections[j].tasks[k].name;
+						var m_id=config.panels[panel_id].columns[i].sections[j].tasks[k].module_id;
+						txt+="<li data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
+					}
 				}
 				txt+="</ul>";
 			}
@@ -56,14 +57,17 @@ function F__ID(){
 			return;
 		}
 		//transfer parent module and record, because this is a panel module
-		var this_mobj  =_mobj().op.mobj;
-		var this_record=_mobj().op.record;
+		var this_mobj  =_mobj.op.mobj;
+		var this_record=_mobj.op.record;
 		var op={
-			sys:_mobj().op.sys,
+			//------------------
+			sys:_sys,
 			mobj:this_mobj,
 			record:this_record,
+			//------------------
 			single_record:single_record,
-			panel:_mobj().op.panel,
+			panel_id:_mobj.op.panel_id,
+			panel_name:_mobj.op.panel_name,
 			child:'1',
 			/*
 			config:$vm.vm['__ID'].op.config,
