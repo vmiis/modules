@@ -21,7 +21,7 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/grid/grid2.js
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
-	var fields="Name,Category,Subcategory";
+	var fields="Name,Category,Subcategory,_gridHidden|Config_URL";
  //	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
 	fields+=",_gridHidden|Config|Input"; ///*_gridHidden|Panel_URL,*/
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
@@ -68,6 +68,49 @@ function F__ID(){
 				var nm=$('<div/>').html(records[I][field]).text();
 	            td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
+					var url=records[I].Config_URL+"?v="+$vm.version;
+					if(records[I].Config_URL.indexOf('?')!=-1){
+						url=records[I].Config_URL+"&v="+$vm.version;
+					}
+					url=$vm.url(url);
+					console.log('LOAD CONFIG '+url.split('/').pop());
+					$.get(url,function(text){
+						var text=$('<div/>').html(text).text();
+						//---------------------------
+						var config;
+						try{
+							config=JSON.parse(text);
+						}
+						catch (e){
+				            alert(e);
+				            return;
+				        }
+						var panel_url=config.panels.main_panel.url;
+						var panel_name=config.panels.main_panel.name;
+						//---------------------------
+						var module="P_"+records[I].UID+"_main_panel";
+						if($vm.module_list[module]==undefined){
+							$vm.module_list[module]={
+								url:panel_url,
+								var:{},
+							}
+						}
+						//---------------------------
+						$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
+							name:records[I].Name,
+							mobj:$vm.vm['__ID'],
+							record:records[I],
+							panel:'main_panel',
+							panel_name:panel_name,
+							sys:{
+								config:config,
+								UID:records[I].UID,
+							}
+						})
+					},'text').fail(function() {
+					    alert( "The file '"+records[I].Config_URL+"' doesn't exist!" );
+					});
+					/*
 					var url=records[I].Panel_URL;
 					var panel_name='';
 					//---------------------------
@@ -110,12 +153,17 @@ function F__ID(){
 									config:records[I].Input,
 									panel:'main_panel',
 									panel_name:panel_name,
+									sys:{
+										config:JSON.parse(records[I].Input),
+										UID:records[I].UID,
+									}
 								})
                                 return;
                             }
                         }
 						alert("The url ("+url+") is not trusted.")
 					}
+					*/
 	            })
 	            break;
 	    }
