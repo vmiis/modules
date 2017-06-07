@@ -8,18 +8,32 @@ function F__ID(){
     VmInclude:__LIB__/vmiis/Common-Code/toolbar/month_v2.js
     VmInclude:__LIB__/vmiis/Common-Code/calendar/month_v2.js
     VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
-	VmInclude:__CURRENT_PATH__/json.js
     //--------------------------------------------------------
-    var _module=$vm.module_list[$vm.vm['__ID'].name];
-    //--------------------------------------------------------
+	var _mobj=$vm.vm['__ID'];
+	var _sys='';
+	if(_mobj.op!=undefined && _mobj.op.sys!=undefined){
+		_sys=_mobj.op.sys;
+	}
+	_mlist=$vm.module_list;
+	//--------------------------------------------------------
+	var ids=_sys.config.module_ids;
+	var daily=ids.daily;
+	var booking_record_module=ids.booking_record;
+	var booking_record_tid	 =_mlist[ids.booking_record].table_id;
+	//-------------------------------------
     _on_day_click_fun=function(date){
-		var op={ //transfer parent module and record, because this is a panel module
-			mobj:_mobj().op.mobj,
-			record:_mobj().op.record,
-			json:_mobj().op.json,
+		var this_mobj  =_mobj.op.mobj;
+		var this_record=_mobj.op.record;
+		var op={
+			//------------------
+			sys:_sys,
+			mobj:this_mobj,
+			record:this_record,
+			//------------------
 			day:date,
+			//------------------
 		}
-        $vm.load_module_by_name(daily_calendar_module,$vm.root_layout_content_slot,op);
+		$vm.load_module_by_name(daily,$vm.root_layout_content_slot,op)
     }
     //--------------------------------------------------------
     _request_and_render=function(){
@@ -50,11 +64,16 @@ function F__ID(){
 		$ul.append(LI);
 		$ul.find('u').data("author",author);
     	$('#event__ID'+id).on('click',function(){
-			var op={ //transfer parent module and record, because this is a panel module
-				mobj:_mobj().op.mobj,
-				record:_mobj().op.record,
-				json:_mobj().op.json,
-				edit:1,sql_where:' id='+id,
+			var this_mobj  =_mobj.op.mobj;
+			var this_record=_mobj.op.record;
+			var op={
+				//------------------
+				sys:_sys,
+				mobj:this_mobj,
+				record:this_record,
+				//------------------
+				sql_where:' id='+id,
+				//------------------
 			}
             $vm.load_module_by_name(booking_record_module,undefined,op);
     	});
