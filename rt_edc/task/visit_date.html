@@ -9,8 +9,8 @@
         VmInclude:__CURRENT_PATH__/task.js
         //-------------------------------------
         _task_fields="Date of Visit|Visit_date";
-        _fields="_Form,Status|S3,Notes|NT,Study_ID,"+_task_fields;
-        _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete,_Hidden|Study_ID_uid";
+        _fields="_Form,Status|S3,Notes|NT,Participant,"+_task_fields;
+        _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete,_Hidden|Participant_uid";
         //-------------------------------------
         $('#D__ID').on('load',function(){    _set_req(); _request_data(); })
         $('#D__ID').on('back',function(){    _set_req(); _request_data(); })
