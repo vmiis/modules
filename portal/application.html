@@ -23,7 +23,7 @@ function F__ID(){
 	//-------------------------------------
 	var fields="Name,Category,Subcategory,_gridHidden|Config_URL";
  //	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
-	fields+=",_gridHidden|Config|Input"; ///*_gridHidden|Panel_URL,*/
+ //fields+=",_gridHidden|Config|Input"; ///*_gridHidden|Panel_URL,*/
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -68,9 +68,9 @@ function F__ID(){
 				var nm=$('<div/>').html(records[I][field]).text();
 	            td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
-					var url=records[I].Config_URL+"?v="+$vm.version;
+					var url=records[I].Config_URL+"?_v="+$vm.version;
 					if(records[I].Config_URL.indexOf('?')!=-1){
-						url=records[I].Config_URL+"&v="+$vm.version;
+						url=records[I].Config_URL+"&_v="+$vm.version;
 					}
 					url=$vm.url(url);
 					console.log('LOAD CONFIG '+url.split('/').pop());
@@ -82,7 +82,7 @@ function F__ID(){
 							config=JSON.parse(text);
 						}
 						catch (e){
-				            alert(e);
+				            alert("Error in config file\n"+e);
 				            return;
 				        }
 						var panel_url=config.panels.main_panel.url;
@@ -170,16 +170,6 @@ function F__ID(){
 	}
 	//-------------------------------------
 	_before_submit=function(record,dbv){
-	    if(record.Input!=""){
-	        try{
-				var obj=record.Input;
-				if(obj[0]!='{') obj='{'+obj+'}';
-	            JSON.parse(obj);
-	        }catch (e) {
-	            alert(e);
-	            return false;
-	        }
-	    }
 	    dbv.S1=record.Name;
 	    dbv.S2=record.Category;
 	    dbv.S3=record.Subcategory;
