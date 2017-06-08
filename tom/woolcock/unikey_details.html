@@ -1,0 +1,73 @@
+<section>
+      VmInclude:__BASE__/vmiis/Common-Code/grid/grid.html
+</section>
+<script>
+function F__ID(){
+      //-------------------------------------
+      var fields="First_name,Surname,Title,Gender,Appointee,Reporting_To,Position,Unikey_Section,Login,Group,Office_No,Telephone,Expiry,Additional_Information";
+      _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+      //-------------------------------------
+      VmInclude:__BASE__/vmiis/Common-Code/grid/grid.js
+      VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+      //-------------------------------------
+      $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
+      //-------------------------------------
+      _cell_render=function(records,I,field,td,set_value,source){
+            switch(field){
+                  case 'Title':
+                        var html="<select style='border:0;'>\
+                                    <option>Mr</option>\
+                                    <option>Miss</option>\
+                                    <option>Ms</option>\
+                              </select>\
+                        ";
+                        VmInclude:__BASE__/vmiis/Common-Code/grid/field_select.js
+                        break;
+                    case 'Gender':
+	                    var html="<select style='border:0;'>\
+	                                <option>Male</option>\
+	                                <option>Female</option>\
+	                            </select>\
+	                    ";
+	                    VmInclude:__BASE__/vmiis/Common-Code/grid/field_select.js
+	                    break;
+					case 'Appointee':
+						var html="<select style='border:0'>\
+						        <option>New</option>\
+						        <option>Existing</option>\
+						    </select>\
+						";
+						VmInclude:__BASE__/vmiis/Common-Code/grid/field_select.js
+						break;
+					case 'Unikey_Section':
+						var html="<select style='border:0;'>\
+						            <option>New</option>\
+						            <option>Existing</option>\
+						        </select>\
+						";
+						VmInclude:__BASE__/vmiis/Common-Code/grid/field_select.js
+						break;
+                    case 'Group':
+                        var html="<select style='border:0;'>\
+                                    <option>Airway</option>\
+                                    <option>Cells</option>\
+                                    <option>ClinManagement</option>\
+                                    <option>Commercial</option>\
+                                    <option>EPI</option>\
+                                    <option>Operations</option>\
+                                    <option>Respitech</option>\
+                                    <option>Sleep</option>\
+                                </select>\
+                        ";
+                        VmInclude:__BASE__/vmiis/Common-Code/grid/field_select.js
+                        break;
+                  case 'Expiry':
+                        VmInclude:__BASE__/vmiis/Common-Code/grid/field_date.js
+                        break;
+            }
+      }
+}
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid.css
+  </style>

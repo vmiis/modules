@@ -15,17 +15,18 @@ function F__ID(){
 	var json;
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
-		json=_module.var;
-		_nav_name=json.panel.name;
+		var json=JSON.parse(_mobj.op.json);
+		var panel=_mobj.op.panel;
+		_nav_name=_mobj.op.panel_name;
 		_set_nav_link();
 		var txt="";
-		for(i=0;i<json.panel.columns.length;i++){
+		for(i=0;i<json[panel].columns.length;i++){
 			txt+="<div class=nav__ID>";
-			for(j=0;j<json.panel.columns[i].sections.length;j++){
-				var header=json.panel.columns[i].sections[j].name;
+			for(j=0;j<json[panel].columns[i].sections.length;j++){
+				var header=json[panel].columns[i].sections[j].name;
 				txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
-				for(k=0;k<json.panel.columns[i].sections[j].tasks.length;k++){
-					var task=json.panel.columns[i].sections[j].tasks[k].name;
+				for(k=0;k<json[panel].columns[i].sections[j].tasks.length;k++){
+					var task=json[panel].columns[i].sections[j].tasks[k].name;
 					txt+="<li data-i="+i+" data-j="+j+" data-k="+k+">"+$('<div/>').html(task).text()+"</li>";
 				}
 				txt+="</ul>";
@@ -48,8 +49,9 @@ function F__ID(){
 		*/
 		//---------------------------------------------
 		var load_module=function(I,J,K){
-			var url=json.panel.columns[I].sections[J].tasks[K].url;
-			var table_id=json.panel.columns[I].sections[J].tasks[K].table_id;
+			var url=json[panel].columns[I].sections[J].tasks[K].url;
+			var single_record=json[panel].columns[I].sections[J].tasks[K].single_record;
+			var table_id=json[panel].columns[I].sections[J].tasks[K].table_id;
 			for(var i=0;i<$vm.trust_path.length;i++){
 				var len=$vm.trust_path[i].length;
 				if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
@@ -72,8 +74,12 @@ function F__ID(){
 						mobj:$vm.vm['__ID'].op.mobj,
 						record:$vm.vm['__ID'].op.record,
 						json:$vm.vm['__ID'].op.json,
+						panel:$vm.vm['__ID'].op.panel,
+						single_record:single_record,
 					}
-					$vm.load_module_by_name(module,$vm.root_layout_content_slot,op)
+					var slot=$vm.root_layout_content_slot;
+					if(single_record=='1') slot=undefined;
+					$vm.load_module_by_name(module,slot,op)
 					return;
 				}
 			}

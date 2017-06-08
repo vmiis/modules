@@ -1,0 +1,152 @@
+<div>
+    <div id=toolbar__ID>
+        <a id=back__ID>Back</a><span class=tab__ID></span>About
+    </div>
+    <div id=notes__ID style='padding:10px'>
+        <span style='color:#005500;font-weight:bold;font-size:12px;'>Summary</span><br>
+        <div style='padding-left:20px;font-size:11px;color:#888;'>
+        Business data sharing and collaboration between people (staff, clients, business partners, service providers, managers, board members...) are necessary for business success.
+        <br>With one login and permissions from business data owner everyone can involve business activities.
+        <br>Add what you need, remove what you don’t need. Every part can be customised.
+        <br>I am happy to build business portal for you if you have some business data to manage and you can describe the way or the logic you manage the data.
+        <br>I am also happy to help people to move business data in spreadsheets to cloud for data collaboration (such as data entry and data reporting).
+        <br>I would like to build a system to link more and more business data together so as to make business operation, management and collaboration easier, faster and more efficient.
+        </div>
+    </div>
+    <div id=panel__ID style='clear:left;'>
+        <div class='nav__ID'>
+            <span>About business portal</span>
+            <ul>
+                <li data-name=about_what_is_business_portal>What is business portal</li>
+                <li data-name=about_solutions>Solutions</li>
+                <li data-name=about_structure>Structure</li>
+            </ul>
+            <br>
+            <span>About myself</span>
+            <ul>
+                <li data-name=about_my_goals>My goals</li>
+                <li data-name=about_my_skills>My skills</li>
+            </ul>
+            <br>
+        </div>
+        <div class='nav__ID'>
+            <span>For clients</span>
+            <ul>
+                <li data-name=job_proposal>Job proposal</li>
+            </ul>
+            <br>
+            <span>For business partners</span>
+            <ul>
+                <li data-name=business_proposal>Business proposal</li>
+            </ul>
+            <br>
+            <span>For investors</span>
+            <ul>
+                <li data-name=potential_success>Potential success</li>
+            </ul>
+            <br>
+            <span>For developers</span>
+            <ul>
+                <li data-name=working_together>Working together</li>
+				<li data-name=github data-s=1>Business portal example on Github</li>
+				<li data-name=source data-s=1>This website source code on Github</li>
+            </ul>
+            <br>
+        </div>
+    </div>
+</div>
+<script>
+    //---------------------------------------------
+    function F__ID(){
+        //---------------------------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/navigation/navigation.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out_2.js
+        //---------------------------------------------
+        var main=function(){
+            var L=$vm.module_list,
+            A=_app_id,
+            B="https://vmiis.github.io/modules/datalinkedin";
+            //---------------------------------------------
+            //database table:
+            //---------------------------------------------
+            //variable
+            var v={ app_id:_app_id}
+            //---------------------------------------------
+            L[A+'about_what_is_business_portal'] ={url:B+'/what_is_business_portal.html'};
+            L[A+'about_solutions']               ={url:B+'/solutions.html'};
+            L[A+'about_structure']               ={url:B+'/structure.html'};
+            L[A+'about_my_goals']                ={url:B+'/mygoals.html'};
+            L[A+'about_my_skills']               ={url:B+'/myskills.html'};
+            L[A+'developer_download']            ={url:B+'/download/download.html'};
+            L[A+'business_proposal']             ={url:B+'/business_proposal.html'};
+            L[A+'working_together']              ={url:B+'/working_together.html'};
+            L[A+'job_proposal']                  ={url:B+'/job_proposal.html'};
+            L[A+'potential_success']             ={url:B+'/potential_success.html'};
+            //---------------------------------------------
+        }
+        main();
+        //---------------------------------------------
+        _set_li_permissions();
+        //---------------------------------------------
+        $('#D__ID').on('load',function(){
+            _nav_name='About';
+        });
+        //---------------------------------------------
+		_special_click_process=function(li){
+			var data_name=$(li).attr('data-name');
+			if(data_name=='github'){
+				window.open('https://github.com/vmiis/business-portal-example');
+			}
+			else if(data_name=='source'){
+				window.open('https://github.com/vmiis/business-portal');
+			}
+		}
+		//---------------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/navigation/navigation.css
+    VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out_2.css
+    #D__ID{
+        overflow: hidden;
+        background: url("__BASE__/vmiis/common-code/image/texture.png");
+    }
+    .nav__ID span,.nav__ID u{
+        color:#005500;
+        font-weight: bold;
+    }
+    .nav__ID li{
+        /*white-space: nowrap;*/
+    }
+    ul{
+        padding-left:28px;
+    }
+    ul.a {
+        padding-left:28px;
+        list-style-type: disc;
+    }
+    ul.b {
+        padding-left:28px;
+        list-style-type: square;
+    }
+    ul.sub{
+        padding-left:25px;
+    }
+    li.folder{
+        color:#005500;
+    }
+    li.panel{
+        color:#000055;
+    }
+    li.folder+ul{
+        display:none;
+    }
+    @media screen and (max-width:900px){
+        #notes__ID{
+            display:none;
+        }
+        #D__ID{
+            font-size:16pt;
+        }
+    }
+</style>

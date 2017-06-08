@@ -53,9 +53,9 @@ function F__ID(){
     //--------------------------------------------------------
     var cell_render=function(record){
         var id=record.ID;
-		var time=record.Time;
-        var name=record.Booked_by;
-		var color=record.Color;
+		var time=$vm.text(record.Time);
+        var name=$vm.text(record.Booked_by);
+		var color=$vm.text(record.Color);
 		var author=record.Author;
         var d=record.Date;
         var $div=_get_cell_div(d);

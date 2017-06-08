@@ -33,7 +33,9 @@ function F__ID(){
 				td.html("<u style='cursor:pointer'>"+records[I].Title+"</u>");
 				td.find('u').on('click',function(){
 					var contents=records[I].Contents;
-					$vm.load_module_by_name(_module.view,$vm.root_layout_content_slot,{contents:contents,});
+					var ids=_sys.config.module_ids;
+					var module=ids[_module.view]
+					$vm.load_module_by_name(module,$vm.root_layout_content_slot,{contents:contents,});
 				});
 				td.css('min-width','500px');
 				td.css('padding-left','10px');

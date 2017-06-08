@@ -35,13 +35,12 @@ function F__ID(){
 	var module_list=function(){
 		_app_id='bookkeeping_';
 		//---------------------------------------------
-	        var L=$vm.module_list,A=_app_id;
-	        var M='https://vmiis.github.io/modules/transaction_bookkeeping';
-	        //---------------------------------------------
-	        if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
-	                M=window.location.protocol+'//'+window.location.host+"/vmiis/modules";
-	        }
-	        //---------------------------------------------
+		var L=$vm.module_list,A=_app_id;
+		var M='https://vmiis.github.io/modules/transaction_bookkeeping';
+		if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
+		        M=window.location.protocol+'//'+window.location.host+"/vmiis/modules/transaction_bookkeeping";
+		}
+		//---------------------------------------------
 		var v={
 			predefined_item_tid :'20005380',
 			record_tid          :'20007172',

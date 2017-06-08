@@ -26,4 +26,3 @@ var basic_view=function(options_json,headers,records,class_name){
     $('#result__ID').html(txt);
     //-----------------------------------------
 }
-

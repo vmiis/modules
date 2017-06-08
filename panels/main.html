@@ -25,20 +25,22 @@ function F__ID(){
 				for(i=0;i<config.panels[P].columns.length;i++){
 					var url=config.panels[P].url;
 					var p_id='P_'+UID+'_'+P;
-					$vm.module_list[p_id]={url:url};
-					for(j=0;j<config.panels[P].columns[i].sections.length;j++){
-						for(k=0;k<config.panels[P].columns[i].sections[j].tasks.length;k++){
-							var m_id=config.panels[P].columns[i].sections[j].tasks[k].module_id;
-							var new_m_id='M_'+UID+'_'+P+'_'+m_id;
-							config.panels[P].columns[i].sections[j].tasks[k].module_id=new_m_id;
-							$vm.module_list[new_m_id]=config.panels[P].columns[i].sections[j].tasks[k];
-							config.module_ids[m_id]=new_m_id;
+					if($vm.module_list[p_id]==undefined){
+						$vm.module_list[p_id]={url:url};
+						for(j=0;j<config.panels[P].columns[i].sections.length;j++){
+							for(k=0;k<config.panels[P].columns[i].sections[j].tasks.length;k++){
+								var m_id=config.panels[P].columns[i].sections[j].tasks[k].module_id;
+								var new_m_id='M_'+UID+'_'+P+'_'+m_id;
+								config.panels[P].columns[i].sections[j].tasks[k].module_id=new_m_id;
+								$vm.module_list[new_m_id]=config.panels[P].columns[i].sections[j].tasks[k];
+								config.module_ids[m_id]=new_m_id;
 
-							var fm=config.panels[P].columns[i].sections[j].tasks[k].form_module;
-							if(fm!=undefined){
-								var new_fm='M_'+UID+'_'+P+'_'+fm;
-								config.panels[P].columns[i].sections[j].tasks[k].form_module=new_fm;
-								$vm.module_list[new_fm]=config.panels[P].columns[i].sections[j].tasks[k];
+								var fm=config.panels[P].columns[i].sections[j].tasks[k].form_module;
+								if(fm!=undefined){
+									var new_fm='M_'+UID+'_'+P+'_'+fm;
+									config.panels[P].columns[i].sections[j].tasks[k].form_module=new_fm;
+									$vm.module_list[new_fm]=config.panels[P].columns[i].sections[j].tasks[k];
+								}
 							}
 						}
 					}

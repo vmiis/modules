@@ -68,102 +68,54 @@ function F__ID(){
 				var nm=$('<div/>').html(records[I][field]).text();
 	            td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
-					var url=records[I].Config_URL+"?_v="+$vm.version;
-					if(records[I].Config_URL.indexOf('?')!=-1){
-						url=records[I].Config_URL+"&_v="+$vm.version;
-					}
-					url=$vm.url(url);
-					console.log('LOAD CONFIG '+url.split('/').pop());
-					$.get(url,function(text){
-						var text=$('<div/>').html(text).text();
-						//---------------------------
-						var config;
-						try{
-							config=JSON.parse(text);
+					var module="P_"+records[I].UID+"_main_panel";
+					if($vm.module_list[module]==undefined){
+						var url=records[I].Config_URL+"?_v="+$vm.version;
+						if(records[I].Config_URL.indexOf('?')!=-1){
+							url=records[I].Config_URL+"&_v="+$vm.version;
 						}
-						catch (e){
-				            alert("Error in config file\n"+e);
-				            return;
-				        }
-						var panel_url=config.panels.main_panel.url;
-						var panel_name=config.panels.main_panel.name;
-						//---------------------------
-						var module="P_"+records[I].UID+"_main_panel";
-						if($vm.module_list[module]==undefined){
-							$vm.module_list[module]={
-								url:panel_url,
-								var:{},
+						url=$vm.url(url);
+						console.log('LOAD CONFIG '+url.split('/').pop());
+						$.get(url,function(text){
+							var text=$('<div/>').html(text).text();
+							//---------------------------
+							var config;
+							try{
+								config=JSON.parse(text);
 							}
-						}
-						//---------------------------
-						$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
-							name:records[I].Name,
-							mobj:$vm.vm['__ID'],
-							record:records[I],
-							panel:'main_panel',
-							panel_name:panel_name,
-							sys:{
-								config:config,
-								UID:records[I].UID,
-							}
-						})
-					},'text').fail(function() {
-					    alert( "The file '"+records[I].Config_URL+"' doesn't exist!" );
-					});
-					/*
-					var url=records[I].Panel_URL;
-					var panel_name='';
-					//---------------------------
-					var obj=records[I].Input;
-					if(obj[0]!='{') obj='{'+obj+'}';
-					var json=JSON.parse(obj);
-					if(json.panels.main_panel!=undefined){
-						var uurl=json.panels.main_panel.url;
-						if(uurl!=undefined) url=uurl;
-						panel_name=json.panels.main_panel.name;
-					}
-					//---------------------------
-                    if($vm.trust_path!==undefined){
-                        for(var i=0;i<$vm.trust_path.length;i++){
-                            var len=$vm.trust_path[i].length;
-                            if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
-                                var v={}
-                                try{
-									var obj=records[I].Input;
-									if(obj[0]!='{') obj='{'+obj+'}';
-                                    v=JSON.parse(obj);
-									v.UID=records[I].UID;
-									v.module_tid=_module.var.module_tid;
-									v.query_tid=_module.var.query_tid;
-                                }catch (e) {}
-    							var module="P"+records[I].UID;
-								if($vm.module_list[module]==undefined){
-	                                $vm.module_list[module]={
-	                                    url:url,
-	                                    var:v,
-	                                }
+							catch (e){
+					            alert("Error in config file\n"+e);
+					            return;
+					        }
+							var panel_url=config.panels.main_panel.url;
+							var panel_name=config.panels.main_panel.name;
+							//---------------------------
+							//if($vm.module_list[module]==undefined){
+								$vm.module_list[module]={
+									url:panel_url,
+									var:{},
 								}
-								var slot=$vm.root_layout_content_slot;
-                                $vm.load_module_by_name(module,slot,{
-									name:records[I].Name,
-									mq_category:records[I].MQ_category,
-									mq_subcategory:records[I].MQ_subcategory,
-									mobj:$vm.vm['__ID'],
-									record:records[I],
-									config:records[I].Input,
-									panel:'main_panel',
-									panel_name:panel_name,
-									sys:{
-										config:JSON.parse(records[I].Input),
-										UID:records[I].UID,
-									}
-								})
-                                return;
-                            }
-                        }
-						alert("The url ("+url+") is not trusted.")
+							//}
+							//---------------------------
+							$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
+								name:records[I].Name,
+								mobj:$vm.vm['__ID'],
+								record:records[I],
+								panel:'main_panel',
+								panel_name:panel_name,
+								sys:{
+									config:config,
+									UID:records[I].UID,
+								}
+							})
+						},'text').fail(function() {
+						    alert( "The file '"+records[I].Config_URL+"' doesn't exist!" );
+						});
 					}
-					*/
+					else{
+						var id=$vm.module_list[module].id
+						$vm.show_module(id,$vm.root_layout_content_slot);
+					}
 	            })
 	            break;
 	    }
