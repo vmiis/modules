@@ -68,7 +68,7 @@ function F__ID(){
 				var nm=$('<div/>').html(records[I][field]).text();
 	            td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
-					var module="P_"+records[I].UID+"_main_panel";
+					var module="M_"+records[I].UID+"_main_panel";
 					if($vm.module_list[module]==undefined){
 						var url=records[I].Config_URL+"?_v="+$vm.version;
 						if(records[I].Config_URL.indexOf('?')!=-1){
