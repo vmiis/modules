@@ -65,10 +65,33 @@ function F__ID(){
 		}
 		$('#panel__ID').html(txt);
 		$('#panel__ID li').on('click',function(){
+			event.stopPropagation();
+	        if( $(this).hasClass( 'not_allowed__ID' )===true){
+	              alert("No permission!");
+	              return;
+	        }
 			var mid=$(this).attr('data-mid');
 			load_module(mid)
 		});
 	}
+	//---------------------------------------------
+	$('#panel__ID li').each(function(){
+		//set_li_permission($(this),module_records)
+		if($vm.server=='production'){
+			$('.nav__ID li').each(function(index){
+				$(this).addClass('not_allowed__ID')
+				var m_id=$(this).attr('data-mid');
+				if(m_id!==undefined && $vm.module_list[m_id]!==undefined){
+					var pid=$vm.module_list[m_id].table_id;
+					if(pid!==undefined && pid!=='--------' && pid!==''){
+						set_li_permission($(this),pid);
+					}
+					else $(this).removeClass('not_allowed__ID');
+				}
+				else $(this).removeClass('not_allowed__ID');
+			});
+		}
+	})
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
 	});

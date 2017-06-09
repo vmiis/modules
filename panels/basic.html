@@ -42,11 +42,23 @@ function F__ID(){
 			load_module(i,j,k)
 		});
 		//---------------------------------------------
-		/*
 		$('#panel__ID li').each(function(){
-			set_li_permission($(this),module_records)
+			//set_li_permission($(this),module_records)
+			if($vm.server=='production'){
+		        $('.nav__ID li').each(function(index){
+		            $(this).addClass('not_allowed__ID')
+		            var m_id=$(this).attr('data-mid');
+		            if(m_id!==undefined && $vm.module_list[m_id]!==undefined){
+		                var pid=$vm.module_list[m_id].table_id;
+		                if(pid!==undefined && pid!=='--------' && pid!==''){
+		                    set_li_permission($(this),pid);
+		                }
+		                else $(this).removeClass('not_allowed__ID');
+		            }
+		            else $(this).removeClass('not_allowed__ID');
+		        });
+		    }
 		})
-		*/
 		//---------------------------------------------
 		var load_module=function(I,J,K){
 			var url=json[panel].columns[I].sections[J].tasks[K].url;
