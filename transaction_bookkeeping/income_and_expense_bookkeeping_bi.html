@@ -41,6 +41,10 @@ function F__ID(){
     VmInclude:__BASE__/vmiis/Common-Code/grid/grid.js
     VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
     //------------------------
+	var ids=_sys.config.module_ids;
+	var record_tid=_mlist[ids.bookkeeping01].table_id;
+	var predefined_item_tid=_mlist[ids.predefined_item].table_id;
+	//-------------------------------------
     var _module=$vm.module_list[$vm.vm['__ID'].name];
     //------------------------
     //year dropdown
@@ -89,11 +93,7 @@ function F__ID(){
                     tr.find('td').eq(2).find('u').data('rid',res.records[i].ID);
                     tr.find('td').eq(2).find('u').on('click',function(){
                         var rid=$(this).data('rid');
-						if(_module.var.bi_details==undefined){
-							_module.var.bi_details="M"+_module.var.UID+"_income_and_expense_bi_details";
-							$vm.module_list[_module.var.bi_details]=_module.var.bi_details_module;
-						}
-                    	$vm.load_module_by_name(_module.var.bi_details,$vm.root_layout_content_slot,{rid:rid});
+                    	$vm.load_module_by_name(ids.bi_processing_details,$vm.root_layout_content_slot,{rid:rid});
                     })
                 }
                 else tr.find('td').eq(2).text(Num)
@@ -110,8 +110,8 @@ function F__ID(){
         var N=0;
         dbv.V1=$('#YY__ID').val();
         dbv.V2=m.toString();
-        var sql="with tb0 as(select V1,name=S1,DateTime,Author,Modified,MAuthor from [TABLE-"+_module.var.record_tid+"] where DatePart(yy,DT1)=@I1 and DatePart(mm,DT1)=@I2)";
-        sql+=",item as (select S1,type=S2,GST=S3,TR=@('Tax_Return') from [TABLE-"+_module.var.predefined_item_tid+"])";
+        var sql="with tb0 as(select V1,name=S1,DateTime,Author,Modified,MAuthor from [TABLE-"+record_tid+"] where DatePart(yy,DT1)=@I1 and DatePart(mm,DT1)=@I2)";
+        sql+=",item as (select S1,type=S2,GST=S3,TR=@('Tax_Return') from [TABLE-"+predefined_item_tid+"])";
         sql+=",tb as (select V1,name,type,GST,TR from tb0 left join item on name=S1)";
         sql+="select amount=sum(V1), name, type,GST,TR from tb group by name,type,GST,TR";
         //,NG=case when GST='GST' then V1*10/11 else V1 end ,amount_without_gst=sum(NG)
@@ -163,8 +163,8 @@ function F__ID(){
         var N=0;
         dbv.V1=$('#YY__ID').val();
         dbv.V2=m.toString();
-        var sql0="with tb0 as(select V1,S1,DateTime,Author,Modified,MAuthor from [TABLE-"+_module.var.record_tid+"] where DatePart(yy,DT1)=@I1 and DatePart(mm,DT1)=@I2)";
-        sql0+=",item as (select S1,S2,S3,TR=@('Tax_Return') from [TABLE-"+_module.var.predefined_item_tid+"])";
+        var sql0="with tb0 as(select V1,S1,DateTime,Author,Modified,MAuthor from [TABLE-"+record_tid+"] where DatePart(yy,DT1)=@I1 and DatePart(mm,DT1)=@I2)";
+        sql0+=",item as (select S1,S2,S3,TR=@('Tax_Return') from [TABLE-"+predefined_item_tid+"])";
         sql0+=",tb as (select V1,S1=tb0.S1,S2,S3,TR from tb0 left join item on tb0.S1=item.S1)";
 
         var sqlA=sql0+",tbA as(select ";

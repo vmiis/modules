@@ -1,10 +1,13 @@
 var fields="Record_ID,Date,Name,Description,Amount,Additional_Info,Notes,Link,Document";
 _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 //-------------------------------------
+var ids=_sys.config.module_ids;
+var predefined_item_tid=_mlist[ids.predefined_item].table_id;
+//-------------------------------------
 $('#name__ID').autocomplete({
     minLength:0,
     source:function(request,response){
-        var sql="with tb as (select name=@('Name') from [FORM-"+_module.var.predefined_item_tid+"])";
+        var sql="with tb as (select name=@('Name') from [FORM-"+predefined_item_tid+"])";
         sql+=" select top 10 name,value=name from tb where name like '%'+@S1+'%' ";
         $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
             response($vm.autocomplete_list(res.table));
@@ -23,7 +26,7 @@ _cell_render=function(records,I,field,td,set_value,source){
             VmInclude:__BASE__/vmiis/Common-Code/grid/field_date.js
             break;
         case 'Name':
-            var sql="with tb as (select name=@('Name') from [FORM-"+_module.var.predefined_item_tid+"])";
+            var sql="with tb as (select name=@('Name') from [FORM-"+predefined_item_tid+"])";
             sql+=" select top 10 name,value=name from tb where name like '%'+@S1+'%' ";
             VmInclude:__BASE__/vmiis/Common-Code/grid/field_auto.js
             break;
