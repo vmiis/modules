@@ -25,10 +25,11 @@ var _default_cell_render=function(records,I,field,td,set_value,source){
 //-------------------------------------
 _set_req=function(){
 	if(_mobj.op.child=='1'){
-		var staff_record=_mobj.op.record;
-		var where="S2='"+staff_record.Login_Name+"'";
-		var sql="select ID,Information,DateTime,Author from [TABLE-"+_db_pid+"] where "+where;
-		_req={cmd:'query_records',sql:sql}
+		var where=" where S2='"+_mobj.op.record.Login_Name+"'";
+		var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1]"+where+" )";
+	    sql+="select Information,ID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
+	    var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1]"+where;
+	    _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
 	}
 	else{
 		var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] )";
@@ -38,8 +39,26 @@ _set_req=function(){
 	}
 }
 //-------------------------------------
+_set_req_export=function(){
+	if(_mobj.op.child=='1'){
+		var where=" where S2='"+_mobj.op.record.Login_Name+"'";
+		var sql="with tb as (select Information,ID,UID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"]"+where+")";
+	    sql+="select Information,ID,UID,DateTime,Author,RowNum from tb";
+	    _set_from_to();
+	    if(_from!='0' && _to!='0') sql+=" where RowNum between @I6 and @I7";
+	    _req={cmd:'query_records',sql:sql,i6:_from,i7:_to}
+	}
+	else{
+		var sql="with tb as (select Information,ID,UID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"] )";
+	    sql+="select Information,ID,UID,DateTime,Author,RowNum from tb";
+	    _set_from_to();
+	    if(_from!='0' && _to!='0') sql+=" where RowNum between @I6 and @I7";
+	    _req={cmd:'query_records',sql:sql,i6:_from,i7:_to}
+	}
+}
+//-------------------------------------
 _data_process_after_render=function(){
-	if(_mobj.op.child='1' && _mobj.op.single_record=='1'){
+	if(_mobj.op.child=='1' && _mobj.op.single_record=='1'){
 		if(_records.length==0){
 			$('#new__ID').triggerHandler('click');
 		}

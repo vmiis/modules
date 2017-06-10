@@ -50,20 +50,43 @@
                     if(records[I].UID==null || records[I].UID==undefined) return;
                     td.html("<u style='cursor:pointer;'>More...</u>");
                     td.find('u').on('click',function(){
-						var this_mobj  =_mobj;
-						var this_record=records[I];
-						var op={
-							//----------------
-							sys:_sys,
-							mobj:this_mobj,
-							record:this_record,
-							//----------------
-							panel_id:'child_panel',
-							panel_name:records[I].First_Name+' '+records[I].Last_Name,
-							//----------------
+						var panel='child_panel';
+						var module="M_"+_sys.UID+"_"+panel;
+						if($vm.module_list[module]==undefined){
+							var panel_url=_sys.config.panels[panel].url;
+							//---------------------------
+							$vm.module_list[module]={
+								url:panel_url,
+								var:{},
+							}
+							//---------------------------
+							var this_mobj  =_mobj;
+							var this_record=records[I];
+							var op={
+								//----------------
+								sys:_sys,
+								mobj:this_mobj,
+								record:this_record,
+								//----------------
+								panel_id:panel,
+								panel_name:records[I].First_Name+' '+records[I].Last_Name,
+								//----------------
+							}
+							$vm.load_module_by_name(module,$vm.root_layout_content_slot,op)
+							//---------------------------
 						}
-						var P='P_'+_mobj.op.sys.UID+"_child_panel";
-						$vm.load_module_by_name(P,$vm.root_layout_content_slot,op)
+						else{
+							var this_record=records[I];
+							var op={
+								//----------------
+								record:this_record,
+								//----------------
+								panel_name:records[I].First_Name+' '+records[I].Last_Name,
+								//----------------
+							}
+							var id=$vm.module_list[module].id
+							$vm.show_module(id,$vm.root_layout_content_slot,op);
+						}
                     })
                     break;
                 case 'Photo':
