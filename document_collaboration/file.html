@@ -10,7 +10,8 @@
         _fields="_Form,Topic,Document,Last Modified|lastModified,Size,Version,Description";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
-        var topic_pid=_module.var.topic_tid;
+		var ids=_sys.config.module_ids;
+		var topics_tid=_mlist[ids.topics].table_id;
         //-------------------------------------
         $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
         //-------------------------------------
@@ -27,22 +28,22 @@
         //-------------------------------------
         _before_submit=function(record,dbv){
             var puid=record.PUID;
-            if(puid===null || puid===undefined) puid=$vm.vm['__ID'].op.puid;
+            if(puid===null || puid===undefined) puid=_mobj.op.puid;
             if(puid===null || puid===undefined){
                 alert("No parent");
                 return false;
             }
-    		dbv.PPID=patopic_pid;
+    		dbv.PPID=topics_tid;
     		dbv.PUID=puid;
             return true;
         };
         //-------------------------------------
         _new_pre_data_process=function(){
-            _records[0].Topic=$vm.vm['__ID'].op.topic;
+            _records[0].Topic=_mobj.op.topic;
         };
         //-------------------------------------
         _set_req=function(){
-            if($vm.vm['__ID'].op.sql_where===undefined) $('#new__ID').hide();
+            if(_mobj.op.sql_where===undefined) $('#new__ID').hide();
             else $('#new__ID').show();
             _set_req_with_sql_where();
         }

@@ -21,8 +21,10 @@
         //-------------------------------------
         VmInclude:__LIB__/vmiis/Common-Code/frame/records_with_paging.js
         VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
-        var _module=$vm.module_list[$vm.vm['__ID'].name];
         //-------------------------------------
+		var ids=_sys.config.module_ids;
+		var category_tid=_mlist[ids.category].table_id;
+		//-------------------------------------
         $('#D__ID').on('load',function(){ _set_req(); _request_data(); })
         //-------------------------------------
         var set_image_url=function($obj,rid,filename,modified){
@@ -57,7 +59,7 @@
             }
         }
         //-------------------------------------
-        var pid=_module.var.category_tid;
+        var pid=category_tid;
         //-------------------------------------
         var toolbar_set_department=function(){
             $('#department__ID').autocomplete({

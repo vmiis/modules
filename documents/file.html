@@ -25,6 +25,9 @@
         _fields="_Form,File_Name,Last Modified|lastModified,Size,Version,Description,Department,Category,Sub_Category";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
+		var ids=_sys.config.module_ids;
+		var category_tid=_mlist[ids.category].table_id;
+		//-------------------------------------
         $('#D__ID').on('load',function(){ _set_req(); _request_data(); })
         //-------------------------------------
         _cell_render=function(records,I,field,td,set_value,source){
@@ -46,7 +49,7 @@
             }
         }
         //-------------------------------------
-        var pid=_module.var.category_tid;
+        var pid=category_tid;
         //-------------------------------------
         var td_set_department=function(records,I,field,td,source){
             td.autocomplete({
