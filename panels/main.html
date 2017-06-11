@@ -19,64 +19,71 @@ function F__ID(){
 	_nav_name=config.panels['main_panel'].name;
 	_set_nav_link();
 	//---------------------------------------------
+	//make unique id and add module to module list
 	for(var P in config.panels){
 		var UID=_mobj.op.record.UID;
-		for(var P in config.panels){
-			var aPanel=config.panels[P];
-			var url=aPanel.url;
-			//var p_id='P_'+UID+'_'+P;
-			if(aPanel.columns!=undefined){
-				for(i=0;i<aPanel.columns.length;i++){
-					for(j=0;j<aPanel.columns[i].sections.length;j++){
-						for(k=0;k<aPanel.columns[i].sections[j].tasks.length;k++){
-							var m_id=aPanel.columns[i].sections[j].tasks[k].module_id;
-							var new_m_id='M_'+UID+'_'+P+'_'+m_id;
-							aPanel.columns[i].sections[j].tasks[k].module_id=new_m_id;
-							$vm.module_list[new_m_id]=aPanel.columns[i].sections[j].tasks[k];
-							config.module_ids[m_id]=new_m_id;
-
-							var fm=aPanel.columns[i].sections[j].tasks[k].form_module;
-							if(fm!=undefined){
-								var new_fm='M_'+UID+'_'+P+'_'+fm;
-								aPanel.columns[i].sections[j].tasks[k].form_module=new_fm;
-								$vm.module_list[new_fm]=aPanel.columns[i].sections[j].tasks[k];
-							}
-						}
+		var aPanel=config.panels[P];
+		var url=aPanel.url;
+		for(i=0;i<aPanel.columns.length;i++){
+			var aColumn=aPanel.columns[i];
+			for(j=0;j<aColumn.sections.length;j++){
+				var aSection=aColumn.sections[j];
+				for(k=0;k<aSection.tasks.length;k++){
+					var aTask=aSection.tasks[k];
+					var m_id=aTask.module_id;
+					var new_m_id='M_'+UID+'_'+P+'_'+m_id;
+					aTask.module_id=new_m_id;
+					$vm.module_list[new_m_id]=aTask;
+					config.module_ids[m_id]=new_m_id;
+					//---------------------
+					//process form_module
+					var fm=aTask.form_module;
+					if(fm!=undefined){
+						var new_fm='M_'+UID+'_'+P+'_'+fm;
+						aTask.form_module=new_fm;
+						$vm.module_list[new_fm]=aTask;
 					}
+					//---------------------
 				}
 			}
 		}
-		var txt="";
-		for(i=0;i<config.panels[panel].columns.length;i++){
-			txt+="<div class=nav__ID>";
-			for(j=0;j<config.panels[panel].columns[i].sections.length;j++){
-				var header=config.panels[panel].columns[i].sections[j].name;
-				txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
-				for(k=0;k<config.panels[panel].columns[i].sections[j].tasks.length;k++){
-					var task=config.panels[panel].columns[i].sections[j].tasks[k].name;
-					if(task!=undefined){
-						var m_id=config.panels[panel].columns[i].sections[j].tasks[k].module_id;
-						txt+="<li data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
-					}
-				}
-				txt+="</ul>";
-			}
-			txt+="</div>";
-		}
-		$('#panel__ID').html(txt);
-		$('#panel__ID li').on('click',function(){
-			event.stopPropagation();
-	        if( $(this).hasClass( 'not_allowed__ID' )===true){
-	              alert("No permission!");
-	              return;
-	        }
-			var mid=$(this).attr('data-mid');
-			load_module(mid)
-		});
 	}
 	//---------------------------------------------
+	//pande render and add click event handler
+	var txt="";
+	var thePanel=config.panels[panel];
+	for(i=0;i<thePanel.columns.length;i++){
+		var aColumn=thePanel.columns[i];
+		txt+="<div class=nav__ID>";
+		for(j=0;j<aColumn.sections.length;j++){
+			var aSection=aColumn.sections[j];
+			var header=aSection.name;
+			txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
+			for(k=0;k<aSection.tasks.length;k++){
+				var aTask=aSection.tasks[k];
+				var task=aTask.name;
+				if(task!=undefined){
+					var m_id=aTask.module_id;
+					txt+="<li data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
+				}
+			}
+			txt+="</ul>";
+		}
+		txt+="</div>";
+	}
+	$('#panel__ID').html(txt);
+	$('#panel__ID li').on('click',function(){
+		event.stopPropagation();
+        if( $(this).hasClass( 'not_allowed__ID' )===true){
+              alert("No permission!");
+              return;
+        }
+		var mid=$(this).attr('data-mid');
+		load_module(mid)
+	});
+	//---------------------------------------------
+	//set permission
 	$('#panel__ID li').each(function(){
-		//set_li_permission($(this),module_records)
 		if($vm.server=='production'){
 			$('.nav__ID li').each(function(index){
 				$(this).addClass('not_allowed__ID')
@@ -126,26 +133,6 @@ function F__ID(){
 		if(single_record=='1') slot=undefined;
 		$vm.load_module_by_name(module_id,slot,op)
 	};
-	//---------------------------------------------
-	/*
-	$('#panel__ID').on('dblclick',function(){
-		if($vm.user=='datalinkedin'){
-			var txt=JSON.stringify(config,null,4);
-			txt=$('<div/>').html(txt).text();
-			var txt2=JSON.stringify($vm.module_list,null,4);
-			txt2=$('<div/>').html(txt2).text();
-			var url='__LIB__/vmiis/Common-Code/code_viewer/code.html'
-			var param={
-				name:"code_viewer",
-				pid:$vm.id(url+"--------"),
-				slot:$vm.root_layout_content_slot,
-				url:$vm.url(url),
-				op:{name:'System info',code:'{"config":'+txt+',\r\n"module_list":'+txt2+'}'}
-			}
-			$vm.load_module(param);
-		}
-	})
-	*/
 	//---------------------------------------------
 }
 </script>
