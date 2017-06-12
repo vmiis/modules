@@ -15,31 +15,60 @@ function F__ID(){
 	var config=_sys.config;
 	var panel_id=_mobj.op.panel_id;
 	//---------------------------------------------
+	//pande render and add click event handler
+	var txt="";
+	var thePanel=config.panels[panel_id];
+	for(i=0;i<thePanel.columns.length;i++){
+		var aColumn=thePanel.columns[i];
+		txt+="<div class=nav__ID>";
+		for(j=0;j<aColumn.sections.length;j++){
+			var aSection=aColumn.sections[j];
+			var header=aSection.name;
+			txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
+			for(k=0;k<aSection.tasks.length;k++){
+				var aTask=aSection.tasks[k];
+				var task=aTask.name;
+				if(task!=undefined){
+					var m_id=aTask.module_id;
+					txt+="<li data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
+				}
+			}
+			txt+="</ul>";
+		}
+		txt+="</div>";
+	}
+	$('#panel__ID').html(txt);
+	$('#panel__ID li').on('click',function(){
+		event.stopPropagation();
+        if( $(this).hasClass( 'not_allowed__ID' )===true){
+              alert("No permission!");
+              return;
+        }
+		var mid=$(this).attr('data-mid');
+		load_module(mid)
+	});
+	//---------------------------------------------
+	//set permission
+	$('#panel__ID li').each(function(){
+		if($vm.server=='production'){
+			$('.nav__ID li').each(function(index){
+				$(this).addClass('not_allowed__ID')
+				var m_id=$(this).attr('data-mid');
+				if(m_id!==undefined && $vm.module_list[m_id]!==undefined){
+					var pid=$vm.module_list[m_id].table_id;
+					if(pid!==undefined && pid!=='--------' && pid!==''){
+						set_li_permission($(this),pid);
+					}
+					else $(this).removeClass('not_allowed__ID');
+				}
+				else $(this).removeClass('not_allowed__ID');
+			});
+		}
+	})
+	//---------------------------------------------
 	$('#D__ID').on('load',function(){
 		_nav_name=_mobj.op.panel_name;
 		_set_nav_link();
-		var txt="";
-		for(i=0;i<config.panels[panel_id].columns.length;i++){
-			txt+="<div class=nav__ID>";
-			for(j=0;j<config.panels[panel_id].columns[i].sections.length;j++){
-				var header=config.panels[panel_id].columns[i].sections[j].name;
-				txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
-				for(k=0;k<config.panels[panel_id].columns[i].sections[j].tasks.length;k++){
-					if(config.panels[panel_id].columns[i].sections[j].tasks[k].name!=undefined){
-						var task=config.panels[panel_id].columns[i].sections[j].tasks[k].name;
-						var m_id=config.panels[panel_id].columns[i].sections[j].tasks[k].module_id;
-						txt+="<li data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
-					}
-				}
-				txt+="</ul>";
-			}
-			txt+="</div>";
-		}
-		$('#panel__ID').html(txt);
-		$('#panel__ID li').on('click',function(){
-			var mid=$(this).attr('data-mid');
-			load_module(mid)
-		});
 	});
 	//---------------------------------------------
 	var load_module=function(module_id){
@@ -69,10 +98,6 @@ function F__ID(){
 			panel_id:_mobj.op.panel_id,
 			panel_name:_mobj.op.panel_name,
 			child:'1',
-			/*
-			config:$vm.vm['__ID'].op.config,
-			panel:$vm.vm['__ID'].op.panel,
-			*/
 		}
 		var slot=$vm.root_layout_content_slot;
 		if(single_record=='1') slot=undefined;

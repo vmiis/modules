@@ -12,46 +12,12 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.js
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
 	//---------------------------------------------
-	_sys.config.module_ids={}
-	var panel='main_panel';
 	var config=_sys.config;
-	//---------------------------------------------
-	_nav_name=config.panels['main_panel'].name;
-	_set_nav_link();
-	//---------------------------------------------
-	//make unique id and add module to module list
-	for(var P in config.panels){
-		var UID=_mobj.op.record.UID;
-		var aPanel=config.panels[P];
-		var url=aPanel.url;
-		for(i=0;i<aPanel.columns.length;i++){
-			var aColumn=aPanel.columns[i];
-			for(j=0;j<aColumn.sections.length;j++){
-				var aSection=aColumn.sections[j];
-				for(k=0;k<aSection.tasks.length;k++){
-					var aTask=aSection.tasks[k];
-					var m_id=aTask.module_id;
-					var new_m_id='M_'+UID+'_'+P+'_'+m_id;
-					aTask.module_id=new_m_id;
-					$vm.module_list[new_m_id]=aTask;
-					config.module_ids[m_id]=new_m_id;
-					//---------------------
-					//process form_module
-					var fm=aTask.form_module;
-					if(fm!=undefined){
-						var new_fm='M_'+UID+'_'+P+'_'+fm;
-						aTask.form_module=new_fm;
-						$vm.module_list[new_fm]=aTask;
-					}
-					//---------------------
-				}
-			}
-		}
-	}
+	var panel_id=_mobj.op.panel_id;
 	//---------------------------------------------
 	//pande render and add click event handler
 	var txt="";
-	var thePanel=config.panels[panel];
+	var thePanel=config.panels[panel_id];
 	for(i=0;i<thePanel.columns.length;i++){
 		var aColumn=thePanel.columns[i];
 		txt+="<div class=nav__ID>";
@@ -106,6 +72,9 @@ function F__ID(){
 	})
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
+		_nav_name=_mobj.op.panel_name;
+		_set_nav_link();
+		_check_count_where=" where puid="+_mobj.op.record.UID;
 	});
 	//---------------------------------------------
 	var load_module=function(module_id){
@@ -126,13 +95,15 @@ function F__ID(){
 		var this_mobj  =_mobj.op.mobj;
 		var this_record=_mobj.op.record;
 		var op={
-			//-----------------
+			//------------------
 			sys:_sys,
 			mobj:this_mobj,
 			record:this_record,
-			//-----------------
+			//------------------
 			single_record:single_record,
-			panel:panel,
+			panel_id:_mobj.op.panel_id,
+			panel_name:_mobj.op.panel_name,
+			child:'1',
 		}
 		var slot=$vm.root_layout_content_slot;
 		if(single_record=='1') slot=undefined;
