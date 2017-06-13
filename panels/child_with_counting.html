@@ -75,6 +75,12 @@ function F__ID(){
 		_nav_name=_mobj.op.panel_name;
 		_set_nav_link();
 		_check_count_where=" where puid="+_mobj.op.record.UID;
+		//remove counting
+		$('.nav__ID li').each(function(){
+			var txt=$(this).attr('data-li_text');
+            txt=$('<div/>').html(txt).text();
+            $(this).html(txt)
+	    })
 	});
 	//---------------------------------------------
 	var load_module=function(module_id){

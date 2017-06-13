@@ -30,6 +30,7 @@ function F__ID(){
 				var aSection=aColumn.sections[j];
 				for(k=0;k<aSection.tasks.length;k++){
 					var aTask=aSection.tasks[k];
+					aTask.section_name=aSection.name;
 					var m_id=aTask.module_id;
 					var new_m_id='M_'+UID+'_'+P+'_'+m_id;
 					aTask.module_id=new_m_id;
