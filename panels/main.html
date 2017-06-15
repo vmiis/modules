@@ -73,7 +73,7 @@ function F__ID(){
 		txt+="</div>";
 	}
 	$('#panel__ID').html(txt);
-	$('#panel__ID li').on('click',function(){
+	$('#panel__ID li').on('click',function(event){
 		event.stopPropagation();
         if( $(this).hasClass( 'not_allowed__ID' )===true){
               alert("No permission!");
