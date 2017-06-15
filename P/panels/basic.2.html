@@ -1,0 +1,155 @@
+<div>
+	<div id=toolbar__ID>
+		<a id=back__ID>Back</a><span class=tab__ID></span><span id=nav_link__ID></span>
+	</div>
+	<div id=panel__ID style='clear:left;'>
+	</div>
+</div>
+<script>
+//---------------------------------------------
+function F__ID(){
+	//---------------------------------------------
+	VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.js
+	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+	//---------------------------------------------
+	$('#panel__ID').on('dblclick',function(){
+		var txt=JSON.stringify(json,null,4);
+		txt=$('<div/>').html(txt).text();
+		var txt2=JSON.stringify($vm.module_list,null,4);
+		txt2=$('<div/>').html(txt2).text();
+		//txt=txt.replace(/\n/g,'<br>').replace(/ /g,'&nbsp;');
+		var url='__LIB__/vmiis/Common-Code/code_viewer/code.html'
+		var param={
+			name:"code_viewer",
+			pid:$vm.id(url+"--------"),
+			slot:$vm.root_layout_content_slot,
+			url:$vm.url(url),
+			op:{name:'json',code:txt+txt2}
+		}
+		$vm.load_module(param);
+	})
+	//---------------------------------------------
+	var json=JSON.parse(_mobj.op.json);
+	var panel=_mobj.op.panel;
+	var sys={UID:_mobj.op.record.UID,json:json}
+	//---------------------------------------------
+	$('#D__ID').on('load',function(){
+		var UID=_mobj.op.record.UID;
+		_nav_name=json[panel].name;//_mobj.op.panel.name;
+		_set_nav_link();
+		for(var P in json){
+			if(json[P].columns!=undefined){
+				for(i=0;i<json[P].columns.length;i++){
+					var url=json[P].url;
+					var p_id='P_'+UID+'_'+P;
+					$vm.module_list[p_id]={url:url};
+					for(j=0;j<json[P].columns[i].sections.length;j++){
+						for(k=0;k<json[P].columns[i].sections[j].tasks.length;k++){
+							var m_id=json[P].columns[i].sections[j].tasks[k].module_id;
+							var new_m_id='M_'+UID+'_'+P+'_'+m_id;
+							json[P].columns[i].sections[j].tasks[k].module_id=new_m_id;
+							$vm.module_list[new_m_id]=json[P].columns[i].sections[j].tasks[k];
+							//json[P].columns[i].sections[j].tasks[k].record={}
+							/*
+							if(json[P].columns[i].sections[j].tasks[k].module_ids!=undefined){
+								for(var M in json[P].columns[i].sections[j].tasks[k].module_ids){
+									var m_id=json[P].columns[i].sections[j].tasks[k].module_ids[M];
+									m_id='M_'+UID+'_'+P+'_'+m_id;
+									json[P].columns[i].sections[j].tasks[k].module_ids[M]=m_id;
+								}
+							}
+							*/
+							if(json.module_ids!=undefined){
+								for(var a in json.module_ids){
+									if(json.module_ids[a]==m_id) json.module_ids[a]=new_m_id;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		//if($vm.AJSON==undefined) $vm.AJSON={}
+		//$vm.AJSON['A'+UID]=json;
+		var txt="";
+		for(i=0;i<json[panel].columns.length;i++){
+			txt+="<div class=nav__ID>";
+			for(j=0;j<json[panel].columns[i].sections.length;j++){
+				var header=json[panel].columns[i].sections[j].name;
+				txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
+				for(k=0;k<json[panel].columns[i].sections[j].tasks.length;k++){
+					var task=json[panel].columns[i].sections[j].tasks[k].name;
+					var m_id=json[panel].columns[i].sections[j].tasks[k].module_id;
+					txt+="<li data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
+				}
+				txt+="</ul>";
+			}
+			txt+="</div>";
+		}
+		$('#panel__ID').html(txt);
+		$('#panel__ID li').on('click',function(){
+			var mid=$(this).attr('data-mid');
+			load_module(mid)
+		});
+	});
+	//---------------------------------------------
+	var load_module=function(module_id){
+		var url=$vm.module_list[module_id].url;
+		var single_record=$vm.module_list[module_id].single_record;
+		var trust=0;
+		for(var i=0;i<$vm.trust_path.length;i++){
+			var len=$vm.trust_path[i].length;
+			if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
+				trust=1;
+			}
+		}
+		if(trust==0){
+			alert("The url ("+url+") is not trusted.")
+			return;
+		}
+		//transfer parent module and record, because this is a panel module
+		var this_mobj  =_mobj.op.mobj;
+		var this_record=_mobj.op.record;
+		var op={
+			sys:sys,
+			mobj:this_mobj,
+			record:this_record,
+			single_record:single_record,
+			panel:_mobj.op.panel,
+		}
+		var slot=$vm.root_layout_content_slot;
+		if(single_record=='1') slot=undefined;
+		$vm.load_module_by_name(module_id,slot,op)
+	};
+	//---------------------------------------------
+}
+</script>
+<style>
+    VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.css
+    #D__ID{
+        background: url("__LIB__/vmiis/common-code/image/texture.png");
+    }
+    .nav__ID span{
+		margin-top: 10px;
+        color:#005500;
+    }
+    .nav__ID li{
+        padding-top:1px;
+        padding-bottom:1px;
+    }
+    .nh__ID{
+        color:#999!Important;
+        font-size:8pt;
+        font-weight: normal!Important;
+        margin:0!Important;
+    }
+    @media screen and (max-width:900px){
+        #D__ID{
+            font-size:16pt;
+        }
+		.nav__ID li{
+	        padding-top:3px;
+	        padding-bottom:3px;
+	    }
+    }
+</style>
