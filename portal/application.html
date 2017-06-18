@@ -22,8 +22,6 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
 	var fields="Name,Category,Subcategory,_gridHidden|Config_URL";
- //	fields+=",_gridHidden|Module/Query category|MQ_category,_gridHidden|Module/Query subcategory|MQ_subcategory";
- //fields+=",_gridHidden|Config|Input"; ///*_gridHidden|Panel_URL,*/
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -68,7 +66,7 @@ function F__ID(){
 				var nm=$('<div/>').html(records[I][field]).text();
 	            td.html("  <u style='cursor:pointer;'>"+nm+"</u>");
 	            td.find('u').on('click',function(){
-					var module="M_"+records[I].UID+"_main_panel";
+					var module="M_"+records[I].UID+"_panel";
 					if($vm.module_list[module]==undefined){
 						var url=records[I].Config_URL+"?_v="+$vm.version;
 						if(records[I].Config_URL.indexOf('?')!=-1){
@@ -87,27 +85,47 @@ function F__ID(){
 					            alert("Error in config file\n"+e);
 					            return;
 					        }
-							var panel_url=config.panels.main_panel.url;
-							var panel_name=config.panels.main_panel.name;
-							//---------------------------
-							//if($vm.module_list[module]==undefined){
+							//-----------------------------------------------
+							if(config.url!=undefined){
+								//---------------------------
+								$vm.module_list[module]={
+									url:config.url,
+									var:{},
+								}
+								//---------------------------
+								$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
+									name:records[I].Name,
+									mobj:$vm.vm['__ID'],
+									record:records[I],
+									sys:{
+										config:config,
+										UID:records[I].UID,
+									}
+								})
+							}
+							//-----------------------------------------------
+							else if(config.panels!=undefined){
+								var panel_url=config.panels.main_panel.url;
+								var panel_name=config.panels.main_panel.name;
+								//---------------------------
 								$vm.module_list[module]={
 									url:panel_url,
 									var:{},
 								}
-							//}
-							//---------------------------
-							$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
-								name:records[I].Name,
-								mobj:$vm.vm['__ID'],
-								record:records[I],
-								panel:'main_panel',
-								panel_name:panel_name,
-								sys:{
-									config:config,
-									UID:records[I].UID,
-								}
-							})
+								//---------------------------
+								$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
+									name:records[I].Name,
+									mobj:$vm.vm['__ID'],
+									record:records[I],
+									panel:'main_panel',
+									panel_name:panel_name,
+									sys:{
+										config:config,
+										UID:records[I].UID,
+									}
+								})
+							}
+							//-----------------------------------------------
 						},'text').fail(function() {
 						    alert( "The file '"+records[I].Config_URL+"' doesn't exist!" );
 						});
@@ -157,8 +175,6 @@ function F__ID(){
 	//---------------------------------------------------------------
 	_data_process_after_render=function(){
 		if(_res.pms=='1000' || $vm.user=='guest'){
-//			$('#grid__ID th:nth-child(2)').hide()
-//			$('#grid__ID td:nth-child(2)').hide()
 			$('#grid__ID th:nth-child(4)').hide()
 			$('#grid__ID td:nth-child(4)').hide()
 			$('#grid__ID th:nth-child(5)').hide()
