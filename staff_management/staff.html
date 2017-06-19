@@ -28,7 +28,7 @@
         $('#D__ID').on('load',function(){ _set_req(); _request_data(); })
         //-------------------------------------
 		//var ids=$vm.AJSON['A'+_mobj.op.sys.UID].module_ids;
-		var ids=_mobj.op.sys.config.module_ids;
+		var ids=_sys.config.module_ids;
 		var department_tid=$vm.module_list[ids.department].table_id;
 		//-------------------------------------
 		$('#department__ID').autocomplete({
@@ -50,6 +50,57 @@
                     if(records[I].UID==null || records[I].UID==undefined) return;
                     td.html("<u style='cursor:pointer;'>More...</u>");
                     td.find('u').on('click',function(){
+						var module="M_"+_sys.UID+"_staff_child_panel";
+						if($vm.module_list[module]==undefined){
+							var url=_sys.config.parameters.child_configuration_url;//+"?_v="+$vm.version;
+							if(url.indexOf('?')==-1) url=url+"?_v="+$vm.version;
+							else url=url+"&_v="+$vm.version;
+							url=$vm.url(url);
+							console.log('LOAD CONFIG '+url.split('/').pop());
+							$.get(url,function(text){
+								var text=$('<div/>').html(text).text();
+								//---------------------------
+								var config;
+								try{
+									config=JSON.parse(text);
+								}
+								catch (e){
+						            alert("Error in config file\n"+e);
+						            return;
+						        }
+								//-----------------------------------------------
+								$vm.module_list[module]={
+									url:config.url,
+									var:{},
+								}
+								//---------------------------
+								$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
+									name:records[I].First_Name+' '+records[I].Last_Name,
+									mobj:$vm.vm['__ID'],
+									record:records[I],
+									sys:{
+										config:config,
+										UID:_sys.UID+"_staff",
+									}
+								})
+								//-----------------------------------------------
+							},'text').fail(function() {
+							    alert( "The file '"+_sys.config.parameters.child_configuration_url+"' doesn't exist!" );
+							});
+						}
+						else{
+							var id=$vm.module_list[module].id
+							$vm.show_module(id,$vm.root_layout_content_slot,{
+								name:records[I].First_Name+' '+records[I].Last_Name
+							});
+						}
+
+
+
+						/*
+
+
+						return;
 						var panel='child_panel';
 						var module="M_"+_sys.UID+"_"+panel;
 						if($vm.module_list[module]==undefined){
@@ -87,6 +138,7 @@
 							var id=$vm.module_list[module].id
 							$vm.show_module(id,$vm.root_layout_content_slot,op);
 						}
+						*/
                     })
                     break;
                 case 'Photo':

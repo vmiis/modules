@@ -13,16 +13,17 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.js
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
 	//---------------------------------------------
-	var module_list={};
+	var local_module_list={}; //used for ctrl doble click
 	//---------------------------------------------
-	var config=_sys.config;
-	config.module_ids={}
+	var config=_sys.config;  //configuration
+	config.module_ids={}	 //add mosule_ids to config
 	//---------------------------------------------
 	_nav_name=config.name;
 	_set_nav_link();
 	//---------------------------------------------
 	//add module to module list
-	var UID=_mobj.op.record.UID;
+	//var UID=_mobj.op.record.UID;
+	var UID=_sys.UID;
 	for(i=0;i<config.panel.columns.length;i++){
 		var aColumn=config.panel.columns[i];
 		for(j=0;j<aColumn.sections.length;j++){
@@ -33,8 +34,8 @@ function F__ID(){
 				var new_m_id='M'+UID+'_'+m_id;
 				aTask.module_id=new_m_id;
 				$vm.module_list[new_m_id]=aTask;
-				config.module_ids[m_id]=new_m_id;
-				module_list[m_id]=aTask;
+				config.module_ids[m_id]=new_m_id;	//link module_id to new unique module
+				local_module_list[new_m_id]=aTask;  //only for ctrl doble click
 			}
 		}
 	}
@@ -83,9 +84,9 @@ function F__ID(){
 				$(this).addClass('not_allowed__ID')
 				var m_id=$(this).attr('data-mid');
 				if(m_id!==undefined && $vm.module_list[m_id]!==undefined){
-					var pid=$vm.module_list[m_id].table_id;
-					if(pid!==undefined && pid!=='--------' && pid!==''){
-						set_li_permission($(this),pid);
+					var tid=$vm.module_list[m_id].table_id;
+					if(tid!==undefined && tid!=='--------' && tid!==''){
+						set_li_permission($(this),tid);
 					}
 					else $(this).removeClass('not_allowed__ID');
 				}
@@ -95,40 +96,13 @@ function F__ID(){
 	})
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
+		if(_mobj.op.name!=undefined){
+			_nav_name=_mobj.op.name;
+			_set_nav_link();
+		}
 	});
 	//---------------------------------------------
 	var load_module=function(module_id){
-		var url=module_list[module_id].url;
-		//var single_record=$vm.module_list[module_id].single_record;
-		var trust=0;
-		for(var i=0;i<$vm.trust_path.length;i++){
-			var len=$vm.trust_path[i].length;
-			if(url.indexOf($vm.trust_path[i])!==-1 && url.substring(0,len)==$vm.trust_path[i]){
-				trust=1;
-			}
-		}
-		if(trust==0){
-			alert("The url ("+url+") is not trusted.")
-			return;
-		}
-		//transfer parent module and record, because this is a panel module
-		var this_mobj  =_mobj.op.mobj;
-		var this_record=_mobj.op.record;
-		var op={
-			//-----------------
-			sys:_sys,
-			mobj:this_mobj,
-			record:this_record,
-			module:module_list[module_id],
-			//-----------------
-			//single_record:single_record,
-		}
-		var slot=$vm.root_layout_content_slot;
-		if(single_record=='1') slot=undefined;
-		$vm.load_module_by_name(module_id,slot,op)
-	};
-	//---------------------------------------------
-	var aload_module=function(module_id){
 		var url=$vm.module_list[module_id].url;
 		var single_record=$vm.module_list[module_id].single_record;
 		var trust=0;
@@ -158,6 +132,25 @@ function F__ID(){
 		$vm.load_module_by_name(module_id,slot,op)
 	};
 	//---------------------------------------------
+	$('#toolbar__ID').on('dblclick',function(event){
+	    if(event.ctrlKey){
+	        event.stopPropagation();
+			var txt1=JSON.stringify(config.module_ids,null,4);
+			txt1=$('<div/>').html(txt1).text();
+			var txt2=JSON.stringify(local_module_list,null,4);
+			txt2=$('<div/>').html(txt2).text();
+			var url='__LIB__/vmiis/Common-Code/code_viewer/code.html'
+			var param={
+				name:"code_viewer",
+				pid:$vm.id(url+"--------"),
+				slot:$vm.root_layout_content_slot,
+				url:$vm.url(url),
+				op:{name:'Module List',code:"Module ID List:\r\n"+txt1+"\r\nModule List:\r\n"+txt2}
+			}
+			$vm.load_module(param);
+	    }
+	})
+	//-------------------------------------------------
 }
 </script>
 <style>

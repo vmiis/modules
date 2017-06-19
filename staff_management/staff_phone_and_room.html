@@ -19,13 +19,11 @@
         //-------------------------------------
         VmInclude:__BASE__/vmiis/Common-Code/frame/records_with_paging.js
         VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
-        var _op,_module=$vm.module_list[$vm.vm['__ID'].name];
         //-------------------------------------
         _fields="First_Name,Last_Name,Department,Position,Location,Email,Phone";
         _fields+=",Submit Date|DateTime,Submitted by|Author,Hidden|File,Hidden|Size,Hidden|lastModified";
         //-------------------------------------
-		//var ids=$vm.AJSON['A'+_mobj.op.sys.UID].module_ids;
-		var ids=_mobj.op.sys.config.module_ids;
+		var ids=_sys.config.module_ids;
 		var department_tid=$vm.module_list[ids.department].table_id;
 		//-------------------------------------
         $('#department__ID').autocomplete({
