@@ -1,6 +1,5 @@
 //-------------------------------------
-//var ids=$vm.AJSON['A'+_mobj.op.sys.UID].module_ids;
-var ids=_mobj.op.sys.config.module_ids;
+var ids=_sys.config.module_ids;
 var staff_tid=$vm.module_list[ids.staff].table_id;
 //-------------------------------------
 var _default_cell_render=function(records,I,field,td,set_value,source){
@@ -24,7 +23,7 @@ var _default_cell_render=function(records,I,field,td,set_value,source){
 }
 //-------------------------------------
 _set_req=function(){
-	if(_mobj.op.child=='1'){
+	if(_module.child=='1'){
 		var where=" where S2='"+_mobj.op.record.Login_Name+"'";
 		var sql="with tb as (select Information,ID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1]"+where+" )";
 	    sql+="select Information,ID,UID,PUID,DateTime,Author,RowNum from tb where RowNum between @I6 and @I7";
@@ -40,7 +39,7 @@ _set_req=function(){
 }
 //-------------------------------------
 _set_req_export=function(){
-	if(_mobj.op.child=='1'){
+	if(_module.child=='1'){
 		var where=" where S2='"+_mobj.op.record.Login_Name+"'";
 		var sql="with tb as (select Information,ID,UID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"]"+where+")";
 	    sql+="select Information,ID,UID,DateTime,Author,RowNum from tb";
@@ -58,7 +57,7 @@ _set_req_export=function(){
 }
 //-------------------------------------
 _data_process_after_render=function(){
-	if(_mobj.op.child=='1' && _mobj.op.single_record=='1'){
+	if(_module.child=='1' && _module.single_record=='1'){
 		if(_records.length==0){
 			$('#new__ID').triggerHandler('click');
 		}
@@ -74,7 +73,7 @@ _data_process_after_render=function(){
 }
 //-------------------------------------
 _new_pre_data_process=function(){
-	if(_mobj.op.child=='1'){
+	if(_module.child=='1'){
 		var record=_mobj.op.record;
 		var staff=record.First_Name+' '+record.Last_Name
 		_records[0].Staff=staff;
@@ -82,7 +81,7 @@ _new_pre_data_process=function(){
 }
 //-------------------------------------
 _before_submit=function(record,dbv){
-	if(_mobj.op.child=='1'){
+	if(_module.child=='1'){
 		var p_record=_mobj.op.record;
 		var staff=p_record.First_Name+' '+p_record.Last_Name
 		record.Staff=staff;

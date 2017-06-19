@@ -28,14 +28,14 @@ function F__ID(){
 		var aColumn=config.panel.columns[i];
 		for(j=0;j<aColumn.sections.length;j++){
 			var aSection=aColumn.sections[j];
-			for(k=0;k<aSection.tasks.length;k++){
-				var aTask=aSection.tasks[k];
-				var m_id=aTask.module_id;
+			for(k=0;k<aSection.modules.length;k++){
+				var aModule=aSection.modules[k];
+				var m_id=aModule.module_id;
 				var new_m_id='M'+UID+'_'+m_id;
-				aTask.module_id=new_m_id;
-				$vm.module_list[new_m_id]=aTask;
+				aModule.module_id=new_m_id;
+				$vm.module_list[new_m_id]=aModule;
 				config.module_ids[m_id]=new_m_id;	//link module_id to new unique module
-				local_module_list[new_m_id]=aTask;  //only for ctrl doble click
+				local_module_list[new_m_id]=aModule;  //only for ctrl doble click
 			}
 		}
 	}
@@ -49,14 +49,14 @@ function F__ID(){
 			var aSection=aColumn.sections[j];
 			var header=aSection.name;
 			txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
-			for(k=0;k<aSection.tasks.length;k++){
-				var aTask=aSection.tasks[k];
-				var task=aTask.name;
-				if(task!=undefined){
-					var m_id=aTask.module_id;
+			for(k=0;k<aSection.modules.length;k++){
+				var aModule=aSection.modules[k];
+				var name=aModule.name;
+				if(name!=undefined){
+					var m_id=aModule.module_id;
 					var data_counting=" data-counting=1 ";
-					if(aTask.counting!='1') data_counting="";
-					txt+="<li "+data_counting+"data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
+					if(aModule.counting!='1') data_counting="";
+					txt+="<li "+data_counting+"data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(name).text()+"</li>";
 				}
 			}
 			txt+="</ul>";
@@ -123,9 +123,9 @@ function F__ID(){
 			//-----------------
 			sys:_sys,
 			mobj:this_mobj,
+			module:$vm.module_list[module_id],
 			record:this_record,
 			//-----------------
-			single_record:single_record,
 		}
 		var slot=$vm.root_layout_content_slot;
 		if(single_record=='1') slot=undefined;

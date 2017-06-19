@@ -60,19 +60,10 @@
 							$.get(url,function(text){
 								var text=$('<div/>').html(text).text();
 								//---------------------------
-								var config;
-								try{
-									config=JSON.parse(text);
-								}
-								catch (e){
-						            alert("Error in config file\n"+e);
-						            return;
-						        }
+								try{ var config=JSON.parse(text);}
+								catch (e){ alert("Error in config file\n"+e); return;}
 								//-----------------------------------------------
-								$vm.module_list[module]={
-									url:config.url,
-									var:{},
-								}
+								$vm.module_list[module]={url:config.url,var:{}}
 								//---------------------------
 								$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
 									name:records[I].First_Name+' '+records[I].Last_Name,
@@ -80,7 +71,7 @@
 									record:records[I],
 									sys:{
 										config:config,
-										UID:_sys.UID+"_staff",
+										UID:_sys.UID+"_staff_child",
 									}
 								})
 								//-----------------------------------------------
@@ -91,7 +82,8 @@
 						else{
 							var id=$vm.module_list[module].id
 							$vm.show_module(id,$vm.root_layout_content_slot,{
-								name:records[I].First_Name+' '+records[I].Last_Name
+								name:records[I].First_Name+' '+records[I].Last_Name,
+								record:records[I],
 							});
 						}
 
@@ -166,7 +158,7 @@
         };
         //-------------------------------------
 		_set_req=function(){
-			if(_mobj.op.child=='1'){
+			if(_module.child=='1'){
 				if(_mobj.op.readonly=='1') $('#save__ID').hide();
 				var where="S2='"+_mobj.op.record.Login_Name+"'";
 	            var sql="select ID,Information,DateTime,Author from [TABLE-"+_db_pid+"] where "+where;
@@ -182,7 +174,7 @@
 		}
 		//-------------------------------------
 		_data_process_after_render=function(){
-			if(_mobj.op.child=='1'){
+			if(_module.child=='1'){
 				if(_records.length==0){
 					$('#new__ID').triggerHandler('click');
 				}
