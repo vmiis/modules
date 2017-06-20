@@ -1,0 +1,98 @@
+<section>
+    <div id=toolbar__ID>
+          <a id=back__ID>Back</a> <a id=new__ID>New</a> <a id=save__ID>Save</a>
+          <span class=tab__ID></span>
+          Year: <select id=yy__ID type=text />
+          <a id=query__ID>Query</a> <a id=export__ID>Export</a>
+          <span id=elapsed__ID style='float:right'></span>
+    </div>
+	<div id=table__ID>
+        <table id=grid__ID></table>
+    </div>
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/grid/grid.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        //year dropdown
+        var $List1=$('#yy__ID');
+        var y=new Date().getFullYear();
+        for(var i=0;i<10;i++){
+            $List1.append(  $('<option></option>').val(y-i).html(y-i)  );
+        }
+        $List1.val(y);
+        //-------------------------------------
+		_fields="Date,Sleep_Lab,Patient_Name,Study_Type,Project,Fee,Staff,Start_Time,Duration,Staff_Lab,SN";
+		//$('#D__ID').on('load',function(){  _set_req(); _request_data();  })
+		//---------------------------------------------
+        _set_req=function(){
+			var sql="\
+				with tb as( \
+		    		 select	 ID, Project=@('Project'),Study_Type=@('Study_Type'), Year=DATEPART(yy,DT1),\
+		    		 MM=DATEPART(mm,DT1) from [TABLE-400448] \
+		    		 where DATEPART(yy,DT1)=@I1 and DT1<GetDate() \
+		    		 and  DatePart(yy,DT1)=@I1 and  dbo.F(Information,'Cancelled')<>'on' \
+		    		 and  dbo.F(Information,'Arrival_Status')<>'Did Not Arrive'\
+				)\
+			    ,tb1 as (select Project,Study_Type\
+					,Jan=case when MM=1 then 1 else 0 end\
+					,Feb=case when MM=2 then 1 else 0 end\
+					,Mar=case when MM=3 then 1 else 0 end\
+					,Apr=case when MM=4 then 1 else 0 end\
+					,May=case when MM=5 then 1 else 0 end\
+					,Jun=case when MM=6 then 1 else 0 end\
+					,Jul=case when MM=7 then 1 else 0 end\
+					,Aug=case when MM=8 then 1 else 0 end\
+					,Sep=case when MM=9 then 1 else 0 end\
+					,Oct=case when MM=10 then 1 else 0 end\
+					,Nov=case when MM=11 then 1 else 0 end\
+					,Dec=case when MM=12 then 1 else 0 end\
+					,Total=1\
+				   	from tb \
+				)\
+				select Project,Study_Type,Jan=Sum(Jan),Feb=Sum(Feb),Mar=Sum(Mar),Apr=Sum(Apr),May=Sum(May),Jun=Sum(Jun)\
+				,Jul=Sum(Jul),Aug=Sum(Aug),Sep=Sum(Sep),Oct=Sum(Oct),Nov=Sum(Nov),Dec=Sum(Dec)\
+				,Total=Sum(Total) from tb1 group by Project,Study_Type\
+				union\
+				select Project='ZZZ',Study_Type='',Jan=Sum(Jan),Feb=Sum(Feb),Mar=Sum(Mar),Apr=Sum(Apr),May=Sum(May),Jun=Sum(Jun)\
+				,Jul=Sum(Jul),Aug=Sum(Aug),Sep=Sum(Sep),Oct=Sum(Oct),Nov=Sum(Nov),Dec=Sum(Dec)\
+				,Total=Sum(Total) from tb1\
+				 order by Project,Study_Type\
+		    ";
+            var y=$('#yy__ID').val();
+            _req={cmd:'query_records',sql:sql,i1:y}
+        }
+        //-------------------------------------
+		_set_req_export=function(){
+			var sql="select a=1,b=2";
+			_req={cmd:'query_records',sql:sql}
+		}
+		//-------------------------------------
+		_data_process=function(){
+			_fields="";
+			var all_headers=[];
+			for(var i=0;i<_res.records.length;i++){
+				var record=_res.records[i];
+				for (var key in record) {
+					if (record.hasOwnProperty(key)) {
+						if($.inArray(key, all_headers)==-1){
+							all_headers.push(key);
+							if(_fields!="") _fields+=",";
+							_fields+=key;
+						}
+					}
+				}
+			}
+			var i=_res.records.length;
+			_res.records[i-1].Project="Total";
+		}
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid.css
+	#grid__ID tr:nth-last-child(2) td:not(:first-child) {border-bottom: 2px solid black!Important;}
+	#grid__ID tr:last-child td{ font-weight: bold!Important;;background-color: #f8f8f8}
+	#grid__ID td:last-child{ font-weight: bold!Important;background-color: #f8f8f8}
+</style>

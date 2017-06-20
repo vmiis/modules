@@ -25,10 +25,10 @@ function F__ID(){
 		var aColumn=config.panel.columns[i];
 		for(j=0;j<aColumn.sections.length;j++){
 			var aSection=aColumn.sections[j];
-			for(k=0;k<aSection.tasks.length;k++){
-				var aTask=aSection.tasks[k];
-				var m_id=aTask.module_id;
-				$vm.module_list[m_id]=aTask;
+			for(k=0;k<aSection.modules.length;k++){
+				var aModule=aSection.modules[k];
+				var m_id=aModule.module_id;
+				$vm.module_list[m_id]=aModule;
 			}
 		}
 	}
@@ -42,14 +42,15 @@ function F__ID(){
 			var aSection=aColumn.sections[j];
 			var header=aSection.name;
 			txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
-			for(k=0;k<aSection.tasks.length;k++){
-				var aTask=aSection.tasks[k];
-				var task=aTask.name;
-				if(task!=undefined){
-					var m_id=aTask.module_id;
+			for(k=0;k<aSection.modules.length;k++){
+				var aModule=aSection.modules[k];
+				aModule.var=_sys.config.var;
+				var name=aModule.name;
+				if(name!=undefined){
+					var m_id=aModule.module_id;
 					var data_counting=" data-counting=1 ";
-					if(aTask.counting!='1') data_counting="";
-					txt+="<li "+data_counting+"data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(task).text()+"</li>";
+					if(aModule.counting!='1') data_counting="";
+					txt+="<li "+data_counting+"data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(name).text()+"</li>";
 				}
 			}
 			txt+="</ul>";

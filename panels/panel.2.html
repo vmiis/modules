@@ -18,6 +18,7 @@ function F__ID(){
 	var config=_sys.config;  //configuration
 	config.module_ids={}	 //add mosule_ids to config
 	//---------------------------------------------
+	if(config.no_counting=='1') $('#counting__ID').hide();
 	_nav_name=config.name;
 	_set_nav_link();
 	//---------------------------------------------
