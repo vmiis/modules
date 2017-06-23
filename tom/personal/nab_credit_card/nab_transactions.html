@@ -1,0 +1,70 @@
+<section>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        _fields="_Form,Date,Transaction_details,Type,C/D|C_D,Amount,Notes";
+        _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
+        //-------------------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/grid/grid.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
+        //-------------------------------------
+        _columns_process=function(columns){
+            columns[0]={data:'Date',width:120,type: 'date',format: 'DD/MM/YYYY',correctFormat:true};
+            columns[2]={data:'Type',type:'dropdown',trimDropdown:false,source:[
+            ]};
+            columns[3]={data:'C_D',type:'dropdown',trimDropdown:false,source:[
+                "Credit","Debit","Refund"
+            ]};
+            columns[4]={data:'Amount',type: 'numeric',format: '$ 0,0.00[0000]'};
+            //-------------------------------------
+        }
+        //-------------------------------------
+        _cell_render=function(records,I,field,td,set_value,source){
+            switch(field){
+                case 'Date':
+                    VmInclude:__BASE__/vmiis/Common-Code/grid/field_date.js
+                    break;
+                case 'Type':
+                    records[I].vm_custom[field]=true;
+                    var html="<select style='border:0;'>"
+                    html+="<option>---</option>";
+                    html+="<option>Credit Interest</option>";
+                    html+="<option>Sophie</option>";
+                    html+="<option>Tom</option>";
+                    html+="<option>Transfer Debit</option>";
+                    html+="</select>"
+
+                    VmInclude:__BASE__/vmiis/Common-Code/grid/field_select.js
+                    break;
+                case 'C_D':
+                    records[I].vm_custom[field]=true;
+                    var html="<select style='border:0;'>"
+                    html+="<option>Credit</option>";
+                    html+="<option>Debit</option>";
+                    html+="</select>"
+
+                    VmInclude:__BASE__/vmiis/Common-Code/grid/field_select.js
+                    break;
+                case 'Amount':
+                    if(source=='grid') td.css('text-align','right');
+                    break;
+            }
+        }
+        //-------------------------------------
+        _before_submit=function(record,dbv){
+            dbv.DT1=record.Date;
+            dbv.S1=record.Type;
+            dbv.S2=record.C_D;
+            dbv.V1='0'; if(record.Amount!=='') dbv.V1=record.Amount;
+            return true;
+        };
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/grid/grid.css
+</style>

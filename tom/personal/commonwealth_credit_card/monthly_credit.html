@@ -1,0 +1,51 @@
+<section>
+    <div id=toolbar__ID>
+        <a id=back__ID>Back</a>
+        <select id=YY__ID type=select></select>
+        <a id=query__ID >Query</a>
+        <a id=export__ID >Export</a>
+    	<a id=pv__ID >Print Version</a>
+    	<span class=tab__ID></span>Monthly Credit
+        <span id=elapsed__ID style='float:right'></span>
+    </div>
+    VmInclude:__BASE__/vmiis/Common-Code/frame/excel_container.html
+</section>
+<script>
+    function F__ID(){
+        //------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/frame/excel_v2.js
+        //------------------------
+        _fields="Month,Amount";
+        //-------------------------------------
+        //number dropdown
+        var $List=$('#YY__ID');
+        var y=new Date().getFullYear();
+        for(var i=0;i<7;i++){
+        	$List.append(  $('<option></option>').val(y-i).html(y-i)  );
+    	}
+    	$List.val(y);
+        $List.on('change',function(){  _set_req(); _request_data(); });
+    	//---------------------------------------------
+        $('#D__ID').on('load',function(){  _set_req(); _request_data();   })
+        //-------------------------------------
+        _set_req=_set_req_export=function(){
+            var sql="\
+                with tb as (select mm=DatePart(mm,DT1),Month=DateName(mm,DT1),Amount=V1 from [TABLE-20007307] where DatePart(yy,DT1)=@I1 and S2='Credit') \
+                select mm,Month,Amount=Sum(Amount) from tb group by mm,Month order by mm\
+            ";
+            _req={cmd:'query_records',sql:sql,i1:$('#YY__ID').val()}
+        }
+        //-------------------------------------
+        _columns_process=function(columns){
+            columns[1]={data:'Amount',type: 'numeric',format: '$ 0,0.00[0000]'};
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/toolbar/toolbar_for_excel.css
+    #D__ID{
+        font-size:14px;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+</style>
