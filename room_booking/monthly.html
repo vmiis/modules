@@ -9,17 +9,9 @@ function F__ID(){
 	VmInclude:__BASE__/vmiis/Common-Code/calendar/month_v2.js
 	VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
 	//--------------------------------------------------------
-	var _mobj=$vm.vm['__ID'];
-	var _sys='';
-	if(_mobj.op!=undefined && _mobj.op.sys!=undefined){
-		_sys=_mobj.op.sys;
-	}
-	_mlist=$vm.module_list;
-	//--------------------------------------------------------
-	var ids=_sys.config.module_ids;
-	var daily=ids.daily;
-	var booking_record_module=ids.booking_record;
-	var booking_record_tid	 =_mlist[ids.booking_record].table_id;
+	var daily_module=_ids.daily;
+	var booking_record_module=_ids.booking_record;
+	var booking_record_tid	 =_mlist[_ids.booking_record].table_id;
 	//-------------------------------------
 	_on_day_click_fun=function(date){
 		var this_mobj  =_mobj.op.mobj;
@@ -33,7 +25,7 @@ function F__ID(){
 			day:date,
 			//------------------
 		}
-		$vm.load_module_by_name(daily,$vm.root_layout_content_slot,op)
+		$vm.load_module_by_name(daily_module,$vm.root_layout_content_slot,op)
 	}
 	//--------------------------------------------------------
 	_request_and_render=function(){
@@ -81,7 +73,7 @@ function F__ID(){
 	}
 	//--------------------------------------------------------
 	$('#D__ID').on('load',_request_and_render);
-	$('#D__ID').on('back',_request_and_render);
+	$('#D__ID').on('refresh_back',_request_and_render);
 	//--------------------------------------------------------
 }
 </script>

@@ -8,17 +8,9 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/toolbar/day_v2.js
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
 	//--------------------------------------------------------
-	var _mobj=$vm.vm['__ID'];
-	var _sys='';
-	if(_mobj.op!=undefined && _mobj.op.sys!=undefined){
-		_sys=_mobj.op.sys;
-	}
-	_mlist=$vm.module_list;
-	//--------------------------------------------------------
-	var ids=_sys.config.module_ids;
-	var booking_record_module=ids.booking_record;
-	var booking_record_tid	=_mlist[ids.booking_record].table_id;
-	var car_tid	 			=_mlist[ids.car].table_id;
+	var booking_record_module=_ids.booking_record;
+	var booking_record_tid	=_mlist[_ids.booking_record].table_id;
+	var car_tid	 			=_mlist[_ids.car].table_id;
 	//--------------------------------------------------------
 	_request_and_render=function(){
 	    layout_render();

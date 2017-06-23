@@ -9,31 +9,24 @@ function F__ID(){
     VmInclude:__LIB__/vmiis/Common-Code/calendar/month_v2.js
     VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
     //--------------------------------------------------------
-	var _mobj=$vm.vm['__ID'];
-	var _sys='';
-	if(_mobj.op!=undefined && _mobj.op.sys!=undefined){
-		_sys=_mobj.op.sys;
-	}
-	_mlist=$vm.module_list;
-	//--------------------------------------------------------
-	var ids=_sys.config.module_ids;
-	var daily=ids.daily;
-	var booking_record_module=ids.booking_record;
-	var booking_record_tid	 =_mlist[ids.booking_record].table_id;
+	var daily_module=_ids.daily;
+	var booking_record_module=_ids.booking_record;
+	var booking_record_tid	 =_mlist[_ids.booking_record].table_id;
 	//-------------------------------------
     _on_day_click_fun=function(date){
 		var this_mobj  =_mobj.op.mobj;
 		var this_record=_mobj.op.record;
 		var op={
-			//------------------
+			//-----------------
 			sys:_sys,
 			mobj:this_mobj,
+			module:$vm.module_list[daily_module],
 			record:this_record,
-			//------------------
+			//-----------------
 			day:date,
 			//------------------
 		}
-		$vm.load_module_by_name(daily,$vm.root_layout_content_slot,op)
+		$vm.load_module_by_name(daily_module,$vm.root_layout_content_slot,op)
     }
     //--------------------------------------------------------
     _request_and_render=function(){
