@@ -1,12 +1,17 @@
 //-------------------------------------
+var _ids=_config.module_ids;
+var sql_participant=_config.parameters.sql_participant;
+var participant_tid	=$vm.module_list[_ids.participant].table_id;
+var notes_tid		=$vm.module_list[_ids.task_notes].table_id;
+var visit_task=_module.section_name+" - "+_module.name;
+/*
 var config=_mobj.op.sys.config;
 var panel=_mobj.op.panel;
-var participant_tid	=$vm.module_list[config.module_ids.participant].table_id;
-var notes_tid		=$vm.module_list[config.module_ids.task_notes].table_id;
 var site_filter_tid	='';
-var sql_participant=config.parameters.sql_participant;
-var this_module=$vm.vm['__ID'].name;
-var visit_task=$vm.module_list[this_module].visit_task;
+//var sql_participant=_config.parameters.sql_participant;
+//var this_module=$vm.vm['__ID'].name;
+//var visit_task=$vm.module_list[this_module].visit_task;
+*/
 //-------------------------------------
 _record_type="s2";
 var _task_fields='';
@@ -14,6 +19,10 @@ var _task_fields='';
 var site_sql_where='';
 var site_array=[];
 var site_filter_and_request=function(){
+	if(site_filter_tid==''){
+		alert('No site filter table id');
+		return;
+	}
     var sql="select List=@('Site_List') from [TABLE-"+site_filter_pid+"] where S2=@S1";
     var req_data={cmd:'query_records',sql:sql,s1:$vm.user};
     $VmAPI.request({data:req_data,callback:function(res){
@@ -40,7 +49,7 @@ var site_filter_and_request=function(){
 var _default_cell_render=function(records,I,field,td,set_value,source){
     switch(field){
 		case 'Participant':
-			if(_mobj.op.is_child_panel==undefined){
+			if(_module.child==undefined){
 				var sql="with tb as (select name="+sql_participant+",value2=UID,value3=S1 from [TABLE-"+participant_tid+"])";
 				sql+=" select top 10 name,value=name,value2,value3 from tb where Name like '%'+@S1+'%' ";
 				VmInclude:__LIB__/vmiis/Common-Code/grid/field_auto.js
@@ -64,15 +73,17 @@ var _default_cell_render=function(records,I,field,td,set_value,source){
             var value=records[I][field];  if(value==="") value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             td.html("<u style='cursor:pointer;color:"+color+"'>"+value+"</u>");
             td.find('u').on('click',function(){
-				var op={
-					sys:_mobj.op.sys,
+				var input={
+					//----------------
+					sys:_sys,
 					mobj:_mobj,
 					record:records[I],
+					//----------------
 					visit_task:visit_task,
 					participant_tid:participant_tid,
 					task:"1"
 				}
-				$vm.load_module_by_name(config.module_ids.task_notes, $vm.root_layout_content_slot, op)
+				$vm.load_module_by_name(_ids.task_notes, $vm.root_layout_content_slot,input)
             });
             break;
     }
@@ -84,7 +95,7 @@ _set_req=function(){
         return;
     }
 	var parent_where="";
-	if(_mobj.op.child=='1'){
+	if(_module.child=='1'){
 		var participant_record=_mobj.op.record;
 		parent_where=" where uid="+participant_record.UID;
 		site_sql_where='';
@@ -132,7 +143,7 @@ var _set_status_and_participant=function(record,dbv){    //set status color, PUI
 };
 //-------------------------------------
 _data_process_after_render=function(){
-	if(_mobj.op.child=='1' && _mobj.op.single_record=='1' ){
+	if(_module.child=='1' && _module.single_record=='1' ){
 		if(_records.length==0){
 			$('#new__ID').triggerHandler('click');
 		}
@@ -148,10 +159,10 @@ _data_process_after_render=function(){
 }
 //-------------------------------------
 _new_pre_data_process=function(){
-	if(_mobj.op.child=='1'){
+	if(_module.child=='1'){
 		var participant_record=_mobj.op.record;
 		_records[0].Participant_uid=participant_record.UID;
-	    _records[0].Participant    =_mobj.op.panel_name;
+	    _records[0].Participant    =participant_record.Study_ID;
 	}
 }
 //-------------------------------------

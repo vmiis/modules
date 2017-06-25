@@ -1,0 +1,128 @@
+VmInclude:__BASE__/vmiis/common-code/toolbar/back.html
+<section>
+    <div id=qe_ID style='padding:50px'>
+        <ui id=items__ID>
+        </ui>
+    </div>
+</section>
+<script>
+    function F__ID(){
+        //---------------------------------
+        VmInclude:__BASE__/vmiis/common-code/toolbar/back.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+		var _mlist=$vm.module_list;
+		var _mobj=$vm.vm['__ID'];
+		var _sys=_mobj.op.sys;
+		var _module=$vm.module_list[_mobj.name];
+		var _ids=_sys.config.module_ids;
+		//-----------------------------------------------
+		//var participant='';
+		//-----------------------------------------------
+        $('#D__ID').on('load',function(){
+            //if($vm.server=='production' && $vm.online_questionnaire!=1){
+            //    alert('You are not a participant. You can continue to enter data for testing purpose and the data you enterd shoud be deleted after you finish the testing');
+            //}
+			/*
+			var sql_participant=_sys.config.parameters.sql_participant)
+			var participant_tid=_mlist[_ids['participant']].table_id;
+			var sql="select participant="+sql_participant+" from [TABLE-"+participant_tid+"] where UID="+_mobj.op.participant_uid;
+			$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+				if(res.records.length==1){
+					participant=res.records[0].participant;
+				}
+				else{
+					alert('Error');
+				}
+			}});
+			*/
+			get_data();
+        })
+        //-------------------------------------
+        $('#D__ID').on('refresh_back',function(){ get_data(); })
+        //---------------------------------
+        var status=[]
+        //---------------------------------
+        var get_data=function(){
+            //----------------------------------
+            //input
+            var participant=_mobj.op.participant;
+            var participant_uid=_mobj.op.participant_uid;
+            var task_list=_mobj.op.task_list;
+            //----------------------------------
+            //display participant
+            $('#info__ID').text(_mobj.op.participant);
+            //----------------------------------
+            //setup tasl LI list and sql for checking Completed task
+            var pids=task_list.split(',');
+            var txt="";
+            //----------------------------------
+            for(var i=0;i<pids.length;i++){
+                var pid=pids[i];
+                if(status[pid.toString()]==undefined){
+                    status[pid.toString()]={rid:0}
+                }
+                for(module in $vm.module_list){
+                    var aModule=$vm.module_list[module];
+                    if(aModule.table_id!==undefined){
+                        var module_pid=aModule.table_id;
+                        if(pid==module_pid && aModule.name!=undefined){
+                            txt+="<li id="+pid+" data-form_name="+module+">"+aModule.name+"</li>";
+                        }
+                    }
+                }
+            }
+            $('#items__ID').html(txt);
+            //----------------------------------
+            $('#items__ID li').each(function(){
+                var $li=$(this);
+                var li_pid=$li.attr('id');
+                if(status[li_pid].rid==0){
+                    var req={cmd:'query_records_s2',db_pid:li_pid,fields:'ID'};
+                    jQuery.ajaxSetup({async:false});
+                    $VmAPI.request({data:req,callback:function(res){
+                        if(res.records.length==0){
+                        }
+                        else{
+                            status[li_pid].rid=1;
+                        }
+                    }})
+                    jQuery.ajaxSetup({async:true});
+                }
+                if(status[li_pid].rid==0){
+                    var txt=$li.html();
+                    var li_form_name=$li.attr('data-form_name');
+                    $li.html("<u style='cursor:pointer' data-form_name="+li_form_name+">"+txt+"</u>");
+                    $li.find('u').on('click',function(){
+                        var module_name=$(this).attr('data-form_name');
+                        var module_id=$vm.get_module_id({name:module_name});
+                        $('#new'+module_id).triggerHandler('click');
+                        $('#D'+module_id).triggerHandler('load_form_module',[{participant:participant,participant_uid:participant_uid,task_name:txt}]);
+                    });
+					var this_mobj  =_mobj.op.mobj;
+					var this_record=_mobj.op.record;
+					var op={
+						//-----------------
+						sys:_sys,
+						mobj:this_mobj,
+						record:this_record,
+						//-----------------
+					}
+                    $vm.load_module_by_name(li_form_name,undefined,op);
+                    return false; // break out the loop
+                }
+            })
+            //----------------------------------
+        }
+    }
+</script>
+<style>
+    #D__ID,#pvdiv__ID{
+      font-size:10pt;
+      font-family: Verdana,Helvetica,Arial,sans-serif;
+      background: url("__BASE__/vmiis/SaaS/images/fresh_snow.png");
+    }
+    #D__ID{
+      /*background-color:#fff;*/
+    }
+</style>
