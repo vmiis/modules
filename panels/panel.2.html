@@ -62,24 +62,26 @@ function F__ID(){
 	var txt="";
 	for(i=0;i<config.panel.columns.length;i++){
 		var aColumn=config.panel.columns[i];
-		txt+="<div class=nav__ID>";
-		for(j=0;j<aColumn.sections.length;j++){
-			var aSection=aColumn.sections[j];
-			var header=aSection.name;
-			txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
-			for(k=0;k<aSection.modules.length;k++){
-				var aModule=aSection.modules[k];
-				var name=aModule.name;
-				if(name!=undefined){
-					var m_id=aModule.module_id;
-					var data_counting=" data-counting=1 ";
-					if(aModule.counting!='1') data_counting="";
-					txt+="<li "+data_counting+"data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(name).text()+"</li>";
+		if(aColumn.hidden!='1'){
+			txt+="<div class=nav__ID>";
+			for(j=0;j<aColumn.sections.length;j++){
+				var aSection=aColumn.sections[j];
+				var header=aSection.name;
+				txt+="<span>"+$('<div/>').html(header).text()+"</span><ul>";
+				for(k=0;k<aSection.modules.length;k++){
+					var aModule=aSection.modules[k];
+					var name=aModule.name;
+					if(name!=undefined){
+						var m_id=aModule.module_id;
+						var data_counting=" data-counting=1 ";
+						if(aModule.counting!='1') data_counting="";
+						txt+="<li "+data_counting+"data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(name).text()+"</li>";
+					}
 				}
+				txt+="</ul>";
 			}
-			txt+="</ul>";
+			txt+="</div>";
 		}
-		txt+="</div>";
 	}
 	$('#panel__ID').html(txt);
 	$('#panel__ID li').on('click',function(event){

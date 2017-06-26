@@ -105,32 +105,9 @@
 					td.html("<u style='cursor:pointer'>Quest</u>");
 					td.find('u').on('click',function(){
 						var p="?username="+records[I].S2+"&password="+records[I].S3;
-						var q_url="https://vmiis.github.io/online-questionnaires/index.html"+p;
+						var q_url="https://vmiis.github.io/online-questionnaire/index.html"+p;
 						q_url=$vm.url(q_url)
 						 window.open(q_url);
-						/*
-                        var sql="select List=@('List') from [TABLE-"+login_setup_tid+"] where PUID="+_records[I].UID;
-                        $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                            if(res.records.length==1){
-								var op={
-									//------------------------
-									mobj:_mobj,
-									record:records[I],
-									sys:_sys,
-									//------------------------
-									participant_uid:records[I].UID,
-									participant:records[I].Study_ID,
-									participant_username:records[I].UID+"-"+login_setup_tid,
-									task_list:res.records[0].List,
-									//------------------------
-								}
-								$vm.load_module_by_name(_ids['questionnaire'],$vm.root_layout_content_slot,op)
-                            }
-                            else{
-                                alert('No setup');
-                            }
-                        }});
-						*/
 					})
 					break;
                 case '_Login_ID':
@@ -144,7 +121,6 @@
             }
         }
         //-------------------------------------
-		//var login_setup_tid='20009728'; //temp
         _set_req=function(){
             var sql="with tb as (select Information,ID,PID,UID,PUID,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] )";
             sql+=",tb2 as (select PUID,S2,S3 from [TABLE-"+login_setup_tid+"] )";
@@ -153,83 +129,6 @@
             _req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
         }
         //-------------------------------------
-		/*
-		var child_panel="M"+_mobj.op.record.UID+"_child_data_entry";
-		if($vm.module_list[child_panel]==undefined){
-			$vm.module_list[child_panel]=_module.var.child_panel;
-		}
-		//--------------------------------------------------------
-		var participant_login_setup="M"+_mobj.op.record.UID+"_participant_login_setup";
-		if($vm.module_list[participant_login_setup]==undefined){
-			$vm.module_list[participant_login_setup]=_module.var.participant_login_setup;
-		}
-		//--------------------------------------------------------
-		*/
-		/*
-		records[I].vm_custom[field]=true;
-		if(_records[I].UID===undefined) return;
-		td.html("<u style='cursor:pointer'>Quest</u>");
-		td.find('u').on('click',function(){
-			var sql="select List=@('List') from [TABLE-"+_module.var.login_setup_tid+"] where PUID="+_records[I].UID;
-			$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-				if(res.records.length==1){
-					$vm.load_module_by_name(_module.var.data_entry_by_participant,$vm.root_layout_content_slot,{
-						participant_uid:_records[I].UID,
-						participant:records[I].Participant,
-						participant_username:_records[I].UID+"-"+_module.var.login_setup_tid,
-						task_list:res.records[0].List,
-					});
-				}
-				else{
-					alert('No setup');
-				}
-			}});
-		});
-		break;
-		*/
-		/*
-		var module="M_"+_sys.UID+"_questionnaire_panel";
-		if($vm.module_list[module]==undefined){
-			var url=_config.parameters.questionnaire_configuration_url;
-			if(url.indexOf('?')==-1) url=url+"?_v="+$vm.version;
-			else url=url+"&_v="+$vm.version;
-			url=$vm.url(url);
-			console.log('LOAD CONFIG '+url.split('/').pop());
-			$.get(url,function(text){
-				var text=$('<div/>').html(text).text();
-				//---------------------------
-				try{ var config=JSON.parse(text);}
-				catch (e){ alert("Error in config file\n"+e); return;}
-				//-----------------------------------------------
-				$vm.module_list[module]={url:config.url,var:{}}
-				//---------------------------
-				$vm.load_module_by_name(module,$vm.root_layout_content_slot,{
-					//------------------------
-					mobj:_mobj,
-					record:records[I],
-					sys:_sys,
-					//------------------------
-					participant_uid:records[I].UID,
-					participant:records[I].Study_ID,
-					participant_username:records[I].UID+"-"+login_setup_tid,
-					task_list:res.records[0].List,
-					//------------------------
-				})
-				//-----------------------------------------------
-			},'text').fail(function() {
-				alert( "The file '"+_config.parameters.questionnaire_configuration_url+"' doesn't exist!" );
-			});
-		}
-		else{
-			var id=$vm.module_list[module].id
-			$vm.show_module(id,$vm.root_layout_content_slot,{
-				record:records[I],
-				child:"1",
-				name:records[I].Study_ID,
-				check_count_where:" where PUID="+records[I].UID,
-			});
-		}
-		*/
     }
 </script>
 <style>

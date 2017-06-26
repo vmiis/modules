@@ -17,25 +17,7 @@ VmInclude:__BASE__/vmiis/common-code/toolbar/back.html
 		var _module=$vm.module_list[_mobj.name];
 		var _ids=_sys.config.module_ids;
 		//-----------------------------------------------
-		//var participant='';
-		//-----------------------------------------------
         $('#D__ID').on('load',function(){
-            //if($vm.server=='production' && $vm.online_questionnaire!=1){
-            //    alert('You are not a participant. You can continue to enter data for testing purpose and the data you enterd shoud be deleted after you finish the testing');
-            //}
-			/*
-			var sql_participant=_sys.config.parameters.sql_participant)
-			var participant_tid=_mlist[_ids['participant']].table_id;
-			var sql="select participant="+sql_participant+" from [TABLE-"+participant_tid+"] where UID="+_mobj.op.participant_uid;
-			$VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-				if(res.records.length==1){
-					participant=res.records[0].participant;
-				}
-				else{
-					alert('Error');
-				}
-			}});
-			*/
 			get_data();
         })
         //-------------------------------------
@@ -97,7 +79,7 @@ VmInclude:__BASE__/vmiis/common-code/toolbar/back.html
                         var module_name=$(this).attr('data-form_name');
                         var module_id=$vm.get_module_id({name:module_name});
                         $('#new'+module_id).triggerHandler('click');
-                        $('#D'+module_id).triggerHandler('load_form_module',[{participant:participant,participant_uid:participant_uid,task_name:txt}]);
+                        $('#D'+module_id).triggerHandler('load_quest_form_module',[{participant:participant,participant_uid:participant_uid,task_name:txt}]);
                     });
 					var this_mobj  =_mobj.op.mobj;
 					var this_record=_mobj.op.record;
