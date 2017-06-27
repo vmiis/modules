@@ -35,7 +35,7 @@
                     td.find('u').on('click',function(){
 						var module="M_"+_sys.UID+"_participant_child_panel";
 						if($vm.module_list[module]==undefined){
-							var url=_config.parameters.child_configuration_url;
+							var url=$vm.url(_config.parameters.child_configuration_url);
 							if(url.indexOf('?')==-1) url=url+"?_v="+$vm.version;
 							else url=url+"&_v="+$vm.version;
 							url=$vm.url(url);
@@ -63,7 +63,7 @@
 								})
 								//-----------------------------------------------
 							},'text').fail(function() {
-							    alert( "The file '"+_config.parameters.child_configuration_url+"' doesn't exist!" );
+							    alert( "The file '"+url+"' doesn't exist!" );
 							});
 						}
 						else{
