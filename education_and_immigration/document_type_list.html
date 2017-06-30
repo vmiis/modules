@@ -1,0 +1,27 @@
+<section>
+	VmInclude:__LIB__/vmiis/Common-Code/grid/grid.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__LIB__/vmiis/Common-Code/grid/grid.js
+        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        _fields="_Form,Document Type|Document_Type";
+        _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
+        //-------------------------------------
+        $("#title__ID").text('Document Type List');
+        //-------------------------------------
+        $('#D__ID').on('load',function(){ _set_req(); _request_data();} )
+        $('#D__ID').on('back',function(){ _set_req(); _request_data();} )
+        //-------------------------------------
+        _before_submit=function(record,dbv){
+            if(record.Document_Type!=='') dbv.S1=record.Document_Type;
+            return true;
+        };
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+</style>

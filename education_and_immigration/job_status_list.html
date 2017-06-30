@@ -1,0 +1,39 @@
+<section>
+	VmInclude:__LIB__/vmiis/Common-Code/grid/grid.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__LIB__/vmiis/Common-Code/grid/grid.js
+        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        _fields="_Form,Job Status|Job_status,Colour";
+        _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
+        //-------------------------------------
+        $("#title__ID").text('Job Status List');
+        //-------------------------------------
+        $('#D__ID').on('load',function(){ _set_req(); _request_data();} )
+        $('#D__ID').on('back',function(){ _set_req(); _request_data();} )
+        //-------------------------------------
+        _cell_render=function(records,I,field,td,set_value,source){
+            switch(field){
+                case 'Colour':
+                    VmInclude:__LIB__/vmiis/Common-Code/grid/field_color.js
+                    break;
+            }
+        }
+        //-------------------------------------
+        _before_submit=function(record,dbv){
+            if(record.Job_status!=='') dbv.S1=record.Job_status;
+            if(record.Colour!=='') dbv.S3=record.Colour;
+            return true;
+        };
+        //-------------------------------------
+        _new_pre_data_process=function(){
+        };
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+</style>
