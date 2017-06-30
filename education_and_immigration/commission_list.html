@@ -1,11 +1,11 @@
 <section>
-	VmInclude:__LIB__/vmiis/Common-Code/grid/grid.html
+	VmInclude:__PARTS__/grid/grid.html
 </section>
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__LIB__/vmiis/Common-Code/grid/grid.js
-        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+        VmInclude:__PARTS__/grid/grid.js
+        VmInclude:__PARTS__/style/ease-in-out.js
         //-------------------------------------
         _fields="_Form,Institute,Commission Rate %|Commission_Rate,Contract From|Contract_From,Contract Unitl|Contract_Until,Bonus,Contact_Staff,Office_Phone,Mobile,Email,Note";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
@@ -19,7 +19,7 @@
             switch(field){
                 case 'Contract_From':
                 case 'Contract_Until':
-                    VmInclude:__LIB__/vmiis/Common-Code/grid/field_date.js
+                    VmInclude:__PARTS__/grid/field_date.js
                     break;
             }
         }
@@ -33,5 +33,5 @@
     }
 </script>
 <style>
-    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+    VmInclude:__PARTS__/grid/grid.css
 </style>

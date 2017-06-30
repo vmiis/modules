@@ -1,11 +1,11 @@
 <section>
-	VmInclude:__LIB__/vmiis/Common-Code/grid/grid.html
+	VmInclude:__PARTS__/grid/grid.html
 </section>
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__LIB__/vmiis/Common-Code/grid/grid.js
-        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+        VmInclude:__PARTS__/grid/grid.js
+        VmInclude:__PARTS__/style/ease-in-out.js
         //-------------------------------------
         _fields="_Form,Job Status|Job_status,Colour";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
@@ -18,7 +18,7 @@
         _cell_render=function(records,I,field,td,set_value,source){
             switch(field){
                 case 'Colour':
-                    VmInclude:__LIB__/vmiis/Common-Code/grid/field_color.js
+                    VmInclude:__PARTS__/grid/field_color.js
                     break;
             }
         }
@@ -35,5 +35,5 @@
     }
 </script>
 <style>
-    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+    VmInclude:__PARTS__/grid/grid.css
 </style>

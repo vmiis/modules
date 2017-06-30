@@ -1,11 +1,11 @@
 <section>
-	  VmInclude:__LIB__/vmiis/Common-Code/grid/grid.html
+	  VmInclude:__PARTS__/grid/grid.html
 </section>
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__LIB__/vmiis/Common-Code/grid/grid.js
-        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+        VmInclude:__PARTS__/grid/grid.js
+        VmInclude:__PARTS__/style/ease-in-out.js
         //-------------------------------------
         _fields="_Form,_Hidden|job_type_uid,Job Type|job_type,Task|Task,Allocated Hours|Hours,Allocated Minutes|Minutes,Accounting";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
@@ -36,7 +36,7 @@
             switch(field){
                 case 'Accounting':
                     td.html('<input type=checkbox />');
-                    VmInclude:__LIB__/vmiis/Common-Code/grid/field_checkbox.js
+                    VmInclude:__PARTS__/grid/field_checkbox.js
                     break;
                 case 'job_type':
                     records[I].vm_readonly[field]=true;
@@ -61,5 +61,5 @@
     }
 </script>
 <style>
-    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+    VmInclude:__PARTS__/grid/grid.css
 </style>

@@ -1,5 +1,5 @@
 <section>
-      VmInclude:__LIB__/vmiis/Common-Code/grid/grid.html
+      VmInclude:__PARTS__/grid/grid.html
 </section>
 <script>
     function F__ID(){
@@ -7,8 +7,8 @@
         _fields="_Form,_Date_Entry,Applicant ID|UID,Applicant Name|Applicant,Alias,Place_of_birth,Country,State,City,Area,Marriage Status,Date of Marriage/De facto|Date_of_Marriage,Email,Contact phone Number in your home country,Contact phone Number in Australia,Residential Address in your home country (including Postcode)|Residential_Address_home_country,Residential Address in Australia (including Postcode)|Residential_Address_Australia";
         _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
-        VmInclude:__LIB__/vmiis/Common-Code/grid/grid.js
-        VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+        VmInclude:__PARTS__/grid/grid.js
+        VmInclude:__PARTS__/style/ease-in-out.js
         //-------------------------------------
         $("#title__ID").text('Applicant');
         $('#D__ID').on('load',function(){  _set_req(); _request_data();  })
@@ -20,7 +20,7 @@
                     td.html(records[I].UID);
                     break;
                 case 'Date_of_Marriage':
-                    VmInclude:__LIB__/vmiis/Common-Code/grid/field_dob.js
+                    VmInclude:__PARTS__/grid/field_dob.js
                     break;
                 case '_Date_Entry':
                     records[I].vm_custom[field]=true;
@@ -91,5 +91,5 @@
     }
 </script>
 <style>
-    VmInclude:__LIB__/vmiis/Common-Code/grid/grid.css
+    VmInclude:__PARTS__/grid/grid.css
 </style>
