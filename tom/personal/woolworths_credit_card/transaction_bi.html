@@ -84,7 +84,16 @@ function F__ID(){
                 var updated_date=Modified; if(updated_date=='') updated_date=DateTime;
 
                 var tr=$('#grid__ID tr').eq(m)
-                tr.find('td').eq(2).text(Num)
+                //tr.find('td').eq(2).text(Num)
+				if(Num!=0){
+                    tr.find('td').eq(2).html("<u style='cursor:pointer'>"+Num+"</u>");
+                    tr.find('td').eq(2).find('u').data('rid',res.records[i].ID);
+                    tr.find('td').eq(2).find('u').on('click',function(){
+                        var rid=$(this).data('rid');
+                    	$vm.load_module_by_name(ids.bi_processing_details,$vm.root_layout_content_slot,{rid:rid});
+                    })
+                }
+                else tr.find('td').eq(2).text(Num)
                 tr.find('td').eq(3).text(updated_date)
                 tr.find('td').eq(4).text(modified_by)
             }
