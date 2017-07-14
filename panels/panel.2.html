@@ -10,8 +10,8 @@
 //---------------------------------------------
 function F__ID(){
 	//---------------------------------------------
-	VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.js
-	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out.js
+	VmInclude:__PARTS__/navigation/navigation.js
+	VmInclude:__PARTS__/style/ease-in-out.js
 	//---------------------------------------------
 	var local_module_list={}; //used for ctrl doble click
 	//---------------------------------------------
@@ -167,7 +167,7 @@ function F__ID(){
 			txt1=$('<div/>').html(txt1).text();
 			var txt2=JSON.stringify(local_module_list,null,4);
 			txt2=$('<div/>').html(txt2).text();
-			var url='__LIB__/vmiis/Common-Code/code_viewer/code.html'
+			var url='__PARTS__/code_viewer/code.html'
 			var param={
 				name:"code_viewer",
 				pid:$vm.id(url+"--------"),
@@ -184,7 +184,7 @@ function F__ID(){
 <style>
     VmInclude:__LIB__/vmiis/Common-Code/navigation/navigation.css
     #D__ID{
-        background: url("__LIB__/vmiis/common-code/image/texture.png");
+        background: url("__PARTS__/image/texture.png");
     }
     .nav__ID span{
 		margin-top: 10px;
