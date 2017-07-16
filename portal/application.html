@@ -69,6 +69,11 @@ function F__ID(){
 					var module="M_"+records[I].UID+"_panel";
 					if($vm.module_list[module]==undefined){
 						var url=records[I].Config_URL+"?_v="+$vm.version;
+						var module_path='';
+						if(url.indexOf('module-path=')!=-1){
+							module_path=url.split('module-path=').pop().split('&')[0];
+							module_path=module_path.split('?')[0];
+						}
 						if(records[I].Config_URL.indexOf('?')!=-1){
 							url=records[I].Config_URL+"&_v="+$vm.version;
 						}
@@ -100,7 +105,8 @@ function F__ID(){
 									sys:{
 										config:config,
 										UID:records[I].UID,
-									}
+									},
+									module_path:module_path,
 								})
 							}
 							//-----------------------------------------------

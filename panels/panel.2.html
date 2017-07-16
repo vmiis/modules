@@ -26,9 +26,15 @@ function F__ID(){
 	//var UID=_mobj.op.record.UID;
 	var UID=_sys.UID;
 	//---------------------------------------------
+	$vm.module_hosting_path=$vm.hosting_path;
+	if(_mobj.op.module_path!=undefined) $vm.module_hosting_path=_mobj.op.module_path;
+	//---------------------------------------------
 	if(config.modules!=undefined){
 		for(i=0;i<config.modules.length;i++){
 			var aModule=config.modules[i];
+			if(aModule.url!=undefined && aModule.url[0]=='/'){
+				aModule.url=$vm.module_hosting_path+aModule.url;
+			}
 			var m_id=aModule.module_id;
 			var new_m_id='M'+UID+'_'+m_id;
 			aModule.module_id=new_m_id;
@@ -44,6 +50,9 @@ function F__ID(){
 			var aSection=aColumn.sections[j];
 			for(k=0;k<aSection.modules.length;k++){
 				var aModule=aSection.modules[k];
+				if(aModule.url!=undefined && aModule.url[0]=='/'){
+					aModule.url=$vm.module_hosting_path+aModule.url;
+				}
 				aModule.section_name=aSection.name; //add section name to module
 				var m_id=aModule.module_id;
 				var new_m_id='M'+UID+'_'+m_id;
@@ -126,7 +135,10 @@ function F__ID(){
 	//---------------------------------------------
 	var load_module=function(module_id){
 		var url=$vm.module_list[module_id].url;
-		if(url[0]=='/') url=$vm.hosting_path+url;
+		if(url[0]=='/'){
+			if($vm.module_hosting_path!=undefined) url=$vm.module_hosting_path+url;
+			//url=$vm.hosting_path+url;
+		}
 		var single_record=$vm.module_list[module_id].single_record;
 		var trust=0;
 		if(url.indexOf('http://127.0.0.1')!=-1 || url.indexOf('http://localhost')!=-1){
