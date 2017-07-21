@@ -21,7 +21,7 @@ function F__ID(){
 	VmInclude:__LIB__/vmiis/Common-Code/grid/grid2.js
 	VmInclude:__LIB__/vmiis/Common-Code/style/ease-in-out_2.js
 	//-------------------------------------
-	var fields="Name,Category,Subcategory,_gridHidden|Config_URL";
+	var fields="Name,Category,Subcategory,_gridHidden|Config_URL,_gridHidden|Module_hosting_path";
 	_fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
 	//-------------------------------------
 	$('#category__ID').autocomplete({
@@ -69,16 +69,19 @@ function F__ID(){
 					var module="M_"+records[I].UID+"_panel";
 					if($vm.module_list[module]==undefined){
 						var url=records[I].Config_URL+"?_v="+$vm.version;
-						var module_path='';
+						var module_path=records[I].Module_hosting_path;
+						if(module_path==undefined || module_path==undefined==null) module_path='';
+						/*
 						if(url.indexOf('module-path=')!=-1){
 							module_path=url.split('module-path=').pop().split('&')[0];
 							module_path=module_path.split('?')[0];
 						}
+						*/
 						if(records[I].Config_URL.indexOf('?')!=-1){
 							url=records[I].Config_URL+"&_v="+$vm.version;
 						}
 						url=$vm.url(url);
-						console.log('LOAD CONFIG '+url.split('/').pop());
+						console.log('loading '+url);
 						$.get(url,function(text){
 							var text=$('<div/>').html(text).text();
 							//---------------------------
