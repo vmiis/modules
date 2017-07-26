@@ -82,8 +82,9 @@ function F__ID(){
 					var name=aModule.name;
 					if(name!=undefined){
 						var m_id=aModule.module_id;
-						var data_counting=" data-counting=1 ";
-						if(aModule.counting!='1') data_counting="";
+						var data_counting="";
+						if(aModule.counting=='1') data_counting=" data-counting=1 ";
+						if(aModule.counting=='2') data_counting=" data-counting=2 ";
 						txt+="<li "+data_counting+"data-mid="+$('<div/>').html(m_id).text()+">"+$('<div/>').html(name).text()+"</li>";
 					}
 				}
