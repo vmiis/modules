@@ -2,4 +2,4 @@
 
 Shared modules used in business portal.
 
-![alt tag](https://cbs.wappsystem.com/dev/github/vmiis/SaaS/images/structure.png)
+![alt tag](https://vmiis.github.io/images/structure2.png)
