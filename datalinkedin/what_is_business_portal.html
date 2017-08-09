@@ -1,5 +1,5 @@
 <section>
-      VmInclude:__BASE__/vmiis/Common-Code/toolbar/back.html
+      VmInclude:__PARTS__/toolbar/back.html
       <div style='padding:30px;max-width:800px'>
           <span style='font-size:18px'><b>Web/Cloud based business portal and business intelligence solutions</b></span>
           <br><br>
@@ -23,11 +23,14 @@
           <br>
           <br>
           <ul>
-              <li>
-                  All data are stored in <a target=_blank href='http://aws.amazon.com/dynamodb/'>Amazon Cloud DynamoDB Database</a> (under data owner's account)
+			  <li>
+                  All web pages are open source code and hosted on GitHub
               </li>
               <li>
-                  All files are stored in <a target=_blank href='http://aws.amazon.com/s3/'>Amazon Cloud S3 Storage</a>  (under data owner's account)
+                  All data are stored in a database hosted on Amazon Cloud EC2 (shared or under data owner's account)
+              </li>
+              <li>
+                  All user files are stored in <a target=_blank href='http://aws.amazon.com/s3/'>Amazon Cloud S3 Storage</a>  (under data owner's account)
               </li>
           </ul>
           <br>
@@ -56,8 +59,8 @@
 </section>
 <script>
       function F__ID(){
-            VmInclude:__BASE__/vmiis/common-code/toolbar/back.js
-            VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+            VmInclude:__PARTS__/toolbar/back.js
+            VmInclude:__PARTS__/style/ease-in-out.js
       }
 </script>
 <style>
@@ -65,6 +68,6 @@
           background-color:#fff;
           font-size:9pt;
           font-family: Verdana,Helvetica,Arial,sans-serif;;
-          background: url("__BASE__/mastercontrols/Business-Portal/images/fresh_snow.png");
+		  background: url("__IMAGE__/texture.png");
       }
 </style>

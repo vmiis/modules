@@ -6,8 +6,6 @@
         <span style='color:#005500;font-weight:bold;font-size:12px;'>Summary</span><br>
         <div style='padding-left:20px;font-size:11px;color:#888;'>
         Business data sharing and collaboration between people (staff, clients, business partners, service providers, managers, board members...) are necessary for business success.
-        <br>With one login and permissions from business data owner everyone can involve business activities.
-        <br>Add what you need, remove what you don’t need. Every part can be customised.
         <br>I am happy to build business portal for you if you have some business data to manage and you can describe the way or the logic you manage the data.
         <br>I am also happy to help people to move business data in spreadsheets to cloud for data collaboration (such as data entry and data reporting).
         <br>I would like to build a system to link more and more business data together so as to make business operation, management and collaboration easier, faster and more efficient.
@@ -59,8 +57,8 @@
     //---------------------------------------------
     function F__ID(){
         //---------------------------------------------
-        VmInclude:__BASE__/vmiis/Common-Code/navigation/navigation.js
-        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out_2.js
+        VmInclude:__PARTS__/navigation/navigation.js
+        VmInclude:__PARTS__/style/ease-in-out_2.js
         //---------------------------------------------
         var main=function(){
             var L=$vm.module_list,
@@ -95,7 +93,7 @@
 		_special_click_process=function(li){
 			var data_name=$(li).attr('data-name');
 			if(data_name=='github'){
-				window.open('https://github.com/vmiis/business-portal-example');
+				window.open('https://github.com/vmiis');
 			}
 			else if(data_name=='source'){
 				window.open('https://github.com/vmiis/business-portal');
@@ -105,11 +103,11 @@
     }
 </script>
 <style>
-    VmInclude:__BASE__/vmiis/Common-Code/navigation/navigation.css
-    VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out_2.css
+    VmInclude:__PARTS__/navigation/navigation.css
+    VmInclude:__PARTS__/style/ease-in-out_2.css
     #D__ID{
         overflow: hidden;
-        background: url("__BASE__/vmiis/common-code/image/texture.png");
+        background: url("__PARTS__/image/texture.png");
     }
     .nav__ID span,.nav__ID u{
         color:#005500;
