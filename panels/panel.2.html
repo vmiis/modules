@@ -108,22 +108,20 @@ function F__ID(){
 	_set_li_text();
 	//---------------------------------------------
 	//set permission
-	$('#panel__ID li').each(function(){
-		if($vm.server=='production'){
-			$('.nav__ID li').each(function(index){
-				$(this).addClass('not_allowed__ID')
-				var m_id=$(this).attr('data-mid');
-				if(m_id!==undefined && $vm.module_list[m_id]!==undefined){
-					var tid=$vm.module_list[m_id].table_id;
-					if(tid!==undefined && tid!=='--------' && tid!==''){
-						set_li_permission($(this),tid);
-					}
-					else $(this).removeClass('not_allowed__ID');
+	if($vm.server=='production'){
+		$('.nav__ID li').each(function(index){
+			$(this).addClass('not_allowed__ID')
+			var m_id=$(this).attr('data-mid');
+			if(m_id!==undefined && $vm.module_list[m_id]!==undefined){
+				var tid=$vm.module_list[m_id].table_id;
+				if(tid!==undefined && tid!=='--------' && tid!==''){
+					set_li_permission($(this),tid);
 				}
 				else $(this).removeClass('not_allowed__ID');
-			});
-		}
-	})
+			}
+			else $(this).removeClass('not_allowed__ID');
+		});
+	}
 	//---------------------------------------------
 	$('#D__ID').on('load',function(){
 		if(_mobj.op.name!=undefined){
