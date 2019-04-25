@@ -1,0 +1,119 @@
+<div id=D__ID>
+    <div id=form_container__ID>
+        <div id=formio__ID></div>
+    </div>
+    <script>
+        function F__ID(){
+    		//-------------------------------------
+            VmInclude:__COMPONENT__/f/form.io.js
+            //-------------------------------------
+            var old_load=m.load;
+            m.load=function(){
+                old_load();
+                new_load();
+            }
+            //-------------------------------------
+            var new_load=function(){
+                var fio={
+                    "display": "form",
+                    "components": [
+                        {
+                            "label": "First name",
+                            "allowMultipleMasks": false,
+                            "showWordCount": false,
+                            "showCharCount": false,
+                            "tableView": true,
+                            "alwaysEnabled": false,
+                            "type": "textfield",
+                            "input": true,
+                            "key": "First_name",
+                            "defaultValue": "",
+                            "validate": {
+                                "customMessage": "",
+                                "json": ""
+                            },
+                            "conditional": {
+                                "show": "",
+                                "when": "",
+                                "json": ""
+                            },
+                            "inputFormat": "plain",
+                            "encrypted": false,
+                            "properties": {},
+                            "customConditional": "",
+                            "logic": [],
+                            "widget": {
+                                "type": ""
+                            },
+                            "reorder": false,
+                            "tags": []
+                        },
+                        {
+                            "label": "Last name",
+                            "allowMultipleMasks": false,
+                            "showWordCount": false,
+                            "showCharCount": false,
+                            "tableView": true,
+                            "alwaysEnabled": false,
+                            "type": "textfield",
+                            "input": true,
+                            "key": "Last_name",
+                            "defaultValue": "",
+                            "validate": {
+                                "customMessage": "",
+                                "json": ""
+                            },
+                            "conditional": {
+                                "show": "",
+                                "when": "",
+                                "json": ""
+                            },
+                            "inputFormat": "plain",
+                            "encrypted": false,
+                            "properties": {},
+                            "customConditional": "",
+                            "logic": [],
+                            "widget": {
+                                "type": ""
+                            },
+                            "reorder": false,
+                            "tags": []
+                        },
+                        {
+                            "type": "button",
+                            "label": "Submit",
+                            "key": "submit",
+                            "disableOnInvalid": true,
+                            "theme": "primary",
+                            "input": true,
+                            "tableView": true
+                        }
+                    ]
+                }
+                var data={}
+                if(m.input.record!=undefined){
+                    data=m.input.record.Data;
+                }
+                thisForm=Formio.createForm(document.getElementById('formio__ID'), fio).then(function(form) {
+                    form.submission = {
+                        data: data
+                    };
+                    form.on('submit', function(submission) {
+                        m.submit(submission.data);
+                    });                
+                })
+            }
+            //-------------------------------------
+        }
+    </script>
+    <style>
+        #form_container__ID{
+            background-color: #fff;
+            max-width:600px;
+            padding:10px;
+            margin-top:30px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
+</div>

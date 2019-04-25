@@ -1,0 +1,200 @@
+<div id=D__ID>
+    <div class='panel__ID' style='font-size:200%'>
+
+        <span id=total__ID style='font-size:14px' ></span><br>
+
+        <a href=?/A>A</a>
+        <a href=?/B>B</a>
+        <a href=?/C>C</a>
+        <a href=?/D>D</a>
+        <a href=?/E>E</a>
+        <a href=?/F>F</a>
+        <a href=?/H>H</a>
+        <a href=?/I>I</a>
+        <a href=?/L>L</a>
+        <a href=?/M>M</a>
+        <a href=?/N>N</a>
+        <a href=?/O>O</a>
+        <a href=?/P>P</a>
+        <a href=?/Q>Q</a>
+        <a href=?/R>R</a>
+        <a href=?/S>S</a>
+        <a href=?/T>T</a>
+        <a href=?/U>U</a>
+        <a href=?/V>V</a>
+        <a href=?/W>W</a>
+    </div>
+    <div class='panel__ID'>
+        Load module from the library
+        <form class="form-inline">
+            <input id=vm_system_search class=form-control style='width:390px' placeholder="module id">
+        </form>
+    </div>
+    <div class='panel__ID'>
+        Load module from a remote place. <br>Example: https://www.vmiis.com/modules/a/about-vmiis.html
+        <form class="form-inline">
+            <input id=module_url__ID class=form-control style='width:390px' placeholder="module url">
+            <button id=load__ID type=button class="btn btn-secondary" title='Load'>Load</button>
+        </form>
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            $vm.module_list["__MODULE__"].show=function(){
+                document.title="Panel | "+$vm.default_title;
+                $("meta[name='description']").attr("content","Control Panel");
+            }
+            //--------------------------------------------------------
+            var this_module=$vm.module_list[$vm.vm['__ID'].name];
+            //--------------------------------------------------------
+            $('.panel__ID a').on('click',function(e){
+                e.preventDefault();
+                var href=$(this).attr('href');
+                if(href!=undefined){
+                    href=href.replace('?\/','');
+                    href=href.replace(/\//g,'_');
+                    $vm.load_module("_panel",'',{folder:href});
+                }
+            })
+            //--------------------------------------------------------
+            $('#load__ID').on('click',function(){
+                if($vm.user_name!="guest"){
+                    alert("we strongly suggest that you log out before you test any third party modules for security reason");
+                    return;
+                }
+                var url=$('#module_url__ID').val();
+                if(url==""){
+                    alert("please type a valid url.");
+                    return;
+                }
+                $vm.module_list["__test__"]={url:url}
+                $vm.load_module("__test__",'',{})
+            })
+            //--------------------------------------------------------
+            var ready1=function(){
+                $('#total__ID').text(Object.keys($vm.module_list).length+" modules");
+
+
+                var website_item_list_for_search=[]
+                for(a in $vm.module_list){
+                    if(a[0]!='_' && a!='home'){
+                        var b=a.replace(/-/g,' ').replace(/_/g,' ');
+                        website_item_list_for_search.push({label:b.charAt(0).toUpperCase()+b.slice(1),value:a})
+                    }
+                }
+                $("#vm_system_search").autocomplete({
+                    minLength:0,
+                    source: function(request, response) {
+                        var results=$.ui.autocomplete.filter(website_item_list_for_search, request.term);
+                        response(results.slice(0, 10));
+                    },
+                    select: function(event,ui) {
+                        event.preventDefault();
+                        /*
+                        $('.navbar-collapse').collapse('hide');
+                        $("#vm_system_search").val('');
+                        $("#vm_system_search").blur();
+                        $('.ui-helper-hidden-accessible').html('');
+                        */
+                        $vm.load_module(ui.item.value,'',{});
+                    }
+                });
+                $("#vm_system_search").focus(function(){$("#vm_system_search").autocomplete("search","");});
+
+
+
+            }
+            //--------------------------------------------------------
+            var I=0; var loop_1=setInterval(function (){
+                if($vm['all_module']==1 && $vm['jquery-ui-min-js']!=undefined ){  clearInterval(loop_1); ready1(); }
+                I++; if(I>50){ clearInterval(loop_1); alert("all module error."); }
+            },100);
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        .panel__ID{
+            padding:30px 50px 10px 50px;
+            font-size:14px;
+            max-width:1600px;
+        }
+        .panel__ID a {
+            text-decoration: none;
+        }
+        .panel__ID li {
+            font-size: 100%;
+            color:#555;
+        }
+        .panel__ID a:link {
+            color:#555;
+        }
+        .panel__ID a:visited {
+            color:#555;
+        }
+        .panel__ID a:hover {
+            color:red;
+        }
+        .panel__ID a:active {
+            color:#555;
+        }
+        .hd__ID{
+            color:#138478;
+            font-size: 160%;
+            margin:3px 10px;
+        }
+        .panel__ID ul{
+            padding-left: 20px;
+            padding-bottom:20px;
+        }
+        .panel__ID li {
+            list-style-type: none;
+        }
+        .panel__ID i{
+            margin-right:12px;
+        }
+        .hr__ID{
+            height:1px;
+            margin: 3px 0 12px 0;
+            background-image: linear-gradient(to right, #f03314, #dcea46);
+        }
+        /*
+        .hr2__ID{
+            height:1px;
+            margin: 3px 0 12px 0;
+            background-image: unset;
+        }
+        */
+        .weather__ID label{
+            display:inline-block;
+            width:100px;
+        }
+        .dot__ID li{
+            margin-left:16px;
+            list-style-type: square;
+        }
+        .sm__ID{
+        }
+        @media screen and (max-width:768px){
+            .section_title__ID{
+                padding:10px 0 0 10px;
+            }
+            .panel__ID{
+                padding:0;
+            }
+            .row{
+                padding:0;
+                margin:0;
+            }
+            .col{
+                padding:3px;
+                margin:0;
+            }
+        }
+    </style>
+</div>

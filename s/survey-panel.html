@@ -1,0 +1,80 @@
+<div id=D__ID>
+	<div class='g_section_title'>
+		The following section demonstrates how to conduct a survey.
+		<div class=g_section_admin>
+			<u id=admin__ID style='cursor:pointer'>Admin of this section</u>
+			<br><u id=code__ID style='cursor:pointer'>Source code of this section</u>
+		</div>
+	</div>
+	<div id=container__ID>
+		<section id=form_container__ID>
+			<div id=header__ID>
+				Survey
+			</div>
+			<form id=F__ID>
+				<div class="container">
+					<div class="row row__ID">
+						<div class="col">
+							<span class=label__ID>What is your employment status?</span>
+							<div class="radio__ID">
+								<label class="form-check-label"><input type="radio" name="Employment_status" value="Employed full time"> Employed full time</label><br>
+								<label class="form-check-label"><input type="radio" name="Employment_status" value="Trade or Vocational degree"> Trade or Vocational degree</label><br>
+								<label class="form-check-label"><input type="radio" name="Employment_status" value="Not employed, but looking for work"> Not employed, but looking for work</label><br>
+							</div>
+						</div>
+					</div>
+					<div class="row row__ID">
+						<div class="col">
+							<span class=label__ID>What is the highest level of education you have completed?</span>
+							<div class="radio__ID">
+								<label class="form-check-label"><input type="radio" name="Highest_education" value="Some high school"> Some high school</label><br>
+								<label class="form-check-label"><input type="radio" name="Highest_education" value="High school graduate or equivalent"> High school graduate or equivalent</label><br>
+								<label class="form-check-label"><input type="radio" name="Highest_education" value="Trade or Vocational degree"> Trade or Vocational degree</label><br>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class=col>
+							<button id=submit__ID type="submit" class="btn btn-secondary">Submit</button>
+							<br><label id=after_submit_message__ID style='display:none;color:#000'>Thank you for taking the time to complete this survey.</label>
+						</div>
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+    VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(){
+    		//-------------------------------------
+            VmInclude:__COMPONENT__/f/form.01.js
+            //-------------------------------------
+            $('#admin__ID').on('click',function(){
+                $vm.load_module('survey-data','',{})
+            })
+            $('#code__ID').on('click',function(){
+                window.open($vm.module_list['__MODULE__'].url.replace('__HOST__/','https://github.com/vmiis/online-profile/blob/master/'));
+            })
+            //-------------------------------------
+			m.after_insert=function(){
+				$('#after_submit_message__ID').show();
+			}
+			//-------------------------------------
+    	}
+    </script>
+    <style>
+        #form_container__ID{
+            padding-top:30px;
+            max-width:700px;
+        }
+		VmInclude:__COMPONENT__/f/form.01.css
+        #F__ID{
+            margin-bottom:50px;
+        }
+        #container__ID{
+            border: 1px solid #888;
+            margin-bottom:30px;
+        }
+    </style>
+</div>

@@ -1,0 +1,176 @@
+<div id=D__ID>
+        <section id=form_container__ID>
+            <div id=header__ID>
+                PSG morning questionnaire
+            </div>
+            <form id=F__ID>
+                <div class='container'>
+                    <!-- participant part for all tsak forms -------------------->
+                    <div class='row row__ID' id=row_participant__ID>
+                        <div class='col-sm-12 col-lg-9 input__ID'>
+                            <span class='label__ID'>Participant</span><br>
+                            <input type='text' name='Participant' class='form-control' id='Participant__ID' data-id='Participant' required />
+                        </div>
+                        <div class='col-sm-12 col-lg-3 input__ID'>
+                            <span class='label__ID'>Participant ID</span><br>
+                            <input type='text' name='Participant_uid' class='form-control' readonly />
+                        </div>
+                        <hr style='border-top: 1px solid #888;width: 100%;margin:10px 0'>
+                    </div>
+                    <!---------------------------------------------------->
+    
+                    <!-- FORM INPUTS -->
+    
+                    <!-- Question and Answerset -->
+                    <div class='row row__ID'><div class='col'>
+                    <div class='row'>
+                        <div class='col'>
+                            <span class='survey-question required'>How long did it take you to fall asleep last night after the lights were turned off?</span>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-sm-2'>                            
+                            <input type='number' maxlength='5' min='0' max='480' class='form-control' name='PSGM_sol' required />
+                        </div>
+                        <div class='col-sm-10'>                            
+                            <label class='survey-label'>minutes</label>
+                        </div>
+                    </div>
+                    </div></div>
+     
+                    <!-- Question and Answerset -->
+                    <div class='row row__ID'><div class='col'>
+                    <div class='row'>
+                        <div class='col'>
+                            <span class='survey-question required'>How does this compare with the length of time it usually takes you to fall asleep?</span>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <input type='radio' name='PSGM_solCompare' id='PSGM_solCompare_1' value='1' required> <label class='survey-answer' for='PSGM_solCompare_1'>Much shorter</label><br />
+                            <input type='radio' name='PSGM_solCompare' id='PSGM_solCompare_2' value='2'> <label class='survey-answer' for='PSGM_solCompare_2'>Shorter</label><br />
+                            <input type='radio' name='PSGM_solCompare' id='PSGM_solCompare_3' value='3'> <label class='survey-answer' for='PSGM_solCompare_3'>Same as usual</label><br />
+                            <input type='radio' name='PSGM_solCompare' id='PSGM_solCompare_4' value='4'> <label class='survey-answer' for='PSGM_solCompare_4'>Longer</label><br />
+                            <input type='radio' name='PSGM_solCompare' id='PSGM_solCompare_5' value='5'> <label class='survey-answer' for='PSGM_solCompare_5'>Much longer</label>
+                        </div>
+                    </div>
+                    </div></div>
+                    
+                    <!-- Question and Answerset -->
+                    <div class='row row__ID'><div class='col'>
+                    <div class='row'>
+                        <div class='col'>
+                            <span class='survey-question required'>Do you have any physical complaints this morning?</span>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-sm-2 select-area'>
+                            <input type='radio' name='PSGM_physCompl' value='0' required> <span class='survey-answer'>no</span>
+                        </div>
+                        <div class='col-sm-2 select-area'>
+                            <input type='radio' name='PSGM_physCompl' value='1'> <span class='survey-answer'>yes</span>
+                        </div>
+                    </div>
+                    <div class='row sh__ID'>
+                        <div class='col-sm-12'>
+                            <span class='survey-subquestion'>If yes, please describe</span>
+                        </div>
+                        <br />
+                        <div class='col-sm-12'>
+                            <input type='text' class='form-control' name='PSGM_physCompl_specify'>
+                        </div>
+                    </div>
+                    </div></div>
+                    
+                    <!-- Question and Answerset -->
+                    <div class='row row__ID'><div class='col'>
+                    <div class='row'>
+                        <div class='col'>
+                            <span class='survey-question required'>Did the EEG cap or other sensors cause you any discomfort during the night?</span>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-sm-2 select-area'>
+                            <input type='radio' name='PSGM_sensorCompl' value='0' required> <span class='survey-answer'>no</span>
+                        </div>
+                        <div class='col-sm-2 select-area'>
+                            <input type='radio' name='PSGM_sensorCompl' value='1'> <span class='survey-answer'>yes</span>
+                        </div>
+                    </div>
+                    <div class='row sh__ID'>
+                        <div class='col-sm-12'>
+                            <span class='survey-subquestion'>If yes, please describe</span>
+                        </div>
+                        <br />
+                        <div class='col-sm-12'>
+                            <input type='text' class='form-control' name='PSGM_sensorCompl_specify'>
+                        </div>
+                    </div>
+                    </div></div>
+                    
+                    <!-- Question and Answerset -->
+                    <div class='row row__ID'><div class='col'>
+                    <div class='row'>
+                        <div class='col'>
+                            <span class='survey-question required'>What awakened you this morning?</span>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <input type='radio' name='PSGM_awakening' id='PSGM_awakening_noise' value='noise' required> <label class='survey-answer' for='PSGM_awakening_noise'>Noise</label><br />
+                            <input type='radio' name='PSGM_awakening' id='PSGM_awakening_discomfort' value='discomfort'> <label class='survey-answer' for='PSGM_awakening_discomfort'>Discomfort</label><br />
+                            <input type='radio' name='PSGM_awakening' id='PSGM_awakening_staff' value='staff'> <label class='survey-answer' for='PSGM_awakening_staff'>Lab-staff</label><br />
+                            <input type='radio' name='PSGM_awakening' id='PSGM_awakening_spontaneous' value='spontaneous'> <label class='survey-answer' for='PSGM_awakening_spontaneous'>Spontaneous</label><br />
+                            <input type='radio' name='PSGM_awakening' id='PSGM_awakening_other' value='other'> <label class='survey-answer' for='PSGM_awakening_other'>Other, please describe</label><br />
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <input type='text' class='form-control' name='PSGM_awakening_other_specify'>
+                        </div>
+                    </div>
+                    </div></div>
+                    
+                    <!-- Question and Answerset -->
+                    <div class='row row__ID'><div class='col'>
+                    <div class='row'>
+                        <div class='col'>
+                            <span class='survey-question required'>In general, how would you describe your sleep last night compared to a normal night's sleep at home?</span>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <input type='radio' name='PSGM_sleepCompare' id='PSGM_sleepCompare_1' value='1' required> <label class='survey-answer' for='PSGM_sleepCompare_1'>Much worse</label><br />
+                            <input type='radio' name='PSGM_sleepCompare' id='PSGM_sleepCompare_2' value='2'> <label class='survey-answer' for='PSGM_sleepCompare_2'>Worse</label><br />
+                            <input type='radio' name='PSGM_sleepCompare' id='PSGM_sleepCompare_3' value='3'> <label class='survey-answer' for='PSGM_sleepCompare_3'>Same as usual</label><br />
+                            <input type='radio' name='PSGM_sleepCompare' id='PSGM_sleepCompare_4' value='4'> <label class='survey-answer' for='PSGM_sleepCompare_4'>Better</label><br />
+                            <input type='radio' name='PSGM_sleepCompare' id='PSGM_sleepCompare_5' value='5'> <label class='survey-answer' for='PSGM_sleepCompare_5'>Much better</label><br />
+                        </div>
+                    </div>
+                    </div></div>
+
+                    <!-- submit button part for all tsak forms------------>
+                    <br>
+                    <div class='row'>
+                        <div class='col'>
+                            <button id='submit__ID' type='submit' class='btn btn-secondary'>Submit</button>
+                        </div>
+                    </div>
+                    <!---------------------------------------------------->
+                </div>
+            </form>
+        </section>
+        <script>
+            function F__ID(){
+                //-------------------------------------
+                VmInclude:'__COMPONENT__/f/form.01.js'
+                VmInclude:'__CURRENT_PATH__/task-form.js'
+                //-------------------------------------
+            }
+        </script>
+        <style>
+            VmInclude:__COMPONENT__/f/form.01.css
+            VmInclude:__CURRENT_PATH__/task-form.css
+            VmInclude:__CURRENT_PATH__/task-form-pickers.css
+        </style>
+    </div>

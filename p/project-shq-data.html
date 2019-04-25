@@ -1,0 +1,37 @@
+<div id=D__ID>
+    <div>
+        <!--Vm  Include:__CURRENT_PATH__/../../../../modules/mdb/g/grid.01.hp.html-->
+        VmInclude:__COMPONENT__/g/grid.01.html
+    </div>
+    <script>
+        function F__ID(){
+            //-------------------------------------
+            VmInclude:__COMPONENT__/g/grid.01.js       
+            //-------------------------------------
+            $('#title__ID').text('Project');            
+            //-------------------------------------
+            var fields="_Project_ID,Site,Project Name|project_name,Phone|phone,Thank You Comments|thank_you_comments,_shq_entry";
+            m.fields="_Form,"+fields+",Submit_date,Submitted_by,_Delete";
+            //m.import_fields="UID,Site,project_name,phone,thank_you_comments,General,Ethnicity,Medical_History,Sleep_HQDP,Sleep_Hygiene_Index,Family_Sleep_History,Medications,Recreational_Drugs,ESS,MAPQ,ISI,Restless_Legs,ME,FOSQ,PSQI,PHQ,GAD,DASS,FSS,SDS,HPQ,Shiftwork,Shiftwork_Disorders,MVA,Workplace_Accidents";
+            //-------------------------------------
+            m.cell_render=function(records,I,field,td,set_value,source){
+                switch(field){
+                    case '_Project_ID':
+                        td.html(records[I].UID);
+                        break;
+                    case '_shq_entry':
+                        td.html("<u style='cursor:pointer'>Project Questionnaires</u>");
+                        td.find('u').on('click',function(){
+    						$vm.load_module(m.child_panel,'',{record:records[I]});
+                        });
+                        break;
+                }
+            }
+            //-------------------------------------
+        }
+    </script>
+    <style>
+        VmInclude:__COMPONENT__/g/grid.01.css
+    </style>
+</div>
+

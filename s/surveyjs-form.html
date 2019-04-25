@@ -1,0 +1,69 @@
+<div id=D__ID>
+    <div id=form_container__ID>
+        <div id=surverjs__ID></div>
+    </div>
+    <script>
+        function F__ID(){
+    		//-------------------------------------
+            VmInclude:__COMPONENT__/f/form.io.js
+            //-------------------------------------
+            Survey.Survey.cssType = "bootstrap";
+            var surveyJSON = {
+                pages: [
+                    {
+                        name: "page1",
+                        elements: [
+                            {
+                                type: "text",
+                                name: "First_name",
+                                title: "First name"
+                            },
+                            {
+                                type: "text",
+                                name: "Last_name",
+                                title: "Last name"
+                            }
+                        ]
+                    }
+                ]
+            }
+            //-------------------------------------
+            var survey=new Survey.Model(surveyJSON);
+            $("#surverjs__ID").Survey({
+                model: survey,
+                onComplete: sendDataToServer
+            });
+            //-------------------------------------
+            function sendDataToServer(survey) {
+                m.submit(survey.data);
+            }
+            //-------------------------------------
+            var old_load=m.load;
+            m.load=function(){
+                old_load();
+                new_load();
+            }
+            //-------------------------------------
+            var new_load=function(){
+                var data={}
+                if(m.input.record!=undefined){
+                    data=m.input.record.Data;
+                }
+                survey.clear(false, true);
+                survey.data=data;
+                survey.render();
+            }
+            //-------------------------------------
+        }
+    </script>
+    <style>
+        #form_container__ID{
+            background-color: #fff;
+            max-width:600px;
+            padding:10px;
+            margin-top:30px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
+</div>

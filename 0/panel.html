@@ -1,0 +1,89 @@
+<div id=D__ID>
+    <div id=panel__ID class='panel__ID'>
+    </div>
+    <script>
+        function F__ID(){
+            $('#D__ID').on('load',function(){
+                var m=$vm.module_list["__MODULE__"];
+                var folder=m.input.folder;
+                var txt="<div class='nav__ID'>";
+                var I=0;
+                for(a in $vm.module_list){
+                    if(a[0].toUpperCase()==folder && a!='home'){
+                        var name=$vm.module_list[a].name;
+                        if(name==undefined) name=a.replace(/_/g,' ');
+                        name=name.charAt(0).toUpperCase() + name.slice(1);
+                        txt+="<a href=?/"+a+">"+name+"</a><br>";
+                        if(I==30){
+                            I=0;
+                            txt+="</div><div class='nav__ID'>"
+                        }
+                        I++
+                    }
+                }
+                txt+="</div>";
+                $('#panel__ID').html(txt);
+                $('.panel__ID a').on('click',function(e){
+                    e.preventDefault();
+                    var href=$(this).attr('href');
+                    if(href!=undefined){
+                        href=href.replace('?\/','');
+                        href=href.replace(/\//g,'_');
+                        if($vm.module_list[href]!=undefined) $vm.load_module(href,'',{});
+                        else alert("The '"+ href +"' is not defined in the module list");
+                    }
+                })
+                //--------------------------------------------------------
+                $('.panel__ID a').each(function(){
+                    var href=$(this).attr('href');
+                    if(href!=undefined){
+                        href=href.replace('?\/','');
+                        href=href.replace(/\//g,'_');
+                        if($vm.module_list[href]!=undefined){
+                            var url=$vm.module_list[href].url;
+                            $(this).attr('title',url);
+                        }
+                    }
+                })
+            })
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        .panel__ID{
+            padding:30px 50px 10px 50px;
+            font-size:14px;
+            max-width:1600px;
+        }
+        .panel__ID a {
+            text-decoration: none;
+        }
+        .panel__ID a:link {
+            color:#555;
+        }
+        .panel__ID a:visited {
+            color:#555;
+        }
+        .panel__ID a:hover {
+            color:red;
+        }
+        .panel__ID a:active {
+            color:#555;
+        }
+        .nav__ID{
+	        padding:6px 26px 6px 6px;
+	        float:left;
+	    }
+        @media screen and (max-width:768px){
+            .panel__ID{
+                padding:0;
+            }
+        }
+    </style>
+</div>

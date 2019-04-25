@@ -1,0 +1,135 @@
+<div id=D__ID>
+    <div>
+        <div id=toolbar__ID class="navbar navbar-default">
+            <span> </span><u id=sourcecode__ID style='float:right;cursor:pointer'>Source code of this module</u>
+        </div>
+        <div  id=chart_div__ID ></div>
+        <div id=data__ID style='padding-left:120px;padding-bottom:30px'></div>
+    </div>
+    <script>
+    	function F__ID(){
+            var m=$vm.module_list['__MODULE__'];
+    		//-------------------------------------
+            var records=[
+                ['EURGBP',0.9802,0.5680,0],
+                ['EURCHF',1.2650,0.8500,0],
+                ['AUDCAD',1.0783,0.7166,0],
+                ['CHFJPY',138.8890,58.8300,0],
+                ['USDCAD',1.6191,0.9056,0],
+                ['NZDJPY',97.74,41.97,0],
+                ['NZDCAD',0.9924,0.7636,0],
+                ['NZDUSD',0.8842,0.3895,0],
+                ['EURCAD',1.7508,1.2129,0],
+                ['USDJPY',147.68,75.56,0],
+                ['AUDJPY',107.85,55.06,0],
+                ['NZDCHF',0.8083,0.5676,0],
+                ['EURJPY',169.95,88.87,0],
+                ['EURAUD',2.1145,1.1605,0],
+                ['EURUSD',1.6037,0.8225,0],
+                ['AUDUSD',1.1079,0.4773,0],
+                ['USDCHF',1.8309,0.7081,0],
+                ['CADJPY',125.53,68.39,0],
+                ['EURNZD',2.5792,1.3882,0],
+                ['GBPAUD',3.0062,1.4380,0],
+                ['GBPJPY',251.09,116.832,0],
+                ['GBPCAD',2.6733,1.4831,0],
+                ['AUDNZD',1.3792,1.0020,0],
+                ['CADCHF',1.2521,0.6804,0],
+                ['AUDCHF',1.1762,0.6530,0],               
+                ['GBPNZD',3.7206,1.6685,0],
+                ['GBPUSD',2.1160,1.1980,0],
+                ['GBPCHF',2.7320,1.1447,0],
+            ]
+			//-------------------------------------
+			var draw_chart=function(){
+                $vm.request({cmd:'forex'},function(res){
+                    var a=JSON.parse(res.result)
+                    console.log(a);
+                    for(var i=0;i<a.length;i++){
+                        var s=a[i].symbol;
+                        for(k in records){
+                            if(records[k][0]==s){
+                                records[k][3]=100*(a[i].bid-records[k][2])/(records[k][1]-records[k][2]);
+                                break;
+                            }
+                        }
+                    }
+                    var ds=[["Symbel","Value"]];
+                    for(i in records){
+                        var t=[records[i][0],records[i][3]];
+                        ds.push(t);
+                    }
+                    ds.sort(function(a,b){
+                        return b[1]-a[1];
+                    })                   
+                    var data = google.visualization.arrayToDataTable(ds);
+                    var options = {
+                        legend: {position: 'none'},
+                        title: 'My favorite forex overview',
+                        chartArea: {width: '80%'},
+                        colors: ['#539ec3', '#ffab91'],
+                        hAxis: {
+                            title: '',
+                            minValue: 0,
+                            maxValue: 100
+                        },
+                        vAxis: {
+                            title: '',
+                            
+                            viewWindow: {
+                                min: [0],
+                                max: [100]
+                            }                            
+                        }
+                    };
+                    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div__ID'));
+                    chart.draw(data, options);
+                    var d="Auto refresh every 2 mins<br>";
+                    d+=ds[26][0]+":"+ds[26][1].toFixed(3)+"<br>";
+                    d+=ds[27][0]+":"+ds[27][1].toFixed(3)+"<br>";
+                    d+=ds[28][0]+":"+ds[28][1].toFixed(3)+"<br>";
+                    $('#data__ID').html(d);				
+                })
+            }
+            var loop_request=function(){
+                draw_chart();
+                setInterval(function (){
+                    draw_chart();
+                },120000);
+            }
+            
+			//-------------------------------------
+            m.start=function(){
+                google.charts.load('current', {packages: ['corechart', 'bar']});
+                google.charts.setOnLoadCallback(loop_request);
+            }
+            //-------------------------------------
+            m.I=0;
+            m.loop__ID=setInterval(function (){
+                if($vm['loader-js']!=undefined){
+                    clearInterval(m.loop__ID); m.start();
+                }
+                m.I++; if(m.I>50){
+                    clearInterval(m.loop__ID); alert("Chart.js is not installed.");
+                }
+            },100);
+            //-------------------------------------
+			$('#sourcecode__ID').on('click',function(){
+                window.open($vm.module_list['__MODULE__'].url.replace('__HOST__/','https://github.com/vmiis/online-profile/blob/master/'));
+			})
+			//---------------------------------------
+    	}
+    </script>
+    <style>
+        VmInclude:__COMPONENT__/c/chart.01.css
+		#chart_div__ID{
+			height:800px;
+		}
+        #toolbar__ID{
+            background-color:#ccc;
+            padding:5px 10px;
+            margin-bottom:0px;
+            overflow:hidden
+        }
+    </style>
+</div>

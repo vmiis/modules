@@ -1,0 +1,49 @@
+<div id=D__ID>
+    <div id=form_container__ID>
+        <div id=header__ID>
+    		Form sql fields
+        </div>
+        <form id=F__ID>
+            <div class="container">
+                <div class="row row__ID">
+                    <div class=col>
+                        <span>Fields</span>
+                        <textarea id=fields__ID class="form-control" style='height:150px' placeholder='comma separated names'></textarea>
+                    </div>
+                </div>
+                <br>
+                <button id=btn1__ID type="button" class="btn btn-secondary">Get sql code</button>
+                </form>
+            </div>
+        </form>
+    </div>
+    <script>
+        function F__ID(){
+            //----------------------------------------------
+            $('#btn1__ID').on('click',function(){
+                $vm.module_list["sys_code_viewer"]={url:'__COMPONENT__/c/code-viewer.01.html'}
+                
+
+                var fields=$('#fields__ID').val().replace(/\n/g,'');
+                var fs=fields.split(',');
+                var txt="select ";
+                for(var i=0;i<fs.length;i++){
+                    txt+=fs[i].trim()+"="+"dbo.F(Information,'"+fs[i].trim()+"'),";
+                }
+                txt=txt.substring(0,txt.length-1);
+				$vm.load_module("sys_code_viewer",'',{code:txt,msg:""});
+            })
+            //----------------------------------------------
+        }
+    </script>
+    <style>
+        #form_container__ID{
+            max-width:700px;
+        }
+        VmInclude:__COMPONENT__/f/form.01.css
+        #F__ID div span{
+            font-weight:700;
+        }
+
+    </style>
+</div>

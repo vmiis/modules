@@ -1,0 +1,498 @@
+<div id=D__ID module=app>
+    <!-- special font, css etc for this app -->
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Nunito|Nunito+Sans|Roboto+Slab' />
+    <!-------->
+    <div id=components style='display:none'>
+        <div id=c_header>
+            <div menu id="vm-menu">
+                <ul>
+                    <li><a href='?/home'><span><i class="fa fa-home"></i> Home</span></a></li>
+                    <li><a href='?/short-page'><span>Short</span></a></li>
+                    <li><a href='?/long-page'><span>Long</span></a></li>
+                    <li><a href='?/contact-us-form-02'><span>Contact</span></a></li>
+                    <li class='has-sub'><a><span>Administrator</span></a>
+                        <ul>
+                            <li><a href='?/contact-us-data'><span>Contact us records</span></a></li>
+                        </ul>
+                    </li>
+                    <li _class='last'><a href='?/about-vmiis'><span>About</span></a></li>
+                    <li><a href='' id=vm_signin onclick=$vm.signin()><i class="fa fa-user"></i> Sign In</a></li>
+                    <li><a href='' class=vm-hide id=vm_signout onclick=$vm.signout()><i class="fa fa-user"></i> Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id=c_footer>
+            <span id=text_0></span>
+        </div>
+    </div>
+    <script main-code>
+        //------------------------------------
+        $vm.api_address="https://api.wappsystem.com";
+        if(window.location.toString().indexOf('_p=1')!=-1) $vm.api_address="https://api.wappsystem.com:3000";
+        //------------------------------------
+        $vm.default_title="Modular distributed web application";
+        var txt="Key Alt+mouse double click on a content area will show the source code of the content module and where it is hosted. ";
+        $('#text_0').html(txt);
+        //------------------------------------
+        $('#c_header').contents().appendTo('#header');
+        $('#c_footer').contents().appendTo('#footer');
+        //------------------------------------
+        $('#vm-mobile_title').on('click',function(){ $vm.load_module('home',$vm.root_layout_content_slot,{}) })
+        $('.vm-desk-logo').on('click',function(){ $vm.load_module('home',$vm.root_layout_content_slot,{}) })
+        //------------------------------------
+        $vm.root_layout_content_slot='content'
+        $vm.root_layout_footer='footer';
+        //---------------------------------------------
+        var set_layout=function(){
+            var header_height=$('#header').outerHeight(); $vm.header_height=header_height;
+            var footer_height=$('#footer').outerHeight(); $vm.footer_height=footer_height;
+            $vm.min_height=($(window).height()-header_height-footer_height);
+            if($vm.active_id!=undefined){
+                $('#D'+$vm.active_id).css('height',($('body').height()-$('#header').outerHeight()-$('#footer').outerHeight())+"px");
+            }
+        }
+        //------------------------------------
+        set_layout();
+        //-----------------------------------------
+        $vm.show=function(m_name){
+            document.title=$vm.default_title;
+            $("meta[name='description']").attr("content", "A single page application with shared reusable modules distributed on different static web servers around the world and maintained by different people with different skills!");
+            $("body").removeClass();
+            $("body").addClass('body_background_default');
+
+            $vm.active_id=undefined;
+            if(m_name!=undefined) $vm.active_id=$vm.module_list[m_name].id;
+            if(m_name!=undefined && $vm.module_list[m_name].show!=undefined) $vm.module_list[m_name].show();
+            if($vm.active_id!=undefined){
+                $('#D'+$vm.active_id).css('overflow','auto');
+                $('#D'+$vm.active_id).css('min-height','unset');
+                $('#D'+$vm.active_id).css('height',($('body').height()-$('#header').outerHeight()-$('#footer').outerHeight())+"px");
+            }
+        }
+        //------------------------------------
+        $vm.show();
+        window.onresize=function(){set_layout();}
+        //------------------------------------
+        $vm.start=function(){
+            $vm.init(function(){
+               $vm.init_status=1;
+               $vm.show_user();
+           })
+        }
+        //------------------------------------
+    </script>
+    <style main-style>
+        :root {
+            --menu-color: #fff;
+            --menu-hover-color: #29eca6;
+            --menu-hover-background-color: #555;
+
+            --dropdown-menu-color:#666;
+            --dropdown-menu-background-color:#f9f9f9;
+            --dropdown-menu-hover-color:#555;
+            --dropdown-menu-hover-background-color:#ddd;
+            --dropdown-menu-border-color:#ddd;
+
+            --mobile-title-color:#fff;
+            --mobile-hamburger-color:#fff;
+            --mobile-menu-background-color:#1c3144;
+        }
+        html,body{ margin:0; padding:0; height:100%; font-family:Arial;}
+        body{background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;}
+        .body_background_default{ background-image: url(https://image.vmiis.com/bk031.jpg);}
+        #content{
+        }
+        #vm-logo-label-A{
+            font-family: Arial, sans-serif;
+            color:#fff;
+            font-size: 200%;
+            line-height:10px;
+            display:inline-block;
+        }
+        #vm-logo-label-B{
+            font-family: Arial, sans-serif;
+            color:#fff;
+            font-size: 93%;
+            line-height:80%;
+            display:inline-block;
+        }
+        #footer{
+            height:24px;
+            color: #fff;
+            padding: 3px;
+            background-color: #333;
+            font:80%/18px arial;
+            text-align: center;
+        }
+        /*----------------------*/
+        /*
+        #header{height:100px;background:rgba(0,0,0,0.6);}
+        .vm-desk-logo{ display:inline-block;float:left;padding:36px 30px 0 30px;cursor:pointer;}
+        #vm-menu{ float:left;padding:50px 30px 0 30px;}
+        @media screen and (max-width: 1200px){
+            #header{height:50px;}
+            .vm-desk-logo{display:none;}
+            #vm-menu{padding:0;}
+        }
+        */
+        /*----------------------*/
+    </style>
+    <script menu code>
+        //------------------------------------
+        $('.vm-dropdown').on('click',function(e){
+            var d=$(this).find('.vm-dropdown-content');
+            if(d.css('display')=='block') d.css('display','none');
+            else d.css('display','block');
+        })
+        $(".vm-dropdown").mouseleave(function (){  $(".vm-dropdown-content").hide();  })
+        $(".vm-dropdown-content").mouseleave(function (){  $(this).hide();  })
+        $vm.toggle=function() {
+            var x = document.getElementById("vm-menu");
+            if(x.className==='') x.className="responsive";
+            else x.className="";
+        }
+        //------------------------------------
+        $('#vm-menu a').on('click',function(e){
+            e.preventDefault();
+            var href=$(this).attr('href');
+            if(href!=undefined && href!=''){
+                if($vm.menu_click!=undefined) $vm.menu_click(href);
+            }
+            $vm.toggle();
+        })
+        //------------------------------------
+        $vm.menu_click=function(href){
+            href=href.replace('?\/','');
+            href=href.replace(/\//g,'_');
+            $vm.load_module_v2(href,$vm.root_layout_content_slot,{});
+        }
+        //------------------------------------
+    </script>
+    <style menu style>
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+        #vm-menu,
+        #vm-menu ul,
+        #vm-menu ul li,
+        #vm-menu ul li a,
+        #vm-menu #menu-button {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          list-style: none;
+          line-height: 1;
+          display: block;
+          position: relative;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+        #vm-menu:after,
+        #vm-menu > ul:after {
+          content: ".";
+          display: block;
+          clear: both;
+          visibility: hidden;
+          line-height: 0;
+          height: 0;
+        }
+        #vm-menu #menu-button {
+          display: none;
+        }
+        #vm-menu {
+          width: auto;
+          font-family: 'Open Sans', Helvetica, sans-serif;
+          background: #39b1cc;
+          background: -moz-linear-gradient(top, #51bbd2 0%, #2d97af 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #51bbd2), color-stop(100%, #2d97af));
+          background: -webkit-linear-gradient(top, #51bbd2 0%, #2d97af 100%);
+          background: -o-linear-gradient(top, #51bbd2 0%, #2d97af 100%);
+          background: -ms-linear-gradient(top, #51bbd2 0%, #2d97af 100%);
+          background: linear-gradient(to bottom, #51bbd2 0%, #2d97af 100%);
+        }
+        #vm-menu > ul {
+          /*background: url('images/bg.png');*/
+          box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
+        }
+        #vm-menu.align-right > ul > li {
+          float: right;
+        }
+        #vm-menu > ul > li {
+          float: left;
+          display: inline-block;
+        }
+        #vm-menu.align-center > ul {
+          float: none;
+          text-align: center;
+        }
+        #vm-menu.align-center > ul > li {
+          float: none;
+        }
+        #vm-menu.align-center ul ul {
+          text-align: left;
+        }
+        #vm-menu > ul > li > a {
+          padding: 18px 25px 21px 25px;
+          border-right: 1px solid rgba(80, 80, 80, 0.12);
+          text-decoration: none;
+          font-size: 13px;
+          font-weight: 700;
+          color: #d3eced;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+        #vm-menu > ul > li:hover > a,
+        #vm-menu > ul > li > a:hover,
+        #vm-menu > ul > li.active > a {
+          color: #ffffff;
+          background: #32a9c3;
+          background: rgba(0, 0, 0, 0.1);
+        }
+        #vm-menu > ul > li.has-sub > a {
+          padding-right: 45px;
+        }
+        #vm-menu > ul > li.has-sub > a::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: 6px solid transparent;
+          border-top-color: #d3eced;
+          right: 17px;
+          top: 22px;
+        }
+        #vm-menu > ul > li.has-sub.active > a::after,
+        #vm-menu > ul > li.has-sub:hover > a {
+          border-top-color: #ffffff;
+        }
+        #vm-menu ul ul {
+          position: absolute;
+          left: -9999px;
+          top: 60px;
+          padding-top: 6px;
+          font-size: 13px;
+          opacity: 0;
+          -webkit-transition: top 0.2s ease, opacity 0.2s ease-in;
+          -moz-transition: top 0.2s ease, opacity 0.2s ease-in;
+          -ms-transition: top 0.2s ease, opacity 0.2s ease-in;
+          -o-transition: top 0.2s ease, opacity 0.2s ease-in;
+          transition: top 0.2s ease, opacity 0.2s ease-in;
+        }
+        #vm-menu.align-right ul ul {
+          text-align: right;
+        }
+        #vm-menu > ul > li > ul::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: 5px solid transparent;
+          border-bottom-color: #ffffff;
+          top: -4px;
+          left: 20px;
+        }
+        #vm-menu.align-right > ul > li > ul::after {
+          left: auto;
+          right: 20px;
+        }
+        #vm-menu ul ul ul::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: 5px solid transparent;
+          border-right-color: #ffffff;
+          top: 11px;
+          left: -4px;
+        }
+        #vm-menu.align-right ul ul ul::after {
+          border-right-color: transparent;
+          border-left-color: #ffffff;
+          left: auto;
+          right: -4px;
+        }
+        #vm-menu > ul > li > ul {
+          top: 120px;
+        }
+        #vm-menu > ul > li:hover > ul {
+          top: 52px;
+          left: 0;
+          opacity: 1;
+        }
+        #vm-menu.align-right > ul > li:hover > ul {
+          left: auto;
+          right: 0;
+        }
+        #vm-menu ul ul ul {
+          padding-top: 0;
+          padding-left: 6px;
+        }
+        #vm-menu.align-right ul ul ul {
+          padding-right: 6px;
+        }
+        #vm-menu ul ul > li:hover > ul {
+          left: 180px;
+          top: 0;
+          opacity: 1;
+        }
+        #vm-menu.align-right ul ul > li:hover > ul {
+          left: auto;
+          right: 100%;
+          opacity: 1;
+        }
+        #vm-menu ul ul li a {
+          text-decoration: none;
+          font-weight: 400;
+          padding: 11px 25px;
+          width: 180px;
+          color: #777777;
+          background: #ffffff;
+          box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.1), -1px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+        #vm-menu ul ul li:hover > a,
+        #vm-menu ul ul li.active > a {
+          color: #333333;
+        }
+        #vm-menu ul ul li:first-child > a {
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+        }
+        #vm-menu ul ul li:last-child > a {
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
+        }
+        #vm-menu > ul > li > ul::after {
+          position: absolute;
+          display: block;
+        }
+        #vm-menu ul ul li.has-sub > a::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: 4px solid transparent;
+          border-left-color: #777777;
+          right: 17px;
+          top: 14px;
+        }
+        #vm-menu.align-right ul ul li.has-sub > a::after {
+          border-left-color: transparent;
+          border-right-color: #777777;
+          right: auto;
+          left: 17px;
+        }
+        #vm-menu ul ul li.has-sub.active > a::after,
+        #vm-menu ul ul li.has-sub:hover > a::after {
+          border-left-color: #333333;
+        }
+        #vm-menu.align-right ul ul li.has-sub.active > a::after,
+        #vm-menu.align-right ul ul li.has-sub:hover > a::after {
+          border-right-color: #333333;
+          border-left-color: transparent;
+        }
+        .vm-hide{
+            display:none!Important;
+        }
+        @media all and (max-width: 800px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+          #vm-menu {
+            background: #39b1cc;
+          }
+          #vm-menu > ul {
+            display: none;
+          }
+          #vm-menu > ul.open {
+            display: block;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+          }
+          #vm-menu.align-right > ul {
+            float: none;
+          }
+          #vm-menu.align-center > ul {
+            text-align: left;
+          }
+          #vm-menu > ul > li,
+          #vm-menu.align-right > ul > li {
+            float: none;
+            display: block;
+          }
+          #vm-menu > ul > li > a {
+            padding: 18px 25px 18px 25px;
+            border-right: 0;
+          }
+          #vm-menu > ul > li:hover > a,
+          #vm-menu > ul > li.active > a {
+            background: rgba(0, 0, 0, 0.1);
+          }
+          #vm-menu #menu-button {
+            display: block;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            color: #d3eced;
+            padding: 18px 25px 18px 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /*background: url('images/bg.png');*/
+            cursor: pointer;
+          }
+          #vm-menu ul ul,
+          #vm-menu ul li:hover > ul,
+          #vm-menu > ul > li > ul,
+          #vm-menu ul ul ul,
+          #vm-menu ul ul li:hover > ul,
+          #vm-menu.align-right ul ul,
+          #vm-menu.align-right ul li:hover > ul,
+          #vm-menu.align-right > ul > li > ul,
+          #vm-menu.align-right ul ul ul,
+          #vm-menu.align-right ul ul li:hover > ul {
+            left: 0;
+            right: auto;
+            top: auto;
+            opacity: 1;
+            width: 100%;
+            padding: 0;
+            position: relative;
+            text-align: left;
+          }
+          #vm-menu ul ul li {
+            width: 100%;
+          }
+          #vm-menu ul ul li a {
+            width: 100%;
+            box-shadow: none;
+            padding-left: 35px;
+          }
+          #vm-menu ul ul ul li a {
+            padding-left: 45px;
+          }
+          #vm-menu ul ul li:first-child > a,
+          #vm-menu ul ul li:last-child > a {
+            border-radius: 0;
+          }
+          #vm-menu #menu-button::after {
+            display: block;
+            content: '';
+            position: absolute;
+            height: 3px;
+            width: 22px;
+            border-top: 2px solid #d3eced;
+            border-bottom: 2px solid #d3eced;
+            right: 25px;
+            top: 18px;
+          }
+          #vm-menu #menu-button::before {
+            display: block;
+            content: '';
+            position: absolute;
+            height: 3px;
+            width: 22px;
+            border-top: 2px solid #d3eced;
+            right: 25px;
+            top: 28px;
+          }
+          #vm-menu > ul > li.has-sub > a::after,
+          #vm-menu ul ul li.has-sub > a::after {
+            display: none;
+          }
+        }
+    </style>
+</div>

@@ -1,0 +1,178 @@
+<div id=D__ID>
+	<div class='g_section_title'>
+        The following section demonstrates a dynamic background of a website landing page.
+		<div class=g_section_admin>
+			<u id=code__ID style='cursor:pointer'>Source code of this section</u>
+		</div>
+	</div>
+    <div id=background__ID></div>
+    <span id=text__ID>Relax for a while</span>
+    <span id=text2__ID>Do you like dynamic background for your landing page? Try these links. 
+        <u>Particle</u> <u>Snow</u> <u>Nasa</u> <u>Bubble</u></span>
+    <script>
+        function F__ID(){
+            $.getScript('https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js',function(){
+                particlesJS("background__ID", {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#ffffff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            },
+                            "image": {
+                                "src": "img/github.svg",
+                                "width": 100,
+                                "height": 100
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#ffffff",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 6,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            });
+            //------------------------------------
+            $('#text2__ID u').on('click',function(){
+                var t=$(this).text();
+                switch(t){
+                    case 'Particle':window.open($vm.module_list['particle-background-app'].url); break;
+                    case 'Snow':window.open($vm.module_list['snow-background-app'].url); break;
+                    case 'Nasa':window.open($vm.module_list['nasa-background-app'].url); break;
+                    case 'Bubble':window.open($vm.module_list['bubble-background-app'].url); break;
+                }
+            })
+			$('#code__ID').on('click',function(){
+                window.open($vm.module_list['__MODULE__'].url.replace('__HOST__/','https://github.com/vmiis/online-profile/blob/master/'));
+			})
+            //------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            margin-bottom:30px;
+            position:relative;
+        }
+        #background__ID{
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #1d1e33;
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+        #text__ID{
+            position:absolute;
+            color:#fff;
+            font-size:160%;
+            z-index:1000;
+            top:50%;
+            left:50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        #text2__ID{
+            position:absolute;
+            color:#fff;
+            font-size:160%;
+            z-index:1000;
+            bottom:3px;
+            left:3px;
+        }
+        #text2__ID u{
+            cursor:pointer;
+        }
+    </style>
+</div>

@@ -1,0 +1,36 @@
+<div id=D__ID>
+    <div>
+        VmInclude:__COMPONENT__/g/grid.365.01.html
+    </div>
+    <script>
+        function F__ID(){
+            //-------------------------------------
+            VmInclude:__COMPONENT__/g/grid.365.01.js
+            //-------------------------------------
+            var fields="Entity";
+            m.fields="_Form,"+fields;
+            m.fields_e=fields
+            $('#new__ID').hide();
+            //-------------------------------------
+            m.data_process=function(data){
+                m.records=[];
+                for(var i=0;i<data.length;i++){
+                    m.records.push({Data:{"Entity":data[i].LogicalCollectionName}});
+                }
+            }
+            m.select="$select=LogicalCollectionName";
+            //-------------------------------------
+            m.set_req=function(){
+                m.req="/api/data/v9.1/"+m.Table+"?"+m.select;
+                var k=$('#keyword__ID').val();
+                if(k!=""){
+                    if(k!="") m.req+="&$filter=contains(LogicalCollectionName,'"+k+"')";
+                }
+            };
+            //-------------------------------------
+        }
+    </script>
+    <style>
+        VmInclude:__COMPONENT__/g/grid.01.css
+    </style>
+</div>

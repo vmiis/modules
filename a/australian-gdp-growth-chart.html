@@ -1,0 +1,83 @@
+<div id=D__ID>
+    <section>
+        <div id=toolbar__ID class="navbar navbar-default">
+            <form class="form-inline">
+                <button id=query__ID type=button class="btn btn-secondary" title='Refresh'>Refresh</button>
+                <span style='margin-left:30px;font-size:150%' id=title__ID></span>
+            </form>
+            <span id=elapsed__ID style='float:right'></span>
+        </div>
+        <div id=chart_container__ID style='padding:10px'>
+            <div id=chart_div__ID></div>
+        </div>
+    </section>
+    <script>
+        function F__ID(){
+            //-------------------------------------
+            VmInclude:__COMPONENT__/c/chart.01.js
+            //-------------------------------------
+            $('#title__ID').text('Australian GDP Growth');
+            //-------------------------------------
+            m.fields="Year,GDP_Growth";
+            //-------------------------------------
+            m.request_data=function(){
+                $.getJSON("https://api.worldbank.org/v2/country/aus/indicator/NY.GDP.MKTP.KD.ZG?format=json", function( data ) {
+                    //console.log(data);
+                    m.records=[];
+                    for(i in data[1]){
+                        m.records.push({'Year':data[1][i].date,'GDP_Growth':data[1][i].value})
+                    }
+                    m.data_process();
+                });
+            }
+            //-------------------------------------
+			m.data_process=function(){
+				if(m.records.length==0){
+					$('#chart_div__ID').text('No data');
+					return;
+				}
+				if(m.google==0) return;
+				google.charts.load('current', {packages: ['corechart', 'bar']});
+				google.charts.setOnLoadCallback(draw_chart);
+			}
+			//-------------------------------------
+			var draw_chart=function(){
+				//----------------------------------
+				var ds=[]
+				ds.push(['Year', 'GDP_Growth'])
+				var fd=m.fields.split(',')
+				for(var i=m.records.length-1;i>=0;i--){
+					var row=[];
+					for(var j=0;j<fd.length;j++){
+                        if(j==0) row.push(m.records[i][fd[j]]);
+                        else row.push(parseFloat(m.records[i][fd[j]]));
+					}
+					ds.push(row)
+				}
+				//----------------------------------
+				var data = google.visualization.arrayToDataTable(ds);
+				var options = {
+                    title: 'Percentage change of real GDP compared to previous year. Real GDP is adjusted for inflation.',
+                    vAxis: {minValue: 0},
+                    legend: {position: 'none'}
+                }; 
+				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div__ID'));
+				chart.draw(data, options);				
+			}
+			//-------------------------------------
+        }
+    </script>
+    <style>
+        VmInclude:__COMPONENT__/g/grid.01.css
+        #toolbar__ID{
+            background-color:#ccc;
+            padding:5px 10px;
+            margin-bottom:0px;
+            overflow:hidden
+        }
+		#chart_div__ID{
+			height:600px;
+			/*max-width:700px;*/
+		}
+    </style>
+</div>
