@@ -1,4 +1,7 @@
 <div id=D__ID>
+    <div style='padding:10px 0 0 20px;'>
+        <input id=filter__ID placeholder=Filter> <button id=apply__ID class="btn btn-secondary btn-sm">Apply</button>
+    </div>
     <div id=panel__ID class='panel__ID'>
     </div>
     <script>
@@ -9,9 +12,9 @@
                 var txt="<div class='nav__ID'>";
                 var I=0;
                 for(a in $vm.module_list){
-                    if(a[0].toUpperCase()==folder && a!='home'){
+                    if( (folder=='ALL' || a[0].toUpperCase()==folder) && a!='home' && a[0]!='_'){
                         var name=$vm.module_list[a].name;
-                        if(name==undefined) name=a.replace(/_/g,' ');
+                        if(name==undefined) name=a.replace(/_/g,' ').replace(/-/g,' ');
                         name=name.charAt(0).toUpperCase() + name.slice(1);
                         txt+="<a href=?/"+a+">"+name+"</a><br>";
                         if(I==30){
@@ -42,6 +45,26 @@
                         if($vm.module_list[href]!=undefined){
                             var url=$vm.module_list[href].url;
                             $(this).attr('title',url);
+                        }
+                    }
+                })
+            })
+            //--------------------------------------------------------
+            $('#apply__ID').on('click',function(){
+                $('#panel__ID a').show();
+                $('#panel__ID br').show();
+                var words=$('#filter__ID').val().split(' ');
+                $('#panel__ID a').each(function(){
+                    var name=$(this).html().toUpperCase();
+                    for(var i=0;i<words.length;i++){
+                        var word=words[i].toUpperCase();                                  //$('#filter__ID').val().toUpperCase();
+                        if(word!=""){
+                            if(name.indexOf(word)==-1){
+                                console.log(name+"---"+word)
+                                $(this).hide();
+                                $(this).next('br').hide();
+                                break;
+                            }
                         }
                     }
                 })
