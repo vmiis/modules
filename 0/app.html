@@ -40,7 +40,7 @@
                 }
             }
             //------------------------------------
-            $vm.show('home');
+            //$vm.show('home');
             window.onresize=function(){set_layout();}
             //------------------------------------
             $vm.init(function(){
@@ -48,6 +48,7 @@
                 $vm.show_user();
             })
             //------------------------------------
+            if($vm.first_module!=undefined) $vm.show($vm.first_module);
         }
         //-------------------------------------
         var I=0; var loop_1=setInterval(function (){
