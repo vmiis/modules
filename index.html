@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- The meta data are changed by the active module-->
+        <!-- The title and meta data are changed by the active module-->
+        <title></title>
+        <meta name="description" content="">
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel="icon" href="data:,">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.css" />
@@ -16,32 +18,38 @@
     </body>
     <script boot-up>
         //------------------------------------
-        $vm={};$vm.ver=[0.02,0.01]; //increase ver[0] if any module changed, increase ver[1] if vm.js changed
+        $vm={};$vm.ver=[0.03,0.03]; //increase ver[0] if any module changed, increase ver[1] if vm.js changed
         //------------------------------------
-        //app urls
-        $vm.public_url_$A='https://modules.vmiis.com';
-        $vm.local_url_$A='http://127.0.0.1:8000/vmiis/modules';
+        //setup modules location
+        $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
+        if(window.location.href.substring(0,5)=="file:") $vm.hosting_path="https://modules.vmiis.com";
+        if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost') $vm.localhost=true;
+        $vm.m_path='https://modules.vmiis.com'; if($vm.localhost==true) $vm.m_path='http://127.0.0.1:8000/vmiis/modules'; 
         //------------------------------------
         //where are your start modules
         $vm.start_modules=[
-            "$A/0/frame.html",  //app frame work
+            "$H/0/frame.html",  //app frame work
         ]
+        for(i in $vm.start_modules) $vm.start_modules[i]=$vm.start_modules[i].replace('$H',$vm.hosting_path);
         //------------------------------------
-        //modules used in this app
+        //modules used immediately
         $vm.module_list={
             //you can add modules here directly
-            "home":	    {url:"$A/0/home.html",router:1},
-            "_panel":	{url:"$A/0/panel.html"},
-            "_app":	    {url:"$A/0/app.html"},
-            "_header":	{url:"$A/0/header.html"},
-            "_footer":	{url:"$A/0/footer.html"},
+            "home":	        {url:"$H/0/home.html",router:1},
+            "_panel":	    {url:"$H/0/panel.html"},
+            "_app":	        {url:"$H/0/app.html"},
+            "_header":	    {url:"$H/0/header.html"},
+            "_footer":	    {url:"$H/0/footer.html"},
         };
+        for(p in $vm.module_list) $vm.module_list[p].url=$vm.module_list[p].url.replace('$H',$vm.hosting_path);
+        for(p in $vm.module_list) $vm.module_list[p].url=$vm.module_list[p].url.replace('$M',$vm.m_path);
         //------------------------------------
-        //where are your all other modules
+        //all other modules, used on demand 
         $vm.app_modules=[
             //you can add a js file that will add mmodules to the $vm.module_list
-            "$A/module-list.js",
+            "$H/module-list.js",
         ]
+        for(i in $vm.app_modules) $vm.app_modules[i]=$vm.app_modules[i].replace('$H',$vm.hosting_path);
         //------------------------------------
         //called by framework
         $vm.start=function(){
@@ -54,7 +62,7 @@
         
         //------------------------------------
         //Do not need to chang the following code in most cases
-        //The following code will load a framework module
+        //The following code will load a framework module and on demand module list
         //------------------------------------
         $VmAPI={};$vm.start_time=new Date().getTime();
         //------------------------------------
@@ -62,24 +70,11 @@
         $vm.root_layout_content_slot='content'
         $vm.root_layout_footer='footer';
         $vm.root_layout_app='app';
-        if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost') $vm.localhost=true;
         //---------------------------------------------
-        //replace the url
-        $vm.replace_url=function(url){
-            var urlR=url.replace("$A",$vm.public_url_$A);
-            if($vm.localhost==true) urlR=urlR.replace($vm.public_url_$A,$vm.local_url_$A);
-            return urlR;
-        }
-        //------------------------------------
-        for(p in $vm.start_modules) $vm.start_modules[p]=$vm.replace_url($vm.start_modules[p]);
-        for(p in $vm.app_modules) $vm.app_modules[p]=$vm.replace_url($vm.app_modules[p]);
-        //------------------------------------
         $vm._I=0; $vm._N=$vm.start_modules.length;
         $vm._boot=function(){
             $vm._I++;
             if($vm._I==$vm._N){
-                for(p in $vm.module_list) $vm.module_list[p].url=$vm.replace_url($vm.module_list[p].url);
-                //console.log("build in module list  "+(new Date().getTime()-$vm.start_time)+'ms');
                 $vm._start();
             }
         }
@@ -88,7 +83,6 @@
         $vm._boot2=function(){
             $vm._J++;
             if($vm._J==$vm._JN){
-                //for(p in $vm.module_list) $vm.module_list[p].url=$vm.replace_url($vm.module_list[p].url);
                 console.log("module list is ready  "+(new Date().getTime()-$vm.start_time)+'ms');
                 $vm.all_module=1;
             }
