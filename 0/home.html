@@ -11,16 +11,8 @@
         <a href=?/U>U</a>        <a href=?/V>V</a>        <a href=?/W>W</a>        <a href=?/X>X</a>        <a href=?/Y>Y</a>
         <a href=?/Z>Z</a>
     </div>
-    <!--
     <div class='panel__ID'>
-        Load module from the library
-        <form class="form-inline">
-            <input id=vm_system_search class=form-control style='width:390px' placeholder="module id">
-        </form>
-    </div>
-    -->
-    <div class='panel__ID'>
-        Load module from a remote place. <br>Example: https://www.vmiis.com/modules/a/about-vmiis.html
+        Test a remote module. <br>Example: https://codepen.io/vmiis/pen/zXemjY.html
         <form class="form-inline">
             <input id=module_url__ID class=form-control style='width:390px' placeholder="module url">
             <button id=load__ID type=button class="btn btn-secondary" title='Load'>Load</button>
@@ -42,7 +34,7 @@
                 if(href!=undefined){
                     href=href.replace('?\/','');
                     href=href.replace(/\//g,'_');
-                    $vm.load_module("_panel",'',{folder:href});
+                    $vm.load_module("panel",'',{folder:href});
                 }
             })
             //--------------------------------------------------------
@@ -61,7 +53,11 @@
             })
             //--------------------------------------------------------
             var ready1=function(){
-                $('#total__ID').text(Object.keys($vm.module_list).length+" modules");
+                var I=0;
+                for(a in $vm.module_list){
+                    if($vm.module_list[a].app!=1 && $vm.module_list[a].sys!=1) I++;
+                }
+                $('#total__ID').text(I+" modules");
 
 
                 var website_item_list_for_search=[]
@@ -84,13 +80,10 @@
                     }
                 });
                 $("#vm_system_search").focus(function(){$("#vm_system_search").autocomplete("search","");});
-
-
-
             }
             //--------------------------------------------------------
             var I=0; var loop_1=setInterval(function (){
-                if($vm['all_module']==1 && $vm['jquery-ui-min-js']!=undefined ){  clearInterval(loop_1); ready1(); }
+                if($vm['all_module']==1){  clearInterval(loop_1); ready1(); }
                 I++; if(I>50){ clearInterval(loop_1); alert("all module error."); }
             },100);
             //--------------------------------------------------------

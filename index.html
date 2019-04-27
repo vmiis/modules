@@ -13,12 +13,13 @@
         <div id=header></div>
         <div id=content></div>
         <div id=footer></div>
-        <div id=app style='display:none'></div>
+        <div id=system></div>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
     </body>
     <script boot-up>
         //------------------------------------
-        $vm={};$vm.ver=[0.05,0.03]; //increase ver[0] if any module changed, increase ver[1] if vm.js changed
+        $vm={};$vm.ver=[0.06,0.05]; //increase ver[0] if any module changed, increase ver[1] if vm.js changed
+        $vm.debug=1;
         //------------------------------------
         //setup modules location
         $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
@@ -35,11 +36,12 @@
         //modules used immediately
         $vm.module_list={
             //you can add modules here directly
-            "home":	        {url:"$H/0/home.html",router:1},
-            "_panel":	    {url:"$H/0/panel.html"},
-            "_app":	        {url:"$H/0/app.html"},
-            "_header":	    {url:"$H/0/header.html"},
-            "_footer":	    {url:"$H/0/footer.html"},
+            "home":	        {url:"$H/0/home.html",router:1,sys:1},
+            "frame":	    {url:"$H/0/frame.html",sys:1},
+            "app":	        {url:"$H/0/app.html",sys:1},
+            "panel":	    {url:"$H/0/panel.html",sys:1},
+            "header":	    {url:"$H/0/header.html",sys:1},
+            "footer":	    {url:"$H/0/footer.html",sys:1},
         };
         for(p in $vm.module_list) $vm.module_list[p].url=$vm.module_list[p].url.replace('$H',$vm.hosting_path);
         for(p in $vm.module_list) $vm.module_list[p].url=$vm.module_list[p].url.replace('$M',$vm.m_path);
@@ -49,14 +51,16 @@
             //you can add a js file that will add mmodules to the $vm.module_list
             "$H/module-list.js",
             "$H/module-list-bookkeeping.js",
+            "$H/invoice-management.js",
+            "$H/purchase-order.js",
         ]
         for(i in $vm.app_modules) $vm.app_modules[i]=$vm.app_modules[i].replace('$H',$vm.hosting_path);
         //------------------------------------
         //called by framework
         $vm.start=function(){
-            $vm.load_component('_header',$vm.root_layout_header,{});
-            $vm.load_component('_footer',$vm.root_layout_footer,{});
-            $vm.load_component('_app',$vm.root_layout_app,{});
+            $vm.load_component('header',$vm.root_layout_header,{});
+            $vm.load_component('footer',$vm.root_layout_footer,{});
+            $vm.load_component('app',$vm.root_layout_system,{});
         }
         //------------------------------------
         
@@ -70,7 +74,7 @@
         $vm.root_layout_header='header';
         $vm.root_layout_content_slot='content'
         $vm.root_layout_footer='footer';
-        $vm.root_layout_app='app';
+        $vm.root_layout_system='system';
         //---------------------------------------------
         $vm._I=0; $vm._N=$vm.start_modules.length;
         $vm._boot=function(){
@@ -101,13 +105,13 @@
                     localStorage.setItem(apppath+url+"txt",new_txt);
                     localStorage.setItem(apppath+url+"ver",$vm.ver[0]);
                     console.log('loading from url, done at '+(new Date().getTime()-$vm.start_time)+'ms. '+url );
-                    $('#content').append(new_txt.replace(/__ID/g,'_'+(index+1)));
+                    $('#system').append(new_txt.replace(/__ID/g,'_'+(index+1)));
                     $vm._boot();
                 },'text');
             }
             else{
                 console.log('loading from storage. done at '+(new Date().getTime()-$vm.start_time)+'ms. '+url+' '+ver+'/'+$vm.ver[0]);
-                $('#content').append(txt.replace(/__ID/g,'_'+(index+1)));
+                $('#system').append(txt.replace(/__ID/g,'_'+(index+1)));
                 $vm._boot();
             }
         })

@@ -27,15 +27,19 @@
     </div>
     <script>
         function F__ID(){
+            var m=$vm.module_list['__MODULE__'];
+            if(m.prefix==undefined) m.prefix="";
             $('#btn1__ID').on('click',function(){
-                $vm.load_module('client-data-wapp','',{})
+                $vm.load_module(m.prefix+'client-data','',{})
             })
             $('#btn2__ID').on('click',function(){
-                $vm.load_module('invoice-data','',{})
+                $vm.load_module(m.prefix+'invoice-data','',{})
             })
+            /*
             $('#btn3__ID').on('click',function(){
                 $vm.load_module('purchase-order-data-p2','',{})
             })
+            */
         }
     </script>
     <style>

@@ -28,7 +28,7 @@
         "bar-form":  	                        {url:"$H/b/bar-form.html",Table:"bar"},
         "bar-chart":  	                        {url:"$H/b/bar-chart.html",Table:"bar",router:1},
         "bubble":  		  	  			        {url:"$H/b/bubble.html",router:1},
-        "bookkeeping-workflow":  			    {url:"$H/b/bookkeeping/home.html",router:1},
+        //"bookkeeping-workflow":  			    {url:"$H/b/bookkeeping/home.html",router:1},
         "bookkeeping-panel":  			        {url:"$H/b/bookkeeping-panel.html",router:1},
         "bookkeeping-home":  			        {url:"$H/b/bookkeeping/home.html",router:1},
         "clinical-trials-data-entry": 	{url:"$H/c/clinical-trials-data-entry.html"},
@@ -90,7 +90,7 @@
         "fss-form":      	  			{url:"$H/f/fatigue-severity-scale-form.html",Table:"fss"},
         "form-maker":                   {url:"$H/f/form-maker.html",router:1},
         "fountains-illumination":		{url:"$H/f/fountains-illumination.html",router:1},
-        "frame":                        {url:"$H/f/frame.html"},
+        //"frame":                        {url:"$H/f/frame.html"},
         "form-text-input-fields":       {url:"$H/f/form-text-input-fields.html",router:1},
         "form-sql-fields":              {url:"$H/f/form-sql-fields.html",router:1},
         "fitness":                      {url:"$H/f/fitness.html",router:1},
@@ -110,14 +110,6 @@
         "isi-form":      	  			{url:"$H/i/insomnia-severity-index-form.html",Table:"isi"},
 
 
-        "invoice-management-workflow":  {url:"$H/i/invoice-management-workflow.html",router:1},
-        "invoice-data": 	            {url:"$H/i/invoice-data.html",Table:"invoice-vm",form_module:"invoice-form",router:1},
-        "invoice-form": 	            {url:"$H/i/invoice-form.html",Table:"invoice-vm",
-                                            client_table:"client-wapp"
-                                        },
-        "invoice-print": 	            {url:"$H/i/invoice-print.html",Table:"invoice-vm",
-                                            client_table:"client-wapp"
-                                        },
         "image-with-title-on-hover": 	                            {url:"$H/i/image-with-title-on-hover.html",router:1},
         "image-and-title-with-scale-rotate-effect-on-hover": 	    {url:"$H/i/image-and-title-with-scale-rotate-effect-on-hover.html",router:1},
         "image-with-title-and-subtitle-on-hover": 	                {url:"$H/i/image-with-title-and-subtitle-on-hover.html",router:1},
@@ -166,32 +158,6 @@
         "psqi-data":                    {url:"$H/p/pittsburgh-sleep-quality-index-data.html",Table:"psqi",form_module:"psqi-form"},
         "psqi-form":   			        {url:"$H/p/pittsburgh-sleep-quality-index-form.html",Table:"psqi"},
 
-        "purchase-order-workflow": {url:"$H/p/purchase-order-workflow.html",router:1},
-        "purchase-order-data-s": {url:"$H/p/purchase-order-data-s.html",Table:"purchase-order",form_module:"purchase-order-form-s",router:1},
-        "purchase-order-form-s": {url:"$H/p/purchase-order-form-s.html",Table:"purchase-order",
-                                        "manager_list_table":"manager-list",
-                                        "accountant_list_table":"accountant-list",
-                                        "email_to_manager":"purchase-order-email-to-manager"
-                                    },
-
-        "purchase-order-data-p1": {url:"$H/p/purchase-order-data-p1.html",Table:"purchase-order",form_module:"purchase-order-form-p1",router:1},
-        "purchase-order-form-p1": {url:"$H/p/purchase-order-form-p1.html",Table:"purchase-order",
-                                        "manager_list_table":"manager-list",
-                                        "accountant_list_table":"accountant-list",
-                                        "email_to_accountant":"purchase-order-email-to-accountant"
-                                    },
-
-        "purchase-order-data-p2": {url:"$H/p/purchase-order-data-p2.html",Table:"purchase-order",form_module:"purchase-order-form-p2",router:1},
-        "purchase-order-form-p2": {url:"$H/p/purchase-order-form-p2.html",Table:"purchase-order",
-                                        "manager_list_table":"manager-list",
-                                        "accountant_list_table":"accountant-list",
-                                        "email_to_requester":"purchase-order-email-to-requester"
-                                    },
-                                                                
-
-        "purchase-order-email-to-manager":      {url:"$H/p/purchase-order-email-to-manager.html",Table:"email-setup"},
-        "purchase-order-email-to-accountant":   {url:"$H/p/purchase-order-email-to-accountant.html",Table:"email-setup"},
-        "purchase-order-email-to-requester":    {url:"$H/p/purchase-order-email-to-requester.html",Table:"email-setup"},
 
         "pie-data":  	            {url:"$H/p/pie-data.html",Table:"pie",form_module:"pie-form",router:1},
         "pie-form":  	            {url:"$H/p/pie-form.html",Table:"pie"},

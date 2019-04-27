@@ -11,25 +11,26 @@
     //-------------------------------------------------------------------------------------
     //bookkeeping
     var modules={
-        "predefined-transaction-item-data": {url:"$H/b/bookkeeping/predefined-transaction-item-data.html",Table:"predefined-transaction-item",form_module:"predefined-transaction-item-form",router:1,tags:"bookkeeping,finance"},
-        "predefined-transaction-item-form": {url:"$H/b/bookkeeping/predefined-transaction-item-form.html",Table:"predefined-transaction-item",router:1,tags:"bookkeeping,finance"},
+        "workflow":                         {url:"$H/b/bookkeeping/home.html",router:1,name:"Bookkeeping",tags:"bookkeeping,finance"},
+        "predefined-transaction-item-data": {url:"$H/b/bookkeeping/predefined-transaction-item-data.html",Table:"predefined-transaction-item",form_module:"predefined-transaction-item-form",router:1,tags:"bookkeeping"},
+        "predefined-transaction-item-form": {url:"$H/b/bookkeeping/predefined-transaction-item-form.html",Table:"predefined-transaction-item",router:1,tags:"bookkeeping"},
         
-        "transaction-y-q-tax-return-data":  {url:"$H/b/bookkeeping/transaction-year-quarter-tax-return-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping,finance"},
-        "transaction-y-q-bas-data":    		{url:"$H/b/bookkeeping/transaction-year-quarter-bas-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping,finance"},
-        "transaction-y-q-data":    		    {url:"$H/b/bookkeeping/transaction-year-quarter-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping,finance"},
+        "transaction-y-q-tax-return-data":  {url:"$H/b/bookkeeping/transaction-year-quarter-tax-return-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping"},
+        "transaction-y-q-bas-data":    		{url:"$H/b/bookkeeping/transaction-year-quarter-bas-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping"},
+        "transaction-y-q-data":    		    {url:"$H/b/bookkeeping/transaction-year-quarter-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping"},
         
-        "transaction-bas-data":   		    {url:"$H/b/bookkeeping/transaction-bas-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping,finance"},
-        "transaction-tax-return-data":      {url:"$H/b/bookkeeping/transaction-tax-return-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping,finance"},
-        "transaction-data":    			    {url:"$H/b/bookkeeping/transaction-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping,finance"},
-        "transaction-form":    			    {url:"$H/b/bookkeeping/transaction-form.html",Table:"transaction",item_table:'predefined-transaction-item',tags:"bookkeeping,finance"},
-        "ato-bas-quarter-aggregation-data":     {url:"$H/b/bookkeeping/ato-bas-quarter-aggregation-data.html",Table:"ato-bas-quarter-aggregation",transaction_table:'transaction',form_module:"ato-bas-quarter-aggregation-form",router:1,tags:"bookkeeping,finance"},
-        "ato-bas-quarter-aggregation-form":     {url:"$H/b/bookkeeping/ato-bas-quarter-aggregation-form.html",Table:"ato-bas-quarter-aggregation",transaction_table:'transaction',tags:"bookkeeping,finance"},
-        "income-expense-month-aggregation-data":{url:"$H/b/bookkeeping/income-expense-month-aggregation-data.html",Table:"income-expense-month-aggregation", transaction_table:'transaction',form_module:"income-expense-month-aggregation-form",router:1,tags:"bookkeeping,finance"},
-        "income-expense-month-aggregation-form":{url:"$H/b/bookkeeping/income-expense-month-aggregation-form.html",Table:"income-expense-month-aggregation", transaction_table:'transaction',tags:"bookkeeping,finance"},
-        "item-month-aggregation-data":          {url:"$H/b/bookkeeping/item-month-aggregation-data.html",Table:"item-month-aggregation", transaction_table:'transaction',form_module:"item-month-aggregation-form",router:1,tags:"bookkeeping,finance"},
-        "item-month-aggregation-form":          {url:"$H/b/bookkeeping/item-month-aggregation-form.html",Table:"item-month-aggregation", transaction_table:'transaction',tags:"bookkeeping,finance"},
-        "income-expense-chart":                 {url:"$H/b/bookkeeping/income-expense-chart.html",Table:"income-expense-month-aggregation",router:1,tags:"bookkeeping,finance"},
-        "item-chart":                           {url:"$H/b/bookkeeping/item-chart.html",Table:"item-month-aggregation",router:1,tags:"bookkeeping,finance"},
+        "transaction-bas-data":   		    {url:"$H/b/bookkeeping/transaction-bas-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping"},
+        "transaction-tax-return-data":      {url:"$H/b/bookkeeping/transaction-tax-return-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping"},
+        "transaction-data":    			    {url:"$H/b/bookkeeping/transaction-data.html",Table:"transaction",form_module:"transaction-form",router:1,tags:"bookkeeping"},
+        "transaction-form":    			    {url:"$H/b/bookkeeping/transaction-form.html",Table:"transaction",item_table:'predefined-transaction-item',tags:"bookkeeping"},
+        "ato-bas-quarter-aggregation-data":     {url:"$H/b/bookkeeping/ato-bas-quarter-aggregation-data.html",Table:"ato-bas-quarter-aggregation",transaction_table:'transaction',form_module:"ato-bas-quarter-aggregation-form",router:1,tags:"bookkeeping"},
+        "ato-bas-quarter-aggregation-form":     {url:"$H/b/bookkeeping/ato-bas-quarter-aggregation-form.html",Table:"ato-bas-quarter-aggregation",transaction_table:'transaction',tags:"bookkeeping"},
+        "income-expense-month-aggregation-data":{url:"$H/b/bookkeeping/income-expense-month-aggregation-data.html",Table:"income-expense-month-aggregation", transaction_table:'transaction',form_module:"income-expense-month-aggregation-form",router:1,tags:"bookkeeping"},
+        "income-expense-month-aggregation-form":{url:"$H/b/bookkeeping/income-expense-month-aggregation-form.html",Table:"income-expense-month-aggregation", transaction_table:'transaction',tags:"bookkeeping"},
+        "item-month-aggregation-data":          {url:"$H/b/bookkeeping/item-month-aggregation-data.html",Table:"item-month-aggregation", transaction_table:'transaction',form_module:"item-month-aggregation-form",router:1,tags:"bookkeeping"},
+        "item-month-aggregation-form":          {url:"$H/b/bookkeeping/item-month-aggregation-form.html",Table:"item-month-aggregation", transaction_table:'transaction',tags:"bookkeeping"},
+        "income-expense-chart":                 {url:"$H/b/bookkeeping/income-expense-chart.html",Table:"income-expense-month-aggregation",router:1,tags:"bookkeeping"},
+        "item-chart":                           {url:"$H/b/bookkeeping/item-chart.html",Table:"item-month-aggregation",router:1,tags:"bookkeeping"},
     }
     url_replace(modules,"bookkeeping-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------

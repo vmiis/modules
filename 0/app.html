@@ -10,9 +10,8 @@
         $vm.default_title="Modular distributed web application";
         //------------------------------------
         var ready1=function(){
-            $('body').append("<u id='vm_sourcecode' style='position:fixed; top:"+($('#header').outerHeight()+3)+"px;right:10px;font-size:11px;color:#888;cursor:pointer'>Source code of current module</u>");
             var set_layout=function(){
-                $vm.min_height=$(window).height();
+                $vm.min_height=$(window).height()-$('#header').outerHeight();
                 $('#content').css('min-height',$vm.min_height);
                 $('#content').css('padding-top',$('#header').outerHeight());
             }
@@ -20,27 +19,29 @@
             set_layout();
             //-----------------------------------------
             $vm.show=function(m_name){
+                var nm="";
+                var ns=window.location.href.split('?/');
+                if(ns.length>1) nm=ns[1].split('&')[0].replace('-data','').replace(/-/g,' ');
                 document.title=$vm.default_title;
+                if(nm!=""){
+                    var name=nm.charAt(0).toUpperCase() + nm.slice(1)
+                    document.title=name+" | "+$vm.default_title;
+                }
                 $("meta[name='description']").attr("content", "A single page application with shared reusable modules distributed on different static web servers around the world and maintained by different people with different skills!");
                 $("body").removeClass();
                 $("body").addClass('body_background_default');
                 $vm.active_id=undefined;
-                if(m_name!=undefined) $vm.active_id=$vm.module_list[m_name].id;
+                $vm.active_name=undefined;
+                if(m_name!=undefined){ $vm.active_id=$vm.module_list[m_name].id; $vm.active_name=m_name; }
                 if(m_name!=undefined && $vm.module_list[m_name].show!=undefined) $vm.module_list[m_name].show();
                 if($vm.active_id!=undefined){
-                    $('#vm_sourcecode').off('click').on('click',function(){
-                        var url=$vm.module_list[m_name].url;
-                        window.open($vm.module_list[m_name].url.replace('__HOST__/','https://github.com/vmiis/modules/blob/master/'));
-                    })
                     $('#D'+$vm.active_id).css('height','unset');
                     $('#D'+$vm.active_id).css('min-height',($(window).height()-$('#header').outerHeight())+"px");
-                    $('#D'+$vm.active_id).css('overflow','unset');
+                    $('#D'+$vm.active_id).css('overflow','hidden');
                     $('#D'+$vm.active_id).css('overflow-x','auto');
-                    if(m_name=='home') $('#D'+$vm.active_id).css('height',$vm.min_height+"px");
                 }
             }
             //------------------------------------
-            //$vm.show('home');
             window.onresize=function(){set_layout();}
             //------------------------------------
             $vm.init(function(){
@@ -49,6 +50,7 @@
             })
             //------------------------------------
             if($vm.first_module!=undefined) $vm.show($vm.first_module);
+            //------------------------------------
         }
         //-------------------------------------
         var I=0; var loop_1=setInterval(function (){
