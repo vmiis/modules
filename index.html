@@ -48,6 +48,7 @@
         $vm.app_modules=[
             //you can add a js file that will add mmodules to the $vm.module_list
             "$H/module-list.js",
+            "$H/module-list-bookkeeping.js",
         ]
         for(i in $vm.app_modules) $vm.app_modules[i]=$vm.app_modules[i].replace('$H',$vm.hosting_path);
         //------------------------------------
