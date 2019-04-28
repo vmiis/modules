@@ -18,7 +18,7 @@
     </body>
     <script boot-up>
         //------------------------------------
-        $vm={};$vm.ver=[0.06,0.05]; //increase ver[0] if any module changed, increase ver[1] if vm.js changed
+        $vm={};$vm.ver=[0.07,0.05]; //increase ver[0] if any module changed, increase ver[1] if vm.js changed
         $vm.debug=1;
         //------------------------------------
         //setup modules location
@@ -50,9 +50,12 @@
         $vm.app_modules=[
             //you can add a js file that will add mmodules to the $vm.module_list
             "$H/module-list.js",
-            "$H/module-list-bookkeeping.js",
+            "$H/bookkeeping.js",
             "$H/invoice-management.js",
             "$H/purchase-order.js",
+            "$H/room-booking.js",
+            "$H/car-booking.js",
+            "$H/equipment-booking.js",
         ]
         for(i in $vm.app_modules) $vm.app_modules[i]=$vm.app_modules[i].replace('$H',$vm.hosting_path);
         //------------------------------------

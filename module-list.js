@@ -252,43 +252,6 @@
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
-    //car booking
-    var modules={
-        "car-booking-record-data":    	{url:"$H/c/car-booking-record-data.html",Table:"car-booking-record",form_module:"car-booking-record-form",router:1},
-        "car-booking-record-form":    	{url:"$H/c/car-booking-record-form.html",Table:"car-booking-record"},
-        "car-data":      	  			{url:"$H/c/car-data.html",Table:"car",form_module:"car-form",router:1},
-        "car-form":      	  			{url:"$H/c/car-form.html",Table:"car"},
-        "car-booking":   			    {url:"$H/c/car-booking.html",Table:"car","booking_form":"car-booking-record-form",router:1},
-        "car-booking-calendar": 	    {url:"$H/c/car-booking-calendar.html",Table:"car-booking-record",
-                                            "booking":"car-booking","booking_form":"car-booking-record-form",router:1},
-    }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
-    //-------------------------------------------------------------------------------------
-    //room booking
-    var modules={
-        "room-booking-record-data":    	{url:"$H/r/room-booking-record-data.html",Table:"room-booking-record",form_module:"room-booking-record-form",router:1},
-        "room-booking-record-form":    	{url:"$H/r/room-booking-record-form.html",Table:"room-booking-record"},
-        "room-data":      	  			{url:"$H/r/room-data.html",Table:"room",form_module:"room-form",router:1},
-        "room-form":      	  			{url:"$H/r/room-form.html",Table:"room"},
-        "room-booking":   			    {url:"$H/r/room-booking.html",Table:"room","booking_form":"room-booking-record-form",router:1},
-        "room-booking-calendar": 	    {url:"$H/r/room-booking-calendar.html",Table:"room-booking-record",
-                                            "booking":"room-booking","booking_form":"room-booking-record-form",router:1},
-    }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
-    //-------------------------------------------------------------------------------------
-    //equipment booking
-    var modules={
-        "equipment-booking-record-data":   	{url:"$H/e/equipment-booking-record-data.html",Table:"equipment-booking-record",form_module:"equipment-booking-record-form",router:1},
-        "equipment-booking-record-form":   	{url:"$H/e/equipment-booking-record-form.html",Table:"equipment-booking-record"},
-        "equipment-data":      	  			{url:"$H/e/equipment-data.html",Table:"equipment",form_module:"equipment-form",router:1},
-        "equipment-form":      	  			{url:"$H/e/equipment-form.html",Table:"equipment"},
-        "equipment-booking":   			    {url:"$H/e/equipment-booking.html",Table:"equipment","booking_form":"equipment-booking-record-form",router:1},
-        "equipment-booking-calendar": 	    {url:"$H/e/equipment-booking-calendar.html",Table:"equipment-booking-record",
-                                                "booking":"equipment-booking","booking_form":"equipment-booking-record-form",router:1},
-        "equipment-booking-app":   			{url:"$H/e/equipment-booking/index.html"},
-    }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
-    //-------------------------------------------------------------------------------------
     //clinical trials
     var modules={
         "participant-data":   		        {url:"$H/c/clinical-trials/participant-data.html",Table:"participant",form_module:"participant-form",router:1,
