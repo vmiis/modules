@@ -209,6 +209,7 @@
         "surveyjs-data":                {url:"$H/s/surveyjs-data.html",Table:"surveyjs-vm",form_module:"surveyjs-form",router:1},
         "surveyjs-form":                {url:"$H/s/surveyjs-form.html",Table:"surveyjs-vm"},
         "sleep-fix-homepage":           {url:"$H/s/sleep-fix-homepage.html"},
+        "success-page":  		   		{url:"$H/s/success.html",router:1},
 
         "text-input-data":    			{url:"$H/t/text-input-data.html",Table:"text-input",form_module:"text-input-form",router:1},
         "text-input-form":    			{url:"$H/t/text-input-form.html",Table:"text-input"},
