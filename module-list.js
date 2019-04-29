@@ -9,11 +9,21 @@
         } 
     }
     //-------------------------------------------------------------------------------------
+    //marketing
+    var modules={
+        "about":  		  	  			{url:"$H/a/about.html",router:1,name:'Clinic services',tags:'marketing'},
+        "contact-us-data":  			{url:"$H/c/contact-us-data.html",Table:"ccontact-us-vm",form_module:"contact-us-form"},
+        "contact-us-form":  			{url:"$H/c/contact-us-form.html",Table:"ccontact-us-vm",tags:'marketing'},
+        "contact-us-form-01":  			{url:"$H/c/contact-us-form-01.html",Table:"ccontact-us-vm",tags:'marketing'},
+        "contact-us-form-02":  			{url:"$H/c/contact-us-form-02.html",Table:"ccontact-us-vm",tags:'marketing'},
+        "contact-us-form-03":  			{url:"$H/c/contact-us-form-03.html",Table:"ccontact-us-vm",tags:'marketing'},
+    }
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    //-------------------------------------------------------------------------------------
     //generic
     var modules={
-        "2-columns-contents": 			{url:"$H/2/2-columns-contents.html",router:1},
+        "2-columns-contents": 			        {url:"$H/2/2-columns-contents.html",router:1},
 
-        "about":  		  	  			        {url:"$H/a/about.html",router:1},
         "about-vmiis":    			            {url:"$H/a/about-vmiis.html",router:1},
         "autocomplete-data":  			        {url:"$H/a/autocomplete-data.html",Table:"autocomplete",form_module:"autocomplete-form",router:1},
         "autocomplete-form":  			        {url:"$H/a/autocomplete-form.html",Table:"autocomplete"},
@@ -31,6 +41,7 @@
         //"bookkeeping-workflow":  			    {url:"$H/b/bookkeeping/home.html",router:1},
         "bookkeeping-panel":  			        {url:"$H/b/bookkeeping-panel.html",router:1},
         "bookkeeping-home":  			        {url:"$H/b/bookkeeping/home.html",router:1},
+        "contact-us-panel":  			{url:"$H/c/contact-us-panel.html",Table:"ccontact-us-vm",tags:'marketing'},
         "clinical-trials-data-entry": 	{url:"$H/c/clinical-trials-data-entry.html"},
         "carousel":  		  			{url:"$H/c/carousel.html",router:1},
         "checkbox-data":      			{url:"$H/c/checkbox-data.html",Table:"checkbox",form_module:"checkbox-form",router:1},
@@ -40,12 +51,6 @@
         "color-data":      	  			{url:"$H/c/color-data.html",Table:"color",form_module:"color-form",router:1},
         "color-form":      	  			{url:"$H/c/color-form.html",Table:"color"},
         "coming-soon": 		            {url:"$H/u/under-construction.html",text:"Coming soon...",router:1},
-        "contact-us-data":  			{url:"$H/c/contact-us-data.html",Table:"ccontact-us-vm",form_module:"contact-us-form"},
-        "contact-us-form":  			{url:"$H/c/contact-us-form.html",Table:"ccontact-us-vm"},
-        "contact-us-form-01":  			{url:"$H/c/contact-us-form-01.html",Table:"ccontact-us-vm"},
-        "contact-us-form-02":  			{url:"$H/c/contact-us-form-02.html",Table:"ccontact-us-vm"},
-        "contact-us-form-03":  			{url:"$H/c/contact-us-form-03.html",Table:"ccontact-us-vm"},
-        "contact-us-panel":  			{url:"$H/c/contact-us-panel.html",Table:"ccontact-us-vm"},
         "column-data":  	            {url:"$H/c/column-data.html",Table:"column",form_module:"column-form",router:1},
         "column-form":  	            {url:"$H/c/column-form.html",Table:"column"},
         "column-chart":  	            {url:"$H/c/column-chart.html",Table:"column",router:1},
@@ -153,8 +158,8 @@
 
         "particle":  		  			{url:"$H/p/particle.html",router:1},
         "particle-panel":  	  			{url:"$H/p/particle-panel.html",router:1},
-        "prices":  		  	  			{url:"$H/p/prices.html",router:1},
-        "price-02":  		  	 		{url:"$H/p/price-02.html",router:1},
+        "prices":  		  	  			{url:"$H/p/prices.html",router:1,name:"Our gym prices",tags:"marketing"},
+        "price-02":  		  	 		{url:"$H/p/price-02.html",router:1,name:"Our clinic prices",tags:"marketing"},
         "psqi-data":                    {url:"$H/p/pittsburgh-sleep-quality-index-data.html",Table:"psqi",form_module:"psqi-form"},
         "psqi-form":   			        {url:"$H/p/pittsburgh-sleep-quality-index-form.html",Table:"psqi"},
 
@@ -217,7 +222,7 @@
         "tom-knowledge-base-form":    	{url:"https://www.tomliweb.com/modules/t/tom-knowledge-base-form.html",Table:"tom-knowledge-base"},
         "text-input-form":    			{url:"$H/t/text-input-form.html",Table:"text-input"},
         
-        "trainers":  		  			{url:"$H/t/trainers.html",router:1},
+        "trainers":  		  			{url:"$H/t/trainers.html",router:1,name:"Gym Trainers",tags:"marketing"},
         "template-001":  		  		{url:"$H/t/template-001/index.html"},
         "template-002":  		  		{url:"$H/t/template-002/index.html"},
         "template-003":  		  		{url:"$H/t/template-003/index.html"},
