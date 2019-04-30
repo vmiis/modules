@@ -110,6 +110,7 @@
         "document-data":	 	        {url:"$H/d/document-data.html",Table:"document-demo",form_module:"document-form",router:1},
         "document-form":	 	        {url:"$H/d/document-form.html",Table:"document-demo"},
         "document-panel":	 	        {url:"$H/d/document-panel.html",Table:"document-demo",form_module:"document-form",router:1},
+        "document-page":	 	        {url:"$H/d/document-page.html",Table:"document-demo",router:1},
 
         "email-setup-data":      	  	{url:"$H/e/email-setup-data.html",Table:"email-setup",form_module:"email-setup-form"},
         "email-setup-form":      	  	{url:"$H/e/email-setup-form.html",Table:"email-setup"},         
@@ -239,18 +240,6 @@
         "tom-knowledge-base-form":    	{url:"https://www.tomliweb.com/modules/t/tom-knowledge-base-form.html",Table:"tom-knowledge-base"},
         "text-input-form":    			{url:"$H/t/text-input-form.html",Table:"text-input"},
         
-        "template-001":  		  		{url:"$H/t/template-001/index.html"},
-        "template-002":  		  		{url:"$H/t/template-002/index.html"},
-        "template-003":  		  		{url:"$H/t/template-003/index.html"},
-        "template-004":  		  		{url:"$H/t/template-004/index.html"},
-        "template-005":  		  		{url:"$H/t/template-005/index.html"},
-        "template-006":  		  		{url:"$H/t/template-006/index.html"},
-        "template-007":  		  		{url:"$H/t/template-007/index.html"},
-        "template-008":  		  		{url:"$H/t/template-008/index.html"},
-        "template-009":  		  		{url:"$H/t/template-009/index.html"},
-        "template-010":  		  		{url:"$H/t/template-010/index.html"},
-        
-
         "under-construction": 		    {url:"$H/u/under-construction.html",text:"Under Construction",router:1},
 
         "visit-date-data":    			{url:"$H/v/visit-date-data.html",Table:"visit-date",form_module:"visit-date-form"},
@@ -288,8 +277,8 @@
         
         "actiwatch-data":	                {url:"$H/c/clinical-trials/tasks/actiwatch-data.html",Table:"actiwatch-wapp",form_module:"actiwatch-form"},
         "actiwatch-form":	                {url:"$H/c/clinical-trials/tasks/actiwatch-form.html",Table:"actiwatch-wapp"},
-        "adverse-event-data":	            {url:"$H/c/clinical-trials/tasks/adverse-event-data.html",Table:"adverse-eevent-wapp",form_module:"adverse-eevent-form"},
-        "adverse-eevent-form":	            {url:"$H/c/clinical-trials/tasks/adverse-event-form.html",Table:"adverse-eevent-wapp"},
+        "adverse-event-data":	            {url:"$H/c/clinical-trials/tasks/adverse-event-data.html",Table:"adverse-event-wapp",form_module:"adverse-event-form"},
+        "adverse-event-form":	            {url:"$H/c/clinical-trials/tasks/adverse-event-form.html",Table:"adverse-event-wapp"},
         "background-information-data":      {url:"$H/w/wapp-tasks/background-information-data.html",Table:"background-information-wapp",form_module:"background-information-form"},
         "background-information-form":      {url:"$H/w/wapp-tasks/background-information-form.html",Table:"background-information-wapp",task_name:"Background information"},
         "consent-data":  			        {url:"$H/c/clinical-trials/tasks/consent-data.html",Table:"consent-wapp",form_module:"consent-form"},
@@ -547,11 +536,5 @@
         "appointment-form":     { url: "$H/i/isleephealth/appointment-form.html", Table: "appointment"},
     }
     url_replace(modules,"isleephealth-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
-    //-------------------------------------------------------------------------------------
-    //template-001
-    var modules={
-        "footer": {url:"$H/t/template-001/modules/footer.html"},
-    }
-    url_replace(modules,"template-001-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
 })();
