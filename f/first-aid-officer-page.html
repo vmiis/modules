@@ -1,16 +1,10 @@
 
 <div id=D__ID>
-	<div class='g_section_title'>
-		The following section shows "FIRST AID OFFICER" part in a company intranet.
-		<div class=g_section_admin>
-			<u id=admin__ID style='cursor:pointer'>Admin of this section</u>
-		</div>
-	</div>
 	<div id="section__ID">
 		<div id=color__ID>
 			<div class="container">
 				<div class="row section-title">
-					<h2 style="font-family: 'Indie Flower', cursive;">First Aid Officer</h2>
+					<h2 style="font-family: 'Indie Flower', cursive;color:#fff;">First Aid Officer</h2>
 					<hr>
 					<div class="clearfix"></div>
 				</div>
@@ -80,9 +74,6 @@
 					}
 				})
 			}
-			$('#admin__ID').on('click',function(){
-				$vm.load_module('first-aid-officer-data','',{});
-			})
 			$('#D__ID .href__ID a').on('click',function(e){
 				e.preventDefault();
 				var i=$(this).attr('href');
@@ -90,14 +81,13 @@
 			})
 			//---------------------------------------
 			$('#D__ID').on('load',function(){
-				request_url();
-			})
-			//---------------------------------------
-			$('#D__ID').on('show',function(){
-				if($vm.g_portal_first_aid_officer_section_refresh==1){
-					$vm.g_portal_first_aid_officer_section_refresh=0;
-					request_url();
-				}
+                if($vm.init_status==1) request_url();
+                else{
+                    var I=0, loop=setInterval(function (){
+                        if($vm.init_status==1){  clearInterval(loop); request_url(); }
+                        I++; if(I>50){ clearInterval(loop); alert("Network error.");}
+                    },100);
+                }
 			})
 			//---------------------------------------
 		}
@@ -105,17 +95,22 @@
 	<style>
 		#D__ID{
 			height:100%;
-			overflow:auto;
 			animation: vm_module_fadein 1.0s;
-			/*background-color:#fff;*/
+            padding-top:120px;
 	    }
+        @media screen and (max-width: 1200px) {
+            #D__ID{
+                padding-top:10px;
+            }
+        }
 	    #section__ID{
-			background: url(__CURRENT_PATH__/first-aid-officer.png) no-repeat center center;
-			background-size: cover;
+            max-width:1200px;
+            margin-left:auto;
+            margin-right:auto;
 	    }
 	    #color__ID{
 			padding: 100px 0;
-    		background:rgba(255,255,255,0.95);
+    		background:rgba(10,50,74,0.69);
 			height: 100%;
 	    }
 		#D__ID hr {

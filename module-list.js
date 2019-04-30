@@ -12,11 +12,60 @@
     //marketing
     var modules={
         "about":  		  	  			{url:"$H/a/about.html",router:1,name:'Clinic services',tags:'marketing'},
-        "contact-us-data":  			{url:"$H/c/contact-us-data.html",Table:"ccontact-us-vm",form_module:"contact-us-form"},
+        "contact-us-data":  			{url:"$H/c/contact-us-data.html",Table:"ccontact-us-vm",form_module:"contact-us-form",tags:"marketing"},
         "contact-us-form":  			{url:"$H/c/contact-us-form.html",Table:"ccontact-us-vm",tags:'marketing'},
         "contact-us-form-01":  			{url:"$H/c/contact-us-form-01.html",Table:"ccontact-us-vm",tags:'marketing'},
         "contact-us-form-02":  			{url:"$H/c/contact-us-form-02.html",Table:"ccontact-us-vm",tags:'marketing'},
         "contact-us-form-03":  			{url:"$H/c/contact-us-form-03.html",Table:"ccontact-us-vm",tags:'marketing'},
+        "prices":  		  	  			{url:"$H/p/prices.html",router:1,name:"Our gym prices",tags:"marketing"},
+        "price-02":  		  	 		{url:"$H/p/price-02.html",router:1,name:"Our clinic prices",tags:"marketing"},
+        "portfolio":	                {url:"$H/c/components/portfolio.html",router:1,tags:"marketing"},
+        "services":  	  	  			{url:"$H/s/services.html",router:1,tags:"marketing"},
+        "success-page":  		   		{url:"$H/s/success.html",router:1,tags:"marketing"},
+        "trainers":  		  			{url:"$H/t/trainers.html",router:1,name:"Gym Trainers",tags:"marketing"},
+    }
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    //-------------------------------------------------------------------------------------
+    //form field
+    var modules={
+        "checkbox-data":      			{url:"$H/c/checkbox-data.html",Table:"checkbox",form_module:"checkbox-form",router:1,tags:'form field'},
+        "checkbox-form":      			{url:"$H/c/checkbox-form.html",Table:"checkbox",tags:'form field'},
+        "color-data":      	  			{url:"$H/c/color-data.html",Table:"color",form_module:"color-form",router:1,tags:'form field'},
+        "color-form":      	  			{url:"$H/c/color-form.html",Table:"color",tags:'form field'},
+        "date-data":      	  			{url:"$H/d/date-data.html",Table:"date-vm",form_module:"date-form",router:1,tags:'form field'},
+        "date-form":      	 		 	{url:"$H/d/date-form.html",Table:"date-vm",tags:'form field'},          
+        "file-data":      	  			{url:"$H/f/file-data.html",Table:"file",form_module:"file-form",router:1,tags:'form field'},
+        "file-form":      	  			{url:"$H/f/file-form.html",Table:"file",tags:'form field'},
+        "radio-data":      	  			{url:"$H/r/radio-data.html",Table:"radio",form_module:"radio-form",router:1,tags:'form field'},
+        "radio-form":      	  			{url:"$H/r/radio-form.html",Table:"radio",tags:'form field'},
+        "select-data":        			{url:"$H/s/select-data.html",Table:"select",form_module:"select-form",router:1,tags:'form field'},
+        "select-form":        			{url:"$H/s/select-form.html",Table:"select",tags:'form field'},
+        "text-input-data":    			{url:"$H/t/text-input-data.html",Table:"text-input",form_module:"text-input-form",router:1,tags:'form field'},
+        "text-input-form":    			{url:"$H/t/text-input-form.html",Table:"text-input",tags:'form field'},
+    }
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    //-------------------------------------------------------------------------------------
+    //landing page background
+    var modules={
+        "bubble":  		  	  			{url:"$H/b/bubble.html",router:1,tags:'landing page background'},
+        "fountains-illumination":		{url:"$H/f/fountains-illumination.html",router:1,tags:'landing page background'},
+        "nasa":  		  	  			{url:"$H/n/nasa.html",router:1,tags:'landing page background'},
+        "nyan":  		  	  			{url:"$H/n/nyan.html",router:1,tags:'landing page background'},
+        "particle":  		  			{url:"$H/p/particle.html",router:1,tags:'landing page background'},
+        "snow":  		  	  			{url:"$H/s/snow.html",router:1,tags:'landing page background'},
+    }
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    //-------------------------------------------------------------------------------------
+    //technology
+    var modules={
+        "angularjs-hello-world":	            {url:"$H/a/angularjs-hello-world.html",router:1,tags:'technology'},
+        "reactjs-hello-world":                  {url:"$H/r/reactjs-hello-world.html",router:1,tags:'technology'},
+        "reactjs-tic-tac-toe-passing-value":    {url:"$H/r/reactjs-tic-tac-toe-passing-value.html",router:1,tags:'technology'},
+        "reactjs-tic-tac-toe-starter":          {url:"$H/r/reactjs-tic-tac-toe-starter.html",router:1,tags:'technology'},
+        "formio-data":                          {url:"$H/f/formio-data.html",Table:"formio-vm",form_module:"formio-form",router:1,tags:'technology'},
+        "formio-form":                          {url:"$H/f/formio-form.html",Table:"formio-vm",tags:'technology'},
+        "surveyjs-data":                        {url:"$H/s/surveyjs-data.html",Table:"surveyjs-vm",form_module:"surveyjs-form",router:1,tags:'technology'},
+        "surveyjs-form":                        {url:"$H/s/surveyjs-form.html",Table:"surveyjs-vm",tags:'technology'},
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
@@ -27,7 +76,6 @@
         "about-vmiis":    			            {url:"$H/a/about-vmiis.html",router:1},
         "autocomplete-data":  			        {url:"$H/a/autocomplete-data.html",Table:"autocomplete",form_module:"autocomplete-form",router:1},
         "autocomplete-form":  			        {url:"$H/a/autocomplete-form.html",Table:"autocomplete"},
-        "angularjs-hello-world":	            {url:"$H/a/angularjs-hello-world.html",router:1},
         "accountant-list-data":  	            {url:"$H/e/email-list-data.html",Table:"accountant-list",form_module:"accountant-list-form",router:1},
         "accountant-list-form":  	            {url:"$H/e/email-list-form.html",Table:"accountant-list"},
         "australian-gdp-growth":	            {url:"$H/a/australian-gdp-growth.html",router:1},
@@ -37,19 +85,14 @@
         "bar-data":  	                        {url:"$H/b/bar-data.html",Table:"bar",form_module:"bar-form",router:1},
         "bar-form":  	                        {url:"$H/b/bar-form.html",Table:"bar"},
         "bar-chart":  	                        {url:"$H/b/bar-chart.html",Table:"bar",router:1},
-        "bubble":  		  	  			        {url:"$H/b/bubble.html",router:1},
         //"bookkeeping-workflow":  			    {url:"$H/b/bookkeeping/home.html",router:1},
         "bookkeeping-panel":  			        {url:"$H/b/bookkeeping-panel.html",router:1},
         "bookkeeping-home":  			        {url:"$H/b/bookkeeping/home.html",router:1},
         "contact-us-panel":  			{url:"$H/c/contact-us-panel.html",Table:"ccontact-us-vm",tags:'marketing'},
         "clinical-trials-data-entry": 	{url:"$H/c/clinical-trials-data-entry.html"},
         "carousel":  		  			{url:"$H/c/carousel.html",router:1},
-        "checkbox-data":      			{url:"$H/c/checkbox-data.html",Table:"checkbox",form_module:"checkbox-form",router:1},
-        "checkbox-form":      			{url:"$H/c/checkbox-form.html",Table:"checkbox"},
         "consent-data":  	  		    {url:"$H/c/consent-data.html",Table:"consent",form_module:"consent-form"},
         "consent-form":  	  		    {url:"$H/c/consent-form.html",Table:"consent"},
-        "color-data":      	  			{url:"$H/c/color-data.html",Table:"color",form_module:"color-form",router:1},
-        "color-form":      	  			{url:"$H/c/color-form.html",Table:"color"},
         "coming-soon": 		            {url:"$H/u/under-construction.html",text:"Coming soon...",router:1},
         "column-data":  	            {url:"$H/c/column-data.html",Table:"column",form_module:"column-form",router:1},
         "column-form":  	            {url:"$H/c/column-form.html",Table:"column"},
@@ -61,8 +104,6 @@
         "doctor":      	 		 	    {url:"$H/d/doctor.html",router:1},          
         "d-c-t-data":      	  			{url:"$H/d/data-collection-template-data.html","App":"demo",Table:"template",form_module:"d-c-t-form",router:1},
         "d-c-t-form":      	 		 	{url:"$H/d/data-collection-template-form.html","App":"demo",Table:"template"},
-        "date-data":      	  			{url:"$H/d/date-data.html",Table:"date-vm",form_module:"date-form",router:1},
-        "date-form":      	 		 	{url:"$H/d/date-form.html",Table:"date-vm"},          
         "dass-data":	 	            {url:"$H/d/depression-anxiety-stress-scales-data.html",Table:"dass",form_module:"dass-form"},
         "dass-form":	 	            {url:"$H/d/depression-anxiety-stress-scales-form.html",Table:"dass"},
 
@@ -89,18 +130,13 @@
                                         },         
         "ffs-data":      	  			{url:"$H/f/flinders-fatigue-scale-data.html",Table:"ffs",form_module:"ffs-form"},
         "ffs-form":      	  			{url:"$H/f/flinders-fatigue-scale-form.html",Table:"ffs"},
-        "file-data":      	  			{url:"$H/f/file-data.html",Table:"file",form_module:"file-form",router:1},
-        "file-form":      	  			{url:"$H/f/file-form.html",Table:"file"},
         "fss-data":      	  			{url:"$H/f/fatigue-severity-scale-data.html",Table:"fss",form_module:"fss-form"},
         "fss-form":      	  			{url:"$H/f/fatigue-severity-scale-form.html",Table:"fss"},
         "form-maker":                   {url:"$H/f/form-maker.html",router:1},
-        "fountains-illumination":		{url:"$H/f/fountains-illumination.html",router:1},
         //"frame":                        {url:"$H/f/frame.html"},
         "form-text-input-fields":       {url:"$H/f/form-text-input-fields.html",router:1},
         "form-sql-fields":              {url:"$H/f/form-sql-fields.html",router:1},
         "fitness":                      {url:"$H/f/fitness.html",router:1},
-        "formio-data":                  {url:"$H/f/formio-data.html",Table:"formio-vm",form_module:"formio-form",router:1},
-        "formio-form":                  {url:"$H/f/formio-form.html",Table:"formio-vm"},
         "forex-overview":	            {url:"$H/f/forex-overview.html",router:1},
 
         
@@ -137,9 +173,7 @@
 
 
         "notes":  		  	  			{url:"$H/n/notes.html"},
-        "nasa":  		  	  			{url:"$H/n/nasa.html",router:1},
         "not-ready": 		            {url:"$H/u/under-construction.html",text:"Not Ready",router:1},
-        "nyan":  		  	  			{url:"$H/n/nyan.html",router:1},
 
         "online-questionnaire-setup": 	    {url:"$H/o/online-questionnaire-setup.html",Table:"participant"},
         
@@ -156,10 +190,7 @@
 
 
 
-        "particle":  		  			{url:"$H/p/particle.html",router:1},
         "particle-panel":  	  			{url:"$H/p/particle-panel.html",router:1},
-        "prices":  		  	  			{url:"$H/p/prices.html",router:1,name:"Our gym prices",tags:"marketing"},
-        "price-02":  		  	 		{url:"$H/p/price-02.html",router:1,name:"Our clinic prices",tags:"marketing"},
         "psqi-data":                    {url:"$H/p/pittsburgh-sleep-quality-index-data.html",Table:"psqi",form_module:"psqi-form"},
         "psqi-form":   			        {url:"$H/p/pittsburgh-sleep-quality-index-form.html",Table:"psqi"},
 
@@ -179,15 +210,10 @@
         
         "quest-panel":                  {url:"$H/o/online-questionnaire-panel.html"},
 
-        "radio-data":      	  			{url:"$H/r/radio-data.html",Table:"radio",form_module:"radio-form",router:1},
-        "radio-form":      	  			{url:"$H/r/radio-form.html",Table:"radio"},
         "room-booking-workflow":  		{url:"$H/r/room-booking-workflow.html",router:1},
         
 
         
-        "reactjs-hello-world":                  {url:"$H/r/reactjs-hello-world.html",router:1},
-        "reactjs-tic-tac-toe-passing-value":    {url:"$H/r/reactjs-tic-tac-toe-passing-value.html",router:1},
-        "reactjs-tic-tac-toe-starter":          {url:"$H/r/reactjs-tic-tac-toe-starter.html",router:1},
         
 
         "sales-data":        			{url:"$H/s/sales-data.html",Table:"sales-vm",form_module:"sales-form",router:1},
@@ -203,26 +229,16 @@
         "sales-monthly-aggregation-chart": {url:"$H/s/sales-monthly-aggregation-chart.html",Table:"sales-monthlt-aggegation-vm",router:1},
 
         "screen-failure":      			{url:"$H/s/screen-failure-thank-you-page.html",router:1},
-        "select-data":        			{url:"$H/s/select-data.html",Table:"select",form_module:"select-form",router:1},
-        "select-form":        			{url:"$H/s/select-form.html",Table:"select"},
-        "services":  	  	  			{url:"$H/s/services.html",router:1},
         "short-page":  		  	 		{url:"$H/s/short-page.html",router:1},
-        "snow":  		  	  			{url:"$H/s/snow.html",router:1},
         "survey-data":      	  		{url:"$H/s/survey-data.html",Table:"survey-vm",form_module:"survey-form"},
         "survey-form":      	  		{url:"$H/s/survey-form.html",Table:"survey-vm"},         
         "survey-panel":      	  		{url:"$H/s/survey-panel.html",Table:"survey-vm"},         
-        "surveyjs-data":                {url:"$H/s/surveyjs-data.html",Table:"surveyjs-vm",form_module:"surveyjs-form",router:1},
-        "surveyjs-form":                {url:"$H/s/surveyjs-form.html",Table:"surveyjs-vm"},
         "sleep-fix-homepage":           {url:"$H/s/sleep-fix-homepage.html"},
-        "success-page":  		   		{url:"$H/s/success.html",router:1},
 
-        "text-input-data":    			{url:"$H/t/text-input-data.html",Table:"text-input",form_module:"text-input-form",router:1},
-        "text-input-form":    			{url:"$H/t/text-input-form.html",Table:"text-input"},
         "tom-knowledge-base-data":    	{url:"https://www.tomliweb.com/modules/t/tom-knowledge-base-data.html",Table:"tom-knowledge-base",form_module:"tom-knowledge-base-form",router:1},
         "tom-knowledge-base-form":    	{url:"https://www.tomliweb.com/modules/t/tom-knowledge-base-form.html",Table:"tom-knowledge-base"},
         "text-input-form":    			{url:"$H/t/text-input-form.html",Table:"text-input"},
         
-        "trainers":  		  			{url:"$H/t/trainers.html",router:1,name:"Gym Trainers",tags:"marketing"},
         "template-001":  		  		{url:"$H/t/template-001/index.html"},
         "template-002":  		  		{url:"$H/t/template-002/index.html"},
         "template-003":  		  		{url:"$H/t/template-003/index.html"},
@@ -241,7 +257,6 @@
         "visit-date-form":    			{url:"$H/v/visit-date-form.html",Table:"visit-date"},
         
         
-        "portfolio":	                {url:"$H/c/components/portfolio.html",router:1},
         "structure":	                {url:"$H/c/components/structure.html",router:1},
         "c_services":  	  	  			{url:"$H/c/components/services.html",router:1},
 
@@ -252,6 +267,7 @@
         "first-aid-officer-data":    	{url:"$H/f/first-aid-officer-data.html",Table:"first-aid-officer-demo",form_module:"first-aid-officer-form",router:1},
         "first-aid-officer-form":    	{url:"$H/f/first-aid-officer-form.html",Table:"first-aid-officer-demo"},
         "first-aid-officer-panel":      {url:"$H/f/first-aid-officer-panel.html",router:1},
+        "first-aid-officer-page":       {url:"$H/f/first-aid-officer-page.html",router:1},
         "flat-trial":    			    {url:"$H/f/flat-trial.html",router:1},
         "flat-trial-home": 			    {url:"$H/f/flat-trial-home.html",router:1},
         "aaxsys-panel":                 {url:"$H/a/aaxsys-panel.html",router:1},
