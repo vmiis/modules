@@ -45,6 +45,18 @@
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
+    //blog
+    var modules={
+        "page-01":	    {url:"$H/p/page-01.html",router:1,tags:'blog'},
+        "page-02":	    {url:"$H/p/page-02.html",router:1,tags:'blog'},
+        "page-03":	    {url:"$H/p/page-03.html",router:1,tags:'blog'},
+        "page-04":	    {url:"$H/p/page-04.html",router:1,tags:'blog'},
+        "page-05":	    {url:"$H/p/page-05.html",router:1,tags:'blog'},
+        "short-page":  	{url:"$H/s/short-page.html",router:1,tags:'blog'},
+        "long-page":  	{url:"$H/l/long-page.html",router:1,tags:'blog'},
+    }
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    //-------------------------------------------------------------------------------------
     //landing page background
     var modules={
         "bubble":  		  	  			{url:"$H/b/bubble.html",router:1,tags:'landing page background'},
@@ -160,7 +172,6 @@
         "layout-with-fixed-header-and-scrollable-footer-index":     {url:"$H/l/layout-with-fixed-header-and-scrollable-footer/index.html"},
         "layout-with-scrollable-header-and-footer-index":           {url:"$H/l/layout-with-scrollable-header-and-footer/index.html"},
         "layout-with-side-nav-and-fixed-footer-index":              {url:"$H/l/layout-with-side-nav-and-fixed-footer/index.html"},
-        "long-page":  		  	 		                            {url:"$H/l/long-page.html",router:1},
 
         "medical-history-wf-data":      {url:"$H/m/medical-history-wf-data.html",Table:"medical-history-wf",form_module:"medical-history-wf-form"},
         "medical-history-wf-form":      {url:"$H/m/medical-history-wf-form.html",Table:"medical-history-wf"},
@@ -209,12 +220,6 @@
         "project-shq-form":         { url: "$H/p/project-shq-form.html", Table: "astn-shq-project-20003481" },
 
         
-        "page-01":	    {url:"$H/p/page-01.html",router:1},
-        "page-02":	    {url:"$H/p/page-02.html",router:1},
-        "page-03":	    {url:"$H/p/page-03.html",router:1},
-        "page-04":	    {url:"$H/p/page-04.html",router:1},
-        "page-05":	    {url:"$H/p/page-05.html",router:1},
-
 
         "quest-panel":                  {url:"$H/o/online-questionnaire-panel.html"},
 
@@ -237,7 +242,6 @@
         "sales-monthly-aggregation-chart": {url:"$H/s/sales-monthly-aggregation-chart.html",Table:"sales-monthlt-aggegation-vm",router:1},
 
         "screen-failure":      			{url:"$H/s/screen-failure-thank-you-page.html",router:1},
-        "short-page":  		  	 		{url:"$H/s/short-page.html",router:1},
         "survey-data":      	  		{url:"$H/s/survey-data.html",Table:"survey-vm",form_module:"survey-form"},
         "survey-form":      	  		{url:"$H/s/survey-form.html",Table:"survey-vm"},         
         "survey-panel":      	  		{url:"$H/s/survey-panel.html",Table:"survey-vm"},         
@@ -275,68 +279,68 @@
         "participant-data":   		        {url:"$H/c/clinical-trials/participant-data.html",Table:"participant",form_module:"participant-form",router:1,
                                                 child_panel:"panel-child-wapp",
                                                 questionnaire_setup:"online-questionnaire-setup-wapp",
-                                                online_questionnaire:"online-questionnaire-app-wapp"
+                                                online_questionnaire:"online-questionnaire-app-wapp",tags:'clinical trials'
                                             },
-        "participant-form":   		        {url:"$H/c/clinical-trials/participant-form.html",Table:"participant"},
+        "participant-form":   		        {url:"$H/c/clinical-trials/participant-form.html",Table:"participant",tags:'clinical trials'},
         
-        "actigraphy-data":	                {url:"$H/c/clinical-trials/tasks/actigraphy-data.html",Table:"actigraphy-wapp",form_module:"actigraphy-form"},
-        "actigraphy-form":	                {url:"$H/c/clinical-trials/tasks/actigraphy-form.html",Table:"actigraphy-wapp"},
+        "actigraphy-data":	                {url:"$H/c/clinical-trials/tasks/actigraphy-data.html",Table:"actigraphy-wapp",form_module:"actigraphy-form",tags:'clinical trials'},
+        "actigraphy-form":	                {url:"$H/c/clinical-trials/tasks/actigraphy-form.html",Table:"actigraphy-wapp",tags:'clinical trials'},
         
-        "actiwatch-data":	                {url:"$H/c/clinical-trials/tasks/actiwatch-data.html",Table:"actiwatch-wapp",form_module:"actiwatch-form"},
-        "actiwatch-form":	                {url:"$H/c/clinical-trials/tasks/actiwatch-form.html",Table:"actiwatch-wapp"},
-        "adverse-event-data":	            {url:"$H/c/clinical-trials/tasks/adverse-event-data.html",Table:"adverse-event-wapp",form_module:"adverse-event-form"},
-        "adverse-event-form":	            {url:"$H/c/clinical-trials/tasks/adverse-event-form.html",Table:"adverse-event-wapp"},
-        "background-information-data":      {url:"$H/w/wapp-tasks/background-information-data.html",Table:"background-information-wapp",form_module:"background-information-form"},
-        "background-information-form":      {url:"$H/w/wapp-tasks/background-information-form.html",Table:"background-information-wapp",task_name:"Background information"},
-        "consent-data":  			        {url:"$H/c/clinical-trials/tasks/consent-data.html",Table:"consent-wapp",form_module:"consent-form"},
-        "consent-form":  			        {url:"$H/c/clinical-trials/tasks/consent-form.html",Table:"consent-wapp",task_name:"Consent"},
-        "dass-data":	 	                {url:"$H/c/clinical-trials/tasks/dass-data.html",Table:"dass-wapp",form_module:"dass-form"},
-        "dass-form":	 	                {url:"$H/c/clinical-trials/tasks/dass-form.html",Table:"dass-wapp"},
-        "ess-data":       			        {url:"$H/c/clinical-trials/tasks/ess-data.html",Table:"ess-wapp",form_module:"ess-form"},
-        "ess-form":       			        {url:"$H/c/clinical-trials/tasks/ess-form.html",Table:"ess-wapp"},
-        "ethnicity-data":    		        {url:"$H/c/clinical-trials/tasks/ethnicity-self-data.html",Table:"ethnicity-wapp",form_module:"ethnicity-form"},
-        "ethnicity-form":    		        {url:"$H/c/clinical-trials/tasks/ethnicity-self-form.html",Table:"ethnicity-wapp"},
-        "family-sleep-history-data":        {url:"$H/c/clinical-trials/tasks/family-sleep-history-data.html",Table:"family-sleep-history-wapp",form_module:"family-sleep-history-form"},
-        "family-sleep-history-form":        {url:"$H/c/clinical-trials/tasks/family-sleep-history-form.html",Table:"family-sleep-history-wapp"},
-        "fosq-data":      	  		        {url:"$H/c/clinical-trials/tasks/fosq-data.html",Table:"fosq-wapp",form_module:"fosq-form"},
-        "fosq-form":      	  		        {url:"$H/c/clinical-trials/tasks/fosq-form.html",Table:"fosq-wapp"},
-        "isi-data":      	  		        {url:"$H/c/clinical-trials/tasks/isi-data.html",Table:"isi-wapp",form_module:"isi-form"},
-        "isi-form":      	  		        {url:"$H/c/clinical-trials/tasks/isi-form.html",Table:"isi-wapp"},
-        "isi2-data":      	  		        {url:"$H/c/clinical-trials/tasks/insomnia-severity-index-data.html",Table:"isi-wapp",form_module:"isi2-form"},
-        "isi2-form":      	  		        {url:"$H/c/clinical-trials/tasks/insomnia-severity-index-form.html",Table:"isi-wapp"},
-        "screening-data": 			        {url:"$H/c/clinical-trials/tasks/screening-data.html",Table:"screening",form_module:"screening-form"},
-        "screening-form": 			        {url:"$H/c/clinical-trials/tasks/screening-form.html",Table:"screening"},
-        "sdp-data":     		            {url:"$H/c/clinical-trials/tasks/sleep-disorder-patterns-data.html",Table:"sdp-wapp",form_module:"sdp-form"},
-        "sdp-form":     		            {url:"$H/c/clinical-trials/tasks/sleep-disorder-patterns-form.html",Table:"sdp-wapp"},
+        "actiwatch-data":	                {url:"$H/c/clinical-trials/tasks/actiwatch-data.html",Table:"actiwatch-wapp",form_module:"actiwatch-form",tags:'clinical trials'},
+        "actiwatch-form":	                {url:"$H/c/clinical-trials/tasks/actiwatch-form.html",Table:"actiwatch-wapp",tags:'clinical trials'},
+        "adverse-event-data":	            {url:"$H/c/clinical-trials/tasks/adverse-event-data.html",Table:"adverse-event-wapp",form_module:"adverse-event-form",tags:'clinical trials'},
+        "adverse-event-form":	            {url:"$H/c/clinical-trials/tasks/adverse-event-form.html",Table:"adverse-event-wapp",tags:'clinical trials'},
+        "background-information-data":      {url:"$H/w/wapp-tasks/background-information-data.html",Table:"background-information-wapp",form_module:"background-information-form",tags:'clinical trials'},
+        "background-information-form":      {url:"$H/w/wapp-tasks/background-information-form.html",Table:"background-information-wapp",task_name:"Background information",tags:'clinical trials'},
+        "consent-data":  			        {url:"$H/c/clinical-trials/tasks/consent-data.html",Table:"consent-wapp",form_module:"consent-form",tags:'clinical trials'},
+        "consent-form":  			        {url:"$H/c/clinical-trials/tasks/consent-form.html",Table:"consent-wapp",task_name:"Consent",tags:'clinical trials'},
+        "dass-data":	 	                {url:"$H/c/clinical-trials/tasks/dass-data.html",Table:"dass-wapp",form_module:"dass-form",tags:'clinical trials'},
+        "dass-form":	 	                {url:"$H/c/clinical-trials/tasks/dass-form.html",Table:"dass-wapp",tags:'clinical trials'},
+        "ess-data":       			        {url:"$H/c/clinical-trials/tasks/ess-data.html",Table:"ess-wapp",form_module:"ess-form",tags:'clinical trials'},
+        "ess-form":       			        {url:"$H/c/clinical-trials/tasks/ess-form.html",Table:"ess-wapp",tags:'clinical trials'},
+        "ethnicity-data":    		        {url:"$H/c/clinical-trials/tasks/ethnicity-self-data.html",Table:"ethnicity-wapp",form_module:"ethnicity-form",tags:'clinical trials'},
+        "ethnicity-form":    		        {url:"$H/c/clinical-trials/tasks/ethnicity-self-form.html",Table:"ethnicity-wapp",tags:'clinical trials'},
+        "family-sleep-history-data":        {url:"$H/c/clinical-trials/tasks/family-sleep-history-data.html",Table:"family-sleep-history-wapp",form_module:"family-sleep-history-form",tags:'clinical trials'},
+        "family-sleep-history-form":        {url:"$H/c/clinical-trials/tasks/family-sleep-history-form.html",Table:"family-sleep-history-wapp",tags:'clinical trials'},
+        "fosq-data":      	  		        {url:"$H/c/clinical-trials/tasks/fosq-data.html",Table:"fosq-wapp",form_module:"fosq-form",tags:'clinical trials'},
+        "fosq-form":      	  		        {url:"$H/c/clinical-trials/tasks/fosq-form.html",Table:"fosq-wapp",tags:'clinical trials'},
+        "isi-data":      	  		        {url:"$H/c/clinical-trials/tasks/isi-data.html",Table:"isi-wapp",form_module:"isi-form",tags:'clinical trials'},
+        "isi-form":      	  		        {url:"$H/c/clinical-trials/tasks/isi-form.html",Table:"isi-wapp",tags:'clinical trials'},
+        "isi2-data":      	  		        {url:"$H/c/clinical-trials/tasks/insomnia-severity-index-data.html",Table:"isi-wapp",form_module:"isi2-form",tags:'clinical trials'},
+        "isi2-form":      	  		        {url:"$H/c/clinical-trials/tasks/insomnia-severity-index-form.html",Table:"isi-wapp",tags:'clinical trials'},
+        "screening-data": 			        {url:"$H/c/clinical-trials/tasks/screening-data.html",Table:"screening",form_module:"screening-form",tags:'clinical trials'},
+        "screening-form": 			        {url:"$H/c/clinical-trials/tasks/screening-form.html",Table:"screening",tags:'clinical trials'},
+        "sdp-data":     		            {url:"$H/c/clinical-trials/tasks/sleep-disorder-patterns-data.html",Table:"sdp-wapp",form_module:"sdp-form",tags:'clinical trials'},
+        "sdp-form":     		            {url:"$H/c/clinical-trials/tasks/sleep-disorder-patterns-form.html",Table:"sdp-wapp",tags:'clinical trials'},
         
-        "psqi-data":     		            {url:"$H/c/clinical-trials/tasks/pittsburgh-sleep-quality-index-data.html",Table:"psqi-wapp",form_module:"psqi-form"},
-        "psqi-form":     		            {url:"$H/c/clinical-trials/tasks/pittsburgh-sleep-quality-index-form.html",Table:"psqi-wapp"},
-        "ffs-data":     		            {url:"$H/c/clinical-trials/tasks/flinders-fatigue-scale-data.html",Table:"ffs-wapp",form_module:"ffs-form"},
-        "ffs-form":     		            {url:"$H/c/clinical-trials/tasks/flinders-fatigue-scale-form.html",Table:"ffs-wapp"},
-        "fss-data":     		            {url:"$H/c/clinical-trials/tasks/fatigue-severity-scale-data.html",Table:"fss-wapp",form_module:"fss-form"},
-        "fss-form":     		            {url:"$H/c/clinical-trials/tasks/fatigue-severity-scale-form.html",Table:"fss-wapp"},
+        "psqi-data":     		            {url:"$H/c/clinical-trials/tasks/pittsburgh-sleep-quality-index-data.html",Table:"psqi-wapp",form_module:"psqi-form",tags:'clinical trials'},
+        "psqi-form":     		            {url:"$H/c/clinical-trials/tasks/pittsburgh-sleep-quality-index-form.html",Table:"psqi-wapp",tags:'clinical trials'},
+        "ffs-data":     		            {url:"$H/c/clinical-trials/tasks/flinders-fatigue-scale-data.html",Table:"ffs-wapp",form_module:"ffs-form",tags:'clinical trials'},
+        "ffs-form":     		            {url:"$H/c/clinical-trials/tasks/flinders-fatigue-scale-form.html",Table:"ffs-wapp",tags:'clinical trials'},
+        "fss-data":     		            {url:"$H/c/clinical-trials/tasks/fatigue-severity-scale-data.html",Table:"fss-wapp",form_module:"fss-form",tags:'clinical trials'},
+        "fss-form":     		            {url:"$H/c/clinical-trials/tasks/fatigue-severity-scale-form.html",Table:"fss-wapp",tags:'clinical trials'},
         
-        "wa-data":    			            {url:"$H/c/clinical-trials/tasks/wa-data.html",Table:"wa-wapp",form_module:"wa-form"},
-        "wa-form":    			            {url:"$H/c/clinical-trials/tasks/wa-form.html",Table:"wa-wapp"},
-        "visit-date-data":    			    {url:"$H/c/clinical-trials/tasks/visit-date-data.html",Table:"visit-date-wapp",form_module:"visit-date-form"},
-        "visit-date-form":    			    {url:"$H/c/clinical-trials/tasks/visit-date-form.html",Table:"visit-date-wapp"},
+        "wa-data":    			            {url:"$H/c/clinical-trials/tasks/wa-data.html",Table:"wa-wapp",form_module:"wa-form",tags:'clinical trials'},
+        "wa-form":    			            {url:"$H/c/clinical-trials/tasks/wa-form.html",Table:"wa-wapp",tags:'clinical trials'},
+        "visit-date-data":    			    {url:"$H/c/clinical-trials/tasks/visit-date-data.html",Table:"visit-date-wapp",form_module:"visit-date-form",tags:'clinical trials'},
+        "visit-date-form":    			    {url:"$H/c/clinical-trials/tasks/visit-date-form.html",Table:"visit-date-wapp",tags:'clinical trials'},
         
-        "demographics-data":    		    {url:"$H/c/clinical-trials/tasks/demographics-data.html",Table:"demographics-wapp",form_module:"demographics-form"},
-        "demographics-form":    		    {url:"$H/c/clinical-trials/tasks/demographics-form.html",Table:"demographics-wapp"},
+        "demographics-data":    		    {url:"$H/c/clinical-trials/tasks/demographics-data.html",Table:"demographics-wapp",form_module:"demographics-form",tags:'clinical trials'},
+        "demographics-form":    		    {url:"$H/c/clinical-trials/tasks/demographics-form.html",Table:"demographics-wapp",tags:'clinical trials'},
         
-        "anthropometry-data":    		    {url:"$H/c/clinical-trials/tasks/anthropometry-data.html",Table:"anthropometry-wapp",form_module:"anthropometry-form"},
-        "anthropometry-form":    		    {url:"$H/c/clinical-trials/tasks/anthropometry-form.html",Table:"anthropometry-wapp"},
+        "anthropometry-data":    		    {url:"$H/c/clinical-trials/tasks/anthropometry-data.html",Table:"anthropometry-wapp",form_module:"anthropometry-form",tags:'clinical trials'},
+        "anthropometry-form":    		    {url:"$H/c/clinical-trials/tasks/anthropometry-form.html",Table:"anthropometry-wapp",tags:'clinical trials'},
         
-        "ecg-report-upload-data":    	    {url:"$H/c/clinical-trials/tasks/ecg-report-upload-data.html",Table:"ecg-report-upload-wapp",form_module:"ecg-report-upload-form"},
-        "ecg-report-upload-form":    	    {url:"$H/c/clinical-trials/tasks/ecg-report-upload-form.html",Table:"ecg-report-upload-wapp"},
+        "ecg-report-upload-data":    	    {url:"$H/c/clinical-trials/tasks/ecg-report-upload-data.html",Table:"ecg-report-upload-wapp",form_module:"ecg-report-upload-form",tags:'clinical trials'},
+        "ecg-report-upload-form":    	    {url:"$H/c/clinical-trials/tasks/ecg-report-upload-form.html",Table:"ecg-report-upload-wapp",tags:'clinical trials'},
         
-        "nback1-data":    	                {url:"$H/c/clinical-trials/tasks/nback1-data.html",Table:"nback1-demo", form_module:"nback1-form",game_module:"nback1-game",router:1},
-        "nback1-form":    	                {url:"$H/c/clinical-trials/tasks/nback1-form.html",Table:"nback1-demo"},
-        "nback1-game":    	                {url:"$H/c/clinical-trials/tasks/nback1-game.html",Table:"nback1-demo"},
+        "nback1-data":    	                {url:"$H/c/clinical-trials/tasks/nback1-data.html",Table:"nback1-demo", form_module:"nback1-form",game_module:"nback1-game",router:1,tags:'clinical trials'},
+        "nback1-form":    	                {url:"$H/c/clinical-trials/tasks/nback1-form.html",Table:"nback1-demo",tags:'clinical trials'},
+        "nback1-game":    	                {url:"$H/c/clinical-trials/tasks/nback1-game.html",Table:"nback1-demo",tags:'clinical trials'},
         
-        "dsst-data":    	                {url:"$H/c/clinical-trials/tasks/dsst-data.html",Table:"dsst-demo", form_module:"dsst-form",game_module:"dsst-game",router:1},
-        "dsst-form":    	                {url:"$H/c/clinical-trials/tasks/dsst-form.html",Table:"dsst-demo"},
-        "dsst-game":    	                {url:"$H/c/clinical-trials/tasks/dsst-game.html",Table:"dsst-demo"},
+        "dsst-data":    	                {url:"$H/c/clinical-trials/tasks/dsst-data.html",Table:"dsst-demo", form_module:"dsst-form",game_module:"dsst-game",router:1,tags:'clinical trials'},
+        "dsst-form":    	                {url:"$H/c/clinical-trials/tasks/dsst-form.html",Table:"dsst-demo",tags:'clinical trials'},
+        "dsst-game":    	                {url:"$H/c/clinical-trials/tasks/dsst-game.html",Table:"dsst-demo",tags:'clinical trials'},
     }
     url_replace(modules,"clinical-trials-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
