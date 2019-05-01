@@ -209,6 +209,13 @@
         "project-shq-form":         { url: "$H/p/project-shq-form.html", Table: "astn-shq-project-20003481" },
 
         
+        "page-01":	    {url:"$H/p/page-01.html",router:1},
+        "page-02":	    {url:"$H/p/page-02.html",router:1},
+        "page-03":	    {url:"$H/p/page-03.html",router:1},
+        "page-04":	    {url:"$H/p/page-04.html",router:1},
+        "page-05":	    {url:"$H/p/page-05.html",router:1},
+
+
         "quest-panel":                  {url:"$H/o/online-questionnaire-panel.html"},
 
         "room-booking-workflow":  		{url:"$H/r/room-booking-workflow.html",router:1},
