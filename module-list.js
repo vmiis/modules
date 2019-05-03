@@ -53,7 +53,10 @@
         "page-04":	    {url:"$H/p/page-04.html",router:1,tags:'blog'},
         "page-05":	    {url:"$H/p/page-05.html",router:1,tags:'blog'},
         "short-page":  	{url:"$H/s/short-page.html",router:1,tags:'blog'},
-        "long-page":  	{url:"$H/l/long-page.html",router:1,tags:'blog'},
+        "long-page":  	                {url:"$H/l/long-page.html",router:1,tags:'blog'},
+        "obstructive-sleep-apnea":  	{url:"$H/o/obstructive-sleep-apnea.html",router:1,tags:'blog,page template'},
+        
+        
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
