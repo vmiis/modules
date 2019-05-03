@@ -81,6 +81,19 @@
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
+    //economic
+    var modules={
+        "australia-unemployment":	            {url:"$H/u/unemployment.html",router:1,country:'Australia',country_code:'aus',tags:'economic'},
+        "china-unemployment":	        {url:"$H/u/unemployment.html",router:1,country:'China',country_code:'cn',tags:'economic'},
+        "united-states-unemployment":	        {url:"$H/u/unemployment.html",router:1,country:'United States',country_code:'us',tags:'economic'},
+
+        
+        "australian-gdp-growth":	            {url:"$H/a/australian-gdp-growth.html",router:1,tags:'economic'},
+        "australian-age-dependency-ratio":	    {url:"$H/a/australian-age-dependency-ratio.html",router:1,tags:'economic'},
+        "forex-overview":	                    {url:"$H/f/forex-overview.html",router:1,tags:'economic'},
+    }
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    //-------------------------------------------------------------------------------------
     //generic
     var modules={
         "2-columns-contents": 			        {url:"$H/2/2-columns-contents.html",router:1},
@@ -90,8 +103,6 @@
         "autocomplete-form":  			        {url:"$H/a/autocomplete-form.html",Table:"autocomplete"},
         "accountant-list-data":  	            {url:"$H/e/email-list-data.html",Table:"accountant-list",form_module:"accountant-list-form",router:1},
         "accountant-list-form":  	            {url:"$H/e/email-list-form.html",Table:"accountant-list"},
-        "australian-gdp-growth":	            {url:"$H/a/australian-gdp-growth.html",router:1},
-        "australian-age-dependency-ratio":	    {url:"$H/a/australian-age-dependency-ratio.html",router:1},
         
 
         "bar-data":  	                        {url:"$H/b/bar-data.html",Table:"bar",form_module:"bar-form",router:1},
@@ -150,7 +161,6 @@
         "form-text-input-fields":       {url:"$H/f/form-text-input-fields.html",router:1},
         "form-sql-fields":              {url:"$H/f/form-sql-fields.html",router:1},
         "fitness":                      {url:"$H/f/fitness.html",router:1},
-        "forex-overview":	            {url:"$H/f/forex-overview.html",router:1},
 
         
 
