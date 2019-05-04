@@ -1,0 +1,47 @@
+<div id=D__ID>
+	<div id=p__ID>
+	</div>
+	<script>
+		function F__ID(){
+            //--------------------------------------------------------
+            var c_I=0;
+            var c_list=[
+                'welcome','structure2','contact-us-form-02','bookkeeping-workflow','aaxsys-panel','event-panel','document-panel','survey-panel','flat-trial',
+                'column-chart-panel','food-special','particle-panel','first-aid-officer-panel','image-with-title-on-hover',
+                'image-and-title-with-scale-rotate-effect-on-hover','c_services'
+            ];
+            //--------------------------------------------------------
+            $vm.demo_scroll=function(){
+                var v1=document.documentElement.offsetHeight;
+                var v2=document.documentElement.scrollTop;
+                var v3=document.documentElement.scrollHeight;
+                if (Math.ceil(v1 + v2) >= v3) {
+                    if(c_I>c_list.length) return;
+                    if(c_I<c_list.length){
+                        $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"></div></div>');
+                        $vm.load_component(c_list[c_I],"c"+c_I+"__ID",{});
+                        c_I++;
+                    }
+                    else if(c_I==c_list.length){
+                        $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"><br>No more contents at the moment. Come later to see more.</div></div>');
+                        c_I++;
+                    }
+                }
+            }
+            //--------------------------------------------------------
+            $('#D__ID').on('show',function(){
+                for(var i=0;i<c_I;i++){
+                    $('#c'+i+'__ID').children().first().triggerHandler('show');
+                }
+            })
+            //--------------------------------------------------------
+		}
+	</script>
+	<style>
+		#D__ID{
+			height:100%;
+            animation: vm_module_fadein 1.0s;
+            overflow: hidden;
+		}
+	</style>
+</div>

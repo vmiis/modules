@@ -1,0 +1,158 @@
+<div id=D__ID>
+    <div id="container__ID">  
+        <form id=F__ID>
+            <h3>Contact Form</h3>
+            <h4>Contact us for custom quote</h4>
+            <fieldset>
+            	<input placeholder="Your name" type="text" tabindex="1" required autofocus name="Name" >
+            </fieldset>
+            <fieldset>
+            	<input placeholder="Your Email Address" type="email" tabindex="2" required name="Email" >
+            </fieldset>
+            <fieldset>
+            	<input placeholder="Your Phone Number (optional)" type="tel" tabindex="3" required name="Phone" >
+            </fieldset>
+            <fieldset>
+            	<input placeholder="Your Web Site (optional)" type="url" tabindex="4" required name="Web" >
+            </fieldset>
+            <fieldset>
+            	<textarea placeholder="Type your message here...." tabindex="5" required name="Message" ></textarea>
+            </fieldset>
+            <fieldset>
+            	<button name="submit" type="submit" id="submit__ID" >Submit</button>
+            </fieldset>
+        </form>
+    </div>	
+
+	<script>
+	    function F__ID(){
+	        //-------------------------------------
+            VmInclude:__COMPONENT__/f/form.01.js
+	        //-------------------------------------
+	    }
+	</script>
+	<style>
+		#D__ID{
+	      height:100%;
+	      animation: vm_module_fadein 1.0s;
+		}
+		
+        #container__ID {
+          max-width: 400px;
+          width: 100%;
+          margin: 0 auto;
+          position: relative;
+        }
+        
+        #F__ID input[type="text"],
+        #F__ID input[type="email"],
+        #F__ID input[type="tel"],
+        #F__ID input[type="url"],
+        #F__ID textarea,
+        #F__ID button[type="submit"] {
+          font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+        }
+        
+        #F__ID {
+          background: #F9F9F9;
+          padding: 25px;
+          margin: 150px 0;
+          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+        
+        #F__ID h3 {
+          display: block;
+          font-size: 30px;
+          font-weight: 300;
+          margin-bottom: 10px;
+        }
+        
+        #F__ID h4 {
+          margin: 5px 0 15px;
+          display: block;
+          font-size: 13px;
+          font-weight: 400;
+        }
+        
+        #F__ID fieldset {
+          border: medium none !important;
+          margin: 0 0 10px;
+          min-width: 100%;
+          padding: 0;
+          width: 100%;
+        }
+        
+        #F__ID input[type="text"],
+        #F__ID input[type="email"],
+        #F__ID input[type="tel"],
+        #F__ID input[type="url"],
+        #F__ID textarea {
+          width: 100%;
+          border: 1px solid #ccc;
+          background: #FFF;
+          margin: 0 0 5px;
+          padding: 10px;
+        }
+        
+        #F__ID input[type="text"]:hover,
+        #F__ID input[type="email"]:hover,
+        #F__ID input[type="tel"]:hover,
+        #F__ID input[type="url"]:hover,
+        #F__ID textarea:hover {
+          -webkit-transition: border-color 0.3s ease-in-out;
+          -moz-transition: border-color 0.3s ease-in-out;
+          transition: border-color 0.3s ease-in-out;
+          border: 1px solid #aaa;
+        }
+        
+        #F__ID textarea {
+          height: 100px;
+          max-width: 100%;
+          resize: none;
+        }
+        
+        #F__ID button[type="submit"] {
+          cursor: pointer;
+          width: 100%;
+          border: none;
+          background: #4CAF50;
+          color: #FFF;
+          margin: 0 0 5px;
+          padding: 10px;
+          font-size: 15px;
+        }
+        
+        #F__ID button[type="submit"]:hover {
+          background: #43A047;
+          -webkit-transition: background 0.3s ease-in-out;
+          -moz-transition: background 0.3s ease-in-out;
+          transition: background-color 0.3s ease-in-out;
+        }
+        
+        #F__ID button[type="submit"]:active {
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        #F__ID input:focus,
+        #F__ID textarea:focus {
+          outline: 0;
+          border: 1px solid #aaa;
+        }
+        
+        #F__ID ::-webkit-input-placeholder {
+          color: #888;
+        }
+        
+        #F__ID :-moz-placeholder {
+          color: #888;
+        }
+        
+        #F__ID ::-moz-placeholder {
+          color: #888;
+        }
+        
+        #F__ID :-ms-input-placeholder {
+          color: #888;
+        }	
+	</style>
+</div>

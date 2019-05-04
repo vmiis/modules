@@ -17,12 +17,14 @@
         "contact-us-form-01":  			{url:"$H/c/contact-us-form-01.html",Table:"ccontact-us-vm",tags:'marketing'},
         "contact-us-form-02":  			{url:"$H/c/contact-us-form-02.html",Table:"ccontact-us-vm",tags:'marketing'},
         "contact-us-form-03":  			{url:"$H/c/contact-us-form-03.html",Table:"ccontact-us-vm",tags:'marketing'},
+        "contact-us-form-04":  			{url:"$H/c/contact-us-form-04.html",Table:"ccontact-us-vm",tags:'marketing'},
         "prices":  		  	  			{url:"$H/p/prices.html",router:1,name:"Our gym prices",tags:"marketing"},
         "price-02":  		  	 		{url:"$H/p/price-02.html",router:1,name:"Our clinic prices",tags:"marketing"},
         "portfolio":	                {url:"$H/c/components/portfolio.html",router:1,tags:"marketing"},
         "services":  	  	  			{url:"$H/s/services.html",router:1,tags:"marketing"},
         "success-page":  		   		{url:"$H/s/success.html",router:1,tags:"marketing"},
         "trainers":  		  			{url:"$H/t/trainers.html",router:1,name:"Gym Trainers",tags:"marketing"},
+        "welcome":  		  	  		{url:"$H/w/welcome.html",router:1,tags:'marketing'},
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
@@ -271,6 +273,7 @@
         
         
         "structure":	                {url:"$H/c/components/structure.html",router:1},
+        "structure2":	                {url:"$H/s/structure.html",router:1},
         "c_services":  	  	  			{url:"$H/c/components/services.html",router:1},
 
         "food-data":    			    {url:"$H/f/food-data.html",Table:"food-demo",form_module:"food-form"},
