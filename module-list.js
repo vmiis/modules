@@ -127,7 +127,7 @@
         "column-chart-stack":           {url:"$H/c/column-chart-stack.html",Table:"column",router:1},
         "column-chart-panel":           {url:"$H/c/column-chart-panel.html",Table:"column",form_module:"column-form",router:1},
         
-        "doctor":      	 		 	    {url:"$H/d/doctor.html",router:1},          
+        "doctor":      	 		 	    {url:"$H/d/doctor-001/doctor.html",router:1},          
         "d-c-t-data":      	  			{url:"$H/d/data-collection-template-data.html","App":"demo",Table:"template",form_module:"d-c-t-form",router:1},
         "d-c-t-form":      	 		 	{url:"$H/d/data-collection-template-form.html","App":"demo",Table:"template"},
         "dass-data":	 	            {url:"$H/d/depression-anxiety-stress-scales-data.html",Table:"dass",form_module:"dass-form"},
