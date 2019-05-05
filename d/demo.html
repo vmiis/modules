@@ -4,18 +4,33 @@
 	<script>
 		function F__ID(){
             //--------------------------------------------------------
+            var random_array=function(array){
+                var currentIndex=array.length, temporaryValue, randomIndex;
+                while (0 !== currentIndex) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                }
+                return array;
+            }            
+            //--------------------------------------------------------
             var c_I=0;
             var c_list=[
                 'welcome','structure2','contact-us-form-02','bookkeeping-workflow','aaxsys-panel','event-panel','document-panel','survey-panel','flat-trial',
                 'column-chart-panel','food-special','particle-panel','first-aid-officer-panel','image-with-title-on-hover',
                 'image-and-title-with-scale-rotate-effect-on-hover','c_services'
             ];
+            random_array(c_list);
+            console.log(c_list);
             //--------------------------------------------------------
             $vm.demo_scroll=function(){
+                if($vm.active_name!='home') return;
                 var v1=document.documentElement.offsetHeight;
                 var v2=document.documentElement.scrollTop;
                 var v3=document.documentElement.scrollHeight;
-                if (Math.ceil(v1 + v2) >= v3) {
+                if (Math.ceil(v1 + v2) >= v3-20) {
                     if(c_I>c_list.length) return;
                     if(c_I<c_list.length){
                         $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"></div></div>');
