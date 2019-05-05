@@ -18,7 +18,8 @@
             //--------------------------------------------------------
             var c_I=0;
             var c_list=[
-                'welcome','structure2','contact-us-form-02','bookkeeping-workflow','aaxsys-panel','event-panel','document-panel','survey-panel','flat-trial',
+                'price-02','prices','pie-chart-3d','trainers','success-page','fitness','portfolio','page-01','page-04','welcome','structure2',
+                'contact-us-form-02','bookkeeping-workflow','aaxsys-panel','event-panel','document-panel','survey-panel','flat-trial',
                 'column-chart-panel','food-special','particle-panel','first-aid-officer-panel','image-with-title-on-hover',
                 'image-and-title-with-scale-rotate-effect-on-hover','c_services'
             ];
@@ -30,7 +31,7 @@
                 var v1=document.documentElement.offsetHeight;
                 var v2=document.documentElement.scrollTop;
                 var v3=document.documentElement.scrollHeight;
-                if (Math.ceil(v1 + v2) >= v3-20) {
+                if (Math.ceil(v1 + v2) >= v3-50) {
                     if(c_I>c_list.length) return;
                     if(c_I<c_list.length){
                         $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"></div></div>');
