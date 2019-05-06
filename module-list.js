@@ -26,7 +26,7 @@
         "trainers":  		  			{url:"$H/t/trainers.html",router:1,name:"Gym Trainers",tags:"marketing"},
         "welcome":  		  	  		{url:"$H/w/welcome.html",router:1,tags:'marketing'},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //form field
     var modules={
@@ -45,7 +45,7 @@
         "text-input-data":    			{url:"$H/t/text-input-data.html",Table:"text-input",form_module:"text-input-form",router:1,tags:'form field'},
         "text-input-form":    			{url:"$H/t/text-input-form.html",Table:"text-input",tags:'form field'},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //blog
     var modules={
@@ -60,7 +60,7 @@
         
         
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //landing page background
     var modules={
@@ -71,7 +71,7 @@
         "particle":  		  			{url:"$H/p/particle.html",router:1,tags:'landing page background'},
         "snow":  		  	  			{url:"$H/s/snow.html",router:1,tags:'landing page background'},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //technology
     var modules={
@@ -84,7 +84,7 @@
         "surveyjs-data":                        {url:"$H/s/surveyjs-data.html",Table:"surveyjs-vm",form_module:"surveyjs-form",router:1,tags:'technology'},
         "surveyjs-form":                        {url:"$H/s/surveyjs-form.html",Table:"surveyjs-vm",tags:'technology'},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //economic
     var modules={
@@ -97,7 +97,7 @@
         "australian-age-dependency-ratio":	    {url:"$H/a/australian-age-dependency-ratio.html",router:1,tags:'economic'},
         "forex-overview":	                    {url:"$H/f/forex-overview.html",router:1,tags:'economic'},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //generic
     var modules={
@@ -291,7 +291,7 @@
         "health-news":                  {url:"$H/h/health-news.html",router:1},
         "epworth-sleepiness-scale-test":{url:"$H/e/epworth-sleepiness-scale-test.html",router:1},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //clinical trials
     var modules={
@@ -361,7 +361,7 @@
         "dsst-form":    	                {url:"$H/c/clinical-trials/tasks/dsst-form.html",Table:"dsst-demo",tags:'clinical trials'},
         "dsst-game":    	                {url:"$H/c/clinical-trials/tasks/dsst-game.html",Table:"dsst-demo",tags:'clinical trials'},
     }
-    url_replace(modules,"clinical-trials-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"clinical-trials-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //apap
     var modules={
@@ -472,7 +472,7 @@
 
 
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //biomakers-ii
     var modules={
@@ -557,7 +557,7 @@
         "maintenance-wakefulness-test-form":            {url:"$H/b/biomarkers-ii-tasks/maintenance-wakefulness-test-form.html",Table:"91000596"},
         
     }
-    url_replace(modules,"biomarkers-ii-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"biomarkers-ii-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //isleephealth
     var modules = {
@@ -565,6 +565,6 @@
         "appointment-data":     { url: "$H/i/isleephealth/appointment-data.html", Table: "appointment", form_module: "appointment-form",router:1},
         "appointment-form":     { url: "$H/i/isleephealth/appointment-form.html", Table: "appointment"},
     }
-    url_replace(modules,"isleephealth-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"isleephealth-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
 })();
