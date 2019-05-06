@@ -24,20 +24,20 @@
         //------------------------------------
         //where are your start modules
         $vm.start_modules=[
-            "$A/modules/v/vmiis-365-app/app.html",      //app menu, title, footer etc
-            "$A/modules/f/frame.html",              //app frame work
+            "$A/v/vmiis-365-app/app.html",      //app menu, title, footer etc
+            "$A/f/frame.html",              //app frame work
         ]
         //------------------------------------
         //modules used in this app
         $vm.module_list={
             //you can add modules here directly
-            "home":                         {url:"$A/modules/v/vm365-home.html"},
-            "about-vmiis":                  {url:"$A/modules/a/about-vmiis.html",router:1},
-            "vm365-entity-data":   	        {url:"$A/modules/v/vm365-entity-data.html",Table:"EntityDefinitions",form_module:"vm365-entity-form"},
-            "vm365-entity-form":   	        {url:"$A/modules/v/vm365-entity-form.html",Table:"EntityDefinitions"},
-            "vm365-table1-data":   	        {url:"$A/modules/v/vm365-table1-data.html",Table:"new_table1s",form_module:"vm365-table1-form"},
-            "vm365-table1-form":   	        {url:"$A/modules/v/vm365-table1-form.html",Table:"new_table1s"},
-            "vm365-sharepoint-list-data":   {url:"$A/modules/v/vm365-sharepoint-list-data.html",Table:"",form_module:"vm365-table1-form"},
+            "home":                         {url:"$A/v/vm365-home.html"},
+            "about-vmiis":                  {url:"$A/a/about-vmiis.html",router:1},
+            "vm365-entity-data":   	        {url:"$A/v/vm365-entity-data.html",Table:"EntityDefinitions",form_module:"vm365-entity-form"},
+            "vm365-entity-form":   	        {url:"$A/v/vm365-entity-form.html",Table:"EntityDefinitions"},
+            "vm365-table1-data":   	        {url:"$A/v/vm365-table1-data.html",Table:"new_table1s",form_module:"vm365-table1-form"},
+            "vm365-table1-form":   	        {url:"$A/v/vm365-table1-form.html",Table:"new_table1s"},
+            "vm365-sharepoint-list-data":   {url:"$A/v/vm365-sharepoint-list-data.html",Table:"",form_module:"vm365-table1-form"},
         };
         //------------------------------------
         //where are your all other modules

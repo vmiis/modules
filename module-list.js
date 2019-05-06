@@ -287,6 +287,9 @@
         "flat-trial":    			    {url:"$H/f/flat-trial.html",router:1},
         "flat-trial-home": 			    {url:"$H/f/flat-trial-home.html",router:1},
         "aaxsys-panel":                 {url:"$H/a/aaxsys-panel.html",router:1},
+        "word-pair-association":        {url:"$H/w/word-pair-association/task-01.html",router:1},
+        "health-news":                  {url:"$H/h/health-news.html",router:1},
+        "epworth-sleepiness-scale-test":{url:"$H/e/epworth-sleepiness-scale-test.html",router:1},
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
