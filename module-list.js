@@ -113,9 +113,7 @@
         "bar-data":  	                        {url:"$H/b/bar-data.html",Table:"bar",form_module:"bar-form",router:1},
         "bar-form":  	                        {url:"$H/b/bar-form.html",Table:"bar"},
         "bar-chart":  	                        {url:"$H/b/bar-chart.html",Table:"bar",router:1},
-        //"bookkeeping-workflow":  			    {url:"$H/b/bookkeeping/home.html",router:1},
-        "bookkeeping-panel":  			        {url:"$H/b/bookkeeping-panel.html",router:1},
-        "bookkeeping-home":  			        {url:"$H/b/bookkeeping/home.html",router:1},
+        "body-mass-index":              {url:"$H/b/body-mass-index.html",router:1},
         "contact-us-panel":  			{url:"$H/c/contact-us-panel.html",Table:"ccontact-us-vm",tags:'marketing'},
         "clinical-trials-data-entry": 	{url:"$H/c/clinical-trials-data-entry.html"},
         "carousel":  		  			{url:"$H/c/carousel.html",router:1},
@@ -289,7 +287,7 @@
         "aaxsys-panel":                 {url:"$H/a/aaxsys-panel.html",router:1},
         "word-pair-association":        {url:"$H/w/word-pair-association/task-01.html",router:1},
         "health-news":                  {url:"$H/h/health-news.html",router:1},
-        "epworth-sleepiness-scale-test":{url:"$H/e/epworth-sleepiness-scale-test.html",router:1},
+        "epworth-sleepiness-scale":     {url:"$H/e/epworth-sleepiness-scale.html",router:1},
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
