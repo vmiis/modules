@@ -288,6 +288,8 @@
         "word-pair-association":        {url:"$H/w/word-pair-association/task-01.html",router:1},
         "health-news":                  {url:"$H/h/health-news.html",router:1},
         "epworth-sleepiness-scale":     {url:"$H/e/epworth-sleepiness-scale.html",router:1},
+        "employee-appointment-data":    {url:"$H/e/employee-appointment-data.html",Table:"employee-appointment-demo",router:1,form_module:'employee-appointment-form'},
+        "employee-appointment-form":    {url:"$H/e/employee-appointment-form.html",Table:"employee-appointment-demo"},
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
