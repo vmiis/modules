@@ -290,6 +290,7 @@
         "epworth-sleepiness-scale":     {url:"$H/e/epworth-sleepiness-scale.html",router:1},
         "employee-appointment-data":    {url:"$H/e/employee-appointment-data.html",Table:"employee-appointment-demo",router:1,form_module:'employee-appointment-form'},
         "employee-appointment-form":    {url:"$H/e/employee-appointment-form.html",Table:"employee-appointment-demo"},
+        "news":                         {url:"$H/n/news.html",router:1},
     }
     url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
