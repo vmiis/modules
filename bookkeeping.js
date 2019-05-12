@@ -32,7 +32,7 @@
         "income-expense-chart":                 {url:"$H/b/bookkeeping/income-expense-chart.html",Table:"income-expense-month-aggregation",router:1,tags:"bookkeeping"},
         "item-chart":                           {url:"$H/b/bookkeeping/item-chart.html",Table:"item-month-aggregation",router:1,tags:"bookkeeping"},
     }
-    url_replace(modules,"bookkeeping-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"bookkeeping-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //bookkeeping-wappsystem
     var modules={
@@ -58,7 +58,7 @@
         "income-expense-chart":                 {url:"$H/b/bookkeeping/income-expense-chart.html",Table:"income-expense-month-aggregation-wappsystem",router:1,private:1},
         "item-chart":                           {url:"$H/b/bookkeeping/item-chart.html",Table:"item-month-aggregation-wappsystem",router:1,private:1},
     }
-    url_replace(modules,"bookkeeping-wappsystem-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"bookkeeping-wappsystem-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
     //bookkeeping-vmautomation
     var modules={
@@ -84,6 +84,6 @@
         "income-expense-chart":                 {url:"$H/b/bookkeeping/income-expense-chart.html",Table:"income-expense-month-aggregation-vmautomation",router:1,private:1},
         "item-chart":                           {url:"$H/b/bookkeeping/item-chart.html",Table:"item-month-aggregation-vmautomation",router:1,private:1},
     }
-    url_replace(modules,"bookkeeping-vmautomation-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"bookkeeping-vmautomation-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
 })();

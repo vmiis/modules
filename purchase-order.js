@@ -38,6 +38,6 @@
         "purchase-order-email-to-accountant":   {url:"$H/p/purchase-order-email-to-accountant.html",Table:"email-setup"},
         "purchase-order-email-to-requester":    {url:"$H/p/purchase-order-email-to-requester.html",Table:"email-setup"},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
 })();

@@ -18,6 +18,6 @@
         "room-booking-calendar": 	    {url:"$H/r/room-booking-calendar.html",Table:"room-booking-record",
                                             "booking":"room-booking","booking_form":"room-booking-record-form",router:1},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
 })();

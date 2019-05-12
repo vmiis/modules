@@ -19,6 +19,6 @@
                                                 "booking":"equipment-booking","booking_form":"equipment-booking-record-form",router:1},
         "equipment-booking-app":   			{url:"$H/e/equipment-booking/index.html"},
     }
-    url_replace(modules,"","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
 })();

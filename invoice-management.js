@@ -18,6 +18,6 @@
         "client-data": 	            {url:"$H/c/client-data-wapp.html",Table:"client-wapp",form_module:"client-form",router:1},
         "client-form": 	            {url:"$H/i/client-form-wapp.html",Table:"client-wapp"},
     }
-    url_replace(modules,"invoice-management-","$H","https://modules.vmiis.com/","http://127.0.0.1:8000/vmiis/modules");
+    url_replace(modules,"invoice-management-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
 })();
