@@ -1,0 +1,73 @@
+<div id=D__ID>
+	<div>
+        <form id=F__ID>
+            <div id=S1__ID>
+                Q1: <input name=Q1 required />
+                <button d="-1" type=button >Previous</button>
+                <button d=1 type=submit >Next</button>
+            </div>
+            <div id=S2__ID>
+                Q2: <input name=Q2 required />
+                <button d="-1" type=button >Previous</button>
+                <button d=1 type=submit >Next</button>
+            </div>
+            <div id=S3__ID >
+                Q3: <input name=Q3  required />
+                <button d="-1" type=button >Previous</button>
+                <button d=1 type=submit >Next</button>
+            </div>
+        </form>
+	</div>
+	<script>
+		function F__ID(){
+            VmInclude:__COMPONENT__/f/form.01.js
+            //---------------------------------------
+            var N=3;
+            var current_I=1;
+            //---------------------------------------
+            var old_submit=m.submit;
+            m.submit=function(event){
+                event.preventDefault();
+                if(current_I==N){
+                    alert('wiil submit')
+                    old_submit(event);
+                }
+                else show_section(current_I+1);
+            }
+            //---------------------------------------
+            $('#D__ID').on('load',function(){
+                show_section(1);
+            })
+            //---------------------------------------
+            $('#F__ID button').on('click', function(event){
+                var d=$(this).attr("d");
+                d=parseInt(d);
+                if(d<0) show_section(current_I-1);
+                else { 
+                    //do nothing, m.submit will handle  
+                }
+            })
+            //---------------------------------------
+            var show_section=function(I){
+                for(var i=1;i<=N;i++){
+                    //$('#S'+i+"__ID").hide();
+                    $('#S'+i+"__ID * ").attr('disabled','disabled');
+                }
+                if(I<1) I=1;
+                if(I>=N) I=N;
+                $('#S'+I+'__ID').show();
+                $('#S'+I+"__ID * ").removeAttr('disabled');
+                current_I=I;
+            }
+            //---------------------------------------
+		}
+	</script>
+	<style>
+		#D__ID{
+			height:100%;
+			animation: vm_module_fadein 1.0s;
+            background-color: #fff;
+            padding:30px;            
+		}
+	</style>
+</div>
