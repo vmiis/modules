@@ -29,7 +29,9 @@
             m.submit=function(event){
                 event.preventDefault();
                 if(current_I==N){
-                    alert('wiil submit')
+                    alert('Will submit...');
+
+                    $('#F__ID *').removeAttr('disabled');
                     old_submit(event);
                 }
                 else show_section(current_I+1);
@@ -50,7 +52,7 @@
             //---------------------------------------
             var show_section=function(I){
                 for(var i=1;i<=N;i++){
-                    //$('#S'+i+"__ID").hide();
+                    //$('#S'+i+"__ID").hide(); // remove/add '//' for Test mode/Production mode 
                     $('#S'+i+"__ID * ").attr('disabled','disabled');
                 }
                 if(I<1) I=1;
