@@ -10,7 +10,7 @@
     }
     //-------------------------------------------------------------------------------------
     var modules={
-        "mappings-of-ip-addresse-to-host-name":                         {url:"$H/m/mappings-of-ip-addresse-to-host-name.html",router:1,tags:"knowledge base"},
+        "mappings-of-ip-addresse-to-host-name":                         {url:"$H/m/mappings-of-ip-address-to-host-name.html",router:1,tags:"knowledge base"},
     }
     url_replace(modules,"kb-","$H","https://modules.vmiis.com/","http://"+window.location.hostname+":8000/vmiis/modules");
     //-------------------------------------------------------------------------------------
