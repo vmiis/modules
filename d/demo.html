@@ -35,6 +35,7 @@
                     if(c_I>c_list.length) return;
                     if(c_I<c_list.length){
                         $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"></div></div>');
+                        alert("aaa"+c_I)
                         $vm.load_component(c_list[c_I],"c"+c_I+"__ID",{},1);
                         c_I++;
                     }
@@ -59,6 +60,7 @@
                 if(c_I<c_list.length){
                     $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"></div></div>');
                     console.log(c_I);
+                    alert(c_I)
                     $vm.load_component(c_list[c_I],"c"+c_I+"__ID",{},1);
                     c_I++;
                 }
