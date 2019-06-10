@@ -52,17 +52,19 @@
             })
             //--------------------------------------------------------
             var loop_1=setInterval(function (){
+                console.log(c_I);
                 if(c_I>c_list.length) clearInterval(loop_1);
                 if(c_I<c_list.length){
-                        $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"></div></div>');
-                        $vm.load_component(c_list[c_I],"c"+c_I+"__ID",{},1);
-                        c_I++;
-                    }
-                    else if(c_I==c_list.length){
-                        $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"><br>No more contents at the moment. Come later to see more.</div></div>');
-                        c_I++;
-                    }
-            },300);
+                    $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"></div></div>');
+                    $vm.load_component(c_list[c_I],"c"+c_I+"__ID",{},1);
+                    c_I++;
+                }
+                else if(c_I==c_list.length){
+                    $('#p__ID').append('<div id=c'+c_I+'__ID><div class=text-center style="font-size:22px"><br>No more contents at the moment. Come later to see more.</div></div>');
+                    c_I++;
+                }
+                console.log(c_I);
+            },2000);
             //--------------------------------------------------------
 		}
 	</script>
