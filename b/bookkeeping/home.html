@@ -26,6 +26,7 @@
         <div class=btn__ID>
             <button type=button id=btn9__ID class="btn btn-secondary">Income/Expense chart</button>
             <button type=button id=btn10__ID class="btn btn-secondary">Item chart</button>
+            <button type=button id=btn11__ID class="btn btn-secondary">Tax return yearly aggregation</button>
         </div>
         <div id=comments__ID>
             <br>
@@ -69,6 +70,7 @@
             $('#btn8__ID').on('click',function(){  $vm.load_module(m.prefix+'item-month-aggregation-data','',{});        })
             $('#btn9__ID').on('click',function(){  $vm.load_module(m.prefix+'income-expense-chart','',{});        })
             $('#btn10__ID').on('click',function(){  $vm.load_module(m.prefix+'item-chart','',{});        })
+            $('#btn11__ID').on('click',function(){  $vm.load_module(m.prefix+'ato-tax-return-yearly-aggregation-data','',{});        })
             //---------------------------------------
             /*
             var wait=function(){

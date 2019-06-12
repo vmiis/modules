@@ -36,6 +36,11 @@
     //-------------------------------------------------------------------------------------
     //bookkeeping-wappsystem
     var modules={
+        
+        
+        "ato-tax-return-yearly-aggregation-data":     {url:"$H/b/bookkeeping/ato-tax-return-yearly-aggregation-data.html",Table:"ato-tax-return-yearly-aggregation-wappsystem",transaction_table:'transaction-wappsystem',form_module:"ato-tax-return-yearly-aggregation-form",router:1,private:1},
+        "ato-tax-return-yearly-aggregation-form":     {url:"$H/b/bookkeeping/ato-tax-return-yearly-aggregation-form.html",Table:"ato-tax-return-yearly-aggregation-wappsystem",transaction_table:'transaction-wappsystem',private:1},
+
         "predefined-transaction-item-data": {url:"$H/b/bookkeeping/predefined-transaction-item-data.html",Table:"predefined-transaction-item-wappsystem",form_module:"predefined-transaction-item-form",private:1},
         "predefined-transaction-item-form": {url:"$H/b/bookkeeping/predefined-transaction-item-form.html",Table:"predefined-transaction-item-wappsystem",private:1},
         
